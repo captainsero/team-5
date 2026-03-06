@@ -30,17 +30,25 @@ environment:
 dependencies:
   csv_localizations: ^2.3.0
   cupertino_icons: ^1.0.8
+  dio: ^5.9.2
   flutter:
     sdk: flutter
   flutter_localizations:
     sdk: flutter
   flutter_secure_storage: ^10.0.0
+  get_it: ^9.2.1
+  injectable: ^2.7.1+4
   intl: ^0.20.2
+  json_annotation: ^4.11.0
+  retrofit: ^4.9.2
 
 dev_dependencies:
+  build_runner: ^2.12.2
   flutter_lints: ^6.0.0
   flutter_test:
     sdk: flutter
+  injectable_generator: ^2.12.1
+  retrofit_generator: ^10.2.3
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
