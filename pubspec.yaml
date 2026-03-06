@@ -28,10 +28,12 @@ environment:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
+  csv_localizations: ^2.3.0
   cupertino_icons: ^1.0.8
   flutter:
     sdk: flutter
-  flutter_localization: ^0.3.3
+  flutter_localizations:
+    sdk: flutter
   flutter_secure_storage: ^10.0.0
   intl: ^0.20.2
 
@@ -76,3 +78,5 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/to/font-from-package
+flutter_intl:
+  enabled: true
