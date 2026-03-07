@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:team_5_examapp/core/constants/font_manager.dart';
-import 'package:team_5_examapp/core/constants/style_manager.dart';
-import 'package:team_5_examapp/core/constants/values_manager.dart';
 import '../constants/color_manager.dart';
+import '../constants/font_manager.dart';
+import '../constants/style_manager.dart';
+import '../constants/values_manager.dart';
 
 abstract class AppTheme {
   static ThemeData lightTheme = ThemeData(
@@ -41,7 +41,7 @@ abstract class AppTheme {
 
       headlineLarge: getSemiBoldStyle(
         color: AppColors.black,
-        fontSize: FontSize.s24,
+        fontSize: FontSize.s25,
         fontFamily: FontConstants.interFamily,
       ),
       headlineMedium: getMediumStyle(
@@ -114,7 +114,7 @@ abstract class AppTheme {
       style: ElevatedButton.styleFrom(
         backgroundColor: AppColors.primary,
         foregroundColor: AppColors.white,
-        padding: EdgeInsets.all(AppPadding.p16),
+        padding: const EdgeInsets.all(20),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(100)),
         textStyle: getMediumStyle(
           color: AppColors.black,
@@ -126,15 +126,16 @@ abstract class AppTheme {
 
     inputDecorationTheme: InputDecorationTheme(
       filled: true,
-      fillColor: AppColors.lightBlue,
-      hintStyle: getRegularStyle(
+      fillColor: AppColors.transparent,
+      hintStyle: TextStyle(
         color: AppColors.placeholder,
         fontSize: FontSize.s16,
         fontFamily: FontConstants.interFamily,
       ),
-      labelStyle: getMediumStyle(
+      labelStyle: TextStyle(
         color: AppColors.grey,
         fontSize: FontSize.s18,
+        fontWeight: FontWeight.w500,
         fontFamily: FontConstants.interFamily,
       ),
       floatingLabelStyle: getRegularStyle(
@@ -158,18 +159,18 @@ abstract class AppTheme {
       ),
       focusedBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(RadiusSize.r4),
-        borderSide: BorderSide(color: AppColors.primary, width: 2),
+        borderSide: BorderSide(color: AppColors.primary, width: AppSize.s2),
       ),
       errorBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(RadiusSize.r4),
-        borderSide: BorderSide(color: AppColors.error, width: 1),
+        borderSide: BorderSide(color: AppColors.error, width: AppSize.s1),
       ),
       focusedErrorBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(RadiusSize.r4),
-        borderSide: BorderSide(color: AppColors.error, width: 2),
+        borderSide: BorderSide(color: AppColors.error, width: AppSize.s2),
       ),
 
-      contentPadding: EdgeInsets.all(AppPadding.p12),
+      contentPadding:  EdgeInsets.all(AppPadding.p16),
     ),
   );
 }

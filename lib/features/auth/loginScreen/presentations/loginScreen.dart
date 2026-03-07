@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../../../core/constants/color_manager.dart';
 import '../../../../core/constants/font_manager.dart';
+import '../../../../core/constants/values_manager.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -32,7 +33,7 @@ class _LoginScreenState extends State<LoginScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                const SizedBox(height: 20),
+                SizedBox(height: AppSize.s20),
 
                 TextFormField(
                   controller: _emailController,
@@ -43,7 +44,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                   keyboardType: TextInputType.emailAddress,
                 ),
-                const SizedBox(height: 24),
+                SizedBox(height: AppSize.s16),
 
                 TextFormField(
                   controller: _passwordController,
@@ -64,7 +65,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                   ),
                 ),
-                const SizedBox(height: 16),
+                SizedBox(height: AppSize.s16),
 
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -91,7 +92,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                       ],
                     ),
-                    const SizedBox(width: 8),
+                    SizedBox(height: AppSize.s8),
                     Text(
                       'Forget password?',
                       style: TextStyle(
@@ -102,7 +103,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),                    ),
                   ],
                 ),
-                const SizedBox(height: 48),
+                SizedBox(height: AppSize.s48),
 
                 ElevatedButton(
                   onPressed: () {
@@ -112,7 +113,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   },
                   child: const Text('Login'),
                 ),
-                const SizedBox(height: 16),
+                SizedBox(height: AppSize.s16),
 
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -135,7 +136,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                   ],
                 ),
-                const SizedBox(height: 20),
+                SizedBox(height: AppSize.s20),
               ],
             ),
           ),
