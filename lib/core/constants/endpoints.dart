@@ -1,1 +1,1 @@
-abstract class Endpoints {}
+abstract class AppEndpoints {}

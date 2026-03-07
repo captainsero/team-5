@@ -26,7 +26,7 @@ class FontSize {
   static double get s24 => 24.sp;
   static double get s25 => 25.sp;
   static double get s30 => 30.sp;
-  static double get s36 => 36.sp;
+  static double get s35 => 35.sp;
   static double get s40 => 40.sp;
   static double get s48 => 48.sp;
 }

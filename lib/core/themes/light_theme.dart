@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:team_5_examapp/core/constants/font_manager.dart';
+import 'package:team_5_examapp/core/constants/style_manager.dart';
+import 'package:team_5_examapp/core/constants/values_manager.dart';
 import '../constants/color_manager.dart';
-import '../constants/font_manager.dart';
 
 abstract class AppTheme {
   static ThemeData lightTheme = ThemeData(
@@ -21,59 +23,102 @@ abstract class AppTheme {
     ),
 
     textTheme: TextTheme(
-      headlineLarge: TextStyle(
+      displayLarge: getBoldStyle(
         color: AppColors.black,
-        fontSize: FontSize.s36,
-        fontWeight: FontWeightManager.medium,
+        fontSize: FontSize.s40,
         fontFamily: FontConstants.interFamily,
       ),
-      headlineMedium: TextStyle(
+      displayMedium: getSemiBoldStyle(
+        color: AppColors.black,
+        fontSize: FontSize.s35,
+        fontFamily: FontConstants.interFamily,
+      ),
+      displaySmall: getMediumStyle(
         color: AppColors.black,
         fontSize: FontSize.s30,
-        fontWeight: FontWeightManager.medium,
         fontFamily: FontConstants.interFamily,
       ),
-      bodyLarge: TextStyle(
+
+      headlineLarge: getSemiBoldStyle(
         color: AppColors.black,
-        fontSize: FontSize.s25,
-        fontWeight: FontWeightManager.regular,
+        fontSize: FontSize.s24,
         fontFamily: FontConstants.interFamily,
       ),
-      bodyMedium: TextStyle(
-        color: AppColors.grey,
+      headlineMedium: getMediumStyle(
+        color: AppColors.black,
         fontSize: FontSize.s20,
-        fontWeight: FontWeightManager.regular,
         fontFamily: FontConstants.interFamily,
       ),
-      bodySmall: TextStyle(
-        color: AppColors.placeholder,
+      headlineSmall: getRegularStyle(
+        color: AppColors.black,
+        fontSize: FontSize.s18,
+        fontFamily: FontConstants.interFamily,
+      ),
+
+      titleLarge: getSemiBoldStyle(
+        color: AppColors.black,
+        fontSize: FontSize.s22,
+        fontFamily: FontConstants.interFamily,
+      ),
+      titleMedium: getMediumStyle(
+        color: AppColors.black,
         fontSize: FontSize.s16,
-        fontWeight: FontWeightManager.regular,
+        fontFamily: FontConstants.interFamily,
+      ),
+      titleSmall: getMediumStyle(
+        color: AppColors.black,
+        fontSize: FontSize.s14,
+        fontFamily: FontConstants.interFamily,
+      ),
+
+      bodyLarge: getRegularStyle(
+        color: AppColors.black,
+        fontSize: FontSize.s16,
+        fontFamily: FontConstants.interFamily,
+      ),
+      bodyMedium: getRegularStyle(
+        color: AppColors.black,
+        fontSize: FontSize.s14,
+        fontFamily: FontConstants.interFamily,
+      ),
+      bodySmall: getRegularStyle(
+        color: AppColors.black,
+        fontSize: FontSize.s12,
+        fontFamily: FontConstants.interFamily,
+      ),
+
+      labelLarge: getMediumStyle(
+        color: AppColors.placeholder,
+        fontSize: FontSize.s14,
+        fontFamily: FontConstants.interFamily,
+      ),
+      labelMedium: getMediumStyle(
+        color: AppColors.placeholder,
+        fontSize: FontSize.s12,
+        fontFamily: FontConstants.interFamily,
+      ),
+      labelSmall: getRegularStyle(
+        color: AppColors.placeholder,
+        fontSize: FontSize.s10,
         fontFamily: FontConstants.interFamily,
       ),
     ),
 
     appBarTheme: AppBarTheme(
-      backgroundColor: AppColors.white,
+      backgroundColor: AppColors.transparent,
       foregroundColor: AppColors.black,
       elevation: 0,
-      titleTextStyle: TextStyle(
-        color: AppColors.black,
-        fontSize: FontSize.s18,
-        fontFamily: FontConstants.interFamily,
-      ),
     ),
 
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
         backgroundColor: AppColors.primary,
         foregroundColor: AppColors.white,
-        padding: const EdgeInsets.all(20),
+        padding: EdgeInsets.all(AppPadding.p16),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(100)),
-        textStyle: TextStyle(
-
+        textStyle: getMediumStyle(
+          color: AppColors.black,
           fontSize: FontSize.s16,
-          fontWeight: FontWeightManager.medium,
           fontFamily: FontConstants.interFamily,
         ),
       ),
@@ -82,51 +127,49 @@ abstract class AppTheme {
     inputDecorationTheme: InputDecorationTheme(
       filled: true,
       fillColor: AppColors.lightBlue,
-      hintStyle: TextStyle(
+      hintStyle: getRegularStyle(
         color: AppColors.placeholder,
         fontSize: FontSize.s16,
         fontFamily: FontConstants.interFamily,
       ),
-      labelStyle: TextStyle(
+      labelStyle: getMediumStyle(
         color: AppColors.grey,
         fontSize: FontSize.s18,
-        fontWeight: FontWeight.w500,
         fontFamily: FontConstants.interFamily,
       ),
-      floatingLabelStyle: TextStyle(
+      floatingLabelStyle: getRegularStyle(
         color: AppColors.grey,
         fontSize: FontSize.s18,
-        fontWeight: FontWeight.w400,
         fontFamily: FontConstants.interFamily,
       ),
       floatingLabelBehavior: FloatingLabelBehavior.always,
-      errorStyle: TextStyle(
+      errorStyle: getRegularStyle(
         color: AppColors.error,
         fontSize: FontSize.s12,
         fontFamily: FontConstants.interFamily,
       ),
       border: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(4),
+        borderRadius: BorderRadius.circular(RadiusSize.r4),
         borderSide: BorderSide(color: AppColors.grey),
       ),
       enabledBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(4),
+        borderRadius: BorderRadius.circular(RadiusSize.r4),
         borderSide: BorderSide(color: AppColors.grey),
       ),
       focusedBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(4),
+        borderRadius: BorderRadius.circular(RadiusSize.r4),
         borderSide: BorderSide(color: AppColors.primary, width: 2),
       ),
       errorBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(4),
+        borderRadius: BorderRadius.circular(RadiusSize.r4),
         borderSide: BorderSide(color: AppColors.error, width: 1),
       ),
       focusedErrorBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(4),
+        borderRadius: BorderRadius.circular(RadiusSize.r4),
         borderSide: BorderSide(color: AppColors.error, width: 2),
       ),
 
-      contentPadding: const EdgeInsets.all(16),
+      contentPadding: EdgeInsets.all(AppPadding.p12),
     ),
   );
 }
