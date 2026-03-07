@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import '../constants/color_manager.dart';
+import '../constants/font_manager.dart';
+import '../constants/style_manager.dart';
+import '../constants/values_manager.dart';
 
 abstract class AppTheme {
   static ThemeData lightTheme = ThemeData(
@@ -20,35 +23,89 @@ abstract class AppTheme {
     ),
 
     textTheme: TextTheme(
-      headlineLarge: TextStyle(
+      displayLarge: getBoldStyle(
         color: AppColors.black,
-        fontSize: 36,
-        fontWeight: FontWeight.w500,
+        fontSize: FontSize.s40,
+        fontFamily: FontConstants.interFamily,
       ),
-      headlineMedium: TextStyle(
+      displayMedium: getSemiBoldStyle(
         color: AppColors.black,
-        fontSize: 30,
-        fontWeight: FontWeight.w500,
+        fontSize: FontSize.s35,
+        fontFamily: FontConstants.interFamily,
       ),
-      bodyLarge: TextStyle(
+      displaySmall: getMediumStyle(
         color: AppColors.black,
-        fontSize: 25,
-        fontWeight: FontWeight.w400,
+        fontSize: FontSize.s30,
+        fontFamily: FontConstants.interFamily,
       ),
-      bodyMedium: TextStyle(
-        color: AppColors.grey,
-        fontSize: 20,
-        fontWeight: FontWeight.w400,
+
+      headlineLarge: getSemiBoldStyle(
+        color: AppColors.black,
+        fontSize: FontSize.s25,
+        fontFamily: FontConstants.interFamily,
       ),
-      bodySmall: TextStyle(
+      headlineMedium: getMediumStyle(
+        color: AppColors.black,
+        fontSize: FontSize.s20,
+        fontFamily: FontConstants.interFamily,
+      ),
+      headlineSmall: getRegularStyle(
+        color: AppColors.black,
+        fontSize: FontSize.s18,
+        fontFamily: FontConstants.interFamily,
+      ),
+
+      titleLarge: getSemiBoldStyle(
+        color: AppColors.black,
+        fontSize: FontSize.s22,
+        fontFamily: FontConstants.interFamily,
+      ),
+      titleMedium: getMediumStyle(
+        color: AppColors.black,
+        fontSize: FontSize.s16,
+        fontFamily: FontConstants.interFamily,
+      ),
+      titleSmall: getMediumStyle(
+        color: AppColors.black,
+        fontSize: FontSize.s14,
+        fontFamily: FontConstants.interFamily,
+      ),
+
+      bodyLarge: getRegularStyle(
+        color: AppColors.black,
+        fontSize: FontSize.s16,
+        fontFamily: FontConstants.interFamily,
+      ),
+      bodyMedium: getRegularStyle(
+        color: AppColors.black,
+        fontSize: FontSize.s14,
+        fontFamily: FontConstants.interFamily,
+      ),
+      bodySmall: getRegularStyle(
+        color: AppColors.black,
+        fontSize: FontSize.s12,
+        fontFamily: FontConstants.interFamily,
+      ),
+
+      labelLarge: getMediumStyle(
         color: AppColors.placeholder,
-        fontSize: 16,
-        fontWeight: FontWeight.w400,
+        fontSize: FontSize.s14,
+        fontFamily: FontConstants.interFamily,
+      ),
+      labelMedium: getMediumStyle(
+        color: AppColors.placeholder,
+        fontSize: FontSize.s12,
+        fontFamily: FontConstants.interFamily,
+      ),
+      labelSmall: getRegularStyle(
+        color: AppColors.placeholder,
+        fontSize: FontSize.s10,
+        fontFamily: FontConstants.interFamily,
       ),
     ),
 
     appBarTheme: AppBarTheme(
-      backgroundColor: AppColors.white,
+      backgroundColor: AppColors.transparent,
       foregroundColor: AppColors.black,
       elevation: 0,
     ),
@@ -57,25 +114,63 @@ abstract class AppTheme {
       style: ElevatedButton.styleFrom(
         backgroundColor: AppColors.primary,
         foregroundColor: AppColors.white,
+        padding: const EdgeInsets.all(20),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(100)),
+        textStyle: getMediumStyle(
+          color: AppColors.black,
+          fontSize: FontSize.s16,
+          fontFamily: FontConstants.interFamily,
+        ),
       ),
     ),
 
     inputDecorationTheme: InputDecorationTheme(
       filled: true,
-      fillColor: AppColors.lightBlue,
-      hintStyle: TextStyle(color: AppColors.placeholder),
+      fillColor: AppColors.transparent,
+      hintStyle: TextStyle(
+        color: AppColors.placeholder,
+        fontSize: FontSize.s16,
+        fontFamily: FontConstants.interFamily,
+      ),
+      labelStyle: TextStyle(
+        color: AppColors.grey,
+        fontSize: FontSize.s18,
+        fontWeight: FontWeight.w500,
+        fontFamily: FontConstants.interFamily,
+      ),
+      floatingLabelStyle: getRegularStyle(
+        color: AppColors.grey,
+        fontSize: FontSize.s18,
+        fontFamily: FontConstants.interFamily,
+      ),
+      floatingLabelBehavior: FloatingLabelBehavior.always,
+      errorStyle: getRegularStyle(
+        color: AppColors.error,
+        fontSize: FontSize.s12,
+        fontFamily: FontConstants.interFamily,
+      ),
       border: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(10),
+        borderRadius: BorderRadius.circular(RadiusSize.r4),
         borderSide: BorderSide(color: AppColors.grey),
       ),
       enabledBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(10),
+        borderRadius: BorderRadius.circular(RadiusSize.r4),
         borderSide: BorderSide(color: AppColors.grey),
       ),
       focusedBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(10),
-        borderSide: BorderSide(color: AppColors.primary, width: 2),
+        borderRadius: BorderRadius.circular(RadiusSize.r4),
+        borderSide: BorderSide(color: AppColors.primary, width: AppSize.s2),
       ),
+      errorBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(RadiusSize.r4),
+        borderSide: BorderSide(color: AppColors.error, width: AppSize.s1),
+      ),
+      focusedErrorBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(RadiusSize.r4),
+        borderSide: BorderSide(color: AppColors.error, width: AppSize.s2),
+      ),
+
+      contentPadding:  EdgeInsets.all(AppPadding.p16),
     ),
   );
 }
