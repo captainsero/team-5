@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:team_5_examapp/generated/l10n.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+import 'core/routing/routes_manager.dart';
+import 'core/themes/light_theme.dart';
+import 'features/auth/loginScreen/presentations/loginScreen.dart';
+import 'generated/l10n.dart';
 
 void main() {
   runApp(const MyApp());
@@ -9,19 +14,30 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      localizationsDelegates: [
-        S.delegate,
-        GlobalMaterialLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-        GlobalCupertinoLocalizations.delegate,
-      ],
-      supportedLocales: S.delegate.supportedLocales,
-      title: 'Flutter Demo',
-      home: const Placeholder(),
+    return ScreenUtilInit(
+      designSize: const Size(375, 812),
+      minTextAdapt: true,
+      splitScreenMode: true,
+      builder: (context, child) {
+        return MaterialApp(
+          title: 'Exam App',
+          debugShowCheckedModeBanner: false,
+          theme: AppTheme.lightTheme,
+
+          localizationsDelegates: const [
+            S.delegate,
+            GlobalMaterialLocalizations.delegate,
+            GlobalWidgetsLocalizations.delegate,
+            GlobalCupertinoLocalizations.delegate,
+          ],
+          supportedLocales: S.delegate.supportedLocales,
+
+          initialRoute: Routes.loginRoute,
+          routes: {Routes.loginRoute: (context) => const LoginScreen(),},
+        );
+      },
     );
   }
 }
