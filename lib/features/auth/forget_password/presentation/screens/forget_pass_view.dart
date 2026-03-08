@@ -10,7 +10,7 @@ class ForgetPassView extends StatefulWidget {
 
 class _ForgetPassViewState extends State<ForgetPassView> {
   final _formKey = GlobalKey<FormState>();
-  final emailController = TextEditingController();
+  final _emailController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -42,7 +42,7 @@ class _ForgetPassViewState extends State<ForgetPassView> {
               SizedBox(height: AppSize.s30),
 
               TextFormField(
-                controller: TextEditingController(),
+                controller: _emailController,
                 decoration: InputDecoration(
                   hintText: "Enter your email",
                   labelText: "Email",

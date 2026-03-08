@@ -65,7 +65,7 @@ abstract class AppTheme {
         fontSize: FontSize.s16,
         fontFamily: FontConstants.interFamily,
       ),
-      titleSmall: getMediumStyle(
+      titleSmall: getRegularStyle(
         color: AppColors.black,
         fontSize: FontSize.s14,
         fontFamily: FontConstants.interFamily,
