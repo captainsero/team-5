@@ -19,6 +19,10 @@ import '../../features/auth/forget_password/api/forget_pass_api_client/forget_pa
     as _i358;
 import '../../features/auth/forget_password/data/data_sources/forget_pass_remote_data_source_contract.dart'
     as _i426;
+import '../../features/auth/forget_password/data/repo/forget_pass_repo_impl.dart'
+    as _i55;
+import '../../features/auth/forget_password/domain/repo/forget_pass_repo_contract.dart'
+    as _i222;
 import '../dio/dio_module.dart' as _i977;
 
 extension GetItInjectableX on _i174.GetIt {
@@ -36,6 +40,12 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i426.ForgetPassRemoteDataSourceContract>(
       () => _i970.ForgetPassRemoteDataSourceImpl(
         forgetPassApiClient: gh<_i358.ForgetPassApiClient>(),
+      ),
+    );
+    gh.factory<_i222.ForgetPassRepoContract>(
+      () => _i55.ForgetPassRepoImpl(
+        forgetPassRemoteDataSourceContract:
+            gh<_i426.ForgetPassRemoteDataSourceContract>(),
       ),
     );
     return this;
