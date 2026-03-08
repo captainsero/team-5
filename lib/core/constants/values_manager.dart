@@ -1,4 +1,5 @@
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 class AppMargin {
   static double get m8 => 8.0.w;
   static double get m12 => 12.0.w;
@@ -37,6 +38,7 @@ class AppSize {
   static double get s40 => 40.0.w;
   static double get s48 => 48.0.w;
   static double get s50 => 50.0.w;
+  static double get s70 => 70.0.w;
   static double get s100 => 100.0.w;
   static double get s200 => 200.0.w;
 }
@@ -44,6 +46,7 @@ class AppSize {
 class RadiusSize {
   static double get r4 => 4.0.r;
   static double get r8 => 8.0.r;
+  static double get r10 => 10.0.r;
   static double get r12 => 12.0.r;
   static double get r16 => 16.0.r;
   static double get r20 => 20.0.r;

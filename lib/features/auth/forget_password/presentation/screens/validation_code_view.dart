@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:team_5_examapp/core/constants/font_manager.dart';
 import 'package:team_5_examapp/core/constants/values_manager.dart';
+import 'package:team_5_examapp/features/auth/forget_password/presentation/widgets/validation_code_field.dart';
 
 class ValidationCodeView extends StatefulWidget {
   const ValidationCodeView({super.key});
@@ -11,7 +12,6 @@ class ValidationCodeView extends StatefulWidget {
 
 class _ValidationCodeViewState extends State<ValidationCodeView> {
   final _formKey = GlobalKey<FormState>();
-  final _codeController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -43,7 +43,7 @@ class _ValidationCodeViewState extends State<ValidationCodeView> {
 
               SizedBox(height: AppSize.s30),
 
-              TextFormField(controller: _codeController),
+              ValidationCodeField(),
 
               SizedBox(height: AppSize.s30),
 
