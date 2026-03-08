@@ -20,20 +20,35 @@ class _ForgetPassApiClient implements ForgetPassApiClient {
   final ParseErrorLogger? errorLogger;
 
   @override
-  Future<void> forgetPassword({Map<String, dynamic>? body}) async {
+  Future<void> forgetPassword({required String email}) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
-    queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
-    final _data = <String, dynamic>{};
-    if (body != null) {
-      _data.addAll(body);
-    }
+    final _data = <String, dynamic>{'email': email};
     final _options = _setStreamType<void>(
       Options(method: 'POST', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
             'https://exam.elevateegy.com/api/v1/auth/forgotPassword',
+            queryParameters: queryParameters,
+            data: _data,
+          )
+          .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
+    );
+    await _dio.fetch<void>(_options);
+  }
+
+  @override
+  Future<void> confirmValidationCode({required String resetCode}) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{'resetCode': resetCode};
+    final _options = _setStreamType<void>(
+      Options(method: 'POST', headers: _headers, extra: _extra)
+          .compose(
+            _dio.options,
+            'https://exam.elevateegy.com/api/v1/auth/verifyResetCode',
             queryParameters: queryParameters,
             data: _data,
           )

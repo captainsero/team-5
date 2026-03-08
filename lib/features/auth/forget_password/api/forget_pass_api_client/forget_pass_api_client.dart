@@ -12,5 +12,10 @@ abstract class ForgetPassApiClient {
   factory ForgetPassApiClient(Dio dio) = _ForgetPassApiClient;
 
   @POST(AppEndPoints.forgetPassword)
-  Future<void> forgetPassword({@Body() Map<String, dynamic>? body});
+  Future<void> forgetPassword({@BodyExtra('email') required String email});
+
+  @POST(AppEndPoints.verifyResetCode)
+  Future<void> confirmValidationCode({
+    @BodyExtra('resetCode') required String resetCode,
+  });
 }

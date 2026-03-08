@@ -13,11 +13,14 @@ class ForgetPassRemoteDataSourceImpl
   final ForgetPassApiClient forgetPassApiClient;
 
   @override
-  Future<BaseResponse<void>> forgetPassword(Map<String, dynamic> body) async {
+  Future<BaseResponse<void>> forgetPassword({required String email}) async {
+    print("Start");
     try {
-      await forgetPassApiClient.forgetPassword(body: body);
+      await forgetPassApiClient.forgetPassword(email: email);
+      print("Success");
       return SucceessBaseResponse<void>(data: null);
     } catch (e) {
+      print(e);
       if (e is DioException) {
         return ErrorBaseResponse<void>(
           errorMessage: e.message ?? "Dio Exception",
@@ -35,9 +38,28 @@ class ForgetPassRemoteDataSourceImpl
   }
 
   @override
-  Future<BaseResponse<void>> confirmValidationCode() {
-    // TODO: implement confirmValidationCode
-    throw UnimplementedError();
+  Future<BaseResponse<void>> confirmValidationCode({required String resetCode}) async {
+    print("Start");
+    try {
+      await forgetPassApiClient.confirmValidationCode(resetCode: resetCode);
+      print("Success");
+      return SucceessBaseResponse<void>(data: null);
+    } catch (e) {
+      print(e);
+      if (e is DioException) {
+        return ErrorBaseResponse<void>(
+          errorMessage: e.message ?? "Dio Exception",
+        );
+      } else if (e is TimeoutException) {
+        return ErrorBaseResponse<void>(
+          errorMessage: "Request timed out. Please try again later.",
+        );
+      }
+
+      return ErrorBaseResponse<void>(
+        errorMessage: "Something went wrong. Please try again later.",
+      );
+    }
   }
 
   @override
