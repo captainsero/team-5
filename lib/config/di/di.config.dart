@@ -23,6 +23,12 @@ import '../../features/auth/forget_password/data/repo/forget_pass_repo_impl.dart
     as _i55;
 import '../../features/auth/forget_password/domain/repo/forget_pass_repo_contract.dart'
     as _i222;
+import '../../features/auth/forget_password/domain/use_cases/confirm_validation_code_use_case.dart'
+    as _i146;
+import '../../features/auth/forget_password/domain/use_cases/forget_pass_use_case.dart'
+    as _i335;
+import '../../features/auth/forget_password/domain/use_cases/reset_pass_use_case.dart'
+    as _i262;
 import '../dio/dio_module.dart' as _i977;
 
 extension GetItInjectableX on _i174.GetIt {
@@ -46,6 +52,21 @@ extension GetItInjectableX on _i174.GetIt {
       () => _i55.ForgetPassRepoImpl(
         forgetPassRemoteDataSourceContract:
             gh<_i426.ForgetPassRemoteDataSourceContract>(),
+      ),
+    );
+    gh.factory<_i146.ConfirmValidationCodeUseCase>(
+      () => _i146.ConfirmValidationCodeUseCase(
+        forgetPassRepo: gh<_i222.ForgetPassRepoContract>(),
+      ),
+    );
+    gh.factory<_i335.ForgetPassUseCase>(
+      () => _i335.ForgetPassUseCase(
+        forgetPassRepo: gh<_i222.ForgetPassRepoContract>(),
+      ),
+    );
+    gh.factory<_i262.ResetPassUseCase>(
+      () => _i262.ResetPassUseCase(
+        forgetPassRepo: gh<_i222.ForgetPassRepoContract>(),
       ),
     );
     return this;
