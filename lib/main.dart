@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:team_5_examapp/config/di/di.dart';
+import 'package:team_5_examapp/features/auth/forget_password/data/data_sources/forget_pass_remote_data_source_contract.dart';
+import 'package:team_5_examapp/features/auth/forget_password/data/models/reset_pass_dto.dart';
 import 'core/routing/routes_manager.dart';
 import 'core/themes/light_theme.dart';
 import 'features/auth/loginScreen/presentations/loginScreen.dart';
@@ -10,8 +12,17 @@ import 'generated/l10n.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   configureDependencies();
+  final getit = getIt.get<ForgetPassRemoteDataSourceContract>();
+  // await getit.forgetPassword(email: "yasoo976098@gmail.com");
+  // await getit.confirmValidationCode(resetCode: "202382");
+  await getit.resetPassword(
+    resetPassDto: ResetPassDto(
+      email: "yasoo976098@gmail.com",
+      newPassword: "Yasser@123",
+    ),
+  );
 
-  runApp(const MyApp());
+  // runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {

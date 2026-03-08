@@ -1,11 +1,11 @@
 import 'dart:async';
-
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 import 'package:team_5_examapp/config/base_response/base_response.dart';
 import 'package:team_5_examapp/features/auth/forget_password/api/forget_pass_api_client/forget_pass_api_client.dart';
 import 'package:team_5_examapp/features/auth/forget_password/data/data_sources/forget_pass_remote_data_source_contract.dart';
 import 'package:team_5_examapp/features/auth/forget_password/data/models/reset_pass_dto.dart';
+import 'package:team_5_examapp/features/auth/forget_password/data/models/responses/forget_password_response.dart';
 
 @Injectable(as: ForgetPassRemoteDataSourceContract)
 class ForgetPassRemoteDataSourceImpl
@@ -14,73 +14,96 @@ class ForgetPassRemoteDataSourceImpl
   final ForgetPassApiClient forgetPassApiClient;
 
   @override
-  Future<BaseResponse<void>> forgetPassword({required String email}) async {
+  Future<BaseResponse<ForgetPasswordResponse>> forgetPassword({
+    required String email,
+  }) async {
     try {
-      await forgetPassApiClient.forgetPassword(email: email);
-      return SucceessBaseResponse<void>(data: null);
+      final response = await forgetPassApiClient.forgetPassword(email: email);
+      return SucceessBaseResponse<ForgetPasswordResponse>(data: response);
     } catch (e) {
       if (e is DioException) {
-        return ErrorBaseResponse<void>(
-          errorMessage: e.message ?? "Dio Exception",
+        final data = e.response?.data;
+        final messageFromApi = (data is Map<String, dynamic>)
+            ? data['message']?.toString()
+            : null;
+        return ErrorBaseResponse<ForgetPasswordResponse>(
+          errorMessage:
+              messageFromApi ??
+              e.message ??
+              "Something went wrong. Please try again later.",
         );
       } else if (e is TimeoutException) {
-        return ErrorBaseResponse<void>(
+        return ErrorBaseResponse<ForgetPasswordResponse>(
           errorMessage: "Request timed out. Please try again later.",
         );
       }
 
-      return ErrorBaseResponse<void>(
+      return ErrorBaseResponse<ForgetPasswordResponse>(
         errorMessage: "Something went wrong. Please try again later.",
       );
     }
   }
 
   @override
-  Future<BaseResponse<void>> confirmValidationCode({
+  Future<BaseResponse<ForgetPasswordResponse>> confirmValidationCode({
     required String resetCode,
   }) async {
     try {
-      await forgetPassApiClient.confirmValidationCode(resetCode: resetCode);
-      return SucceessBaseResponse<void>(data: null);
+      final response = await forgetPassApiClient.confirmValidationCode(
+        resetCode: resetCode,
+      );
+      return SucceessBaseResponse(data: response);
     } catch (e) {
       if (e is DioException) {
-        return ErrorBaseResponse<void>(
-          errorMessage: e.message ?? "Dio Exception",
+        final data = e.response?.data;
+        final messageFromApi = (data is Map<String, dynamic>)
+            ? data['message']?.toString()
+            : null;
+        return ErrorBaseResponse<ForgetPasswordResponse>(
+          errorMessage:
+              messageFromApi ??
+              e.message ??
+              "Something went wrong. Please try again later.",
         );
       } else if (e is TimeoutException) {
-        return ErrorBaseResponse<void>(
+        return ErrorBaseResponse<ForgetPasswordResponse>(
           errorMessage: "Request timed out. Please try again later.",
         );
       }
 
-      return ErrorBaseResponse<void>(
+      return ErrorBaseResponse<ForgetPasswordResponse>(
         errorMessage: "Something went wrong. Please try again later.",
       );
     }
   }
 
   @override
-  Future<BaseResponse<void>> resetPassword({
+  Future<BaseResponse<ForgetPasswordResponse>> resetPassword({
     required ResetPassDto resetPassDto,
   }) async {
     try {
-      await forgetPassApiClient.resetPassword(
+      final response = await forgetPassApiClient.resetPassword(
         resetPassDto: resetPassDto.toJson(),
       );
-      return SucceessBaseResponse<void>(data: null);
+      return SucceessBaseResponse<ForgetPasswordResponse>(data: response);
     } catch (e) {
-      // print(e);
       if (e is DioException) {
-        return ErrorBaseResponse<void>(
-          errorMessage: e.message ?? "Dio Exception",
+        final data = e.response?.data;
+        final messageFromApi = (data is Map<String, dynamic>)
+            ? data['message']?.toString()
+            : null;
+        return ErrorBaseResponse<ForgetPasswordResponse>(
+          errorMessage:
+              messageFromApi ??
+              e.message ??
+              "Something went wrong. Please try again later.",
         );
       } else if (e is TimeoutException) {
-        return ErrorBaseResponse<void>(
+        return ErrorBaseResponse<ForgetPasswordResponse>(
           errorMessage: "Request timed out. Please try again later.",
         );
       }
-
-      return ErrorBaseResponse<void>(
+      return ErrorBaseResponse<ForgetPasswordResponse>(
         errorMessage: "Something went wrong. Please try again later.",
       );
     }

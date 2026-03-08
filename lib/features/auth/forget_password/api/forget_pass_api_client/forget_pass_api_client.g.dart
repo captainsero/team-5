@@ -20,12 +20,12 @@ class _ForgetPassApiClient implements ForgetPassApiClient {
   final ParseErrorLogger? errorLogger;
 
   @override
-  Future<void> forgetPassword({required String email}) async {
+  Future<ForgetPasswordResponse> forgetPassword({required String email}) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{'email': email};
-    final _options = _setStreamType<void>(
+    final _options = _setStreamType<ForgetPasswordResponse>(
       Options(method: 'POST', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
@@ -35,16 +35,26 @@ class _ForgetPassApiClient implements ForgetPassApiClient {
           )
           .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
     );
-    await _dio.fetch<void>(_options);
+    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
+    late ForgetPasswordResponse _value;
+    try {
+      _value = ForgetPasswordResponse.fromJson(_result.data!);
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options, response: _result);
+      rethrow;
+    }
+    return _value;
   }
 
   @override
-  Future<void> confirmValidationCode({required String resetCode}) async {
+  Future<ForgetPasswordResponse> confirmValidationCode({
+    required String resetCode,
+  }) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{'resetCode': resetCode};
-    final _options = _setStreamType<void>(
+    final _options = _setStreamType<ForgetPasswordResponse>(
       Options(method: 'POST', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
@@ -54,11 +64,19 @@ class _ForgetPassApiClient implements ForgetPassApiClient {
           )
           .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
     );
-    await _dio.fetch<void>(_options);
+    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
+    late ForgetPasswordResponse _value;
+    try {
+      _value = ForgetPasswordResponse.fromJson(_result.data!);
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options, response: _result);
+      rethrow;
+    }
+    return _value;
   }
 
   @override
-  Future<void> resetPassword({
+  Future<ForgetPasswordResponse> resetPassword({
     required Map<String, dynamic> resetPassDto,
   }) async {
     final _extra = <String, dynamic>{};
@@ -66,7 +84,7 @@ class _ForgetPassApiClient implements ForgetPassApiClient {
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     _data.addAll(resetPassDto);
-    final _options = _setStreamType<void>(
+    final _options = _setStreamType<ForgetPasswordResponse>(
       Options(method: 'PUT', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
@@ -76,7 +94,15 @@ class _ForgetPassApiClient implements ForgetPassApiClient {
           )
           .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
     );
-    await _dio.fetch<void>(_options);
+    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
+    late ForgetPasswordResponse _value;
+    try {
+      _value = ForgetPasswordResponse.fromJson(_result.data!);
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options, response: _result);
+      rethrow;
+    }
+    return _value;
   }
 
   RequestOptions _setStreamType<T>(RequestOptions requestOptions) {
