@@ -37,13 +37,11 @@ dependencies:
   flutter_screenutil: ^5.9.3
   flutter_secure_storage: ^10.0.0
   get_it: ^9.2.1
-
-  # The following adds the Cupertino Icons font to your application.
-  # Use with the CupertinoIcons class for iOS style icons.
   go_router: ^17.1.0
   injectable: ^2.7.1+4
   intl: ^0.20.2
   json_annotation: ^4.11.0
+  pin_code_fields: ^9.1.0
   retrofit: ^4.9.2
 
 dev_dependencies:
