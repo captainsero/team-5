@@ -15,13 +15,6 @@ class _ValidationCodeFieldState extends State<ValidationCodeField> {
   final _focusNode = FocusNode();
 
   @override
-  void dispose() {
-    _pinController.dispose();
-    _focusNode.dispose();
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
     final defaultPinTheme = PinTheme(
       width: AppSize.s50,
@@ -94,5 +87,12 @@ class _ValidationCodeFieldState extends State<ValidationCodeField> {
         ],
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    _pinController.dispose();
+    _focusNode.dispose();
+    super.dispose();
   }
 }

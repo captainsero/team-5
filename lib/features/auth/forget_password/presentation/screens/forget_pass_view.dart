@@ -11,6 +11,7 @@ class ForgetPassView extends StatefulWidget {
 class _ForgetPassViewState extends State<ForgetPassView> {
   final _formKey = GlobalKey<FormState>();
   final _emailController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -63,5 +64,11 @@ class _ForgetPassViewState extends State<ForgetPassView> {
         ),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    _emailController.dispose();
+    super.dispose();
   }
 }

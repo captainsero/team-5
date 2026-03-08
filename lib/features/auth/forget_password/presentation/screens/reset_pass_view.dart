@@ -69,4 +69,11 @@ class _ResetPassViewState extends State<ResetPassView> {
       ),
     );
   }
+
+  @override
+  void dispose() {
+    _newPasswordController.dispose();
+    _confirmPasswordController.dispose();
+    super.dispose();
+  }
 }
