@@ -44,8 +44,8 @@ class _ForgetPassViewState extends State<ForgetPassView> {
               TextFormField(
                 controller: _emailController,
                 decoration: InputDecoration(
-                  hintText: "Enter your email",
                   labelText: "Email",
+                  hintText: "Enter your email",
                 ),
               ),
 
