@@ -41,7 +41,7 @@ dependencies:
   injectable: ^2.7.1+4
   intl: ^0.20.2
   json_annotation: ^4.11.0
-  pin_code_fields: ^9.1.0
+  pinput: ^6.0.2
   retrofit: ^4.9.2
 
 dev_dependencies:
