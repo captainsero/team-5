@@ -18,4 +18,7 @@ abstract class ForgetPassApiClient {
   Future<void> confirmValidationCode({
     @BodyExtra('resetCode') required String resetCode,
   });
+
+  @PUT(AppEndPoints.resetPassword)
+  Future<void> resetPassword({@Body() required Map<String, dynamic> resetPassDto});
 }
