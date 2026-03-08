@@ -14,13 +14,10 @@ class ForgetPassRemoteDataSourceImpl
 
   @override
   Future<BaseResponse<void>> forgetPassword(Map<String, dynamic> body) async {
-    print("start");
     try {
-      await forgetPassApiClient.forgetPassword();
-      print("Success");
+      await forgetPassApiClient.forgetPassword(body: body);
       return SucceessBaseResponse<void>(data: null);
     } catch (e) {
-      print(e);
       if (e is DioException) {
         return ErrorBaseResponse<void>(
           errorMessage: e.message ?? "Dio Exception",

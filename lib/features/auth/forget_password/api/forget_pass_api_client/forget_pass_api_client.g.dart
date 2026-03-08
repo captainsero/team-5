@@ -33,7 +33,7 @@ class _ForgetPassApiClient implements ForgetPassApiClient {
       Options(method: 'POST', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
-            '/forgotPassword',
+            'https://exam.elevateegy.com/api/v1/auth/forgotPassword',
             queryParameters: queryParameters,
             data: _data,
           )
