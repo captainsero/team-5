@@ -89,8 +89,7 @@ class _ForgetPassViewState extends State<ForgetPassView> {
                             : () async {
                                 if (_formKey.currentState!.validate()) {
                                   String email = _emailController.text;
-                                  await viewModel.forgetPassword(email);
-                                  print("Done");
+                                  await viewModel.forgetPassword(email: email);
                                 }
                               },
                         child: Text("Continue"),

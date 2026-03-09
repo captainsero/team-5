@@ -2,6 +2,7 @@ import 'package:go_router/go_router.dart';
 import 'package:team_5_examapp/features/auth/forget_password/presentation/screens/forget_pass_view.dart';
 import 'package:team_5_examapp/features/auth/forget_password/presentation/screens/reset_pass_view.dart';
 import 'package:team_5_examapp/features/auth/forget_password/presentation/screens/validation_code_view.dart';
+import 'package:team_5_examapp/features/auth/loginScreen/presentations/loginScreen.dart';
 
 class Routes {
   static const String splashRoute = "/";
@@ -15,6 +16,11 @@ class AppRouter {
   static final GoRouter router = GoRouter(
     initialLocation: Routes.forgetPasswordRoute,
     routes: [
+      GoRoute(
+        path: Routes.loginRoute,
+        name: Routes.loginRoute,
+        builder: (_, _) => LoginScreen(),
+      ),
       GoRoute(
         path: Routes.forgetPasswordRoute,
         name: Routes.forgetPasswordRoute,
