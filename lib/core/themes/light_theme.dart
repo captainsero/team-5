@@ -112,8 +112,8 @@ abstract class AppTheme {
         fontSize: FontSize.s20,
         fontFamily: FontConstants.interFamily,
       ),
-      leadingWidth: AppSize.s8,
-
+      leadingWidth: AppSize.s25,
+      titleSpacing: AppSize.s0,
       elevation: 0,
     ),
 

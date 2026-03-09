@@ -40,7 +40,10 @@ class _ForgetPassViewState extends State<ForgetPassView> {
         builder: (context, state) {
           return Scaffold(
             appBar: AppBar(
-              leading: const Icon(Icons.arrow_back_ios),
+              leading: IconButton(
+                onPressed: () => context.pop(),
+                icon: Icon(Icons.arrow_back_ios),
+              ),
               title: Text("Password"),
             ),
             body: Form(

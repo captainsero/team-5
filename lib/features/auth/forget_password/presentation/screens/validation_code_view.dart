@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:team_5_examapp/core/constants/font_manager.dart';
 import 'package:team_5_examapp/core/constants/values_manager.dart';
 import 'package:team_5_examapp/features/auth/forget_password/presentation/widgets/validation_code_field.dart';
@@ -15,34 +16,37 @@ class _ValidationCodeViewState extends State<ValidationCodeView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: const Icon(Icons.arrow_back_ios),
+        leading: IconButton(
+          onPressed: () => context.pop(),
+          icon: Icon(Icons.arrow_back_ios),
+        ),
         title: Text("Password"),
       ),
       body: SingleChildScrollView(
         padding: EdgeInsets.all(AppPadding.p20),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
-      
+
           children: [
             Text(
               "Email verification",
               style: Theme.of(context).textTheme.headlineMedium,
             ),
-      
+
             SizedBox(height: AppSize.s16),
-      
+
             Text(
               "Please enter your code that send to your email adress",
               textAlign: TextAlign.center,
               style: Theme.of(context).textTheme.bodyLarge,
             ),
-      
+
             SizedBox(height: AppSize.s30),
-      
+
             ValidationCodeField(),
-      
+
             SizedBox(height: AppSize.s30),
-      
+
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [

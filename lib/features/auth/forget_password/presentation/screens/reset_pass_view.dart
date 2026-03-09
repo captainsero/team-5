@@ -43,8 +43,11 @@ class _ResetPassViewState extends State<ResetPassView> {
         builder: (context, state) {
           return Scaffold(
             appBar: AppBar(
-              leading: const Icon(Icons.arrow_back_ios),
-              title: const Text("Password"),
+              leading: IconButton(
+                onPressed: () => context.pop(),
+                icon: Icon(Icons.arrow_back_ios),
+              ),
+              title: Text("Password"),
             ),
             body: SingleChildScrollView(
               padding: EdgeInsets.all(AppPadding.p20),
