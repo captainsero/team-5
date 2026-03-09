@@ -29,6 +29,8 @@ import '../../features/auth/forget_password/domain/use_cases/forget_pass_use_cas
     as _i335;
 import '../../features/auth/forget_password/domain/use_cases/reset_pass_use_case.dart'
     as _i262;
+import '../../features/auth/forget_password/presentation/view_model/cubit/forget_pass_view_model.dart'
+    as _i128;
 import '../dio/dio_module.dart' as _i977;
 
 extension GetItInjectableX on _i174.GetIt {
@@ -67,6 +69,13 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i262.ResetPassUseCase>(
       () => _i262.ResetPassUseCase(
         forgetPassRepo: gh<_i222.ForgetPassRepoContract>(),
+      ),
+    );
+    gh.factory<_i128.ForgetPassViewModel>(
+      () => _i128.ForgetPassViewModel(
+        forgetPassUseCase: gh<_i335.ForgetPassUseCase>(),
+        confirmValidationCodeUseCase: gh<_i146.ConfirmValidationCodeUseCase>(),
+        resetPassUseCase: gh<_i262.ResetPassUseCase>(),
       ),
     );
     return this;

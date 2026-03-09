@@ -1,0 +1,19 @@
+{
+    "customFileOrder.rules": {
+        "e:\\programming\\Flutter\\Bootcamp\\team_5_examapp\\lib\\features\\auth\\forget_password\\api": {
+            "order": [
+                "forget_pass_api_client",
+                "data_sources"
+            ],
+            "type": "manual"
+        },
+        "e:\\programming\\Flutter\\Bootcamp\\team_5_examapp\\lib\\features\\auth\\forget_password\\data": {
+            "order": [
+                "data_sources",
+                "repo",
+                "models"
+            ],
+            "type": "manual"
+        }
+    }
+}
