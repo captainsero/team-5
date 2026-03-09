@@ -21,6 +21,16 @@ class ForgetPassViewModel extends Cubit<ForgetPassState> {
   final ConfirmValidationCodeUseCase confirmValidationCodeUseCase;
   final ResetPassUseCase resetPassUseCase;
 
+  Future<void> clearError() async {
+    emit(
+      state.copyWith(
+        forgetPasswordState: BaseState(isLoading: false),
+        confirmValidationState: BaseState(isLoading: false),
+        resetPasswordState: BaseState(isLoading: false),
+      ),
+    );
+  }
+
   Future<void> forgetPassword(String email) async {
     emit(
       state.copyWith(
@@ -56,7 +66,39 @@ class ForgetPassViewModel extends Cubit<ForgetPassState> {
     }
   }
 
-  Future<void> clearError() async {
-    emit(state.copyWith(forgetPasswordState: BaseState(isLoading: false)));
+  Future<void> confirmValidationCode({required String resetCode}) async {
+    emit(
+      state.copyWith(
+        confirmValidationState: state.confirmValidationState.copyWith(
+          isLoading: true,
+        ),
+      ),
+    );
+
+    final response = await confirmValidationCodeUseCase(resetCode: resetCode);
+
+    switch (response) {
+      case SucceessBaseResponse():
+        emit(
+          state.copyWith(
+            confirmValidationState: state.confirmValidationState.copyWith(
+              isLoading: false,
+              data: response.data,
+              errorMessage: null,
+            ),
+          ),
+        );
+        break;
+      case ErrorBaseResponse():
+        emit(
+          state.copyWith(
+            confirmValidationState: state.confirmValidationState.copyWith(
+              isLoading: false,
+              errorMessage: response.errorMessage,
+            ),
+          ),
+        );
+        break;
+    }
   }
 }

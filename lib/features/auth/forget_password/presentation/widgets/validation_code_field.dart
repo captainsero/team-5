@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:pinput/pinput.dart';
 import 'package:team_5_examapp/config/app_validator.dart';
+import 'package:team_5_examapp/config/di/di.dart';
 import 'package:team_5_examapp/core/constants/values_manager.dart';
+import 'package:team_5_examapp/core/routing/routes_manager.dart';
+import 'package:team_5_examapp/features/auth/forget_password/presentation/view_model/cubit/forget_pass_view_model.dart';
 
 class ValidationCodeField extends StatefulWidget {
   const ValidationCodeField({super.key});
@@ -14,6 +19,7 @@ class _ValidationCodeFieldState extends State<ValidationCodeField> {
   final _formKey = GlobalKey<FormState>();
   final _pinController = TextEditingController();
   final _focusNode = FocusNode();
+  final viewModel = getIt.get<ForgetPassViewModel>();
 
   @override
   Widget build(BuildContext context) {
@@ -55,29 +61,57 @@ class _ValidationCodeFieldState extends State<ValidationCodeField> {
       ),
     );
 
-    return Form(
-      key: _formKey,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.end,
-        children: [
-          Pinput(
-            controller: _pinController,
-            focusNode: _focusNode,
-            length: 6,
-            defaultPinTheme: defaultPinTheme,
-            focusedPinTheme: focusedPinTheme,
-            submittedPinTheme: submittedPinTheme,
-            errorPinTheme: errorPinTheme,
-            keyboardType: TextInputType.number,
-            showCursor: true,
-            pinputAutovalidateMode: PinputAutovalidateMode.onSubmit,
-            validator: AppValidator.validateOtpCode,
-            onCompleted: (pin) {
-              //TODO: Handel API Error State
-              _formKey.currentState!.validate();
-            },
-          ),
-        ],
+    return BlocProvider<ForgetPassViewModel>(
+      create: (context) => viewModel,
+      child: BlocConsumer<ForgetPassViewModel, ForgetPassState>(
+        listenWhen: (previous, current) =>
+            previous.confirmValidationState.isLoading !=
+                current.confirmValidationState.isLoading ||
+            previous.confirmValidationState.data !=
+                current.confirmValidationState.data ||
+            previous.confirmValidationState.errorMessage !=
+                current.confirmValidationState.errorMessage,
+        listener: (context, state) {
+          // navigate on success
+          if (!state.confirmValidationState.isLoading &&
+              state.confirmValidationState.data != null &&
+              state.confirmValidationState.errorMessage == null) {
+            context.push(Routes.resetPassRoute);
+          }
+        },
+        builder: (context, state) {
+          return Form(
+            key: _formKey,
+            child: Pinput(
+              controller: _pinController,
+              focusNode: _focusNode,
+              autofocus: true,
+              length: 6,
+              defaultPinTheme: defaultPinTheme,
+              focusedPinTheme: focusedPinTheme,
+              submittedPinTheme: submittedPinTheme,
+              errorPinTheme: errorPinTheme,
+              keyboardType: TextInputType.number,
+              showCursor: true,
+              pinputAutovalidateMode: PinputAutovalidateMode.onSubmit,
+              forceErrorState:
+                  state.confirmValidationState.errorMessage != null,
+              errorText: state.confirmValidationState.errorMessage,
+              validator: AppValidator.validateOtpCode,
+              onChanged: (_) {
+                if (state.confirmValidationState.errorMessage != null) {
+                  viewModel.clearError();
+                }
+              },
+              onCompleted: (pin) async {
+                if (_formKey.currentState!.validate()) {
+                  String resetCode = pin;
+                  await viewModel.confirmValidationCode(resetCode: resetCode);
+                }
+              },
+            ),
+          );
+        },
       ),
     );
   }
