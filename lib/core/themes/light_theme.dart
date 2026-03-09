@@ -121,6 +121,8 @@ abstract class AppTheme {
       style: ElevatedButton.styleFrom(
         backgroundColor: AppColors.primary,
         foregroundColor: AppColors.white,
+        disabledBackgroundColor: AppColors.lightGrey,
+        disabledForegroundColor: AppColors.white,
         padding: EdgeInsets.all(AppPadding.p16),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(100)),
         textStyle: getMediumStyle(
