@@ -5,7 +5,6 @@ import 'package:team_5_examapp/config/app_validator.dart';
 import 'package:team_5_examapp/config/di/di.dart';
 import 'package:team_5_examapp/core/constants/values_manager.dart';
 import 'package:team_5_examapp/core/routing/routes_manager.dart';
-import 'package:team_5_examapp/features/auth/forget_password/data/models/reset_pass_dto.dart';
 import 'package:team_5_examapp/features/auth/forget_password/presentation/view_model/cubit/forget_pass_view_model.dart';
 
 class ResetPassView extends StatefulWidget {
@@ -110,15 +109,12 @@ class _ResetPassViewState extends State<ResetPassView> {
                       child: ElevatedButton(
                         onPressed: state.resetPasswordState.isLoading
                             ? null
-                            : () {
+                            : () async {
                                 if (_formKey.currentState!.validate()) {
                                   String newPasswrod =
                                       _newPasswordController.text;
-                                  viewModel.resetPassword(
-                                    resetPassDto: ResetPassDto(
-                                      email: 'yasoo976098@gmail.com',
-                                      newPassword: newPasswrod.trim(),
-                                    ),
+                                  await viewModel.resetPassword(
+                                    newPassword: newPasswrod.trim(),
                                   );
                                 }
                               },

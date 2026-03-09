@@ -7,7 +7,7 @@ part of 'reset_pass_dto.dart';
 // **************************************************************************
 
 ResetPassDto _$ResetPassDtoFromJson(Map<String, dynamic> json) => ResetPassDto(
-  email: json['email'] as String,
+  email: json['email'] as String?,
   newPassword: json['newPassword'] as String,
 );
 

@@ -2,6 +2,8 @@ import 'package:bloc/bloc.dart';
 import 'package:injectable/injectable.dart';
 import 'package:team_5_examapp/config/base_response/base_response.dart';
 import 'package:team_5_examapp/config/base_state/base_state.dart';
+import 'package:team_5_examapp/config/secure_storage/secure_storage_keys.dart';
+import 'package:team_5_examapp/config/secure_storage/secure_storage_service.dart';
 import 'package:team_5_examapp/features/auth/forget_password/data/models/reset_pass_dto.dart';
 import 'package:team_5_examapp/features/auth/forget_password/data/models/responses/forget_password_response.dart';
 import 'package:team_5_examapp/features/auth/forget_password/domain/use_cases/confirm_validation_code_use_case.dart';
@@ -45,6 +47,12 @@ class ForgetPassViewModel extends Cubit<ForgetPassState> {
 
     switch (response) {
       case SucceessBaseResponse():
+        await SecureStorageService.write(
+          key: SecureStorageKeys.forgetPassEmail,
+          value: email,
+        );
+        print("Email Saved: $email");
+
         emit(
           state.copyWith(
             forgetPasswordState: state.forgetPasswordState.copyWith(
@@ -55,6 +63,7 @@ class ForgetPassViewModel extends Cubit<ForgetPassState> {
           ),
         );
         break;
+
       case ErrorBaseResponse():
         emit(
           state.copyWith(
@@ -104,33 +113,57 @@ class ForgetPassViewModel extends Cubit<ForgetPassState> {
     }
   }
 
-  Future<void> resetPassword({required ResetPassDto resetPassDto}) async {
+  Future<void> resetPassword({required String newPassword}) async {
     emit(
       state.copyWith(
         resetPasswordState: state.resetPasswordState.copyWith(isLoading: true),
       ),
     );
 
-    final response = await resetPassUseCase(resetPassDto: resetPassDto);
+    //* Didn't delete the email, you can use in login feature @mohamedabda28
+    final emailResponse = await SecureStorageService.read(
+      key: SecureStorageKeys.forgetPassEmail,
+    );
 
-    switch (response) {
-      case SucceessBaseResponse():
-        emit(
-          state.copyWith(
-            resetPasswordState: state.resetPasswordState.copyWith(
-              isLoading: false,
-              data: response.data,
-              errorMessage: null,
-            ),
-          ),
+    switch (emailResponse) {
+      case SucceessBaseResponse<String>(data: final email):
+        print("Email get: $email");
+        final response = await resetPassUseCase(
+          resetPassDto: ResetPassDto(email: email, newPassword: newPassword),
         );
+
+        switch (response) {
+          case SucceessBaseResponse():
+            emit(
+              state.copyWith(
+                resetPasswordState: state.resetPasswordState.copyWith(
+                  isLoading: false,
+                  data: response.data,
+                  errorMessage: null,
+                ),
+              ),
+            );
+            break;
+          case ErrorBaseResponse():
+            emit(
+              state.copyWith(
+                resetPasswordState: state.resetPasswordState.copyWith(
+                  isLoading: false,
+                  data: null,
+                  errorMessage: response.errorMessage,
+                ),
+              ),
+            );
+            break;
+        }
         break;
-      case ErrorBaseResponse():
+
+      case ErrorBaseResponse<String>():
         emit(
           state.copyWith(
             resetPasswordState: state.resetPasswordState.copyWith(
               isLoading: false,
-              errorMessage: response.errorMessage,
+              errorMessage: 'Please start again later.',
             ),
           ),
         );
