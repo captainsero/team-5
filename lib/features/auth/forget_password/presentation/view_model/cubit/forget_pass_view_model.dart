@@ -51,7 +51,6 @@ class ForgetPassViewModel extends Cubit<ForgetPassState> {
           key: SecureStorageKeys.forgetPassEmail,
           value: email,
         );
-        print("Email Saved: $email");
 
         emit(
           state.copyWith(
@@ -127,7 +126,6 @@ class ForgetPassViewModel extends Cubit<ForgetPassState> {
 
     switch (emailResponse) {
       case SucceessBaseResponse<String>(data: final email):
-        print("Email get: $email");
         final response = await resetPassUseCase(
           resetPassDto: ResetPassDto(email: email, newPassword: newPassword),
         );
