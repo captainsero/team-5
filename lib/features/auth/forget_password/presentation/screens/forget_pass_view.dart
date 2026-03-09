@@ -73,7 +73,7 @@ class _ForgetPassViewState extends State<ForgetPassView> {
                         labelText: "Email",
                         hintText: "Enter your email",
                       ),
-                      validator: (value) => AppValidator.validateEmail(value),
+                      validator: AppValidator.validateEmail,
                       onChanged: (value) {
                         viewModel.clearError();
                       },

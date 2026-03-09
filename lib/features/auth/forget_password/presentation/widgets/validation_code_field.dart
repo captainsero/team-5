@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pinput/pinput.dart';
+import 'package:team_5_examapp/config/app_validator.dart';
 import 'package:team_5_examapp/core/constants/values_manager.dart';
 
 class ValidationCodeField extends StatefulWidget {
@@ -70,15 +71,7 @@ class _ValidationCodeFieldState extends State<ValidationCodeField> {
             keyboardType: TextInputType.number,
             showCursor: true,
             pinputAutovalidateMode: PinputAutovalidateMode.onSubmit,
-            validator: (value) {
-              if (value == null || value.isEmpty) {
-                return 'Code is required';
-              }
-              if (value.length != 6) {
-                return 'Invalid code';
-              }
-              return null;
-            },
+            validator: AppValidator.validateOtpCode,
             onCompleted: (pin) {
               //TODO: Handel API Error State
               _formKey.currentState!.validate();

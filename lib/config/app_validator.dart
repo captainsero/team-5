@@ -26,4 +26,14 @@ class AppValidator {
 
     return null;
   }
+
+  static String? validateOtpCode(String? value) {
+    if (value == null || value.isEmpty) {
+      return 'Code is required';
+    }
+    if (value.length != 6) {
+      return 'Invalid code';
+    }
+    return null;
+  }
 }
