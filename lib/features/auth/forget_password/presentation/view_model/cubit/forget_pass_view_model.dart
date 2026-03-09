@@ -170,4 +170,28 @@ class ForgetPassViewModel extends Cubit<ForgetPassState> {
         break;
     }
   }
+
+  Future<void> resendCode() async {
+    final emailResponse = await SecureStorageService.read(
+      key: SecureStorageKeys.forgetPassEmail,
+    );
+
+    switch (emailResponse) {
+      case SucceessBaseResponse<String>(data: final email):
+        // reuse the existing logic
+        await forgetPassword(email: email);
+        break;
+
+      case ErrorBaseResponse<String>():
+        emit(
+          state.copyWith(
+            forgetPasswordState: state.forgetPasswordState.copyWith(
+              isLoading: false,
+              errorMessage: 'Please start the process again.',
+            ),
+          ),
+        );
+        break;
+    }
+  }
 }

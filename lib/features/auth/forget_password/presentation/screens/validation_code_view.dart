@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:team_5_examapp/config/di/di.dart';
 import 'package:team_5_examapp/core/constants/font_manager.dart';
 import 'package:team_5_examapp/core/constants/values_manager.dart';
+import 'package:team_5_examapp/features/auth/forget_password/presentation/view_model/cubit/forget_pass_view_model.dart';
 import 'package:team_5_examapp/features/auth/forget_password/presentation/widgets/validation_code_field.dart';
 
 class ValidationCodeView extends StatefulWidget {
@@ -12,6 +14,7 @@ class ValidationCodeView extends StatefulWidget {
 }
 
 class _ValidationCodeViewState extends State<ValidationCodeView> {
+  final viewModel = getIt.get<ForgetPassViewModel>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -57,7 +60,7 @@ class _ValidationCodeViewState extends State<ValidationCodeView> {
                   ).textTheme.titleSmall!.copyWith(fontSize: FontSize.s16),
                 ),
                 TextButton(
-                  onPressed: () {},
+                  onPressed: () async => await viewModel.resendCode(),
                   style: TextButton.styleFrom(
                     padding: EdgeInsets.zero,
                     minimumSize: Size(AppSize.s0, AppSize.s0),
