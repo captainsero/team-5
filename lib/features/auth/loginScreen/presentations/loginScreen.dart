@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:team_5_examapp/core/routing/routes_manager.dart';
 import '../../../../core/constants/color_manager.dart';
 import '../../../../core/constants/font_manager.dart';
 import '../../../../core/constants/values_manager.dart';
@@ -41,7 +43,6 @@ class _LoginScreenState extends State<LoginScreen> {
                   decoration: const InputDecoration(
                     hintText: 'Enter your email',
                     labelText: 'Email',
-
                   ),
                   keyboardType: TextInputType.emailAddress,
                 ),
@@ -56,7 +57,9 @@ class _LoginScreenState extends State<LoginScreen> {
 
                     suffixIcon: IconButton(
                       icon: Icon(
-                        _obscurePassword ? Icons.visibility_off : Icons.visibility,
+                        _obscurePassword
+                            ? Icons.visibility_off
+                            : Icons.visibility,
                       ),
                       onPressed: () {
                         setState(() {
@@ -84,24 +87,29 @@ class _LoginScreenState extends State<LoginScreen> {
                           visualDensity: VisualDensity.compact,
                         ),
                         Text(
-                          'Remember me',style: TextStyle(
+                          'Remember me',
+                          style: TextStyle(
                             color: AppColors.black,
                             fontSize: FontSize.s14,
                             fontWeight: FontWeightManager.regular,
-                        ),
+                          ),
                           overflow: TextOverflow.ellipsis,
                         ),
                       ],
                     ),
                     SizedBox(height: AppSize.s8),
-                    Text(
-                      'Forget password?',
-                      style: TextStyle(
-                        color: AppColors.black,
-                        fontSize: FontSize.s14,
-                        fontWeight: FontWeightManager.regular,
-                        decoration: TextDecoration.underline,
-                      ),                    ),
+                    TextButton(
+                      onPressed: () => context.push(Routes.forgetPasswordRoute),
+                      child: Text(
+                        'Forget password?',
+                        style: TextStyle(
+                          color: AppColors.black,
+                          fontSize: FontSize.s14,
+                          fontWeight: FontWeightManager.regular,
+                          decoration: TextDecoration.underline,
+                        ),
+                      ),
+                    ),
                   ],
                 ),
                 SizedBox(height: AppSize.s48),
@@ -119,13 +127,14 @@ class _LoginScreenState extends State<LoginScreen> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                     Text("Don't have an account? ",
+                    Text(
+                      "Don't have an account? ",
                       style: TextStyle(
                         color: AppColors.black,
                         fontSize: FontSize.s18,
                         fontWeight: FontWeightManager.regular,
-
-                    ),),
+                      ),
+                    ),
                     Text(
                       'Sign up',
                       style: TextStyle(

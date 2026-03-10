@@ -14,7 +14,7 @@ class Routes {
 
 class AppRouter {
   static final GoRouter router = GoRouter(
-    initialLocation: Routes.forgetPasswordRoute,
+    initialLocation: Routes.loginRoute,
     routes: [
       GoRoute(
         path: Routes.loginRoute,
