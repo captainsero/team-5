@@ -54,6 +54,86 @@ class S {
     return Localizations.of<S>(context, S);
   }
 
+  /// `Email is required`
+  String get emailIsRequired {
+    return Intl.message(
+      'Email is required',
+      name: 'emailIsRequired',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Enter a Valid email`
+  String get enterAValidEmail {
+    return Intl.message(
+      'Enter a Valid email',
+      name: 'enterAValidEmail',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Password is required`
+  String get passwordIsRequired {
+    return Intl.message(
+      'Password is required',
+      name: 'passwordIsRequired',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Password must be at least 8 characters and include upper, lower, number and special character`
+  String get passwordMustBe {
+    return Intl.message(
+      'Password must be at least 8 characters and include upper, lower, number and special character',
+      name: 'passwordMustBe',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Code is required`
+  String get codeIsRequired {
+    return Intl.message(
+      'Code is required',
+      name: 'codeIsRequired',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Invalid code`
+  String get invalidCode {
+    return Intl.message(
+      'Invalid code',
+      name: 'invalidCode',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please confirm your password`
+  String get pleaseConfirmPassword {
+    return Intl.message(
+      'Please confirm your password',
+      name: 'pleaseConfirmPassword',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Password do not match`
+  String get passwordDoNotMatch {
+    return Intl.message(
+      'Password do not match',
+      name: 'passwordDoNotMatch',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Password`
   String get passwrod {
     return Intl.message('Password', name: 'passwrod', desc: '', args: []);
