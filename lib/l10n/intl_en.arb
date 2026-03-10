@@ -1,1 +1,20 @@
-{}
+{
+    "passwrod": "Password",
+    "forgetPassword": "Forget Password",
+    "forgetPasswordDis": "Please enter your email associated to your account",
+    "email" : "Email",
+    "enterYourEmail" : "Enter your email",
+    "continueButton" : "Continue",
+
+    "emailVerification" : "Email verification",
+    "emailVerificationDis" : "Please enter your code that send to your email adress",
+    "didnotReceiveCode" : "Didn't recieve code? ",
+    "resend" : "Resend",
+
+    "resetPassword" : "Reset Password",
+    "resetPasswordDis" : "Password must not be empty and must contain 6 characters with upper case letter and one number at least",
+    "newPassword" : "New Password",
+    "enterYourPassword" : "Enter your passwrod",
+    "confirmPassword" : "Confirm password"
+    
+}

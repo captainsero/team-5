@@ -6,6 +6,7 @@ import 'package:team_5_examapp/config/di/di.dart';
 import 'package:team_5_examapp/core/constants/values_manager.dart';
 import 'package:team_5_examapp/core/routing/routes_manager.dart';
 import 'package:team_5_examapp/features/auth/forget_password/presentation/view_model/cubit/forget_pass_view_model.dart';
+import 'package:team_5_examapp/generated/l10n.dart';
 
 class ResetPassView extends StatefulWidget {
   const ResetPassView({super.key});
@@ -47,7 +48,7 @@ class _ResetPassViewState extends State<ResetPassView> {
                 onPressed: () => context.pop(),
                 icon: Icon(Icons.arrow_back_ios),
               ),
-              title: Text("Password"),
+              title: Text(S.of(context).passwrod),
             ),
             body: SingleChildScrollView(
               padding: EdgeInsets.all(AppPadding.p20),
@@ -57,14 +58,14 @@ class _ResetPassViewState extends State<ResetPassView> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Text(
-                      "Reset Password",
+                      S.of(context).resetPassword,
                       style: Theme.of(context).textTheme.headlineMedium,
                     ),
 
                     SizedBox(height: AppSize.s16),
 
                     Text(
-                      "Password must not be empty and must contain 6 characters with upper case letter and one number at least",
+                      S.of(context).resetPasswordDis,
                       textAlign: TextAlign.center,
                       style: Theme.of(context).textTheme.bodyLarge,
                     ),
@@ -75,9 +76,9 @@ class _ResetPassViewState extends State<ResetPassView> {
                       controller: _newPasswordController,
                       obscureText: true,
                       forceErrorText: state.resetPasswordState.errorMessage,
-                      decoration: const InputDecoration(
-                        labelText: "New password",
-                        hintText: "Enter your password",
+                      decoration: InputDecoration(
+                        labelText: S.of(context).newPassword,
+                        hintText: S.of(context).enterYourPassword,
                       ),
                       validator: AppValidator.validatePassword,
                       onChanged: (_) {
@@ -90,19 +91,15 @@ class _ResetPassViewState extends State<ResetPassView> {
                     TextFormField(
                       controller: _confirmPasswordController,
                       obscureText: true,
-                      decoration: const InputDecoration(
-                        labelText: "Confirm password",
-                        hintText: "Confirm password",
+                      decoration: InputDecoration(
+                        labelText: S.of(context).confirmPassword,
+                        hintText: S.of(context).confirmPassword,
                       ),
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Please confirm your password';
-                        }
-                        if (value != _newPasswordController.text) {
-                          return 'Passwords do not match';
-                        }
-                        return null;
-                      },
+                      validator: (value) =>
+                          AppValidator.validateConfirmPasswrod(
+                            value,
+                            _newPasswordController.text,
+                          ),
                     ),
 
                     SizedBox(height: AppSize.s30),
@@ -121,7 +118,7 @@ class _ResetPassViewState extends State<ResetPassView> {
                                   );
                                 }
                               },
-                        child: const Text("Continue"),
+                        child: Text(S.of(context).continueButton),
                       ),
                     ),
                   ],

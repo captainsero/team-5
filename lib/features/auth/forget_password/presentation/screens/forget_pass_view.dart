@@ -6,6 +6,7 @@ import 'package:team_5_examapp/config/di/di.dart';
 import 'package:team_5_examapp/core/constants/values_manager.dart';
 import 'package:team_5_examapp/core/routing/routes_manager.dart';
 import 'package:team_5_examapp/features/auth/forget_password/presentation/view_model/cubit/forget_pass_view_model.dart';
+import 'package:team_5_examapp/generated/l10n.dart';
 
 class ForgetPassView extends StatefulWidget {
   const ForgetPassView({super.key});
@@ -44,7 +45,7 @@ class _ForgetPassViewState extends State<ForgetPassView> {
                 onPressed: () => context.pop(),
                 icon: Icon(Icons.arrow_back_ios),
               ),
-              title: Text("Password"),
+              title: Text(S.of(context).passwrod),
             ),
             body: Form(
               key: _formKey,
@@ -55,14 +56,14 @@ class _ForgetPassViewState extends State<ForgetPassView> {
 
                   children: [
                     Text(
-                      "Forget Password",
+                      S.of(context).forgetPassword,
                       style: Theme.of(context).textTheme.headlineMedium,
                     ),
 
                     SizedBox(height: AppSize.s16),
 
                     Text(
-                      "Please enter your email associated to your account",
+                      S.of(context).forgetPasswordDis,
                       textAlign: TextAlign.center,
                       style: Theme.of(context).textTheme.bodyLarge,
                     ),
@@ -73,8 +74,8 @@ class _ForgetPassViewState extends State<ForgetPassView> {
                       controller: _emailController,
                       forceErrorText: state.forgetPasswordState.errorMessage,
                       decoration: InputDecoration(
-                        labelText: "Email",
-                        hintText: "Enter your email",
+                        labelText: S.of(context).email,
+                        hintText: S.of(context).enterYourEmail,
                       ),
                       validator: AppValidator.validateEmail,
                       onChanged: (value) {
@@ -95,7 +96,7 @@ class _ForgetPassViewState extends State<ForgetPassView> {
                                   await viewModel.forgetPassword(email: email);
                                 }
                               },
-                        child: Text("Continue"),
+                        child: Text(S.of(context).continueButton),
                       ),
                     ),
                   ],

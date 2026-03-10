@@ -5,6 +5,7 @@ import 'package:team_5_examapp/core/constants/font_manager.dart';
 import 'package:team_5_examapp/core/constants/values_manager.dart';
 import 'package:team_5_examapp/features/auth/forget_password/presentation/view_model/cubit/forget_pass_view_model.dart';
 import 'package:team_5_examapp/features/auth/forget_password/presentation/widgets/validation_code_field.dart';
+import 'package:team_5_examapp/generated/l10n.dart';
 
 class ValidationCodeView extends StatefulWidget {
   const ValidationCodeView({super.key});
@@ -23,7 +24,7 @@ class _ValidationCodeViewState extends State<ValidationCodeView> {
           onPressed: () => context.pop(),
           icon: Icon(Icons.arrow_back_ios),
         ),
-        title: Text("Password"),
+        title: Text(S.of(context).passwrod),
       ),
       body: SingleChildScrollView(
         padding: EdgeInsets.all(AppPadding.p20),
@@ -32,14 +33,14 @@ class _ValidationCodeViewState extends State<ValidationCodeView> {
 
           children: [
             Text(
-              "Email verification",
+              S.of(context).emailVerification,
               style: Theme.of(context).textTheme.headlineMedium,
             ),
 
             SizedBox(height: AppSize.s16),
 
             Text(
-              "Please enter your code that send to your email adress",
+              S.of(context).emailVerificationDis,
               textAlign: TextAlign.center,
               style: Theme.of(context).textTheme.bodyLarge,
             ),
@@ -54,7 +55,7 @@ class _ValidationCodeViewState extends State<ValidationCodeView> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  "Didn't receive code? ",
+                  S.of(context).didnotReceiveCode,
                   style: Theme.of(
                     context,
                   ).textTheme.titleSmall!.copyWith(fontSize: FontSize.s16),
@@ -66,7 +67,7 @@ class _ValidationCodeViewState extends State<ValidationCodeView> {
                     minimumSize: Size(AppSize.s0, AppSize.s0),
                   ),
                   child: Text(
-                    "Resend",
+                    S.of(context).resend,
                     style: TextStyle(
                       decoration: TextDecoration.underline,
                       decorationColor: Theme.of(

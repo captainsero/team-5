@@ -21,5 +21,33 @@ class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'en';
 
   final messages = _notInlinedMessages(_notInlinedMessages);
-  static Map<String, Function> _notInlinedMessages(_) => <String, Function>{};
+  static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+    "confirmPassword": MessageLookupByLibrary.simpleMessage("Confirm password"),
+    "continueButton": MessageLookupByLibrary.simpleMessage("Continue"),
+    "didnotReceiveCode": MessageLookupByLibrary.simpleMessage(
+      "Didn\'t recieve code? ",
+    ),
+    "email": MessageLookupByLibrary.simpleMessage("Email"),
+    "emailVerification": MessageLookupByLibrary.simpleMessage(
+      "Email verification",
+    ),
+    "emailVerificationDis": MessageLookupByLibrary.simpleMessage(
+      "Please enter your code that send to your email adress",
+    ),
+    "enterYourEmail": MessageLookupByLibrary.simpleMessage("Enter your email"),
+    "enterYourPassword": MessageLookupByLibrary.simpleMessage(
+      "Enter your passwrod",
+    ),
+    "forgetPassword": MessageLookupByLibrary.simpleMessage("Forget Password"),
+    "forgetPasswordDis": MessageLookupByLibrary.simpleMessage(
+      "Please enter your email associated to your account",
+    ),
+    "newPassword": MessageLookupByLibrary.simpleMessage("New Password"),
+    "passwrod": MessageLookupByLibrary.simpleMessage("Password"),
+    "resend": MessageLookupByLibrary.simpleMessage("Resend"),
+    "resetPassword": MessageLookupByLibrary.simpleMessage("Reset Password"),
+    "resetPasswordDis": MessageLookupByLibrary.simpleMessage(
+      "Password must not be empty and must contain 6 characters with upper case letter and one number at least",
+    ),
+  };
 }
