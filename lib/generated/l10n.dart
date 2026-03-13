@@ -69,16 +69,6 @@ class S {
     return Intl.message('Password', name: 'password', desc: '', args: []);
   }
 
-  /// `Enter your email`
-  String get enterEmail {
-    return Intl.message(
-      'Enter your email',
-      name: 'enterEmail',
-      desc: '',
-      args: [],
-    );
-  }
-
   /// `Enter your password`
   String get enterPassword {
     return Intl.message(
