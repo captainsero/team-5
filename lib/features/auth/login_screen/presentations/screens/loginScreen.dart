@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:team_5_examapp/config/app_validator.dart';
 import 'package:team_5_examapp/core/constants/color_manager.dart';
 import 'package:team_5_examapp/core/constants/font_manager.dart';
 import 'package:team_5_examapp/core/constants/values_manager.dart';
+import 'package:team_5_examapp/core/routing/routes_manager.dart';
 import 'package:team_5_examapp/generated/l10n.dart';
 
 import '../view_model/cubit/login_view_model.dart';
@@ -167,7 +169,7 @@ class LoginScreen extends StatelessWidget {
                             ),
                           ),
                           GestureDetector(
-                            onTap: () {},
+                            onTap: () => context.push(Routes.registerRoute),
                             child: Text(
                               S.of(context).signUp,
                               style: TextStyle(
