@@ -1,21 +1,38 @@
+import 'dart:async';
+import 'package:dio/dio.dart';
+import 'package:injectable/injectable.dart';
+import 'package:team_5_examapp/features/auth/login_screen/api/auth_api_client/auth_api_client.dart';
+import 'package:team_5_examapp/features/auth/login_screen/data/data_sources/auth_remote_data_source_contract.dart';
+import 'package:team_5_examapp/features/auth/login_screen/data/models/user_dto.dart';
 
-
-import '../../data/data_sources/auth_remote_data_source_contract.dart';
-import '../../data/models/user_dto.dart';
-import '../auth_api_client/auth_api_client.dart';
-
+@Injectable(as: AuthRemoteDataSourceContract)
 class AuthRemoteDataSourceImpl implements AuthRemoteDataSourceContract {
-
   final AuthApiClient authApiClient;
 
   AuthRemoteDataSourceImpl(this.authApiClient);
 
   @override
   Future<UserDto> login(String email, String password) async {
+    try {
+      final response = await authApiClient.login({
+        "email": email,
+        "password": password,
+      });      return response;
+    } catch (e) {
+      if (e is DioException) {
+        final data = e.response?.data;
+        final messageFromApi = (data is Map<String, dynamic>)
+            ? data['message']?.toString()
+            : null;
+        throw DioException(
+          requestOptions: e.requestOptions,
+          error: messageFromApi ?? e.message ?? "Something went wrong.",
+        );
+      } else if (e is TimeoutException) {
+        throw TimeoutException("Request timed out. Please try again later.");
+      }
 
-    final response = await authApiClient.login(email, password);
-
-    return UserDto.fromJson(response);
+      throw Exception("Something went wrong. Please try again later.");
+    }
   }
-
 }

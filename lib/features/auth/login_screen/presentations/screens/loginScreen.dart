@@ -9,9 +9,6 @@ import 'package:team_5_examapp/features/auth/login_screen/domain/models/user_mod
 import 'package:team_5_examapp/features/auth/login_screen/presentations/view_model/cubit/login_cubit.dart' show LoginViewModel;
 import 'package:team_5_examapp/generated/l10n.dart';
 
-
-
-
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
 
@@ -20,7 +17,6 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-
   final _formKey = GlobalKey<FormState>();
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
@@ -30,69 +26,57 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
-
     return BlocConsumer<LoginViewModel, BaseState<UserModel>>(
       listener: (context, state) {
-
         if (state.errorMessage != null) {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(content: Text(state.errorMessage!)),
           );
         }
 
-        if (state.data != null) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text("Welcome ${state.data!.name}")),
-          );
-        }
-
+        // تمت إزالة رسالة الترحيب
+        // if (state.data != null) {
+        //   ScaffoldMessenger.of(context).showSnackBar(
+        //     SnackBar(content: Text("Welcome ${state.data!.name}")),
+        //   );
+        // }
       },
       builder: (context, state) {
-
         return Scaffold(
           appBar: AppBar(
             leading: IconButton(
               icon: const Icon(Icons.arrow_back),
               onPressed: () => Navigator.of(context).maybePop(),
             ),
-            title:  Text(S.of(context).login),
+            title: Text(S.of(context).login),
           ),
-
           body: GestureDetector(
             onTap: () => FocusScope.of(context).unfocus(),
-
             child: SafeArea(
               child: SingleChildScrollView(
                 padding: EdgeInsets.all(AppPadding.p20),
-
                 child: Form(
                   key: _formKey,
-
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
-
                       SizedBox(height: AppSize.s20),
-
                       TextFormField(
                         controller: _emailController,
-                        decoration:  InputDecoration(
+                        decoration: InputDecoration(
                           hintText: S.of(context).enterYourEmail,
                           labelText: S.of(context).email,
                         ),
                         keyboardType: TextInputType.emailAddress,
                         validator: AppValidator.validateEmail,
                       ),
-
                       SizedBox(height: AppSize.s16),
-
                       TextFormField(
                         controller: _passwordController,
                         obscureText: _obscurePassword,
                         decoration: InputDecoration(
                           hintText: S.of(context).enterPassword,
                           labelText: S.of(context).password,
-
                           suffixIcon: IconButton(
                             icon: Icon(
                               _obscurePassword
@@ -108,13 +92,10 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                         validator: AppValidator.validatePassword,
                       ),
-
                       SizedBox(height: AppSize.s16),
-
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-
                           Row(
                             children: [
                               Checkbox(
@@ -127,7 +108,6 @@ class _LoginScreenState extends State<LoginScreen> {
                                 activeColor: AppColors.primary,
                                 visualDensity: VisualDensity.compact,
                               ),
-
                               Text(
                                 S.of(context).rememberMe,
                                 style: TextStyle(
@@ -138,7 +118,6 @@ class _LoginScreenState extends State<LoginScreen> {
                               ),
                             ],
                           ),
-
                           Text(
                             S.of(context).forgetPassword,
                             style: TextStyle(
@@ -150,23 +129,17 @@ class _LoginScreenState extends State<LoginScreen> {
                           ),
                         ],
                       ),
-
                       SizedBox(height: AppSize.s48),
-
                       ElevatedButton(
                         onPressed: state.isLoading
                             ? null
                             : () {
-
                           if (_formKey.currentState!.validate()) {
-
                             context.read<LoginViewModel>().login(
                               _emailController.text.trim(),
                               _passwordController.text.trim(),
                             );
-
                           }
-
                         },
                         child: state.isLoading
                             ? const SizedBox(
@@ -177,15 +150,12 @@ class _LoginScreenState extends State<LoginScreen> {
                             strokeWidth: 2,
                           ),
                         )
-                            :  Text(S.of(context).login),
+                            : Text(S.of(context).login),
                       ),
-
                       SizedBox(height: AppSize.s16),
-
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-
                           Text(
                             S.of(context).dontHaveAccount,
                             style: TextStyle(
@@ -194,7 +164,6 @@ class _LoginScreenState extends State<LoginScreen> {
                               fontWeight: FontWeightManager.regular,
                             ),
                           ),
-
                           Text(
                             S.of(context).signUp,
                             style: TextStyle(
@@ -206,7 +175,6 @@ class _LoginScreenState extends State<LoginScreen> {
                           ),
                         ],
                       ),
-
                       SizedBox(height: AppSize.s20),
                     ],
                   ),

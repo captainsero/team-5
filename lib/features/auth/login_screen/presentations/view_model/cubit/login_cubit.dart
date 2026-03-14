@@ -1,10 +1,10 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
+import 'package:team_5_examapp/config/base_response/base_response.dart';
+import 'package:team_5_examapp/config/base_state/base_state.dart';
+import 'package:team_5_examapp/features/auth/login_screen/domain/models/user_model.dart';
+import 'package:team_5_examapp/features/auth/login_screen/domain/use_cases/login_use_cases.dart';
 
-import '../../../../../../config/base_state/base_state.dart';
-import '../../../domain/models/user_model.dart';
-import '../../../domain/use_cases/login_use_cases.dart';
-import '../../../../../../config/base_response/base_response.dart';
 
 @injectable
 class LoginViewModel extends Cubit<BaseState<UserModel>> {

@@ -1,4 +1,5 @@
-import '../models/user_dto.dart';
+
+import 'package:team_5_examapp/features/auth/login_screen/data/models/user_dto.dart';
 
 abstract class AuthRemoteDataSourceContract {
 

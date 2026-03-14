@@ -1,5 +1,9 @@
+import 'package:json_annotation/json_annotation.dart';
 import '../../domain/models/user_model.dart';
 
+part 'user_dto.g.dart';
+
+@JsonSerializable()
 class UserDto {
 
   int? id;
@@ -9,18 +13,12 @@ class UserDto {
 
   UserDto({this.id, this.name, this.email, this.token});
 
-  factory UserDto.fromJson(Map<String, dynamic> json) {
+  factory UserDto.fromJson(Map<String, dynamic> json) =>
+      _$UserDtoFromJson(json);
 
-    return UserDto(
-      id: json['id'],
-      name: json['name'],
-      email: json['email'],
-      token: json['token'],
-    );
-  }
+  Map<String, dynamic> toJson() => _$UserDtoToJson(this);
 
   UserModel toDomain() {
-
     return UserModel(
       id: id ?? 0,
       name: name ?? "",

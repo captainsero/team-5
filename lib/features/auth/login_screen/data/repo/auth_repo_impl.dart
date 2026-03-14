@@ -1,9 +1,10 @@
-import '../../../../../config/base_response/base_response.dart';
-import '../../domain/models/user_model.dart';
-import '../../domain/repo/auth_repo_contract.dart';
-import '../data_sources/auth_remote_data_source_contract.dart';
-import '../models/user_dto.dart';
+import 'package:injectable/injectable.dart';
+import 'package:team_5_examapp/config/base_response/base_response.dart';
+import 'package:team_5_examapp/features/auth/login_screen/data/data_sources/auth_remote_data_source_contract.dart';
+import 'package:team_5_examapp/features/auth/login_screen/domain/models/user_model.dart';
+import 'package:team_5_examapp/features/auth/login_screen/domain/repo/auth_repo_contract.dart';
 
+@Injectable(as: AuthRepoContract)
 class AuthRepoImpl implements AuthRepoContract {
   final AuthRemoteDataSourceContract remoteDataSource;
 
@@ -13,9 +14,9 @@ class AuthRepoImpl implements AuthRepoContract {
   Future<BaseResponse<UserModel>> login(String email, String password) async {
     try {
       final dto = await remoteDataSource.login(email, password);
-      return SucceessBaseResponse(data: dto.toDomain());
+      return SucceessBaseResponse<UserModel>(data: dto.toDomain());
     } catch (e) {
-      return ErrorBaseResponse(errorMessage: e.toString());
+      return ErrorBaseResponse<UserModel>(errorMessage: e.toString());
     }
   }
 }
