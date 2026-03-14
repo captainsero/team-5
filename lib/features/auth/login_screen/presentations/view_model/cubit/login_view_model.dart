@@ -16,21 +16,7 @@ class LoginViewModel extends Cubit<LoginState> {
   LoginViewModel({required this.loginUseCase}) : super(LoginState());
 
   void clearError() {
-    emit(
-      state.copyWith(
-        loginState: BaseState(isLoading: true),
-        emailError: null,
-        passwordError: null,
-      ),
-    );
-  }
-
-  void clearEmailError() {
-    emit(state.copyWith(emailError: null));
-  }
-
-  void clearPasswordError() {
-    emit(state.copyWith(passwordError: null));
+    emit(state.copyWith(loginState: BaseState(isLoading: false)));
   }
 
   void toggleObscurePassword() {
@@ -50,8 +36,6 @@ class LoginViewModel extends Cubit<LoginState> {
       state.copyWith(
         isLoginAttempted: true,
         loginState: state.loginState.copyWith(isLoading: true),
-        emailError: null,
-        passwordError: null,
       ),
     );
 

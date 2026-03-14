@@ -58,26 +58,18 @@ class LoginScreen extends StatelessWidget {
                       SizedBox(height: AppSize.s20),
                       TextFormField(
                         controller: _emailController,
+                        forceErrorText: loginState.errorMessage,
                         decoration: InputDecoration(
                           hintText: S.of(context).enterYourEmail,
                           labelText: S.of(context).email,
-                          errorText: showErrors
-                              ? loginViewModel.state.emailError ??
-                              loginState.errorMessage
-                              : null,
                         ),
                         keyboardType: TextInputType.emailAddress,
                         autovalidateMode: showErrors
                             ? AutovalidateMode.onUserInteraction
                             : AutovalidateMode.disabled,
-                        validator: (value) {
-                          if (!showErrors) return null;
-                          final error = AppValidator.validateEmail(value);
-                          if (error == null &&
-                              loginViewModel.state.emailError != null) {
-                            loginViewModel.clearEmailError();
-                          }
-                          return error;
+                        validator: (value) => AppValidator.validateEmail(value),
+                        onChanged: (value) {
+                          loginViewModel.clearError();
                         },
                       ),
                       SizedBox(height: AppSize.s16),
@@ -85,6 +77,7 @@ class LoginScreen extends StatelessWidget {
                       TextFormField(
                         controller: _passwordController,
                         obscureText: state.obscurePassword,
+                        forceErrorText: loginState.errorMessage,
                         decoration: InputDecoration(
                           hintText: S.of(context).enterPassword,
                           labelText: S.of(context).password,
@@ -98,23 +91,17 @@ class LoginScreen extends StatelessWidget {
                               loginViewModel.toggleObscurePassword();
                             },
                           ),
-                          errorText: showErrors
-                              ? loginViewModel.state.passwordError
-                              : null,
                         ),
                         autovalidateMode: showErrors
                             ? AutovalidateMode.onUserInteraction
                             : AutovalidateMode.disabled,
-                        validator: (value) {
-                          if (!showErrors) return null;
-                          final error = AppValidator.validatePassword(value);
-                          if (error == null &&
-                              loginViewModel.state.passwordError != null) {
-                            loginViewModel.clearPasswordError();
-                          }
-                          return error;
+                        validator: (value) =>
+                            AppValidator.validatePassword(value),
+                        onChanged: (value) {
+                          loginViewModel.clearError();
                         },
                       ),
+
                       SizedBox(height: AppSize.s16),
 
                       Row(
@@ -144,12 +131,10 @@ class LoginScreen extends StatelessWidget {
                             ),
                             child: Text(
                               S.of(context).forgetPassword,
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .bodyMedium
+                              style: Theme.of(context).textTheme.bodyMedium
                                   ?.copyWith(
-                                decoration: TextDecoration.underline,
-                              ),
+                                    decoration: TextDecoration.underline,
+                                  ),
                             ),
                           ),
                         ],
@@ -160,23 +145,23 @@ class LoginScreen extends StatelessWidget {
                         onPressed: loginState.isLoading
                             ? null
                             : () {
-                          if (_formKey.currentState!.validate()) {
-                            loginViewModel.login(
-                              email: _emailController.text.trim(),
-                              password: _passwordController.text.trim(),
-                              rememberMe: state.rememberMe,
-                            );
-                          }
-                        },
+                                if (_formKey.currentState!.validate()) {
+                                  loginViewModel.login(
+                                    email: _emailController.text.trim(),
+                                    password: _passwordController.text.trim(),
+                                    rememberMe: state.rememberMe,
+                                  );
+                                }
+                              },
                         child: loginState.isLoading
                             ? SizedBox(
-                          height: AppSize.s20,
-                          width: AppSize.s20,
-                          child: CircularProgressIndicator(
-                            color: Colors.white,
-                            strokeWidth: AppSize.s2,
-                          ),
-                        )
+                                height: AppSize.s20,
+                                width: AppSize.s20,
+                                child: CircularProgressIndicator(
+                                  color: Colors.white,
+                                  strokeWidth: AppSize.s2,
+                                ),
+                              )
                             : Text(S.of(context).login),
                       ),
                       SizedBox(height: AppSize.s16),
@@ -196,10 +181,10 @@ class LoginScreen extends StatelessWidget {
                               S.of(context).signUp,
                               style: Theme.of(context).textTheme.bodyLarge
                                   ?.copyWith(
-                                color: AppColors.primary,
-                                fontSize: FontSize.s18,
-                                decoration: TextDecoration.underline,
-                              ),
+                                    color: AppColors.primary,
+                                    fontSize: FontSize.s18,
+                                    decoration: TextDecoration.underline,
+                                  ),
                             ),
                           ),
                         ],

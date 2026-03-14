@@ -6,8 +6,6 @@ class LoginState {
   final bool isLoginAttempted;
   final bool rememberMe;
   final bool obscurePassword;
-  final String? emailError;
-  final String? passwordError;
   final String? savedEmail;
 
   LoginState({
@@ -15,8 +13,6 @@ class LoginState {
     this.isLoginAttempted = false,
     this.rememberMe = false,
     this.obscurePassword = true,
-    this.emailError,
-    this.passwordError,
     this.savedEmail,
   }) : loginState = loginState ?? BaseState<UserModel>(isLoading: false);
 
@@ -25,8 +21,6 @@ class LoginState {
     bool? isLoginAttempted,
     bool? rememberMe,
     bool? obscurePassword,
-    String? emailError,
-    String? passwordError,
     String? savedEmail,
   }) {
     return LoginState(
@@ -34,8 +28,6 @@ class LoginState {
       isLoginAttempted: isLoginAttempted ?? this.isLoginAttempted,
       rememberMe: rememberMe ?? this.rememberMe,
       obscurePassword: obscurePassword ?? this.obscurePassword,
-      emailError: emailError,
-      passwordError: passwordError,
       savedEmail: savedEmail ?? this.savedEmail,
     );
   }
