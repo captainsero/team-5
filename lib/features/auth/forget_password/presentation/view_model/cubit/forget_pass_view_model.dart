@@ -48,7 +48,7 @@ class ForgetPassViewModel extends Cubit<ForgetPassState> {
     switch (response) {
       case SucceessBaseResponse():
         await SecureStorageService.write(
-          key: SecureStorageKeys.forgetPassEmail,
+          key: SecureStorageKeys.userEmail,
           value: email,
         );
 
@@ -121,7 +121,7 @@ class ForgetPassViewModel extends Cubit<ForgetPassState> {
 
     //* Didn't delete the email, you can use in login feature @mohamedabda28
     final emailResponse = await SecureStorageService.read(
-      key: SecureStorageKeys.forgetPassEmail,
+      key: SecureStorageKeys.userEmail,
     );
 
     switch (emailResponse) {
@@ -171,7 +171,7 @@ class ForgetPassViewModel extends Cubit<ForgetPassState> {
 
   Future<void> resendCode() async {
     final emailResponse = await SecureStorageService.read(
-      key: SecureStorageKeys.forgetPassEmail,
+      key: SecureStorageKeys.userEmail,
     );
 
     switch (emailResponse) {
@@ -190,6 +190,20 @@ class ForgetPassViewModel extends Cubit<ForgetPassState> {
           ),
         );
         break;
+    }
+  }
+
+  Future<String> getUserEmail() async {
+    final emailResponse = await SecureStorageService.read(
+      key: SecureStorageKeys.userEmail,
+    );
+
+    switch (emailResponse) {
+      case SucceessBaseResponse<String>(data: final email):
+        return email;
+
+      case ErrorBaseResponse<String>():
+        return '';
     }
   }
 }
