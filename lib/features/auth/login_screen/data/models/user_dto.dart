@@ -72,7 +72,6 @@ class UserDto {
 
   Map<String, dynamic> toJson() => _$UserDtoToJson(this);
 
-  /// Convert DTO to domain model
   UserModel toDomain() {
     return UserModel(
       username: username,
