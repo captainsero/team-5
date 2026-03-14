@@ -1,10 +1,8 @@
-// login_state.dart
 part of 'login_view_model.dart';
 
 class LoginState {
-  BaseState<UserModel> loginState = BaseState<UserModel>(isLoading: false);
+  final BaseState<UserModel> loginState;
 
-  // UI State
   final bool isLoginAttempted;
   final bool rememberMe;
   final bool obscurePassword;
@@ -20,9 +18,7 @@ class LoginState {
     this.emailError,
     this.passwordError,
     this.savedEmail,
-  }) {
-    this.loginState = loginState ?? BaseState<UserModel>(isLoading: false);
-  }
+  }) : loginState = loginState ?? BaseState<UserModel>(isLoading: false);
 
   LoginState copyWith({
     BaseState<UserModel>? loginState,

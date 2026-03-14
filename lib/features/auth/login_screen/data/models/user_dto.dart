@@ -5,25 +5,85 @@ part 'user_dto.g.dart';
 
 @JsonSerializable()
 class UserDto {
+  @JsonKey(name: "username")
+  String username;
 
-  int? id;
-  String? name;
-  String? email;
-  String? token;
+  @JsonKey(name: "firstName")
+  String firstName;
 
-  UserDto({this.id, this.name, this.email, this.token});
+  @JsonKey(name: "lastName")
+  String lastName;
+
+  @JsonKey(name: "email")
+  String email;
+
+  @JsonKey(name: "phone")
+  String phone;
+
+  @JsonKey(name: "role")
+  String role;
+
+  @JsonKey(name: "isVerified")
+  bool isVerified;
+
+  @JsonKey(name: "_id")
+  String id;
+
+  @JsonKey(name: "createdAt")
+  DateTime createdAt;
+
+  UserDto({
+    required this.username,
+    required this.firstName,
+    required this.lastName,
+    required this.email,
+    required this.phone,
+    required this.role,
+    required this.isVerified,
+    required this.id,
+    required this.createdAt,
+  });
+
+  UserDto copyWith({
+    String? username,
+    String? firstName,
+    String? lastName,
+    String? email,
+    String? phone,
+    String? role,
+    bool? isVerified,
+    String? id,
+    DateTime? createdAt,
+  }) =>
+      UserDto(
+        username: username ?? this.username,
+        firstName: firstName ?? this.firstName,
+        lastName: lastName ?? this.lastName,
+        email: email ?? this.email,
+        phone: phone ?? this.phone,
+        role: role ?? this.role,
+        isVerified: isVerified ?? this.isVerified,
+        id: id ?? this.id,
+        createdAt: createdAt ?? this.createdAt,
+      );
 
   factory UserDto.fromJson(Map<String, dynamic> json) =>
       _$UserDtoFromJson(json);
 
   Map<String, dynamic> toJson() => _$UserDtoToJson(this);
 
+  /// Convert DTO to domain model
   UserModel toDomain() {
     return UserModel(
-      id: id ?? 0,
-      name: name ?? "",
-      email: email ?? "",
-      token: token ?? "",
+      username: username,
+      firstName: firstName,
+      lastName: lastName,
+      email: email,
+      phone: phone,
+      role: role,
+      isVerified: isVerified,
+      id: id,
+      createdAt: createdAt,
     );
   }
 }
