@@ -72,17 +72,17 @@ abstract class AppTheme {
       ),
 
       bodyLarge: getRegularStyle(
-        color: AppColors.grey,
+        color: AppColors.black,
         fontSize: FontSize.s16,
         fontFamily: FontConstants.interFamily,
       ),
       bodyMedium: getRegularStyle(
-        color: AppColors.grey,
+        color: AppColors.black,
         fontSize: FontSize.s14,
         fontFamily: FontConstants.interFamily,
       ),
       bodySmall: getRegularStyle(
-        color: AppColors.grey,
+        color: AppColors.black,
         fontSize: FontSize.s12,
         fontFamily: FontConstants.interFamily,
       ),

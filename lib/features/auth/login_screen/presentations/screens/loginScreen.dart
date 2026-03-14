@@ -9,7 +9,6 @@ import 'package:team_5_examapp/core/routing/routes_manager.dart';
 import 'package:team_5_examapp/features/auth/login_screen/presentations/view_model/cubit/login_view_model.dart';
 import 'package:team_5_examapp/generated/l10n.dart';
 
-
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
 
@@ -111,21 +110,25 @@ class LoginScreen extends StatelessWidget {
                               ),
                               Text(
                                 S.of(context).rememberMe,
-                                style: TextStyle(
-                                  color: AppColors.black,
-                                  fontSize: FontSize.s14,
-                                  fontWeight: FontWeightManager.regular,
-                                ),
+                                style: Theme.of(context).textTheme.bodyLarge,
                               ),
                             ],
                           ),
-                          Text(
-                            S.of(context).forgetPassword,
-                            style: TextStyle(
-                              color: AppColors.black,
-                              fontSize: FontSize.s14,
-                              fontWeight: FontWeightManager.regular,
-                              decoration: TextDecoration.underline,
+                          TextButton(
+                            onPressed: () {
+                              context.push(Routes.forgetPasswordRoute);
+                            },
+                            style: TextButton.styleFrom(
+                              padding: EdgeInsets.zero,
+                              minimumSize: const Size(0, 0),
+                              tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                            ),
+                            child: Text(
+                              S.of(context).forgetPassword,
+                              style: Theme.of(context).textTheme.bodyMedium
+                                  ?.copyWith(
+                                    decoration: TextDecoration.underline,
+                                  ),
                             ),
                           ),
                         ],
@@ -145,9 +148,9 @@ class LoginScreen extends StatelessWidget {
                                 }
                               },
                         child: loginState.isLoading
-                            ? const SizedBox(
-                                height: 20,
-                                width: 20,
+                            ? SizedBox(
+                                height: AppSize.s20,
+                                width: AppSize.s20,
                                 child: CircularProgressIndicator(
                                   color: Colors.white,
                                   strokeWidth: 2,
@@ -162,22 +165,20 @@ class LoginScreen extends StatelessWidget {
                         children: [
                           Text(
                             S.of(context).dontHaveAccount,
-                            style: TextStyle(
-                              color: AppColors.black,
-                              fontSize: FontSize.s18,
-                              fontWeight: FontWeightManager.regular,
-                            ),
+                            style: Theme.of(context).textTheme.bodyLarge
+                                ?.copyWith(fontSize: FontSize.s18),
                           ),
+                          SizedBox(width: AppSize.s2),
                           GestureDetector(
                             onTap: () => context.push(Routes.registerRoute),
                             child: Text(
                               S.of(context).signUp,
-                              style: TextStyle(
-                                color: AppColors.primary,
-                                fontSize: FontSize.s18,
-                                fontWeight: FontWeightManager.medium,
-                                decoration: TextDecoration.underline,
-                              ),
+                              style: Theme.of(context).textTheme.bodyLarge
+                                  ?.copyWith(
+                                    color: AppColors.primary,
+                                    fontSize: FontSize.s18,
+                                    decoration: TextDecoration.underline,
+                                  ),
                             ),
                           ),
                         ],
