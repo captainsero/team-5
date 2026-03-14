@@ -7,7 +7,6 @@ import 'package:team_5_examapp/config/secure_storage/secure_storage_service.dart
 import 'package:team_5_examapp/features/auth/login_screen/domain/models/user_model.dart';
 import 'package:team_5_examapp/features/auth/login_screen/domain/use_cases/login_use_cases.dart';
 
-
 part 'login_state.dart';
 
 @injectable
@@ -16,7 +15,7 @@ class LoginViewModel extends Cubit<LoginState> {
 
   LoginViewModel({required this.loginUseCase}) : super(LoginState());
 
-  Future<void> clearError() async {
+  void clearError() {
     emit(
       state.copyWith(
         loginState: state.loginState.copyWith(errorMessage: null),
@@ -24,6 +23,14 @@ class LoginViewModel extends Cubit<LoginState> {
         passwordError: null,
       ),
     );
+  }
+
+  void clearEmailError() {
+    emit(state.copyWith(emailError: null));
+  }
+
+  void clearPasswordError() {
+    emit(state.copyWith(passwordError: null));
   }
 
   void toggleObscurePassword() {
