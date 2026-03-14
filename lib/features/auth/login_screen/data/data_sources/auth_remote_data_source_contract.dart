@@ -1,8 +1,8 @@
 
-import 'package:team_5_examapp/features/auth/login_screen/data/models/user_dto.dart';
+import 'package:team_5_examapp/features/auth/login_screen/data/models/responses/auth_response.dart';
 
 abstract class AuthRemoteDataSourceContract {
 
-  Future<UserDto> login(String email, String password);
+  Future<AuthResponse> login(String email, String password);
 
 }

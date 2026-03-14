@@ -26,7 +26,11 @@ class LoginScreen extends StatelessWidget {
 
     return BlocConsumer<LoginViewModel, LoginState>(
       listener: (context, state) {
-        if (state.loginState.data != null) {}
+        if (state.loginState.data != null) {
+          ScaffoldMessenger.of(
+            context,
+          ).showSnackBar(SnackBar(content: Text("Login successful! Welcome")));
+        }
       },
       builder: (context, state) {
         final loginState = state.loginState;
@@ -130,10 +134,6 @@ class LoginScreen extends StatelessWidget {
                         onPressed: loginState.isLoading
                             ? null
                             : () {
-                                loginViewModel.emit(
-                                  state.copyWith(isLoginAttempted: true),
-                                );
-
                                 if (_formKey.currentState!.validate()) {
                                   loginViewModel.login(
                                     email: _emailController.text.trim(),

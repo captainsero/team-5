@@ -1,5 +1,4 @@
 import 'package:json_annotation/json_annotation.dart';
-import '../../domain/models/user_model.dart';
 
 part 'user_dto.g.dart';
 
@@ -72,18 +71,4 @@ class UserDto {
 
   Map<String, dynamic> toJson() => _$UserDtoToJson(this);
 
-  /// Convert DTO to domain model
-  UserModel toDomain() {
-    return UserModel(
-      username: username,
-      firstName: firstName,
-      lastName: lastName,
-      email: email,
-      phone: phone,
-      role: role,
-      isVerified: isVerified,
-      id: id,
-      createdAt: createdAt,
-    );
-  }
 }
