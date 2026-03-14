@@ -53,6 +53,216 @@ class S {
   static S? maybeOf(BuildContext context) {
     return Localizations.of<S>(context, S);
   }
+
+  /// `Email is required`
+  String get emailIsRequired {
+    return Intl.message(
+      'Email is required',
+      name: 'emailIsRequired',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Enter a Valid email`
+  String get enterAValidEmail {
+    return Intl.message(
+      'Enter a Valid email',
+      name: 'enterAValidEmail',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Password is required`
+  String get passwordIsRequired {
+    return Intl.message(
+      'Password is required',
+      name: 'passwordIsRequired',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Password must be at least 8 characters and include upper, lower, number and special character`
+  String get passwordMustBe {
+    return Intl.message(
+      'Password must be at least 8 characters and include upper, lower, number and special character',
+      name: 'passwordMustBe',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Code is required`
+  String get codeIsRequired {
+    return Intl.message(
+      'Code is required',
+      name: 'codeIsRequired',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Invalid code`
+  String get invalidCode {
+    return Intl.message(
+      'Invalid code',
+      name: 'invalidCode',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please confirm your password`
+  String get pleaseConfirmPassword {
+    return Intl.message(
+      'Please confirm your password',
+      name: 'pleaseConfirmPassword',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Password do not match`
+  String get passwordDoNotMatch {
+    return Intl.message(
+      'Password do not match',
+      name: 'passwordDoNotMatch',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Password`
+  String get passwrod {
+    return Intl.message('Password', name: 'passwrod', desc: '', args: []);
+  }
+
+  /// `Forget Password`
+  String get forgetPassword {
+    return Intl.message(
+      'Forget Password',
+      name: 'forgetPassword',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please enter your email associated to your account`
+  String get forgetPasswordDis {
+    return Intl.message(
+      'Please enter your email associated to your account',
+      name: 'forgetPasswordDis',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Email`
+  String get email {
+    return Intl.message('Email', name: 'email', desc: '', args: []);
+  }
+
+  /// `Enter your email`
+  String get enterYourEmail {
+    return Intl.message(
+      'Enter your email',
+      name: 'enterYourEmail',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Continue`
+  String get continueButton {
+    return Intl.message('Continue', name: 'continueButton', desc: '', args: []);
+  }
+
+  /// `Email verification`
+  String get emailVerification {
+    return Intl.message(
+      'Email verification',
+      name: 'emailVerification',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please enter your code that send to your email adress`
+  String get emailVerificationDis {
+    return Intl.message(
+      'Please enter your code that send to your email adress',
+      name: 'emailVerificationDis',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Didn't recieve code? `
+  String get didnotReceiveCode {
+    return Intl.message(
+      'Didn\'t recieve code? ',
+      name: 'didnotReceiveCode',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Resend`
+  String get resend {
+    return Intl.message('Resend', name: 'resend', desc: '', args: []);
+  }
+
+  /// `Reset Password`
+  String get resetPassword {
+    return Intl.message(
+      'Reset Password',
+      name: 'resetPassword',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Password must not be empty and must contain 6 characters with upper case letter and one number at least`
+  String get resetPasswordDis {
+    return Intl.message(
+      'Password must not be empty and must contain 6 characters with upper case letter and one number at least',
+      name: 'resetPasswordDis',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `New Password`
+  String get newPassword {
+    return Intl.message(
+      'New Password',
+      name: 'newPassword',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Enter your passwrod`
+  String get enterYourPassword {
+    return Intl.message(
+      'Enter your passwrod',
+      name: 'enterYourPassword',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Confirm password`
+  String get confirmPassword {
+    return Intl.message(
+      'Confirm password',
+      name: 'confirmPassword',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

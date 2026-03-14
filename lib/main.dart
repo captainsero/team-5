@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
+import 'package:team_5_examapp/config/di/di.dart';
 import 'core/routing/routes_manager.dart';
 import 'core/themes/light_theme.dart';
-import 'features/auth/loginScreen/presentations/loginScreen.dart';
 import 'generated/l10n.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  configureDependencies();
+
   runApp(const MyApp());
 }
 
@@ -21,11 +23,10 @@ class MyApp extends StatelessWidget {
       minTextAdapt: true,
       splitScreenMode: true,
       builder: (context, child) {
-        return MaterialApp(
+        return MaterialApp.router(
           title: 'Exam App',
           debugShowCheckedModeBanner: false,
           theme: AppTheme.lightTheme,
-
           localizationsDelegates: const [
             S.delegate,
             GlobalMaterialLocalizations.delegate,
@@ -34,8 +35,7 @@ class MyApp extends StatelessWidget {
           ],
           supportedLocales: S.delegate.supportedLocales,
 
-          initialRoute: Routes.loginRoute,
-          routes: {Routes.loginRoute: (context) => const LoginScreen(),},
+          routerConfig: AppRouter.router,
         );
       },
     );

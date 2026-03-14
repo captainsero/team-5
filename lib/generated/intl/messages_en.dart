@@ -21,5 +21,53 @@ class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'en';
 
   final messages = _notInlinedMessages(_notInlinedMessages);
-  static Map<String, Function> _notInlinedMessages(_) => <String, Function>{};
+  static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+    "codeIsRequired": MessageLookupByLibrary.simpleMessage("Code is required"),
+    "confirmPassword": MessageLookupByLibrary.simpleMessage("Confirm password"),
+    "continueButton": MessageLookupByLibrary.simpleMessage("Continue"),
+    "didnotReceiveCode": MessageLookupByLibrary.simpleMessage(
+      "Didn\'t recieve code? ",
+    ),
+    "email": MessageLookupByLibrary.simpleMessage("Email"),
+    "emailIsRequired": MessageLookupByLibrary.simpleMessage(
+      "Email is required",
+    ),
+    "emailVerification": MessageLookupByLibrary.simpleMessage(
+      "Email verification",
+    ),
+    "emailVerificationDis": MessageLookupByLibrary.simpleMessage(
+      "Please enter your code that send to your email adress",
+    ),
+    "enterAValidEmail": MessageLookupByLibrary.simpleMessage(
+      "Enter a Valid email",
+    ),
+    "enterYourEmail": MessageLookupByLibrary.simpleMessage("Enter your email"),
+    "enterYourPassword": MessageLookupByLibrary.simpleMessage(
+      "Enter your passwrod",
+    ),
+    "forgetPassword": MessageLookupByLibrary.simpleMessage("Forget Password"),
+    "forgetPasswordDis": MessageLookupByLibrary.simpleMessage(
+      "Please enter your email associated to your account",
+    ),
+    "invalidCode": MessageLookupByLibrary.simpleMessage("Invalid code"),
+    "newPassword": MessageLookupByLibrary.simpleMessage("New Password"),
+    "passwordDoNotMatch": MessageLookupByLibrary.simpleMessage(
+      "Password do not match",
+    ),
+    "passwordIsRequired": MessageLookupByLibrary.simpleMessage(
+      "Password is required",
+    ),
+    "passwordMustBe": MessageLookupByLibrary.simpleMessage(
+      "Password must be at least 8 characters and include upper, lower, number and special character",
+    ),
+    "passwrod": MessageLookupByLibrary.simpleMessage("Password"),
+    "pleaseConfirmPassword": MessageLookupByLibrary.simpleMessage(
+      "Please confirm your password",
+    ),
+    "resend": MessageLookupByLibrary.simpleMessage("Resend"),
+    "resetPassword": MessageLookupByLibrary.simpleMessage("Reset Password"),
+    "resetPasswordDis": MessageLookupByLibrary.simpleMessage(
+      "Password must not be empty and must contain 6 characters with upper case letter and one number at least",
+    ),
+  };
 }
