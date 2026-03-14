@@ -3,7 +3,7 @@ import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 import 'package:team_5_examapp/features/auth/login_screen/api/auth_api_client/auth_api_client.dart';
 import 'package:team_5_examapp/features/auth/login_screen/data/data_sources/auth_remote_data_source_contract.dart';
-import 'package:team_5_examapp/features/auth/login_screen/data/models/user_dto.dart';
+import 'package:team_5_examapp/features/auth/login_screen/data/models/responses/auth_response.dart';
 
 @Injectable(as: AuthRemoteDataSourceContract)
 class AuthRemoteDataSourceImpl implements AuthRemoteDataSourceContract {
@@ -12,12 +12,13 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSourceContract {
   AuthRemoteDataSourceImpl(this.authApiClient);
 
   @override
-  Future<UserDto> login(String email, String password) async {
+  Future<AuthResponse> login(String email, String password) async {
     try {
       final response = await authApiClient.login({
         "email": email,
         "password": password,
-      });      return response;
+      });
+      return response;
     } catch (e) {
       if (e is DioException) {
         final data = e.response?.data;

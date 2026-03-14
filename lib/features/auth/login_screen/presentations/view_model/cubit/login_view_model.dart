@@ -17,11 +17,13 @@ class LoginViewModel extends Cubit<LoginState> {
   LoginViewModel({required this.loginUseCase}) : super(LoginState());
 
   Future<void> clearError() async {
-    emit(state.copyWith(
-      loginState: state.loginState.copyWith(errorMessage: null),
-      emailError: null,
-      passwordError: null,
-    ));
+    emit(
+      state.copyWith(
+        loginState: state.loginState.copyWith(errorMessage: null),
+        emailError: null,
+        passwordError: null,
+      ),
+    );
   }
 
   void toggleObscurePassword() {
@@ -34,32 +36,39 @@ class LoginViewModel extends Cubit<LoginState> {
 
   Future<void> login({
     required String email,
-    required String password, required bool rememberMe,
+    required String password,
+    required bool rememberMe,
   }) async {
-    emit(state.copyWith(
-      isLoginAttempted: true,
-      loginState: state.loginState.copyWith(isLoading: true),
-      emailError: null,
-      passwordError: null,
-    ));
+    emit(
+      state.copyWith(
+        isLoginAttempted: true,
+        loginState: state.loginState.copyWith(isLoading: true),
+        emailError: null,
+        passwordError: null,
+      ),
+    );
 
     final response = await loginUseCase(email, password);
 
     if (response is SucceessBaseResponse<UserModel>) {
-      emit(state.copyWith(
-        loginState: state.loginState.copyWith(
-          isLoading: false,
-          data: response.data,
-          errorMessage: null,
+      emit(
+        state.copyWith(
+          loginState: state.loginState.copyWith(
+            isLoading: false,
+            data: response.data,
+            errorMessage: null,
+          ),
         ),
-      ));
+      );
     } else if (response is ErrorBaseResponse<UserModel>) {
-      emit(state.copyWith(
-        loginState: state.loginState.copyWith(
-          isLoading: false,
-          errorMessage: response.errorMessage,
+      emit(
+        state.copyWith(
+          loginState: state.loginState.copyWith(
+            isLoading: false,
+            errorMessage: response.errorMessage,
+          ),
         ),
-      ));
+      );
     }
   }
 
@@ -69,10 +78,7 @@ class LoginViewModel extends Cubit<LoginState> {
     );
 
     if (response is SucceessBaseResponse<String>) {
-      emit(state.copyWith(
-        savedEmail: response.data,
-        rememberMe: true,
-      ));
+      emit(state.copyWith(savedEmail: response.data, rememberMe: true));
     }
   }
 }

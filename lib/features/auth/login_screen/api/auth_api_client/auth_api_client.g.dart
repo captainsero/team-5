@@ -20,13 +20,13 @@ class _AuthApiClient implements AuthApiClient {
   final ParseErrorLogger? errorLogger;
 
   @override
-  Future<UserDto> login(Map<String, dynamic> body) async {
+  Future<AuthResponse> login(Map<String, dynamic> body) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     _data.addAll(body);
-    final _options = _setStreamType<UserDto>(
+    final _options = _setStreamType<AuthResponse>(
       Options(method: 'POST', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
@@ -37,9 +37,9 @@ class _AuthApiClient implements AuthApiClient {
           .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
     );
     final _result = await _dio.fetch<Map<String, dynamic>>(_options);
-    late UserDto _value;
+    late AuthResponse _value;
     try {
-      _value = UserDto.fromJson(_result.data!);
+      _value = AuthResponse.fromJson(_result.data!);
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options, response: _result);
       rethrow;
