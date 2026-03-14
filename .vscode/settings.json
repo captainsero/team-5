@@ -1,0 +1,14 @@
+{
+    "cmake.sourceDirectory": "C:/Users/Rana/Downloads/team-5/windows/flutter",
+    "customFileOrder.rules": {
+        "c:\\Users\\Rana\\Downloads\\team-5\\lib\\features\\auth\\register": {
+            "order": [
+                "presentation",
+                "domain",
+                "data",
+                "api"
+            ],
+            "type": "manual"
+        }
+    }
+}
