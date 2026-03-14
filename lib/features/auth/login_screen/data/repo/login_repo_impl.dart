@@ -1,8 +1,8 @@
 import 'package:injectable/injectable.dart';
 import 'package:team_5_examapp/config/base_response/base_response.dart';
-import 'package:team_5_examapp/features/auth/login_screen/data/data_sources/auth_remote_data_source_contract.dart';
+import 'package:team_5_examapp/features/auth/login_screen/data/data_sources/login_remote_data_source_contract.dart';
 import 'package:team_5_examapp/features/auth/login_screen/domain/models/user_model.dart';
-import 'package:team_5_examapp/features/auth/login_screen/domain/repo/auth_repo_contract.dart';
+import 'package:team_5_examapp/features/auth/login_screen/domain/repo/login_repo_contract.dart';
 
 @Injectable(as: AuthRepoContract)
 class AuthRepoImpl implements AuthRepoContract {
