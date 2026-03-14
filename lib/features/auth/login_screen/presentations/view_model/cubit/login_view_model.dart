@@ -18,7 +18,7 @@ class LoginViewModel extends Cubit<LoginState> {
   void clearError() {
     emit(
       state.copyWith(
-        loginState: state.loginState.copyWith(errorMessage: null),
+        loginState: BaseState(isLoading: true),
         emailError: null,
         passwordError: null,
       ),

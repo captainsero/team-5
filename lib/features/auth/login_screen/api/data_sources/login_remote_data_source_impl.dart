@@ -22,9 +22,10 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSourceContract {
     } catch (e) {
       if (e is DioException) {
         final data = e.response?.data;
-        final messageFromApi = (data is Map<String, dynamic>)
-            ? data['message']?.toString()
-            : null;
+        String? messageFromApi;
+        if (data != null && data is Map<String, dynamic>) {
+          messageFromApi = data['message']?.toString();
+        }
         throw DioException(
           requestOptions: e.requestOptions,
           error: messageFromApi ?? e.message ?? "Something went wrong.",

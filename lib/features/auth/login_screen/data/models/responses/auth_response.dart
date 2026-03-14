@@ -34,19 +34,8 @@ class AuthResponse {
         userDto: userDto ?? this.userDto,
       );
 
-  /// Convert DTO to domain model
   UserModel toDomain() {
-    return UserModel(
-      username: userDto.username,
-      firstName: userDto.firstName,
-      lastName: userDto.lastName,
-      email: userDto.email,
-      phone: userDto.phone,
-      role: userDto.role,
-      isVerified: userDto.isVerified,
-      id: userDto.id,
-      createdAt: userDto.createdAt,
-    );
+    return userDto.toDomain();
   }
 
   factory AuthResponse.fromJson(Map<String, dynamic> json) =>

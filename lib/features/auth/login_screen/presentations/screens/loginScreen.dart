@@ -56,7 +56,6 @@ class LoginScreen extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
                       SizedBox(height: AppSize.s20),
-
                       TextFormField(
                         controller: _emailController,
                         decoration: InputDecoration(
