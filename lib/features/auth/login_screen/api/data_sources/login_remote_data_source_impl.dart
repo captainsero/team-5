@@ -1,8 +1,8 @@
 import 'dart:async';
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
-import 'package:team_5_examapp/features/auth/login_screen/api/auth_api_client/auth_api_client.dart';
-import 'package:team_5_examapp/features/auth/login_screen/data/data_sources/auth_remote_data_source_contract.dart';
+import 'package:team_5_examapp/features/auth/login_screen/api/auth_api_client/login_api_client.dart';
+import 'package:team_5_examapp/features/auth/login_screen/data/data_sources/login_remote_data_source_contract.dart';
 import 'package:team_5_examapp/features/auth/login_screen/data/models/responses/auth_response.dart';
 
 @Injectable(as: AuthRemoteDataSourceContract)

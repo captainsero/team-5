@@ -4,7 +4,7 @@ import 'package:retrofit/retrofit.dart';
 import 'package:team_5_examapp/features/auth/login_screen/data/models/responses/auth_response.dart';
 import 'package:team_5_examapp/core/constants/app_end_points.dart';
 
-part 'auth_api_client.g.dart';
+part 'login_api_client.g.dart';
 
 @RestApi()
 @injectable

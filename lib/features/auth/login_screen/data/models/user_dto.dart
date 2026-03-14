@@ -1,5 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
-import '../../domain/models/user_model.dart';
+import 'package:team_5_examapp/features/auth/login_screen/domain/models/user_model.dart';
 
 part 'user_dto.g.dart';
 
