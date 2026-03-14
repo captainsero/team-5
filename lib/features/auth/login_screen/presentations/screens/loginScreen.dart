@@ -4,59 +4,33 @@ import 'package:team_5_examapp/config/app_validator.dart';
 import 'package:team_5_examapp/core/constants/color_manager.dart';
 import 'package:team_5_examapp/core/constants/font_manager.dart';
 import 'package:team_5_examapp/core/constants/values_manager.dart';
-import 'package:team_5_examapp/features/auth/login_screen/domain/models/user_model.dart';
-import 'package:team_5_examapp/features/auth/login_screen/presentations/view_model/cubit/login_view_model.dart';
 import 'package:team_5_examapp/generated/l10n.dart';
 
-class LoginScreen extends StatefulWidget {
+import '../view_model/cubit/login_view_model.dart';
+
+class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
 
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
-}
+  Widget build(BuildContext context) {
+    final _formKey = GlobalKey<FormState>();
+    final _emailController = TextEditingController();
+    final _passwordController = TextEditingController();
 
-class _LoginScreenState extends State<LoginScreen> {
-  final _formKey = GlobalKey<FormState>();
-  final _emailController = TextEditingController();
-  final _passwordController = TextEditingController();
-
-  bool _rememberMe = false;
-  bool _obscurePassword = true;
-
-  @override
-  void initState() {
-    super.initState();
-    // Load saved email if exists
-    final cubit = context.read<LoginViewModel>();
-    cubit.loadSavedEmail().then((email) {
-      if (email != null) {
-        _emailController.text = email;
-        setState(() {
-          _rememberMe = true;
-        });
+    final loginViewModel = context.read<LoginViewModel>();
+    loginViewModel.loadSavedEmail().then((_) {
+      if (loginViewModel.state.savedEmail != null) {
+        _emailController.text = loginViewModel.state.savedEmail!;
       }
     });
-  }
 
-  @override
-  Widget build(BuildContext context) {
     return BlocConsumer<LoginViewModel, LoginState>(
       listener: (context, state) {
-        final loginState = state.loginState;
-
-        if (loginState.errorMessage != null) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text(loginState.errorMessage!)),
-          );
-        }
-
-        if (loginState.data != null) {
-          // Navigate to home or dashboard
-          // Navigator.of(context).pushReplacementNamed('/home');
-        }
+        if (state.loginState.data != null) {}
       },
       builder: (context, state) {
         final loginState = state.loginState;
+        final showErrors = state.isLoginAttempted;
 
         return Scaffold(
           appBar: AppBar(
@@ -77,50 +51,55 @@ class _LoginScreenState extends State<LoginScreen> {
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
                       SizedBox(height: AppSize.s20),
+
                       TextFormField(
                         controller: _emailController,
                         decoration: InputDecoration(
                           hintText: S.of(context).enterYourEmail,
                           labelText: S.of(context).email,
+                          errorText: showErrors
+                              ? loginViewModel.state.emailError ??
+                                    loginState.errorMessage
+                              : null,
                         ),
                         keyboardType: TextInputType.emailAddress,
+                        autovalidateMode: AutovalidateMode.disabled,
                         validator: AppValidator.validateEmail,
                       ),
                       SizedBox(height: AppSize.s16),
+
                       TextFormField(
                         controller: _passwordController,
-                        obscureText: _obscurePassword,
+                        obscureText: state.obscurePassword,
                         decoration: InputDecoration(
                           hintText: S.of(context).enterPassword,
                           labelText: S.of(context).password,
                           suffixIcon: IconButton(
                             icon: Icon(
-                              _obscurePassword
+                              state.obscurePassword
                                   ? Icons.visibility_off
                                   : Icons.visibility,
                             ),
                             onPressed: () {
-                              setState(() {
-                                _obscurePassword = !_obscurePassword;
-                              });
+                              loginViewModel.toggleObscurePassword();
                             },
                           ),
+                          errorText: showErrors ? state.passwordError : null,
                         ),
+                        autovalidateMode: AutovalidateMode.disabled,
                         validator: AppValidator.validatePassword,
                       ),
                       SizedBox(height: AppSize.s16),
+
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Row(
                             children: [
                               Checkbox(
-                                value: _rememberMe,
-                                onChanged: (value) {
-                                  setState(() {
-                                    _rememberMe = value ?? false;
-                                  });
-                                },
+                                value: state.rememberMe,
+                                onChanged: (_) =>
+                                    loginViewModel.toggleRememberMe(),
                                 activeColor: AppColors.primary,
                                 visualDensity: VisualDensity.compact,
                               ),
@@ -146,30 +125,36 @@ class _LoginScreenState extends State<LoginScreen> {
                         ],
                       ),
                       SizedBox(height: AppSize.s48),
+
                       ElevatedButton(
                         onPressed: loginState.isLoading
                             ? null
                             : () {
-                          if (_formKey.currentState!.validate()) {
-                            context.read<LoginViewModel>().login(
-                              email: _emailController.text.trim(),
-                              password: _passwordController.text.trim(),
-                              // rememberMe: _rememberMe,
-                            );
-                          }
-                        },
+                                loginViewModel.emit(
+                                  state.copyWith(isLoginAttempted: true),
+                                );
+
+                                if (_formKey.currentState!.validate()) {
+                                  loginViewModel.login(
+                                    email: _emailController.text.trim(),
+                                    password: _passwordController.text.trim(),
+                                    rememberMe: state.rememberMe,
+                                  );
+                                }
+                              },
                         child: loginState.isLoading
                             ? const SizedBox(
-                          height: 20,
-                          width: 20,
-                          child: CircularProgressIndicator(
-                            color: Colors.white,
-                            strokeWidth: 2,
-                          ),
-                        )
+                                height: 20,
+                                width: 20,
+                                child: CircularProgressIndicator(
+                                  color: Colors.white,
+                                  strokeWidth: 2,
+                                ),
+                              )
                             : Text(S.of(context).login),
                       ),
                       SizedBox(height: AppSize.s16),
+
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
@@ -181,13 +166,16 @@ class _LoginScreenState extends State<LoginScreen> {
                               fontWeight: FontWeightManager.regular,
                             ),
                           ),
-                          Text(
-                            S.of(context).signUp,
-                            style: TextStyle(
-                              color: AppColors.primary,
-                              fontSize: FontSize.s18,
-                              fontWeight: FontWeightManager.medium,
-                              decoration: TextDecoration.underline,
+                          GestureDetector(
+                            onTap: () {},
+                            child: Text(
+                              S.of(context).signUp,
+                              style: TextStyle(
+                                color: AppColors.primary,
+                                fontSize: FontSize.s18,
+                                fontWeight: FontWeightManager.medium,
+                                decoration: TextDecoration.underline,
+                              ),
                             ),
                           ),
                         ],
@@ -202,12 +190,5 @@ class _LoginScreenState extends State<LoginScreen> {
         );
       },
     );
-  }
-
-  @override
-  void dispose() {
-    _emailController.dispose();
-    _passwordController.dispose();
-    super.dispose();
   }
 }

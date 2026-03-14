@@ -15,62 +15,77 @@ class LoginViewModel extends Cubit<LoginState> {
 
   LoginViewModel({required this.loginUseCase}) : super(LoginState());
 
+  /// Clear any existing errors
   Future<void> clearError() async {
-    emit(LoginState(
-      loginState: BaseState(isLoading: false),
+    emit(state.copyWith(
+      loginState: state.loginState.copyWith(errorMessage: null),
+      emailError: null,
+      passwordError: null,
     ));
   }
 
-  Future<void> login({required String email, required String password, bool rememberMe = false}) async {
-    emit(
-      state.copyWith(
-        loginState: state.loginState.copyWith(isLoading: true),
-      ),
-    );
+  /// Toggle password visibility
+  void toggleObscurePassword() {
+    emit(state.copyWith(obscurePassword: !state.obscurePassword));
+  }
+
+  /// Toggle "Remember Me" checkbox
+  void toggleRememberMe() {
+    emit(state.copyWith(rememberMe: !state.rememberMe));
+  }
+
+  /// Perform login
+  Future<void> login({
+    required String email,
+    required String password,
+    bool rememberMe = false,
+  }) async {
+    // mark login attempt
+    emit(state.copyWith(
+      isLoginAttempted: true,
+      loginState: state.loginState.copyWith(isLoading: true),
+      emailError: null,
+      passwordError: null,
+    ));
 
     final response = await loginUseCase(email, password);
 
-    switch (response) {
-      case SucceessBaseResponse<UserModel>():
-      // Save token and email if rememberMe is true
-        if (rememberMe) {
-          await SecureStorageService.write(
-              key: SecureStorageKeys.userToken, value: response.data?.token ?? '');
-          await SecureStorageService.write(
-              key: SecureStorageKeys.userEmail, value: email);
-        }
+    if (response is SucceessBaseResponse<UserModel>) {
+      if (rememberMe) {
+        await SecureStorageService.write(
+            key: SecureStorageKeys.userToken, value: response.data?.token ?? '');
+        await SecureStorageService.write(
+            key: SecureStorageKeys.userEmail, value: email);
+      }
 
-        emit(
-          state.copyWith(
-            loginState: state.loginState.copyWith(
-              isLoading: false,
-              data: response.data,
-              errorMessage: null,
-            ),
-          ),
-        );
-        break;
-
-      case ErrorBaseResponse<UserModel>():
-        emit(
-          state.copyWith(
-            loginState: state.loginState.copyWith(
-              isLoading: false,
-              errorMessage: response.errorMessage,
-            ),
-          ),
-        );
-        break;
+      emit(state.copyWith(
+        loginState: state.loginState.copyWith(
+          isLoading: false,
+          data: response.data,
+          errorMessage: null,
+        ),
+      ));
+    } else if (response is ErrorBaseResponse<UserModel>) {
+      emit(state.copyWith(
+        loginState: state.loginState.copyWith(
+          isLoading: false,
+          errorMessage: response.errorMessage,
+        ),
+      ));
     }
   }
 
-  Future<String?> loadSavedEmail() async {
-    final response = await SecureStorageService.read(key: SecureStorageKeys.userEmail);
-    switch (response) {
-      case SucceessBaseResponse<String>(data: final email):
-        return email;
-      case ErrorBaseResponse<String>():
-        return null;
+  /// Load saved email from secure storage
+  Future<void> loadSavedEmail() async {
+    final response = await SecureStorageService.read(
+      key: SecureStorageKeys.userEmail,
+    );
+
+    if (response is SucceessBaseResponse<String>) {
+      emit(state.copyWith(
+        savedEmail: response.data,
+        rememberMe: true,
+      ));
     }
   }
 }
