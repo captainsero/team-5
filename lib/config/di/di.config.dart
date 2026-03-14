@@ -25,7 +25,7 @@ import '../../features/auth/login_screen/domain/repo/auth_repo_contract.dart'
     as _i498;
 import '../../features/auth/login_screen/domain/use_cases/login_use_cases.dart'
     as _i70;
-import '../../features/auth/login_screen/presentations/view_model/cubit/login_cubit.dart'
+import '../../features/auth/login_screen/presentations/view_model/cubit/login_view_model.dart'
     as _i796;
 import '../dio/dio_module.dart' as _i977;
 

@@ -6,7 +6,7 @@ import 'package:team_5_examapp/config/di/di.dart';
 import 'package:team_5_examapp/core/routing/routes_manager.dart';
 import 'package:team_5_examapp/core/themes/light_theme.dart';
 import 'package:team_5_examapp/features/auth/login_screen/presentations/screens/loginScreen.dart';
-import 'package:team_5_examapp/features/auth/login_screen/presentations/view_model/cubit/login_cubit.dart';
+import 'package:team_5_examapp/features/auth/login_screen/presentations/view_model/cubit/login_view_model.dart';
 import 'package:team_5_examapp/generated/l10n.dart';
 
 

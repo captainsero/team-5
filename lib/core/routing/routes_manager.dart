@@ -8,6 +8,7 @@ class Routes {
 class AppRouter {
   static final GoRouter router = GoRouter(
     initialLocation: Routes.splashRoute,
-    routes: [],
+    routes: [
+    ],
   );
 }

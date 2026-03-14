@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:team_5_examapp/config/app_validator.dart';
-import 'package:team_5_examapp/config/base_state/base_state.dart';
 import 'package:team_5_examapp/core/constants/color_manager.dart';
 import 'package:team_5_examapp/core/constants/font_manager.dart';
 import 'package:team_5_examapp/core/constants/values_manager.dart';
 import 'package:team_5_examapp/features/auth/login_screen/domain/models/user_model.dart';
-import 'package:team_5_examapp/features/auth/login_screen/presentations/view_model/cubit/login_cubit.dart' show LoginViewModel;
+import 'package:team_5_examapp/features/auth/login_screen/presentations/view_model/cubit/login_view_model.dart';
 import 'package:team_5_examapp/generated/l10n.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -25,23 +24,40 @@ class _LoginScreenState extends State<LoginScreen> {
   bool _obscurePassword = true;
 
   @override
+  void initState() {
+    super.initState();
+    // Load saved email if exists
+    final cubit = context.read<LoginViewModel>();
+    cubit.loadSavedEmail().then((email) {
+      if (email != null) {
+        _emailController.text = email;
+        setState(() {
+          _rememberMe = true;
+        });
+      }
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return BlocConsumer<LoginViewModel, BaseState<UserModel>>(
+    return BlocConsumer<LoginViewModel, LoginState>(
       listener: (context, state) {
-        if (state.errorMessage != null) {
+        final loginState = state.loginState;
+
+        if (loginState.errorMessage != null) {
           ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text(state.errorMessage!)),
+            SnackBar(content: Text(loginState.errorMessage!)),
           );
         }
 
-        // تمت إزالة رسالة الترحيب
-        // if (state.data != null) {
-        //   ScaffoldMessenger.of(context).showSnackBar(
-        //     SnackBar(content: Text("Welcome ${state.data!.name}")),
-        //   );
-        // }
+        if (loginState.data != null) {
+          // Navigate to home or dashboard
+          // Navigator.of(context).pushReplacementNamed('/home');
+        }
       },
       builder: (context, state) {
+        final loginState = state.loginState;
+
         return Scaffold(
           appBar: AppBar(
             leading: IconButton(
@@ -131,17 +147,18 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                       SizedBox(height: AppSize.s48),
                       ElevatedButton(
-                        onPressed: state.isLoading
+                        onPressed: loginState.isLoading
                             ? null
                             : () {
                           if (_formKey.currentState!.validate()) {
                             context.read<LoginViewModel>().login(
-                              _emailController.text.trim(),
-                              _passwordController.text.trim(),
+                              email: _emailController.text.trim(),
+                              password: _passwordController.text.trim(),
+                              // rememberMe: _rememberMe,
                             );
                           }
                         },
-                        child: state.isLoading
+                        child: loginState.isLoading
                             ? const SizedBox(
                           height: 20,
                           width: 20,

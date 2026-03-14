@@ -1,17 +1,15 @@
-abstract class LoginState {}
+part of 'login_view_model.dart';
 
-class LoginInitial extends LoginState {}
+class LoginState {
+  BaseState<UserModel> loginState = BaseState<UserModel>(isLoading: false);
 
-class LoginLoading extends LoginState {}
+  LoginState({BaseState<UserModel>? loginState}) {
+    this.loginState = loginState ?? BaseState<UserModel>(isLoading: false);
+  }
 
-class LoginSuccess extends LoginState {
-  final String message;
-
-  LoginSuccess(this.message);
-}
-
-class LoginError extends LoginState {
-  final String error;
-
-  LoginError(this.error);
+  LoginState copyWith({BaseState<UserModel>? loginState}) {
+    return LoginState(
+      loginState: loginState ?? this.loginState,
+    );
+  }
 }
