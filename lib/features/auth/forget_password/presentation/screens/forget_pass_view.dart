@@ -17,8 +17,21 @@ class ForgetPassView extends StatefulWidget {
 
 class _ForgetPassViewState extends State<ForgetPassView> {
   final _formKey = GlobalKey<FormState>();
-  final _emailController = TextEditingController();
+  final _emailController = TextEditingController(text: '');
   ForgetPassViewModel viewModel = getIt.get<ForgetPassViewModel>();
+
+  @override
+  void initState() {
+    super.initState();
+    _loadEmail();
+  }
+
+  Future<void> _loadEmail() async {
+    if (!mounted) return;
+    String email = await viewModel.getUserEmail();
+    _emailController.text = email;
+  }
+
   @override
   Widget build(BuildContext context) {
     return BlocProvider<ForgetPassViewModel>(
