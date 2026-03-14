@@ -94,6 +94,16 @@ class S {
     );
   }
 
+  /// `Enter your email`
+  String get enterYourEmail {
+    return Intl.message(
+      'Enter your email',
+      name: 'enterYourEmail',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Forget password?`
   String get forgetPassword {
     return Intl.message(

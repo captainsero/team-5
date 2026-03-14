@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:team_5_examapp/config/app_validator.dart';
+import 'package:team_5_examapp/config/base_state/base_state.dart';
+import 'package:team_5_examapp/core/constants/color_manager.dart';
+import 'package:team_5_examapp/core/constants/font_manager.dart';
+import 'package:team_5_examapp/core/constants/values_manager.dart';
 import 'package:team_5_examapp/features/auth/login_screen/domain/models/user_model.dart';
-import '../../../../../core/constants/color_manager.dart';
-import '../../../../../core/constants/font_manager.dart';
-import '../../../../../core/constants/values_manager.dart';
-import '../../../../../config/base_state/base_state.dart';
-import '../../../../../config/app_validator.dart';
-import '../view_model/cubit/login_cubit.dart';
+import 'package:team_5_examapp/features/auth/login_screen/presentations/view_model/cubit/login_cubit.dart' show LoginViewModel;
+import 'package:team_5_examapp/generated/l10n.dart';
+
+
 
 
 class LoginScreen extends StatefulWidget {
@@ -52,7 +55,7 @@ class _LoginScreenState extends State<LoginScreen> {
               icon: const Icon(Icons.arrow_back),
               onPressed: () => Navigator.of(context).maybePop(),
             ),
-            title: const Text("Login"),
+            title:  Text(S.of(context).login),
           ),
 
           body: GestureDetector(
@@ -73,9 +76,9 @@ class _LoginScreenState extends State<LoginScreen> {
 
                       TextFormField(
                         controller: _emailController,
-                        decoration: const InputDecoration(
-                          hintText: 'Enter your email',
-                          labelText: 'Email',
+                        decoration:  InputDecoration(
+                          hintText: S.of(context).enterYourEmail,
+                          labelText: S.of(context).email,
                         ),
                         keyboardType: TextInputType.emailAddress,
                         validator: AppValidator.validateEmail,
@@ -87,8 +90,8 @@ class _LoginScreenState extends State<LoginScreen> {
                         controller: _passwordController,
                         obscureText: _obscurePassword,
                         decoration: InputDecoration(
-                          hintText: 'Enter your password',
-                          labelText: 'Password',
+                          hintText: S.of(context).enterPassword,
+                          labelText: S.of(context).password,
 
                           suffixIcon: IconButton(
                             icon: Icon(
@@ -126,7 +129,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               ),
 
                               Text(
-                                'Remember me',
+                                S.of(context).rememberMe,
                                 style: TextStyle(
                                   color: AppColors.black,
                                   fontSize: FontSize.s14,
@@ -137,7 +140,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           ),
 
                           Text(
-                            'Forget password?',
+                            S.of(context).forgetPassword,
                             style: TextStyle(
                               color: AppColors.black,
                               fontSize: FontSize.s14,
@@ -174,7 +177,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             strokeWidth: 2,
                           ),
                         )
-                            : const Text('Login'),
+                            :  Text(S.of(context).login),
                       ),
 
                       SizedBox(height: AppSize.s16),
@@ -184,7 +187,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         children: [
 
                           Text(
-                            "Don't have an account? ",
+                            S.of(context).dontHaveAccount,
                             style: TextStyle(
                               color: AppColors.black,
                               fontSize: FontSize.s18,
@@ -193,7 +196,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           ),
 
                           Text(
-                            'Sign up',
+                            S.of(context).signUp,
                             style: TextStyle(
                               color: AppColors.primary,
                               fontSize: FontSize.s18,

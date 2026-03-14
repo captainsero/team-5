@@ -5,6 +5,7 @@
     "enterPassword": "Enter your password",
     "rememberMe": "Remember me",
     "dontHaveAccount": "Don't have an account?",
+    "enterYourEmail" : "Enter your email",
     "forgetPassword": "Forget password?",
     "signUp": "Sign up"
 }
