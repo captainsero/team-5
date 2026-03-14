@@ -25,12 +25,7 @@ class _ForgetPassViewState extends State<ForgetPassView> {
       create: (context) => viewModel,
       child: BlocConsumer<ForgetPassViewModel, ForgetPassState>(
         listenWhen: (previous, current) =>
-            previous.forgetPasswordState.isLoading !=
-                current.forgetPasswordState.isLoading ||
-            previous.forgetPasswordState.data !=
-                current.forgetPasswordState.data ||
-            previous.forgetPasswordState.errorMessage !=
-                current.forgetPasswordState.errorMessage,
+            previous.forgetPasswordState != current.forgetPasswordState,
         listener: (context, state) {
           if (!state.forgetPasswordState.isLoading &&
               state.forgetPasswordState.data != null &&
@@ -38,6 +33,8 @@ class _ForgetPassViewState extends State<ForgetPassView> {
             context.push(Routes.validationCodeRoute);
           }
         },
+        buildWhen: (previous, current) =>
+            previous.forgetPasswordState != current.forgetPasswordState,
         builder: (context, state) {
           return Scaffold(
             appBar: AppBar(

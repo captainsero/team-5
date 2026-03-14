@@ -28,12 +28,7 @@ class _ResetPassViewState extends State<ResetPassView> {
       create: (context) => viewModel,
       child: BlocConsumer<ForgetPassViewModel, ForgetPassState>(
         listenWhen: (previous, current) =>
-            previous.resetPasswordState.isLoading !=
-                current.resetPasswordState.isLoading ||
-            previous.resetPasswordState.data !=
-                current.resetPasswordState.data ||
-            previous.resetPasswordState.errorMessage !=
-                current.resetPasswordState.errorMessage,
+            previous.resetPasswordState != current.resetPasswordState,
         listener: (context, state) {
           if (!state.resetPasswordState.isLoading &&
               state.resetPasswordState.data != null &&
@@ -41,6 +36,8 @@ class _ResetPassViewState extends State<ResetPassView> {
             context.go(Routes.loginRoute);
           }
         },
+        buildWhen: (previous, current) =>
+            previous.resetPasswordState != current.resetPasswordState,
         builder: (context, state) {
           return Scaffold(
             appBar: AppBar(

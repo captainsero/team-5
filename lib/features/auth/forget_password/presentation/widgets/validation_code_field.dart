@@ -65,12 +65,7 @@ class _ValidationCodeFieldState extends State<ValidationCodeField> {
       create: (context) => viewModel,
       child: BlocConsumer<ForgetPassViewModel, ForgetPassState>(
         listenWhen: (previous, current) =>
-            previous.confirmValidationState.isLoading !=
-                current.confirmValidationState.isLoading ||
-            previous.confirmValidationState.data !=
-                current.confirmValidationState.data ||
-            previous.confirmValidationState.errorMessage !=
-                current.confirmValidationState.errorMessage,
+            previous.confirmValidationState != current.confirmValidationState,
         listener: (context, state) {
           // navigate on success
           if (!state.confirmValidationState.isLoading &&
@@ -79,6 +74,8 @@ class _ValidationCodeFieldState extends State<ValidationCodeField> {
             context.push(Routes.resetPassRoute);
           }
         },
+        buildWhen: (previous, current) =>
+            previous.confirmValidationState != current.confirmValidationState,
         builder: (context, state) {
           return Form(
             key: _formKey,
