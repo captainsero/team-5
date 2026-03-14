@@ -1,2 +1,3 @@
-// TODO: add keys for secure storage here
-abstract class SecureStorageKeys {}
+abstract class SecureStorageKeys {
+  static const String forgetPassEmail = "forgetPassEmail";
+}
