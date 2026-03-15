@@ -2,7 +2,7 @@ import 'package:go_router/go_router.dart';
 import 'package:team_5_examapp/features/auth/forget_password/presentation/screens/forget_pass_view.dart';
 import 'package:team_5_examapp/features/auth/forget_password/presentation/screens/reset_pass_view.dart';
 import 'package:team_5_examapp/features/auth/forget_password/presentation/screens/validation_code_view.dart';
-import 'package:team_5_examapp/features/auth/loginScreen/presentations/loginScreen.dart';
+import 'package:team_5_examapp/features/auth/login_screen/presentations/screens/login_screen.dart';
 
 class Routes {
   static const String splashRoute = "/";

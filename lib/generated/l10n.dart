@@ -157,44 +157,11 @@ class S {
       desc: '',
       args: [],
     );
-  /// `Login`
-  String get login {
-    return Intl.message('Login', name: 'login', desc: '', args: []);
   }
 
   /// `Email`
   String get email {
     return Intl.message('Email', name: 'email', desc: '', args: []);
-  }
-
-  /// `Password`
-  String get password {
-    return Intl.message('Password', name: 'password', desc: '', args: []);
-  }
-
-  /// `Enter your password`
-  String get enterPassword {
-    return Intl.message(
-      'Enter your password',
-      name: 'enterPassword',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Remember me`
-  String get rememberMe {
-    return Intl.message('Remember me', name: 'rememberMe', desc: '', args: []);
-  }
-
-  /// `Don't have an account?`
-  String get dontHaveAccount {
-    return Intl.message(
-      'Don\'t have an account?',
-      name: 'dontHaveAccount',
-      desc: '',
-      args: [],
-    );
   }
 
   /// `Enter your email`
@@ -217,11 +184,6 @@ class S {
     return Intl.message(
       'Email verification',
       name: 'emailVerification',
-  /// `Forget password?`
-  String get forgetPassword {
-    return Intl.message(
-      'Forget password?',
-      name: 'forgetPassword',
       desc: '',
       args: [],
     );
@@ -300,6 +262,43 @@ class S {
       desc: '',
       args: [],
     );
+  }
+
+  /// `Login`
+  String get login {
+    return Intl.message('Login', name: 'login', desc: '', args: []);
+  }
+
+  /// `Password`
+  String get password {
+    return Intl.message('Password', name: 'password', desc: '', args: []);
+  }
+
+  /// `Enter your password`
+  String get enterPassword {
+    return Intl.message(
+      'Enter your password',
+      name: 'enterPassword',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Remember me`
+  String get rememberMe {
+    return Intl.message('Remember me', name: 'rememberMe', desc: '', args: []);
+  }
+
+  /// `Don't have an account?`
+  String get dontHaveAccount {
+    return Intl.message(
+      'Don\'t have an account?',
+      name: 'dontHaveAccount',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Sign up`
   String get signUp {
     return Intl.message('Sign up', name: 'signUp', desc: '', args: []);

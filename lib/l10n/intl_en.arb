@@ -24,15 +24,12 @@
     "resetPasswordDis" : "Password must not be empty and must contain 6 characters with upper case letter and one number at least",
     "newPassword" : "New Password",
     "enterYourPassword" : "Enter your passwrod",
-    "confirmPassword" : "Confirm password"
+    "confirmPassword" : "Confirm password",
     
     "login": "Login",
-    "email": "Email",
     "password": "Password",
     "enterPassword": "Enter your password",
     "rememberMe": "Remember me",
     "dontHaveAccount": "Don't have an account?",
-    "enterYourEmail" : "Enter your email",
-    "forgetPassword": "Forget password?",
     "signUp": "Sign up"
 }

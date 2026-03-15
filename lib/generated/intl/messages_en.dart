@@ -28,6 +28,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "didnotReceiveCode": MessageLookupByLibrary.simpleMessage(
       "Didn\'t recieve code? ",
     ),
+    "dontHaveAccount": MessageLookupByLibrary.simpleMessage(
+      "Don\'t have an account?",
+    ),
     "email": MessageLookupByLibrary.simpleMessage("Email"),
     "emailIsRequired": MessageLookupByLibrary.simpleMessage(
       "Email is required",
@@ -41,6 +44,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "enterAValidEmail": MessageLookupByLibrary.simpleMessage(
       "Enter a Valid email",
     ),
+    "enterPassword": MessageLookupByLibrary.simpleMessage(
+      "Enter your password",
+    ),
     "enterYourEmail": MessageLookupByLibrary.simpleMessage("Enter your email"),
     "enterYourPassword": MessageLookupByLibrary.simpleMessage(
       "Enter your passwrod",
@@ -50,7 +56,9 @@ class MessageLookup extends MessageLookupByLibrary {
       "Please enter your email associated to your account",
     ),
     "invalidCode": MessageLookupByLibrary.simpleMessage("Invalid code"),
+    "login": MessageLookupByLibrary.simpleMessage("Login"),
     "newPassword": MessageLookupByLibrary.simpleMessage("New Password"),
+    "password": MessageLookupByLibrary.simpleMessage("Password"),
     "passwordDoNotMatch": MessageLookupByLibrary.simpleMessage(
       "Password do not match",
     ),
@@ -64,23 +72,12 @@ class MessageLookup extends MessageLookupByLibrary {
     "pleaseConfirmPassword": MessageLookupByLibrary.simpleMessage(
       "Please confirm your password",
     ),
+    "rememberMe": MessageLookupByLibrary.simpleMessage("Remember me"),
     "resend": MessageLookupByLibrary.simpleMessage("Resend"),
     "resetPassword": MessageLookupByLibrary.simpleMessage("Reset Password"),
     "resetPasswordDis": MessageLookupByLibrary.simpleMessage(
       "Password must not be empty and must contain 6 characters with upper case letter and one number at least",
     ),
-    "dontHaveAccount": MessageLookupByLibrary.simpleMessage(
-      "Don\'t have an account?",
-    ),
-    "email": MessageLookupByLibrary.simpleMessage("Email"),
-    "enterPassword": MessageLookupByLibrary.simpleMessage(
-      "Enter your password",
-    ),
-    "enterYourEmail": MessageLookupByLibrary.simpleMessage("Enter your email"),
-    "forgetPassword": MessageLookupByLibrary.simpleMessage("Forget password?"),
-    "login": MessageLookupByLibrary.simpleMessage("Login"),
-    "password": MessageLookupByLibrary.simpleMessage("Password"),
-    "rememberMe": MessageLookupByLibrary.simpleMessage("Remember me"),
     "signUp": MessageLookupByLibrary.simpleMessage("Sign up"),
   };
 }
