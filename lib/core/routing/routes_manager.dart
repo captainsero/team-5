@@ -4,16 +4,15 @@ import 'package:team_5_examapp/features/auth/register/presentation/screens/regis
 class Routes {
   static const String splashRoute = "/";
   static const String loginRoute = "/login";
-  static const String signUpRoute = "/register";
-}
+  static const String registerRoute = "/register";}
 
 class AppRouter {
   static final GoRouter router = GoRouter(
     initialLocation: Routes.splashRoute,
     routes: [
       GoRoute(
-        path: Routes.signUpRoute,
-        name: Routes.signUpRoute,
+        path: Routes.registerRoute,
+        name: Routes.registerRoute,
         builder: (_, _) => SignUpScreen(),
       ),
     ],
