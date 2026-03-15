@@ -34,8 +34,8 @@ class MyApp extends StatelessWidget {
             GlobalCupertinoLocalizations.delegate,
           ],
           supportedLocales: S.delegate.supportedLocales,
-          initialRoute: Routes.signUpRoute,
-          routes: {Routes.signUpRoute: (context) => SignUpScreen()},
+          initialRoute: Routes.registerRoute,
+          routes: {Routes.registerRoute: (context) => SignUpScreen()},
         );
       },
     );

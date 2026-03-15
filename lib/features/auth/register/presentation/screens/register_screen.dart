@@ -38,7 +38,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
           if (!state.registerUserState.isLoading &&
               state.registerUserState.data != null &&
               state.registerUserState.errorMessage == null) {
-            context.go(Routes.signUpRoute);
+            context.go(Routes.loginRoute);
           }
         },
         buildWhen: (previous, current) =>
