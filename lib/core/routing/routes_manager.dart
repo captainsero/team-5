@@ -17,6 +17,11 @@ class AppRouter {
   static final GoRouter router = GoRouter(
     initialLocation: Routes.loginRoute,
     routes: [
+        GoRoute(
+        path: Routes.registerRoute,
+        name: Routes.registerRoute,
+        builder: (_, _) => SignUpScreen(),
+        ),
       GoRoute(
         path: Routes.loginRoute,
         name: Routes.loginRoute,

@@ -1,19 +1,27 @@
 class AppValidator {
   static String? validateEmail(String? value) {
-    if (value == null || value.isEmpty) {
-      return 'Email is required';
-    }
     final emailRegex = RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
-    if (!emailRegex.hasMatch(value)) {
+    if (value == null || !emailRegex.hasMatch(value)) {
       return 'Enter a valid email';
     }
     return null;
   }
 
+  // 3. Password: Matches your backend regex requirement
   static String? validatePassword(String? value) {
-    if (value == null || value.isEmpty) {
-      return 'Password is required';
+    final passRegex = RegExp(
+      r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$',
+    );
+    if (value == null || !passRegex.hasMatch(value)) {
+      return 'Password needs uppercase, digit, and special char';
     }
+    return null;
+  }
+
+  // 4. Confirm Password: Simple equality check
+  static String? validateConfirmPassword(String? value, String password) {
+    if (value != password) {
+      return 'Passwords do not match';
 
     // At least 8 chars, 1 upper, 1 lower, 1 digit, 1 special
     final regex = RegExp(
@@ -37,6 +45,11 @@ class AppValidator {
     return null;
   }
 
+  // 5. Phone: Egypt format (010, 011, 012, 015 + 8 digits)
+  static String? validatePhone(String? value) {
+    final phoneRegex = RegExp(r'^01[0125][0-9]{8}$');
+    if (value == null || !phoneRegex.hasMatch(value)) {
+      return 'Enter a valid Egyptian phone number';
   static String? validateConfirmPasswrod(String? value, String password) {
     if (value == null || value.isEmpty) {
       return 'Please confirm your password';

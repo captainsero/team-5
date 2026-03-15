@@ -10,7 +10,7 @@ abstract class SecureStorageService {
   }) async {
     try {
       await _storage.write(key: key, value: value);
-      return SucceessBaseResponse(data: key);
+      return SuccessBaseResponse(data: key);
     } catch (e) {
       return ErrorBaseResponse(errorMessage: "$e");
     }
@@ -24,7 +24,7 @@ abstract class SecureStorageService {
         return ErrorBaseResponse(errorMessage: 'No value found for key: $key');
       }
 
-      return SucceessBaseResponse(data: value);
+      return SuccessBaseResponse(data: value);
     } catch (e) {
       return ErrorBaseResponse(errorMessage: "$e");
     }
@@ -33,7 +33,7 @@ abstract class SecureStorageService {
   static Future<BaseResponse<bool>> delete({required String key}) async {
     try {
       await _storage.delete(key: key);
-      return SucceessBaseResponse(data: true);
+      return SuccessBaseResponse(data: true);
     } catch (e) {
       return ErrorBaseResponse(errorMessage: "$e");
     }
@@ -42,7 +42,7 @@ abstract class SecureStorageService {
   static Future<BaseResponse<bool>> deleteAll() async {
     try {
       await _storage.deleteAll();
-      return SucceessBaseResponse(data: true);
+      return SuccessBaseResponse(data: true);
     } catch (e) {
       return ErrorBaseResponse(errorMessage: "$e");
     }

@@ -1,17 +1,34 @@
 {
+    "cmake.sourceDirectory": "C:/Users/Rana/Downloads/team-5/windows/flutter",
     "customFileOrder.rules": {
-        "e:\\programming\\Flutter\\Bootcamp\\team_5_examapp\\lib\\features\\auth\\forget_password\\api": {
+        "c:\\Users\\Rana\\Downloads\\team-5\\lib\\features\\auth\\register": {
             "order": [
-                "forget_pass_api_client",
-                "data_sources"
+                "presentation",
+                "domain",
+                "data",
+                "api"
             ],
             "type": "manual"
         },
-        "e:\\programming\\Flutter\\Bootcamp\\team_5_examapp\\lib\\features\\auth\\forget_password\\data": {
+        "c:\\Users\\Rana\\Downloads\\team-5\\lib\\features\\auth\\register\\presentation\\widgets": {
+            "order": [],
+            "type": "manual"
+        },
+        "c:\\Users\\Rana\\Downloads\\team-5\\lib\\features\\auth\\register\\presentation\\view_model": {
+            "order": [],
+            "type": "manual"
+        },
+        "c:\\Users\\Rana\\Downloads\\team-5\\lib\\features\\auth\\register\\presentation\\view_model\\cubit": {
+            "order": [],
+            "type": "manual"
+        },
+        "c:\\Users\\Rana\\Downloads\\team-5\\lib\\features\\auth\\register\\data\\models": {
+            "order": [],
+            "type": "manual"
+        },
+        "c:\\Users\\Rana\\Downloads\\team-5\\lib\\features\\auth\\register\\data\\models\\responses": {
             "order": [
-                "data_sources",
-                "repo",
-                "models"
+                "user_response_dto.dart"
             ],
             "type": "manual"
         }
