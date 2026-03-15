@@ -47,7 +47,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
           return Scaffold(
             appBar: AppBar(
               leading: IconButton(
-                icon: const Icon(Icons.arrow_back),
+                icon: const Icon(Icons.arrow_back_ios),
                 onPressed: context.pop,
               ),
               title: const Text('Sign Up'),
@@ -66,7 +66,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         labelText: 'User name',
                         hintText: "Enter your user name",
                       ),
-                      forceErrorText: state.registerUserState.errorMessage,
+                      onChanged: (value) => viewModel.clearError(),
                     ),
                     const SizedBox(height: 16),
 
@@ -81,8 +81,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               labelText: 'First name',
                               hintText: "Enter your First Name",
                             ),
-                            forceErrorText:
-                                state.registerUserState.errorMessage,
+
+                            onChanged: (value) => viewModel.clearError(),
                           ),
                         ),
                         const SizedBox(width: 16),
@@ -95,8 +95,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               labelText: 'Last name',
                               hintText: "Enter your last name",
                             ),
-                            forceErrorText:
-                                state.registerUserState.errorMessage,
+
+                            onChanged: (value) => viewModel.clearError(),
                           ),
                         ),
                       ],
@@ -112,6 +112,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         labelText: 'Email',
                         hintText: "Enter your Email",
                       ),
+                      onChanged: (value) => viewModel.clearError(),
                     ),
                     const SizedBox(height: 16),
 
@@ -127,8 +128,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               labelText: 'Password',
                               hintText: "Enter your Password",
                             ),
-                            forceErrorText:
-                                state.registerUserState.errorMessage,
+
+                            onChanged: (value) => viewModel.clearError(),
                           ),
                         ),
                         const SizedBox(width: 16),
@@ -140,13 +141,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                   value,
                                   _passwordController.text,
                                 ),
+
                             obscureText: true,
                             decoration: InputDecoration(
                               labelText: 'Confirm password',
                               hintText: "Confirm your Password",
                             ),
-                            forceErrorText:
-                                state.registerUserState.errorMessage,
+
+                            onChanged: (value) => viewModel.clearError(),
                           ),
                         ),
                       ],
@@ -161,7 +163,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         labelText: 'Phone number',
                         hintText: "Enter your phone number",
                       ),
-                      forceErrorText: state.registerUserState.errorMessage,
+                      onChanged: (value) => viewModel.clearError(),
                     ),
                     SizedBox(height: AppSize.s30),
                     // Sign Up Button

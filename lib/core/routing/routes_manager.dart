@@ -4,7 +4,7 @@ import 'package:team_5_examapp/features/auth/register/presentation/screens/regis
 class Routes {
   static const String splashRoute = "/";
   static const String loginRoute = "/login";
-  static const String signUpRoute = "/signUp";
+  static const String signUpRoute = "/register";
 }
 
 class AppRouter {

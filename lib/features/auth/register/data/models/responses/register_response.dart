@@ -3,9 +3,7 @@
 //     final registerResponse = registerResponseFromMap(jsonString);
 
 import 'package:json_annotation/json_annotation.dart';
-
-import 'package:team_5_examapp/features/auth/register/data/models/user_dto.dart';
-
+import 'package:team_5_examapp/features/auth/register/data/models/responses/user_response_dto.dart';
 part 'register_response.g.dart';
 
 //RegisterResponse registerResponseFromMap(String str) => RegisterResponse.fromMap(json.decode(str));
@@ -19,20 +17,23 @@ class AuthResponse {
   @JsonKey(name: "token")
   String token;
   @JsonKey(name: "user")
-  UserDto userDto;
+  UserResponseDto userResponseDto;
 
   AuthResponse({
     required this.message,
     required this.token,
-    required this.userDto,
+    required this.userResponseDto,
   });
 
-  AuthResponse copyWith({String? message, String? token, UserDto? userDto}) =>
-      AuthResponse(
-        message: message ?? this.message,
-        token: token ?? this.token,
-        userDto: userDto ?? this.userDto,
-      );
+  AuthResponse copyWith({
+    String? message,
+    String? token,
+    UserResponseDto? userResponseDto,
+  }) => AuthResponse(
+    message: message ?? this.message,
+    token: token ?? this.token,
+    userResponseDto: userResponseDto ?? this.userResponseDto,
+  );
 
   factory AuthResponse.fromJson(Map<String, dynamic> json) =>
       _$AuthResponseFromJson(json);
