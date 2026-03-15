@@ -12,7 +12,7 @@ abstract class RegisterApiClient {
   factory RegisterApiClient(Dio dio) = _RegisterApiClient;
 
   @POST(AppEndPoints.signUp)
-  Future<RegisterResponse> register({
+  Future<AuthResponse> register({
     @Body() required Map<String, dynamic> registerResponse,
   });
 }

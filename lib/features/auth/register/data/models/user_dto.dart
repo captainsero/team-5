@@ -1,6 +1,5 @@
-
 import 'package:json_annotation/json_annotation.dart';
-part'user_dto.g.dart';
+part 'user_dto.g.dart';
 
 @JsonSerializable()
 class UserDto {
@@ -12,27 +11,21 @@ class UserDto {
   String lastName;
   @JsonKey(name: "email")
   String email;
+  @JsonKey(name: "password")
+  String password;
+  @JsonKey(name: "rePassword")
+  String rePassword;
   @JsonKey(name: "phone")
   String phone;
-  @JsonKey(name: "role")
-  String role;
-  @JsonKey(name: "isVerified")
-  bool isVerified;
-  @JsonKey(name: "_id")
-  String id;
-  @JsonKey(name: "createdAt")
-  DateTime createdAt;
 
   UserDto({
     required this.username,
     required this.firstName,
     required this.lastName,
     required this.email,
+    required this.password,
+    required this.rePassword,
     required this.phone,
-    required this.role,
-    required this.isVerified,
-    required this.id,
-    required this.createdAt,
   });
 
   UserDto copyWith({
@@ -40,25 +33,21 @@ class UserDto {
     String? firstName,
     String? lastName,
     String? email,
+    String? password,
+    String? rePassword,
     String? phone,
-    String? role,
-    bool? isVerified,
-    String? id,
-    DateTime? createdAt,
-  }) =>
-      UserDto(
-        username: username ?? this.username,
-        firstName: firstName ?? this.firstName,
-        lastName: lastName ?? this.lastName,
-        email: email ?? this.email,
-        phone: phone ?? this.phone,
-        role: role ?? this.role,
-        isVerified: isVerified ?? this.isVerified,
-        id: id ?? this.id,
-        createdAt: createdAt ?? this.createdAt,
-      );
+  }) => UserDto(
+    username: username ?? this.username,
+    firstName: firstName ?? this.firstName,
+    lastName: lastName ?? this.lastName,
+    email: email ?? this.email,
+    password: password ?? this.password,
+    rePassword: rePassword ?? this.rePassword,
+    phone: phone ?? this.phone,
+  );
 
-  factory UserDto.fromJson(Map<String, dynamic> json) => _$UserDtoFromJson(json);
+  factory UserDto.fromJson(Map<String, dynamic> json) =>
+      _$UserDtoFromJson(json);
 
   Map<String, dynamic> toJson() => _$UserDtoToJson(this);
 }

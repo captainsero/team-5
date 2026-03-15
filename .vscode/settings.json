@@ -9,6 +9,28 @@
                 "api"
             ],
             "type": "manual"
+        },
+        "c:\\Users\\Rana\\Downloads\\team-5\\lib\\features\\auth\\register\\presentation\\widgets": {
+            "order": [],
+            "type": "manual"
+        },
+        "c:\\Users\\Rana\\Downloads\\team-5\\lib\\features\\auth\\register\\presentation\\view_model": {
+            "order": [],
+            "type": "manual"
+        },
+        "c:\\Users\\Rana\\Downloads\\team-5\\lib\\features\\auth\\register\\presentation\\view_model\\cubit": {
+            "order": [],
+            "type": "manual"
+        },
+        "c:\\Users\\Rana\\Downloads\\team-5\\lib\\features\\auth\\register\\data\\models": {
+            "order": [],
+            "type": "manual"
+        },
+        "c:\\Users\\Rana\\Downloads\\team-5\\lib\\features\\auth\\register\\data\\models\\responses": {
+            "order": [
+                "user_response_dto.dart"
+            ],
+            "type": "manual"
         }
     }
 }

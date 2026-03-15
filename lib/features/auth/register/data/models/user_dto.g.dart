@@ -11,11 +11,9 @@ UserDto _$UserDtoFromJson(Map<String, dynamic> json) => UserDto(
   firstName: json['firstName'] as String,
   lastName: json['lastName'] as String,
   email: json['email'] as String,
+  password: json['password'] as String,
+  rePassword: json['rePassword'] as String,
   phone: json['phone'] as String,
-  role: json['role'] as String,
-  isVerified: json['isVerified'] as bool,
-  id: json['_id'] as String,
-  createdAt: DateTime.parse(json['createdAt'] as String),
 );
 
 Map<String, dynamic> _$UserDtoToJson(UserDto instance) => <String, dynamic>{
@@ -23,9 +21,7 @@ Map<String, dynamic> _$UserDtoToJson(UserDto instance) => <String, dynamic>{
   'firstName': instance.firstName,
   'lastName': instance.lastName,
   'email': instance.email,
+  'password': instance.password,
+  'rePassword': instance.rePassword,
   'phone': instance.phone,
-  'role': instance.role,
-  'isVerified': instance.isVerified,
-  '_id': instance.id,
-  'createdAt': instance.createdAt.toIso8601String(),
 };

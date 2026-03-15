@@ -2,11 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:team_5_examapp/features/auth/register/presentation/screens/register_screen.dart';
-import 'package:team_5_examapp/features/auth/register/register_screen.dart';
-
 import 'core/routing/routes_manager.dart';
 import 'core/themes/light_theme.dart';
-import 'features/auth/loginScreen/presentations/loginScreen.dart';
 import 'generated/l10n.dart';
 
 void main() {
@@ -35,9 +32,8 @@ class MyApp extends StatelessWidget {
             GlobalCupertinoLocalizations.delegate,
           ],
           supportedLocales: S.delegate.supportedLocales,
-
           initialRoute: Routes.signUpRoute,
-          routes: {Routes.signUpRoute: (context) => const RegisterScreen()},
+          routes: {Routes.signUpRoute: (context) => SignUpScreen()},
         );
       },
     );

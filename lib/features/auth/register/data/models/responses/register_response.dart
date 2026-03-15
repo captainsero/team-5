@@ -13,7 +13,7 @@ part 'register_response.g.dart';
 //String registerResponseToMap(RegisterResponse data) => json.encode(data.toMap());
 
 @JsonSerializable()
-class RegisterResponse {
+class AuthResponse {
   @JsonKey(name: "message")
   String message;
   @JsonKey(name: "token")
@@ -21,24 +21,21 @@ class RegisterResponse {
   @JsonKey(name: "user")
   UserDto userDto;
 
-  RegisterResponse({
+  AuthResponse({
     required this.message,
     required this.token,
     required this.userDto,
   });
 
-  RegisterResponse copyWith({
-    String? message,
-    String? token,
-    UserDto? userDto,
-  }) => RegisterResponse(
-    message: message ?? this.message,
-    token: token ?? this.token,
-    userDto: userDto ?? this.userDto,
-  );
+  AuthResponse copyWith({String? message, String? token, UserDto? userDto}) =>
+      AuthResponse(
+        message: message ?? this.message,
+        token: token ?? this.token,
+        userDto: userDto ?? this.userDto,
+      );
 
-  factory RegisterResponse.fromJson(Map<String, dynamic> json) =>
-      _$RegisterResponseFromJson(json);
+  factory AuthResponse.fromJson(Map<String, dynamic> json) =>
+      _$AuthResponseFromJson(json);
 
-  Map<String, dynamic> toJson() => _$RegisterResponseToJson(this);
+  Map<String, dynamic> toJson() => _$AuthResponseToJson(this);
 }

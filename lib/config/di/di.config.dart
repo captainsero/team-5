@@ -25,6 +25,8 @@ import '../../features/auth/register/domain/repo/register_repo_contract.dart'
     as _i65;
 import '../../features/auth/register/domain/use_cases/register_use_case.dart'
     as _i118;
+import '../../features/auth/register/presentation/view_model/register_view_model.dart'
+    as _i656;
 import '../dio/dio_module.dart' as _i977;
 
 extension GetItInjectableX on _i174.GetIt {
@@ -53,6 +55,10 @@ extension GetItInjectableX on _i174.GetIt {
       () => _i118.RegisterUseCase(
         registerRepoContract: gh<_i65.RegisterRepoContract>(),
       ),
+    );
+    gh.factory<_i656.RegisterViewModel>(
+      () =>
+          _i656.RegisterViewModel(registerUseCase: gh<_i118.RegisterUseCase>()),
     );
     return this;
   }
