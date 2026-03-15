@@ -13,20 +13,6 @@ import 'package:dio/dio.dart' as _i361;
 import 'package:get_it/get_it.dart' as _i174;
 import 'package:injectable/injectable.dart' as _i526;
 
-import '../../features/auth/register/api/data_sources/register_remote_source_implementation.dart'
-    as _i1056;
-import '../../features/auth/register/api/register_api_client/register_api_client.dart'
-    as _i453;
-import '../../features/auth/register/data/data_sources/register_remote_source_contract.dart'
-    as _i821;
-import '../../features/auth/register/data/repo/register_repo_implementation.dart'
-    as _i695;
-import '../../features/auth/register/domain/repo/register_repo_contract.dart'
-    as _i65;
-import '../../features/auth/register/domain/use_cases/register_use_case.dart'
-    as _i118;
-import '../../features/auth/register/presentation/view_model/register_view_model.dart'
-    as _i656;
 import '../../features/auth/forget_password/api/data_sources/forget_pass_remote_data_source_impl.dart'
     as _i970;
 import '../../features/auth/forget_password/api/forget_pass_api_client/forget_pass_api_client.dart'
@@ -59,6 +45,20 @@ import '../../features/auth/login_screen/domain/use_cases/login_use_cases.dart'
     as _i70;
 import '../../features/auth/login_screen/presentations/view_model/cubit/login_view_model.dart'
     as _i952;
+import '../../features/auth/register/api/data_sources/register_remote_source_implementation.dart'
+    as _i1056;
+import '../../features/auth/register/api/register_api_client/register_api_client.dart'
+    as _i453;
+import '../../features/auth/register/data/data_sources/register_remote_source_contract.dart'
+    as _i821;
+import '../../features/auth/register/data/repo/register_repo_implementation.dart'
+    as _i695;
+import '../../features/auth/register/domain/repo/register_repo_contract.dart'
+    as _i65;
+import '../../features/auth/register/domain/use_cases/register_use_case.dart'
+    as _i118;
+import '../../features/auth/register/presentation/view_model/register_view_model.dart'
+    as _i656;
 import '../dio/dio_module.dart' as _i977;
 
 extension GetItInjectableX on _i174.GetIt {
@@ -70,37 +70,24 @@ extension GetItInjectableX on _i174.GetIt {
     final gh = _i526.GetItHelper(this, environment, environmentFilter);
     final dioModule = _$DioModule();
     gh.singleton<_i361.Dio>(() => dioModule.dio);
-    gh.factory<_i453.RegisterApiClient>(
-      () => _i453.RegisterApiClient(gh<_i361.Dio>()),
-    );
-    gh.factory<_i821.RegisterRemoteSourceContract>(
-      () => _i1056.RegisterRemoteSourceImplementation(
-        registerApiClient: gh<_i453.RegisterApiClient>(),
-      ),
-    );
-    gh.factory<_i65.RegisterRepoContract>(
-      () => _i695.RegisterRepoImplementation(
-        registerRemoteSourceContract: gh<_i821.RegisterRemoteSourceContract>(),
-      ),
-    );
-    gh.factory<_i118.RegisterUseCase>(
-      () => _i118.RegisterUseCase(
-        registerRepoContract: gh<_i65.RegisterRepoContract>(),
-      ),
-    );
-    gh.factory<_i656.RegisterViewModel>(
-      () =>
-          _i656.RegisterViewModel(registerUseCase: gh<_i118.RegisterUseCase>()),
     gh.factory<_i358.ForgetPassApiClient>(
       () => _i358.ForgetPassApiClient(gh<_i361.Dio>()),
     );
     gh.factory<_i226.AuthApiClient>(() => _i226.AuthApiClient(gh<_i361.Dio>()));
+    gh.factory<_i453.RegisterApiClient>(
+      () => _i453.RegisterApiClient(gh<_i361.Dio>()),
+    );
     gh.factory<_i462.AuthRemoteDataSourceContract>(
       () => _i33.AuthRemoteDataSourceImpl(gh<_i226.AuthApiClient>()),
     );
     gh.factory<_i426.ForgetPassRemoteDataSourceContract>(
       () => _i970.ForgetPassRemoteDataSourceImpl(
         forgetPassApiClient: gh<_i358.ForgetPassApiClient>(),
+      ),
+    );
+    gh.factory<_i821.RegisterRemoteSourceContract>(
+      () => _i1056.RegisterRemoteSourceImplementation(
+        registerApiClient: gh<_i453.RegisterApiClient>(),
       ),
     );
     gh.factory<_i48.AuthRepoContract>(
@@ -114,10 +101,20 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i952.LoginViewModel>(
       () => _i952.LoginViewModel(loginUseCase: gh<_i70.LoginUseCase>()),
     );
+    gh.factory<_i65.RegisterRepoContract>(
+      () => _i695.RegisterRepoImplementation(
+        registerRemoteSourceContract: gh<_i821.RegisterRemoteSourceContract>(),
+      ),
+    );
     gh.factory<_i222.ForgetPassRepoContract>(
       () => _i55.ForgetPassRepoImpl(
         forgetPassRemoteDataSourceContract:
             gh<_i426.ForgetPassRemoteDataSourceContract>(),
+      ),
+    );
+    gh.factory<_i118.RegisterUseCase>(
+      () => _i118.RegisterUseCase(
+        registerRepoContract: gh<_i65.RegisterRepoContract>(),
       ),
     );
     gh.factory<_i146.ConfirmValidationCodeUseCase>(
@@ -134,6 +131,10 @@ extension GetItInjectableX on _i174.GetIt {
       () => _i262.ResetPassUseCase(
         forgetPassRepo: gh<_i222.ForgetPassRepoContract>(),
       ),
+    );
+    gh.factory<_i656.RegisterViewModel>(
+      () =>
+          _i656.RegisterViewModel(registerUseCase: gh<_i118.RegisterUseCase>()),
     );
     gh.factory<_i128.ForgetPassViewModel>(
       () => _i128.ForgetPassViewModel(

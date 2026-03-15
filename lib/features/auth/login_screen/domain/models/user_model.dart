@@ -4,10 +4,7 @@ class UserModel {
   final String lastName;
   final String email;
   final String phone;
-  final String role;
-  final bool isVerified;
-  final String id;
-  final DateTime createdAt;
+
 
   UserModel({
     required this.username,
@@ -15,9 +12,5 @@ class UserModel {
     required this.lastName,
     required this.email,
     required this.phone,
-    required this.role,
-    required this.isVerified,
-    required this.id,
-    required this.createdAt,
   });
 }

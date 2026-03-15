@@ -19,7 +19,7 @@ class ForgetPassRemoteDataSourceImpl
   }) async {
     try {
       final response = await forgetPassApiClient.forgetPassword(email: email);
-      return SucceessBaseResponse<ForgetPasswordResponse>(data: response);
+      return SuccessBaseResponse<ForgetPasswordResponse>(data: response);
     } catch (e) {
       if (e is DioException) {
         final data = e.response?.data;
@@ -52,7 +52,7 @@ class ForgetPassRemoteDataSourceImpl
       final response = await forgetPassApiClient.confirmValidationCode(
         resetCode: resetCode,
       );
-      return SucceessBaseResponse(data: response);
+      return SuccessBaseResponse(data: response);
     } catch (e) {
       if (e is DioException) {
         final data = e.response?.data;
@@ -85,7 +85,7 @@ class ForgetPassRemoteDataSourceImpl
       final response = await forgetPassApiClient.resetPassword(
         resetPassDto: resetPassDto.toJson(),
       );
-      return SucceessBaseResponse<ForgetPasswordResponse>(data: response);
+      return SuccessBaseResponse<ForgetPasswordResponse>(data: response);
     } catch (e) {
       if (e is DioException) {
         final data = e.response?.data;

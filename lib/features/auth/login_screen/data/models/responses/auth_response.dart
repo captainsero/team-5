@@ -3,8 +3,8 @@
 //     final AuthResponse = AuthResponseFromMap(jsonString);
 
 import 'package:json_annotation/json_annotation.dart';
-import 'package:team_5_examapp/features/auth/login_screen/data/models/user_dto.dart';
 import 'package:team_5_examapp/features/auth/login_screen/domain/models/user_model.dart';
+import 'package:team_5_examapp/features/auth/register/data/models/responses/user_response_dto.dart';
 
 part 'auth_response.g.dart';
 
@@ -19,7 +19,7 @@ class AuthResponse {
   @JsonKey(name: "token")
   String token;
   @JsonKey(name: "user")
-  UserDto userDto;
+  UserResponseDto userDto;
 
   AuthResponse({
     required this.message,
@@ -27,12 +27,15 @@ class AuthResponse {
     required this.userDto,
   });
 
-  AuthResponse copyWith({String? message, String? token, UserDto? userDto}) =>
-      AuthResponse(
-        message: message ?? this.message,
-        token: token ?? this.token,
-        userDto: userDto ?? this.userDto,
-      );
+  AuthResponse copyWith({
+    String? message,
+    String? token,
+    UserResponseDto? userDto,
+  }) => AuthResponse(
+    message: message ?? this.message,
+    token: token ?? this.token,
+    userDto: userDto ?? this.userDto,
+  );
 
   UserModel toDomain() {
     return userDto.toDomain();

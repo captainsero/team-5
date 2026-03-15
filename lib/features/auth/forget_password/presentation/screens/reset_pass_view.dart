@@ -93,7 +93,7 @@ class _ResetPassViewState extends State<ResetPassView> {
                         hintText: S.of(context).confirmPassword,
                       ),
                       validator: (value) =>
-                          AppValidator.validateConfirmPasswrod(
+                          AppValidator.validateConfirmPassword(
                             value,
                             _newPasswordController.text,
                           ),

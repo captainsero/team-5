@@ -46,7 +46,7 @@ class ForgetPassViewModel extends Cubit<ForgetPassState> {
     final response = await forgetPassUseCase(email: email);
 
     switch (response) {
-      case SucceessBaseResponse():
+      case SuccessBaseResponse():
         await SecureStorageService.write(
           key: SecureStorageKeys.userEmail,
           value: email,
@@ -88,7 +88,7 @@ class ForgetPassViewModel extends Cubit<ForgetPassState> {
     final response = await confirmValidationCodeUseCase(resetCode: resetCode);
 
     switch (response) {
-      case SucceessBaseResponse():
+      case SuccessBaseResponse():
         emit(
           state.copyWith(
             confirmValidationState: state.confirmValidationState.copyWith(
@@ -125,13 +125,13 @@ class ForgetPassViewModel extends Cubit<ForgetPassState> {
     );
 
     switch (emailResponse) {
-      case SucceessBaseResponse<String>(data: final email):
+      case SuccessBaseResponse<String>(data: final email):
         final response = await resetPassUseCase(
           resetPassDto: ResetPassDto(email: email, newPassword: newPassword),
         );
 
         switch (response) {
-          case SucceessBaseResponse():
+          case SuccessBaseResponse():
             emit(
               state.copyWith(
                 resetPasswordState: state.resetPasswordState.copyWith(
@@ -175,7 +175,7 @@ class ForgetPassViewModel extends Cubit<ForgetPassState> {
     );
 
     switch (emailResponse) {
-      case SucceessBaseResponse<String>(data: final email):
+      case SuccessBaseResponse<String>(data: final email):
         // reuse the existing logic
         await forgetPassword(email: email);
         break;
@@ -199,7 +199,7 @@ class ForgetPassViewModel extends Cubit<ForgetPassState> {
     );
 
     switch (emailResponse) {
-      case SucceessBaseResponse<String>(data: final email):
+      case SuccessBaseResponse<String>(data: final email):
         return email;
 
       case ErrorBaseResponse<String>():

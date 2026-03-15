@@ -10,16 +10,21 @@ import 'package:team_5_examapp/core/routing/routes_manager.dart';
 import 'package:team_5_examapp/features/auth/login_screen/presentations/view_model/cubit/login_view_model.dart';
 import 'package:team_5_examapp/generated/l10n.dart';
 
-class LoginScreen extends StatelessWidget {
+class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    final _formKey = GlobalKey<FormState>();
-    final _emailController = TextEditingController();
-    final _passwordController = TextEditingController();
+  State<LoginScreen> createState() => _LoginScreenState();
+}
 
-    final loginViewModel = getIt.get<LoginViewModel>();
+class _LoginScreenState extends State<LoginScreen> {
+  final _formKey = GlobalKey<FormState>();
+  final _emailController = TextEditingController();
+  final _passwordController = TextEditingController();
+  final loginViewModel = getIt.get<LoginViewModel>();
+
+  @override
+  Widget build(BuildContext context) {
     loginViewModel.loadSavedEmail().then((_) {
       if (loginViewModel.state.savedEmail != null) {
         _emailController.text = loginViewModel.state.savedEmail!;
@@ -36,6 +41,8 @@ class LoginScreen extends StatelessWidget {
             );
           }
         },
+        listenWhen: (previous, current) =>
+            previous.loginState != current.loginState,
         builder: (context, state) {
           final loginState = state.loginState;
           final showErrors = state.isLoginAttempted;

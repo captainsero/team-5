@@ -19,8 +19,8 @@ class ForgetPassRepoImpl implements ForgetPassRepoContract {
       email: email,
     );
     switch (response) {
-      case SucceessBaseResponse<ForgetPasswordResponse>():
-        return SucceessBaseResponse<ForgetPasswordResponse>(
+      case SuccessBaseResponse<ForgetPasswordResponse>():
+        return SuccessBaseResponse<ForgetPasswordResponse>(
           data: response.data,
         );
       case ErrorBaseResponse<ForgetPasswordResponse>():
@@ -37,8 +37,8 @@ class ForgetPassRepoImpl implements ForgetPassRepoContract {
     final response = await forgetPassRemoteDataSourceContract
         .confirmValidationCode(resetCode: resetCode);
     switch (response) {
-      case SucceessBaseResponse<ForgetPasswordResponse>():
-        return SucceessBaseResponse<ForgetPasswordResponse>(
+      case SuccessBaseResponse<ForgetPasswordResponse>():
+        return SuccessBaseResponse<ForgetPasswordResponse>(
           data: response.data,
         );
       case ErrorBaseResponse<ForgetPasswordResponse>():
@@ -56,8 +56,8 @@ class ForgetPassRepoImpl implements ForgetPassRepoContract {
       resetPassDto: resetPassDto,
     );
     switch (response) {
-      case SucceessBaseResponse<ForgetPasswordResponse>():
-        return SucceessBaseResponse<ForgetPasswordResponse>(
+      case SuccessBaseResponse<ForgetPasswordResponse>():
+        return SuccessBaseResponse<ForgetPasswordResponse>(
           data: response.data,
         );
       case ErrorBaseResponse<ForgetPasswordResponse>():

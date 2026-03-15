@@ -3,6 +3,7 @@ import 'package:team_5_examapp/features/auth/forget_password/presentation/screen
 import 'package:team_5_examapp/features/auth/forget_password/presentation/screens/reset_pass_view.dart';
 import 'package:team_5_examapp/features/auth/forget_password/presentation/screens/validation_code_view.dart';
 import 'package:team_5_examapp/features/auth/login_screen/presentations/screens/login_screen.dart';
+import 'package:team_5_examapp/features/auth/register/presentation/screens/register_screen.dart';
 
 class Routes {
   static const String splashRoute = "/";

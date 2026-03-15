@@ -15,7 +15,7 @@ class AuthRepoImpl implements AuthRepoContract {
   Future<BaseResponse<UserModel>> login(String email, String password) async {
     try {
       final dto = await remoteDataSource.login(email, password);
-      return SucceessBaseResponse<UserModel>(data: dto.toDomain());
+      return SuccessBaseResponse<UserModel>(data: dto.toDomain());
     } catch (e) {
       String message = "Something went wrong";
 
