@@ -1,16 +1,4 @@
 class AppValidator {
-  // 1. Name: Min 3 chars, letters only
-  static String? validateName(String? value) {
-    if (value == null || value.length < 3) {
-      return 'Must be at least 3 characters';
-    }
-    if (!RegExp(r'^[a-zA-Z]+$').hasMatch(value)) {
-      return 'Only letters allowed';
-    }
-    return null;
-  }
-
-  // 2. Email: Standard format
   static String? validateEmail(String? value) {
     final emailRegex = RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
     if (value == null || !emailRegex.hasMatch(value)) {
@@ -34,6 +22,25 @@ class AppValidator {
   static String? validateConfirmPassword(String? value, String password) {
     if (value != password) {
       return 'Passwords do not match';
+
+    // At least 8 chars, 1 upper, 1 lower, 1 digit, 1 special
+    final regex = RegExp(
+      r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*\-]).{8,}$',
+    );
+
+    if (!regex.hasMatch(value)) {
+      return 'Password must be at least 8 characters and include upper, lower, number and special character';
+    }
+
+    return null;
+  }
+
+  static String? validateOtpCode(String? value) {
+    if (value == null || value.isEmpty) {
+      return 'Code is required';
+    }
+    if (value.length != 6) {
+      return 'Invalid code';
     }
     return null;
   }
@@ -43,6 +50,12 @@ class AppValidator {
     final phoneRegex = RegExp(r'^01[0125][0-9]{8}$');
     if (value == null || !phoneRegex.hasMatch(value)) {
       return 'Enter a valid Egyptian phone number';
+  static String? validateConfirmPasswrod(String? value, String password) {
+    if (value == null || value.isEmpty) {
+      return 'Please confirm your password';
+    }
+    if (value != password) {
+      return 'Passwords do not match';
     }
     return null;
   }

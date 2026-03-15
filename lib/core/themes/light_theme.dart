@@ -46,7 +46,7 @@ abstract class AppTheme {
       ),
       headlineMedium: getMediumStyle(
         color: AppColors.black,
-        fontSize: FontSize.s20,
+        fontSize: FontSize.s18,
         fontFamily: FontConstants.interFamily,
       ),
       headlineSmall: getRegularStyle(
@@ -65,24 +65,24 @@ abstract class AppTheme {
         fontSize: FontSize.s16,
         fontFamily: FontConstants.interFamily,
       ),
-      titleSmall: getMediumStyle(
+      titleSmall: getRegularStyle(
         color: AppColors.black,
         fontSize: FontSize.s14,
         fontFamily: FontConstants.interFamily,
       ),
 
       bodyLarge: getRegularStyle(
-        color: AppColors.black,
+        color: AppColors.grey,
         fontSize: FontSize.s16,
         fontFamily: FontConstants.interFamily,
       ),
       bodyMedium: getRegularStyle(
-        color: AppColors.black,
+        color: AppColors.grey,
         fontSize: FontSize.s14,
         fontFamily: FontConstants.interFamily,
       ),
       bodySmall: getRegularStyle(
-        color: AppColors.black,
+        color: AppColors.grey,
         fontSize: FontSize.s12,
         fontFamily: FontConstants.interFamily,
       ),
@@ -107,6 +107,13 @@ abstract class AppTheme {
     appBarTheme: AppBarTheme(
       backgroundColor: AppColors.transparent,
       foregroundColor: AppColors.black,
+      titleTextStyle: getRegularStyle(
+        color: AppColors.black,
+        fontSize: FontSize.s20,
+        fontFamily: FontConstants.interFamily,
+      ),
+      leadingWidth: AppSize.s25,
+      titleSpacing: AppSize.s0,
       elevation: 0,
     ),
 
@@ -114,7 +121,9 @@ abstract class AppTheme {
       style: ElevatedButton.styleFrom(
         backgroundColor: AppColors.primary,
         foregroundColor: AppColors.white,
-        padding: const EdgeInsets.all(20),
+        disabledBackgroundColor: AppColors.lightGrey,
+        disabledForegroundColor: AppColors.white,
+        padding: EdgeInsets.all(AppPadding.p16),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(100)),
         textStyle: getMediumStyle(
           color: AppColors.black,
@@ -170,7 +179,7 @@ abstract class AppTheme {
         borderSide: BorderSide(color: AppColors.error, width: AppSize.s2),
       ),
 
-      contentPadding:  EdgeInsets.all(AppPadding.p16),
+      contentPadding: EdgeInsets.all(AppPadding.p16),
     ),
   );
 }

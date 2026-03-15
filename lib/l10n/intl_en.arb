@@ -1,1 +1,35 @@
-{}
+{
+    "emailIsRequired" : "Email is required",
+    "enterAValidEmail" : "Enter a Valid email",
+    "passwordIsRequired" : "Password is required",
+    "passwordMustBe" : "Password must be at least 8 characters and include upper, lower, number and special character",
+    "codeIsRequired" : "Code is required",
+    "invalidCode" : "Invalid code",
+    "pleaseConfirmPassword" : "Please confirm your password",
+    "passwordDoNotMatch" : "Password do not match",
+
+    "passwrod": "Password",
+    "forgetPassword": "Forget Password",
+    "forgetPasswordDis": "Please enter your email associated to your account",
+    "email" : "Email",
+    "enterYourEmail" : "Enter your email",
+    "continueButton" : "Continue",
+
+    "emailVerification" : "Email verification",
+    "emailVerificationDis" : "Please enter your code that send to your email adress",
+    "didnotReceiveCode" : "Didn't recieve code? ",
+    "resend" : "Resend",
+
+    "resetPassword" : "Reset Password",
+    "resetPasswordDis" : "Password must not be empty and must contain 6 characters with upper case letter and one number at least",
+    "newPassword" : "New Password",
+    "enterYourPassword" : "Enter your passwrod",
+    "confirmPassword" : "Confirm password",
+    
+    "login": "Login",
+    "password": "Password",
+    "enterPassword": "Enter your password",
+    "rememberMe": "Remember me",
+    "dontHaveAccount": "Don't have an account?",
+    "signUp": "Sign up"
+}

@@ -1,4 +1,4 @@
 abstract class SecureStorageKeys {
-  static const String token = "token";
-  static const String userEmail = "email";
+  static const String userEmail = "userEmail";
+  static const String userToken = "userToken";
 }

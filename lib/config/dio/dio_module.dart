@@ -1,7 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
-import 'package:team_5_examapp/core/%D9%90app_endpoints/app_endpoints.dart';
-
+import 'package:team_5_examapp/core/constants/app_end_points.dart';
 
 @module
 abstract class DioModule {
