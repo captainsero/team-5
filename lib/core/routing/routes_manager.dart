@@ -10,6 +10,7 @@ class Routes {
   static const String forgetPasswordRoute = "/forgetPassword";
   static const String validationCodeRoute = "/validationCode";
   static const String resetPassRoute = "/resetPass";
+  static const String registerRoute = "/register";
 }
 
 class AppRouter {

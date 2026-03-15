@@ -69,5 +69,18 @@ class MessageLookup extends MessageLookupByLibrary {
     "resetPasswordDis": MessageLookupByLibrary.simpleMessage(
       "Password must not be empty and must contain 6 characters with upper case letter and one number at least",
     ),
+    "dontHaveAccount": MessageLookupByLibrary.simpleMessage(
+      "Don\'t have an account?",
+    ),
+    "email": MessageLookupByLibrary.simpleMessage("Email"),
+    "enterPassword": MessageLookupByLibrary.simpleMessage(
+      "Enter your password",
+    ),
+    "enterYourEmail": MessageLookupByLibrary.simpleMessage("Enter your email"),
+    "forgetPassword": MessageLookupByLibrary.simpleMessage("Forget password?"),
+    "login": MessageLookupByLibrary.simpleMessage("Login"),
+    "password": MessageLookupByLibrary.simpleMessage("Password"),
+    "rememberMe": MessageLookupByLibrary.simpleMessage("Remember me"),
+    "signUp": MessageLookupByLibrary.simpleMessage("Sign up"),
   };
 }
