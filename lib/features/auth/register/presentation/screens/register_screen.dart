@@ -25,7 +25,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
   final _passwordController = TextEditingController();
   final _confirmPasswordController = TextEditingController();
   final _phoneController = TextEditingController();
-  RegisterViewModel viewModel = getIt<RegisterViewModel>();
+  RegisterViewModel viewModel = getIt.get<RegisterViewModel>();
 
   @override
   Widget build(BuildContext context) {
@@ -46,7 +46,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
         builder: (context, state) {
           return Scaffold(
             appBar: AppBar(
-              leading: const Icon(Icons.arrow_back),
+              leading: IconButton(
+                icon: const Icon(Icons.arrow_back),
+                onPressed: context.pop,
+              ),
               title: const Text('Sign Up'),
             ),
             body: SingleChildScrollView(
@@ -59,7 +62,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     TextFormField(
                       controller: _userNameController,
                       validator: AppValidator.validateName,
-                      decoration: InputDecoration(labelText: 'User name'),
+                      decoration: InputDecoration(
+                        labelText: 'User name',
+                        hintText: "Enter your user name",
+                      ),
+                      forceErrorText: state.registerUserState.errorMessage,
                     ),
                     const SizedBox(height: 16),
 
@@ -72,7 +79,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             validator: AppValidator.validateName,
                             decoration: InputDecoration(
                               labelText: 'First name',
+                              hintText: "Enter your First Name",
                             ),
+                            forceErrorText:
+                                state.registerUserState.errorMessage,
                           ),
                         ),
                         const SizedBox(width: 16),
@@ -81,7 +91,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           child: TextFormField(
                             controller: _lastNameController,
                             validator: AppValidator.validateName,
-                            decoration: InputDecoration(labelText: 'Last name'),
+                            decoration: InputDecoration(
+                              labelText: 'Last name',
+                              hintText: "Enter your last name",
+                            ),
+                            forceErrorText:
+                                state.registerUserState.errorMessage,
                           ),
                         ),
                       ],
@@ -92,6 +107,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     TextFormField(
                       controller: _emailController,
                       validator: AppValidator.validateEmail,
+                      forceErrorText: state.registerUserState.errorMessage,
                       decoration: InputDecoration(
                         labelText: 'Email',
                         hintText: "Enter your Email",
@@ -107,7 +123,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             controller: _passwordController,
                             validator: AppValidator.validatePassword,
                             obscureText: true,
-                            decoration: InputDecoration(labelText: 'Password'),
+                            decoration: InputDecoration(
+                              labelText: 'Password',
+                              hintText: "Enter your Password",
+                            ),
+                            forceErrorText:
+                                state.registerUserState.errorMessage,
                           ),
                         ),
                         const SizedBox(width: 16),
@@ -122,7 +143,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             obscureText: true,
                             decoration: InputDecoration(
                               labelText: 'Confirm password',
+                              hintText: "Confirm your Password",
                             ),
+                            forceErrorText:
+                                state.registerUserState.errorMessage,
                           ),
                         ),
                       ],
@@ -133,7 +157,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     TextFormField(
                       controller: _phoneController,
                       validator: AppValidator.validatePhone,
-                      decoration: InputDecoration(labelText: 'Phone number'),
+                      decoration: InputDecoration(
+                        labelText: 'Phone number',
+                        hintText: "Enter your phone number",
+                      ),
+                      forceErrorText: state.registerUserState.errorMessage,
                     ),
                     SizedBox(height: AppSize.s30),
                     // Sign Up Button
