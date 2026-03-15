@@ -11,8 +11,6 @@ class RegisterUseCase {
   RegisterUseCase({required this.registerRepoContract});
 
   Future<BaseResponse<AuthResponse>> call({required UserDto userInfo}) async {
-    print("go to useCase ya RANA🥰🥰");
-
     return registerRepoContract.register(userInfo: userInfo);
   }
 }

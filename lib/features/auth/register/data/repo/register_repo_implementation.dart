@@ -20,10 +20,8 @@ class RegisterRepoImplementation implements RegisterRepoContract {
     );
     switch (response) {
       case SuccessBaseResponse<AuthResponse>():
-        print(" Sucess Ya RANA 🥰🥰Repo Response: ${response.data}");
         return SuccessBaseResponse<AuthResponse>(data: response.data);
       case ErrorBaseResponse<AuthResponse>():
-        print(" Error Ya RANA 🥰🥰Repo Response: ${response.errorMessage}");
         return ErrorBaseResponse<AuthResponse>(
           errorMessage: response.errorMessage,
         );

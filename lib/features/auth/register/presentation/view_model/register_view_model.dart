@@ -37,9 +37,6 @@ class RegisterViewModel extends Cubit<RegisterState> {
             ),
           ),
         );
-        print(
-          "Rana  🥰🥰 view model called with user info: ${userInfo.toString()}",
-        );
 
         break;
       case ErrorBaseResponse():
@@ -51,9 +48,6 @@ class RegisterViewModel extends Cubit<RegisterState> {
               errorMessage: response.errorMessage,
             ),
           ),
-        );
-        print(
-          "Rana  error view model🥰🥰 view model called with user info: ${userInfo.toString()}",
         );
 
         break;

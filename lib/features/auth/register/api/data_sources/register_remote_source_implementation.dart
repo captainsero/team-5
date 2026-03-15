@@ -21,7 +21,6 @@ class RegisterRemoteSourceImplementation
       final response = await registerApiClient.register(
         registerResponse: userInfo.toJson(),
       );
-      print(" Sucess Ya RANA 🥰🥰Remote API Response: $response");
       return SuccessBaseResponse<AuthResponse>(data: response);
     } catch (e) {
       if (e is DioException) {

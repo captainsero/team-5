@@ -41,8 +41,6 @@ class LoginViewModel extends Cubit<LoginState> {
 
     final response = await loginUseCase(email, password);
 
-    print("$response");
-
     if (response is SuccessBaseResponse<UserModel>) {
       emit(
         state.copyWith(
@@ -62,7 +60,6 @@ class LoginViewModel extends Cubit<LoginState> {
           ),
         ),
       );
-      print("Error: ${state.loginState.errorMessage}");
     }
   }
 
