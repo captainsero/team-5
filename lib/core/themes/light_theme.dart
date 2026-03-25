@@ -15,6 +15,7 @@ abstract class AppTheme {
       primary: AppColors.primary,
       onPrimary: AppColors.white,
       //! The secondary color can't be grey
+      
       secondary: AppColors.lightBlue,
       onSecondary: AppColors.white,
       error: AppColors.error,
