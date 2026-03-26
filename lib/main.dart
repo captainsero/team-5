@@ -8,6 +8,8 @@ import 'generated/l10n.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  // Avoid 0× screen scale before layout; otherwise `.sp` font sizes become 0 and StrutStyle asserts.
+  await ScreenUtil.ensureScreenSize();
   configureDependencies();
 
   runApp(const MyApp());
@@ -22,6 +24,7 @@ class MyApp extends StatelessWidget {
       designSize: const Size(375, 812),
       minTextAdapt: true,
       splitScreenMode: true,
+      ensureScreenSize: true,
       builder: (context, child) {
         return MaterialApp.router(
           title: 'Exam App',

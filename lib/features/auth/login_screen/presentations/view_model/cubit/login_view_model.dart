@@ -2,6 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:injectable/injectable.dart';
 import 'package:team_5_examapp/config/base_response/base_response.dart';
 import 'package:team_5_examapp/config/base_state/base_state.dart';
+import 'package:team_5_examapp/config/response_handler/response_handler.dart';
 import 'package:team_5_examapp/config/secure_storage/secure_storage_keys.dart';
 import 'package:team_5_examapp/config/secure_storage/secure_storage_service.dart';
 import 'package:team_5_examapp/features/auth/login_screen/domain/models/user_model.dart';
@@ -16,7 +17,7 @@ class LoginViewModel extends Cubit<LoginState> {
   LoginViewModel({required this.loginUseCase}) : super(LoginState());
 
   void clearError() {
-    emit(state.copyWith(loginState: BaseState(isLoading: false)));
+    emit(state.copyWith(loginState: BaseState<UserModel>(isLoading: false)));
   }
 
   void toggleObscurePassword() {
@@ -40,26 +41,19 @@ class LoginViewModel extends Cubit<LoginState> {
     );
 
     final response = await loginUseCase(email, password);
+    final newState = ResponseHandler.handle(response);
 
-    if (response is SuccessBaseResponse<UserModel>) {
-      emit(
-        state.copyWith(
-          loginState: state.loginState.copyWith(
-            isLoading: false,
-            data: response.data,
-            errorMessage: null,
-          ),
-        ),
+    emit(state.copyWith(loginState: newState));
+
+    //Save email in secure storage  in case of successful login and rememberMe is true
+
+    if (newState.data != null && rememberMe) {
+      SecureStorageService.write(
+        key: SecureStorageKeys.userEmail,
+        value: email,
       );
-    } else if (response is ErrorBaseResponse<UserModel>) {
-      emit(
-        state.copyWith(
-          loginState: state.loginState.copyWith(
-            isLoading: false,
-            errorMessage: response.errorMessage,
-          ),
-        ),
-      );
+    } else {
+      await SecureStorageService.delete(key: SecureStorageKeys.userEmail);
     }
   }
 
