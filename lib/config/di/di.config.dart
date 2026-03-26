@@ -59,6 +59,12 @@ import '../../features/auth/register/domain/use_cases/register_use_case.dart'
     as _i118;
 import '../../features/auth/register/presentation/view_model/register_view_model.dart'
     as _i656;
+import '../../features/questions/api/data_sources/questions_remote_data_source_impl.dart'
+    as _i1041;
+import '../../features/questions/api/questions_api_client/questions_api_client.dart'
+    as _i108;
+import '../../features/questions/data/data_sources/questions_remote_data_source_contract.dart'
+    as _i26;
 import '../dio/dio_module.dart' as _i977;
 
 extension GetItInjectableX on _i174.GetIt {
@@ -76,6 +82,14 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i226.AuthApiClient>(() => _i226.AuthApiClient(gh<_i361.Dio>()));
     gh.factory<_i453.RegisterApiClient>(
       () => _i453.RegisterApiClient(gh<_i361.Dio>()),
+    );
+    gh.factory<_i108.QuestionsApiClient>(
+      () => _i108.QuestionsApiClient(gh<_i361.Dio>()),
+    );
+    gh.factory<_i26.QuestionsRemoteDataSourceContract>(
+      () => _i1041.QuestionsRemoteDataSourceImpl(
+        questionsApiClient: gh<_i108.QuestionsApiClient>(),
+      ),
     );
     gh.factory<_i462.AuthRemoteDataSourceContract>(
       () => _i33.AuthRemoteDataSourceImpl(gh<_i226.AuthApiClient>()),
