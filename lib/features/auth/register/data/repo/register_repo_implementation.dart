@@ -18,13 +18,6 @@ class RegisterRepoImplementation implements RegisterRepoContract {
     final response = await registerRemoteSourceContract.register(
       userInfo: userInfo,
     );
-    switch (response) {
-      case SuccessBaseResponse<AuthResponse>():
-        return SuccessBaseResponse<AuthResponse>(data: response.data);
-      case ErrorBaseResponse<AuthResponse>():
-        return ErrorBaseResponse<AuthResponse>(
-          errorMessage: response.errorMessage,
-        );
-    }
+    return response;
   }
 }

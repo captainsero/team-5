@@ -1,9 +1,11 @@
-import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 import 'package:team_5_examapp/config/base_response/base_response.dart';
+import 'package:team_5_examapp/config/secure_storage/secure_storage_keys.dart';
+import 'package:team_5_examapp/config/secure_storage/secure_storage_service.dart';
 import 'package:team_5_examapp/features/auth/login_screen/data/data_sources/login_remote_data_source_contract.dart';
 import 'package:team_5_examapp/features/auth/login_screen/domain/models/user_model.dart';
 import 'package:team_5_examapp/features/auth/login_screen/domain/repo/login_repo_contract.dart';
+import 'package:team_5_examapp/features/auth/register/data/models/responses/register_response.dart';
 
 @Injectable(as: AuthRepoContract)
 class AuthRepoImpl implements AuthRepoContract {
@@ -13,19 +15,29 @@ class AuthRepoImpl implements AuthRepoContract {
 
   @override
   Future<BaseResponse<UserModel>> login(String email, String password) async {
-    try {
-      final dto = await remoteDataSource.login(email, password);
-      return SuccessBaseResponse<UserModel>(data: dto.toDomain());
-    } catch (e) {
-      String message = "Something went wrong";
+    final response = await remoteDataSource.login(
+      email: email,
+      password: password,
+    );
 
-      if (e is DioException) {
-        message = e.error?.toString() ?? e.message ?? message;
-      } else {
-        message = e.toString();
-      }
+    switch (response) {
+      case SuccessBaseResponse<AuthResponse>():
 
-      return ErrorBaseResponse<UserModel>(errorMessage: message);
+        // Save token
+        SecureStorageService.write(
+          key: SecureStorageKeys.userToken,
+          value: response.data.token,
+        );
+
+        // Map to User domain model
+        final user = UserModel.fromAuthResponse(response.data);
+
+        return SuccessBaseResponse<UserModel>(data: user);
+
+      case ErrorBaseResponse<AuthResponse>():
+        return ErrorBaseResponse<UserModel>(
+          errorMessage: response.errorMessage,
+        );
     }
   }
 }
