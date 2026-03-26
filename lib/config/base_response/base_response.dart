@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:dio/dio.dart';
 
 sealed class BaseResponse<T> {}
@@ -11,11 +10,28 @@ class SuccessBaseResponse<T> extends BaseResponse<T> {
 
 class ErrorBaseResponse<T> extends BaseResponse<T> {
   late String errorMessage;
+
   ErrorBaseResponse({Object? error, String? errorMessage}) {
-    errorMessage = _extractErrorMessage();
+    this.errorMessage =
+        _extractErrorMessage(error: error) ??
+        errorMessage ??
+        "Something went wrong. Please try again later.";
   }
 
-  static String _extractErrorMessage({Object? error}) {
+  static String? _extractErrorMessage({Object? error}) {
+    // 1️⃣ PRIORITY: Extract message from API response
+    if (error is DioException) {
+      final data = error.response?.data;
+      final messageFromApi = (data is Map<String, dynamic>)
+          ? data['message']?.toString()
+          : null;
+
+      if (messageFromApi != null && messageFromApi.isNotEmpty) {
+        return messageFromApi;
+      }
+    }
+
+    // 2️⃣ FALLBACK: DioException type-based messages
     if (error is DioException) {
       switch (error.type) {
         case DioExceptionType.connectionTimeout:
@@ -37,10 +53,12 @@ class ErrorBaseResponse<T> extends BaseResponse<T> {
       }
     }
 
+    // 3️⃣ TimeoutException fallback
     if (error is TimeoutException) {
       return "Request timed out. Please try again.";
     }
-    // Fallback for any other exception
-    return "Something went wrong. Please try again later.";
+
+    // 4️⃣ Final fallback
+    return null;
   }
 }
