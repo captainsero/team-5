@@ -26,9 +26,9 @@ class _ValidationCodeFieldState extends State<ValidationCodeField> {
     final defaultPinTheme = PinTheme(
       width: AppSize.s50,
       height: AppSize.s70,
-      textStyle: Theme.of(context).textTheme.titleSmall,
+      textStyle: Theme.of(context).textTheme.titleMedium,
       decoration: BoxDecoration(
-        color: Theme.of(context).colorScheme.onPrimary,
+        color: Theme.of(context).colorScheme.secondary,
         borderRadius: BorderRadius.circular(RadiusSize.r10),
         border: Border.all(
           color: Theme.of(context).colorScheme.secondary,
@@ -55,6 +55,7 @@ class _ValidationCodeFieldState extends State<ValidationCodeField> {
 
     final errorPinTheme = defaultPinTheme.copyDecorationWith(
       borderRadius: BorderRadius.circular(RadiusSize.r10),
+      color: Theme.of(context).colorScheme.onPrimary,
       border: Border.all(
         color: Theme.of(context).colorScheme.error,
         width: AppSize.s1,
