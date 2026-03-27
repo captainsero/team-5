@@ -7,4 +7,5 @@ abstract class AppEndPoints {
   static const String verifyResetCode = "$baseUrl/auth/verifyResetCode";
   static const String resetPassword = "$baseUrl/auth/resetPassword";
   static const String signUp ="$baseUrl/auth/signup";
+  static const String exams = "$baseUrl/exams";
 }
