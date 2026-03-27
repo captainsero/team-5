@@ -1,7 +1,7 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:team_5_examapp/config/models/exam_model.dart';
 
-part 'exam_dto.g.dart';
+part 'exams_dto.g.dart';
 
 @JsonSerializable()
 class ExamDto {
