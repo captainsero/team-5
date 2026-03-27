@@ -16,15 +16,12 @@ class QuestionsRemoteDataSourceImpl
     required String examId,
   }) async {
     try {
-      print("Start");
       final response = await questionsApiClient.getAllQuestionsOnExam(
         token: token,
         examId: examId,
       );
-      print("Success: ${response.questions}");
       return SuccessBaseResponse<List<QuestionDto>>(data: response.questions);
     } catch (e) {
-      print("Error: $e");
       return ErrorBaseResponse<List<QuestionDto>>(error: e);
     }
   }
