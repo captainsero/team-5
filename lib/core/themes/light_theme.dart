@@ -15,7 +15,6 @@ abstract class AppTheme {
       primary: AppColors.primary,
       onPrimary: AppColors.white,
       //! The secondary color can't be grey
-      
       secondary: AppColors.lightBlue,
       onSecondary: AppColors.white,
       error: AppColors.error,
@@ -115,6 +114,7 @@ abstract class AppTheme {
         fontFamily: FontConstants.interFamily,
       ),
       leadingWidth: AppSize.s25,
+      actionsPadding: EdgeInsets.only(right: AppPadding.p20),
       titleSpacing: AppSize.s0,
       elevation: 0,
     ),
