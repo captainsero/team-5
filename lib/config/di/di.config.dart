@@ -59,6 +59,16 @@ import '../../features/auth/register/domain/use_cases/register_use_case.dart'
     as _i118;
 import '../../features/auth/register/presentation/view_model/register_view_model.dart'
     as _i656;
+import '../../features/exams/api/data_sources/exams_remote_data_source_impl.dart'
+    as _i21;
+import '../../features/exams/api/exams_api_client/exams_api_client.dart'
+    as _i598;
+import '../../features/exams/data/data_sources/exams_remote_data_source_contract.dart'
+    as _i286;
+import '../../features/exams/data/repo/exams_repo_impl.dart' as _i646;
+import '../../features/exams/domain/repo/exams_repo_contract.dart' as _i827;
+import '../../features/exams/domain/use_cases/get_exams_use_case.dart' as _i854;
+import '../../features/exams/presentation/exams_view_model.dart' as _i279;
 import '../dio/dio_module.dart' as _i977;
 
 extension GetItInjectableX on _i174.GetIt {
@@ -76,6 +86,13 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i226.AuthApiClient>(() => _i226.AuthApiClient(gh<_i361.Dio>()));
     gh.factory<_i453.RegisterApiClient>(
       () => _i453.RegisterApiClient(gh<_i361.Dio>()),
+    );
+    gh.factory<_i598.ExamsApiClient>(
+      () => _i598.ExamsApiClient(gh<_i361.Dio>()),
+    );
+    gh.factory<_i286.ExamsRemoteDataSourceContract>(
+      () =>
+          _i21.ExamsRemoteDataSourceImpl(apiClient: gh<_i598.ExamsApiClient>()),
     );
     gh.factory<_i462.AuthRemoteDataSourceContract>(
       () => _i33.AuthRemoteDataSourceImpl(gh<_i226.AuthApiClient>()),
@@ -101,6 +118,14 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i952.LoginViewModel>(
       () => _i952.LoginViewModel(loginUseCase: gh<_i70.LoginUseCase>()),
     );
+    gh.factory<_i827.ExamsRepoContract>(
+      () => _i646.ExamsRepoImpl(
+        remoteDataSource: gh<_i286.ExamsRemoteDataSourceContract>(),
+      ),
+    );
+    gh.factory<_i854.GetExamsBySubjectUseCase>(
+      () => _i854.GetExamsBySubjectUseCase(repo: gh<_i827.ExamsRepoContract>()),
+    );
     gh.factory<_i65.RegisterRepoContract>(
       () => _i695.RegisterRepoImplementation(
         registerRemoteSourceContract: gh<_i821.RegisterRemoteSourceContract>(),
@@ -111,6 +136,9 @@ extension GetItInjectableX on _i174.GetIt {
         forgetPassRemoteDataSourceContract:
             gh<_i426.ForgetPassRemoteDataSourceContract>(),
       ),
+    );
+    gh.factory<_i279.ExamsViewModel>(
+      () => _i279.ExamsViewModel(useCase: gh<_i854.GetExamsBySubjectUseCase>()),
     );
     gh.factory<_i118.RegisterUseCase>(
       () => _i118.RegisterUseCase(
