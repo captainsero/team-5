@@ -5,8 +5,8 @@ import 'package:team_5_examapp/config/base_state/base_state.dart';
 import 'package:team_5_examapp/config/response_handler/response_handler.dart';
 import 'package:team_5_examapp/config/secure_storage/secure_storage_keys.dart';
 import 'package:team_5_examapp/config/secure_storage/secure_storage_service.dart';
-import 'package:team_5_examapp/features/auth/login_screen/domain/models/user_model.dart';
-import 'package:team_5_examapp/features/auth/login_screen/domain/use_cases/login_use_cases.dart';
+import 'package:team_5_examapp/features/auth/login/domain/models/user_model.dart';
+import 'package:team_5_examapp/features/auth/login/domain/use_cases/login_use_cases.dart';
 
 part 'login_state.dart';
 

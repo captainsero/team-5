@@ -3,7 +3,7 @@
 //     final registerResponse = registerResponseFromMap(jsonString);
 
 import 'package:json_annotation/json_annotation.dart';
-import 'package:team_5_examapp/features/auth/register/data/models/responses/user_response_dto.dart';
+import 'package:team_5_examapp/features/auth/auth_shared_models/responses/user_response_dto.dart';
 part 'register_response.g.dart';
 
 //RegisterResponse registerResponseFromMap(String str) => RegisterResponse.fromMap(json.decode(str));
