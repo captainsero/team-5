@@ -68,6 +68,10 @@ import '../../features/questions/data/data_sources/questions_remote_data_source_
 import '../../features/questions/data/repo/questions_repo_impl.dart' as _i92;
 import '../../features/questions/domain/repo/questions_repo_contract.dart'
     as _i46;
+import '../../features/questions/domain/use_cases/get_all_questions_on_exam_use_case.dart'
+    as _i266;
+import '../../features/questions/presentation/view_model/cubit/questions_view_model.dart'
+    as _i659;
 import '../dio/dio_module.dart' as _i977;
 
 extension GetItInjectableX on _i174.GetIt {
@@ -124,6 +128,11 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i952.LoginViewModel>(
       () => _i952.LoginViewModel(loginUseCase: gh<_i70.LoginUseCase>()),
     );
+    gh.factory<_i266.GetAllQuestionsOnExamUseCase>(
+      () => _i266.GetAllQuestionsOnExamUseCase(
+        questionsRepo: gh<_i46.QuestionsRepoContract>(),
+      ),
+    );
     gh.factory<_i65.RegisterRepoContract>(
       () => _i695.RegisterRepoImplementation(
         registerRemoteSourceContract: gh<_i821.RegisterRemoteSourceContract>(),
@@ -138,6 +147,11 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i118.RegisterUseCase>(
       () => _i118.RegisterUseCase(
         registerRepoContract: gh<_i65.RegisterRepoContract>(),
+      ),
+    );
+    gh.factory<_i659.QuestionsViewModel>(
+      () => _i659.QuestionsViewModel(
+        getAllQuestionsOnExamUseCase: gh<_i266.GetAllQuestionsOnExamUseCase>(),
       ),
     );
     gh.factory<_i146.ConfirmValidationCodeUseCase>(
