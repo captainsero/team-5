@@ -1,9 +1,9 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
-import 'package:team_5_examapp/config/base_response/base_response.dart';
 import 'package:team_5_examapp/config/base_state/base_state.dart';
-import 'package:team_5_examapp/features/auth/register/data/models/responses/register_response.dart';
-import 'package:team_5_examapp/features/auth/register/data/models/user_dto.dart';
+import 'package:team_5_examapp/config/response_handler/response_handler.dart';
+import 'package:team_5_examapp/features/auth/auth_shared_models/responses/register_response.dart';
+import 'package:team_5_examapp/features/auth/register/data/models/user_request_dto.dart';
 import 'package:team_5_examapp/features/auth/register/domain/use_cases/register_use_case.dart';
 
 part 'register_state.dart';
@@ -26,31 +26,9 @@ class RegisterViewModel extends Cubit<RegisterState> {
     );
 
     final response = await registerUseCase(userInfo: userInfo);
-    switch (response) {
-      case SuccessBaseResponse():
-        emit(
-          state.copyWith(
-            registerUserState: state.registerUserState.copyWith(
-              isLoading: false,
-              data: response.data,
-              errorMessage: null,
-            ),
-          ),
-        );
 
-        break;
-      case ErrorBaseResponse():
-        emit(
-          state.copyWith(
-            registerUserState: state.registerUserState.copyWith(
-              isLoading: false,
-              data: null,
-              errorMessage: response.errorMessage,
-            ),
-          ),
-        );
+    final newState = ResponseHandler.handle(response);
 
-        break;
-    }
+    emit(state.copyWith(registerUserState: newState));
   }
 }
