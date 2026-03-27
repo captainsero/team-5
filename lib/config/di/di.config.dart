@@ -31,19 +31,17 @@ import '../../features/auth/forget_password/domain/use_cases/reset_pass_use_case
     as _i262;
 import '../../features/auth/forget_password/presentation/view_model/cubit/forget_pass_view_model.dart'
     as _i128;
-import '../../features/auth/login_screen/api/auth_api_client/login_api_client.dart'
+import '../../features/auth/login/api/auth_api_client/login_api_client.dart'
     as _i226;
-import '../../features/auth/login_screen/api/data_sources/login_remote_data_source_impl.dart'
+import '../../features/auth/login/api/data_sources/login_remote_data_source_impl.dart'
     as _i33;
-import '../../features/auth/login_screen/data/data_sources/login_remote_data_source_contract.dart'
+import '../../features/auth/login/data/data_sources/login_remote_data_source_contract.dart'
     as _i462;
-import '../../features/auth/login_screen/data/repo/login_repo_impl.dart'
-    as _i375;
-import '../../features/auth/login_screen/domain/repo/login_repo_contract.dart'
-    as _i48;
-import '../../features/auth/login_screen/domain/use_cases/login_use_cases.dart'
+import '../../features/auth/login/data/repo/login_repo_impl.dart' as _i375;
+import '../../features/auth/login/domain/repo/login_repo_contract.dart' as _i48;
+import '../../features/auth/login/domain/use_cases/login_use_cases.dart'
     as _i70;
-import '../../features/auth/login_screen/presentations/view_model/cubit/login_view_model.dart'
+import '../../features/auth/login/presentations/view_model/cubit/login_view_model.dart'
     as _i952;
 import '../../features/auth/register/api/data_sources/register_remote_source_implementation.dart'
     as _i1056;

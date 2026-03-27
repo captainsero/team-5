@@ -1,10 +1,10 @@
 import 'dart:async';
 import 'package:injectable/injectable.dart';
 import 'package:team_5_examapp/config/base_response/base_response.dart';
-import 'package:team_5_examapp/features/auth/login_screen/api/auth_api_client/login_api_client.dart';
-import 'package:team_5_examapp/features/auth/login_screen/data/data_sources/login_remote_data_source_contract.dart';
-import 'package:team_5_examapp/features/auth/login_screen/data/models/login_request_model.dart';
-import 'package:team_5_examapp/features/auth/register/data/models/responses/register_response.dart';
+import 'package:team_5_examapp/features/auth/login/api/auth_api_client/login_api_client.dart';
+import 'package:team_5_examapp/features/auth/login/data/data_sources/login_remote_data_source_contract.dart';
+import 'package:team_5_examapp/features/auth/login/data/models/login_request_model.dart';
+import 'package:team_5_examapp/features/auth/auth_shared_models/responses/register_response.dart';
 
 @Injectable(as: AuthRemoteDataSourceContract)
 class AuthRemoteDataSourceImpl implements AuthRemoteDataSourceContract {

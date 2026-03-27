@@ -2,7 +2,7 @@ import 'package:go_router/go_router.dart';
 import 'package:team_5_examapp/features/auth/forget_password/presentation/screens/forget_pass_view.dart';
 import 'package:team_5_examapp/features/auth/forget_password/presentation/screens/reset_pass_view.dart';
 import 'package:team_5_examapp/features/auth/forget_password/presentation/screens/validation_code_view.dart';
-import 'package:team_5_examapp/features/auth/login_screen/presentations/screens/login_screen.dart';
+import 'package:team_5_examapp/features/auth/login/presentations/screens/login_screen.dart';
 import 'package:team_5_examapp/features/auth/register/presentation/screens/register_screen.dart';
 
 class Routes {
@@ -18,11 +18,11 @@ class AppRouter {
   static final GoRouter router = GoRouter(
     initialLocation: Routes.loginRoute,
     routes: [
-        GoRoute(
+      GoRoute(
         path: Routes.registerRoute,
         name: Routes.registerRoute,
         builder: (_, _) => SignUpScreen(),
-        ),
+      ),
       GoRoute(
         path: Routes.loginRoute,
         name: Routes.loginRoute,
