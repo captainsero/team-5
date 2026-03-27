@@ -1,20 +1,20 @@
 import 'package:json_annotation/json_annotation.dart';
 
-part 'answer_model.g.dart';
+part 'answer_dto.g.dart';
 
 @JsonSerializable()
-class AnswerModel {
+class AnswerDto {
     @JsonKey(name: "answer")
     final String answer;
     @JsonKey(name: "key")
     final String key;
 
-    AnswerModel({
+    AnswerDto({
         required this.answer,
         required this.key,
     });
 
-    factory AnswerModel.fromJson(Map<String, dynamic> json) => _$AnswerModelFromJson(json);
+    factory AnswerDto.fromJson(Map<String, dynamic> json) => _$AnswerDtoFromJson(json);
 
-    Map<String, dynamic> toJson() => _$AnswerModelToJson(this);
+    Map<String, dynamic> toJson() => _$AnswerDtoToJson(this);
 }

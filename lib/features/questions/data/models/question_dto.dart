@@ -1,17 +1,18 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:team_5_examapp/config/models/exam_model.dart';
-import 'package:team_5_examapp/features/questions/data/models/answer_model.dart';
+import 'package:team_5_examapp/features/questions/data/models/answer_dto.dart';
+import 'package:team_5_examapp/features/questions/domain/entities/question_model.dart';
 
-part 'question_model.g.dart';
+part 'question_dto.g.dart';
 
 @JsonSerializable()
-class QuestionModel {
+class QuestionDto {
   @JsonKey(name: "_id")
   final String id;
   @JsonKey(name: "question")
   final String question;
   @JsonKey(name: "answers")
-  final List<AnswerModel> answers;
+  final List<AnswerDto> answers;
   @JsonKey(name: "type")
   final String type;
   @JsonKey(name: "correct")
@@ -23,7 +24,7 @@ class QuestionModel {
   @JsonKey(name: "createdAt")
   final DateTime createdAt;
 
-  QuestionModel({
+  QuestionDto({
     required this.id,
     required this.question,
     required this.answers,
@@ -34,8 +35,21 @@ class QuestionModel {
     required this.createdAt,
   });
 
-  factory QuestionModel.fromJson(Map<String, dynamic> json) =>
-      _$QuestionModelFromJson(json);
+  factory QuestionDto.fromJson(Map<String, dynamic> json) =>
+      _$QuestionDtoFromJson(json);
 
-  Map<String, dynamic> toJson() => _$QuestionModelToJson(this);
+  Map<String, dynamic> toJson() => _$QuestionDtoToJson(this);
+
+  QuestionModel toDomain() => QuestionModel(
+    false, // IsAnswerd (bool)
+    null, // userAnswer
+    id: id,
+    question: question,
+    answers: answers,
+    type: type,
+    correct: correct,
+    subject: subject,
+    exam: exam,
+    createdAt: createdAt,
+  );
 }

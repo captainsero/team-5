@@ -65,6 +65,9 @@ import '../../features/questions/api/questions_api_client/questions_api_client.d
     as _i108;
 import '../../features/questions/data/data_sources/questions_remote_data_source_contract.dart'
     as _i26;
+import '../../features/questions/data/repo/questions_repo_impl.dart' as _i92;
+import '../../features/questions/domain/repo/questions_repo_contract.dart'
+    as _i46;
 import '../dio/dio_module.dart' as _i977;
 
 extension GetItInjectableX on _i174.GetIt {
@@ -107,6 +110,12 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i48.AuthRepoContract>(
       () => _i375.AuthRepoImpl(
         remoteDataSource: gh<_i462.AuthRemoteDataSourceContract>(),
+      ),
+    );
+    gh.factory<_i46.QuestionsRepoContract>(
+      () => _i92.QuestionsRepoImpl(
+        questionsRemoteDataSourceContract:
+            gh<_i26.QuestionsRemoteDataSourceContract>(),
       ),
     );
     gh.factory<_i70.LoginUseCase>(

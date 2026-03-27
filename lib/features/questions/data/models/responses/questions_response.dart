@@ -1,5 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:team_5_examapp/features/questions/data/models/question_model.dart';
+import 'package:team_5_examapp/features/questions/data/models/question_dto.dart';
 
 part 'questions_response.g.dart';
 
@@ -8,7 +8,7 @@ class QuestionsResponse {
   @JsonKey(name: "message")
   final String message;
   @JsonKey(name: "questions")
-  final List<QuestionModel> questions;
+  final List<QuestionDto> questions;
 
   QuestionsResponse({required this.message, required this.questions});
 
