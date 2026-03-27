@@ -48,7 +48,7 @@ abstract class AppTheme {
       ),
       headlineMedium: getMediumStyle(
         color: AppColors.black,
-        fontSize: FontSize.s18,
+        fontSize: FontSize.s22,
         fontFamily: FontConstants.interFamily,
       ),
       headlineSmall: getRegularStyle(
