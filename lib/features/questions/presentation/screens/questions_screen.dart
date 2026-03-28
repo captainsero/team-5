@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:team_5_examapp/core/constants/assets_manager.dart';
 import 'package:team_5_examapp/core/constants/color_manager.dart';
+import 'package:team_5_examapp/core/constants/values_manager.dart';
+import 'package:team_5_examapp/features/questions/presentation/widgets/question_progress_bar.dart';
 
 class QuestionsScreen extends StatefulWidget {
   const QuestionsScreen({super.key});
@@ -29,6 +31,15 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
             ).textTheme.headlineMedium!.copyWith(color: AppColors.sucess),
           ),
         ],
+      ),
+      body: Padding(
+        padding: EdgeInsets.symmetric(horizontal: AppPadding.p20),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            QuestionProgressBar(currentQuestion: 10, totalQuestions: 20),
+          ],
+        ),
       ),
     );
   }
