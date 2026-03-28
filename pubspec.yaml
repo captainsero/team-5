@@ -29,7 +29,6 @@ environment:
 # versions available, run `flutter pub outdated`.
 dependencies:
   bloc: ^9.2.0
-  csv_localizations: ^2.3.0
   dio: ^5.9.2
   flutter:
     sdk: flutter
@@ -45,6 +44,8 @@ dependencies:
   pinput: ^6.0.2
   retrofit: ^4.9.2
   flutter_bloc: ^9.1.1
+  csv_localizations: ^2.3.0
+
   
   
 
