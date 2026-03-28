@@ -4,6 +4,7 @@ import 'package:team_5_examapp/core/constants/assets_manager.dart';
 import 'package:team_5_examapp/core/constants/color_manager.dart';
 import 'package:team_5_examapp/core/constants/values_manager.dart';
 import 'package:team_5_examapp/features/questions/presentation/widgets/question_progress_bar.dart';
+import 'package:team_5_examapp/features/questions/presentation/widgets/question_widget.dart';
 
 class QuestionsScreen extends StatefulWidget {
   const QuestionsScreen({super.key});
@@ -37,7 +38,10 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
+            SizedBox(height: AppSize.s20),
             QuestionProgressBar(currentQuestion: 10, totalQuestions: 20),
+            SizedBox(height: AppSize.s20),
+            QuestionWidget(isRadio: false),
           ],
         ),
       ),
