@@ -13,5 +13,7 @@ sealed class AppColors {
   static Color lightRed = const Color(0xffF8D2D2);
   static Color placeholder = const Color(0xffA6A6A6);
   static Color white = const Color(0xffF9F9F9);
+  static Color selectedAnswerBg = const Color(0xffCCD7EB);
+  static Color unselectedAnswerBg = const Color(0xffEDEFF3);
   static Color transparent = const Color.fromRGBO(0, 0, 0, 0);
 }
