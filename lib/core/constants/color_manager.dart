@@ -5,6 +5,7 @@ sealed class AppColors {
   static Color lightBlue = const Color(0xffDFE7F7);
   static Color grey = const Color(0xff535353);
   static Color lightGrey = const Color(0xff878787);
+  static Color trackGrey = const Color(0xFFCFCFCF);
   static Color error = const Color(0xffCC1010);
   static Color black = const Color(0xff0F0F0F);
   static Color sucess = const Color(0xff11CE19);

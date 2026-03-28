@@ -183,5 +183,11 @@ abstract class AppTheme {
 
       contentPadding: EdgeInsets.all(AppPadding.p16),
     ),
+
+    progressIndicatorTheme: ProgressIndicatorThemeData(
+      color: AppColors.primary, // progress color
+      linearTrackColor: AppColors.trackGrey, // background track
+      borderRadius: BorderRadius.circular(RadiusSize.r8), // rounded edges
+    ),
   );
 }
