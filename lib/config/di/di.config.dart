@@ -68,7 +68,8 @@ import '../../features/exams/data/data_sources/exams_remote_data_source_contract
 import '../../features/exams/data/repo/exams_repo_impl.dart' as _i646;
 import '../../features/exams/domain/repo/exams_repo_contract.dart' as _i827;
 import '../../features/exams/domain/use_cases/get_exams_use_case.dart' as _i854;
-import '../../features/exams/presentation/exams_view_model.dart' as _i279;
+import '../../features/exams/presentation/view_model/exams_view_model.dart'
+    as _i66;
 import '../dio/dio_module.dart' as _i977;
 
 extension GetItInjectableX on _i174.GetIt {
@@ -137,8 +138,8 @@ extension GetItInjectableX on _i174.GetIt {
             gh<_i426.ForgetPassRemoteDataSourceContract>(),
       ),
     );
-    gh.factory<_i279.ExamsViewModel>(
-      () => _i279.ExamsViewModel(useCase: gh<_i854.GetExamsBySubjectUseCase>()),
+    gh.factory<_i66.ExamsViewModel>(
+      () => _i66.ExamsViewModel(useCase: gh<_i854.GetExamsBySubjectUseCase>()),
     );
     gh.factory<_i118.RegisterUseCase>(
       () => _i118.RegisterUseCase(
