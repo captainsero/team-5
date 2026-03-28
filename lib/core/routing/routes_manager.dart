@@ -12,6 +12,8 @@ class Routes {
   static const String validationCodeRoute = "/validationCode";
   static const String resetPassRoute = "/resetPass";
   static const String registerRoute = "/register";
+  static const String getExamsRoute = '/exams';
+
 }
 
 class AppRouter {
@@ -39,6 +41,10 @@ class AppRouter {
         builder: (_, _) => ValidationCodeView(),
       ),
       GoRoute(
+        path: Routes.resetPassRoute,
+        name: Routes.resetPassRoute,
+        builder: (_, _) => ResetPassView(),
+      ),GoRoute(
         path: Routes.resetPassRoute,
         name: Routes.resetPassRoute,
         builder: (_, _) => ResetPassView(),

@@ -17,7 +17,7 @@ abstract class ExamsApiClient {
 
   @GET(AppEndPoints.exams)
   Future<ExamsResponse> getExamsBySubject(
-      @Header('Authorization') String token,
+      @Header('token') String token,
       @Query('subjectId') String subjectId,
       );
 }
