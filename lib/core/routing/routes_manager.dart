@@ -13,6 +13,7 @@ class Routes {
   static const String resetPassRoute = "/resetPass";
   static const String registerRoute = "/register";
   static const String getExamsRoute = '/exams';
+  static const String startExam = '/startExam';
 
 }
 
