@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:team_5_examapp/core/constants/font_manager.dart';
 import 'package:team_5_examapp/core/constants/values_manager.dart';
+import 'package:team_5_examapp/features/questions/presentation/widgets/answer_number_circle_avatar.dart';
 import 'package:team_5_examapp/features/questions/presentation/widgets/score_bar.dart';
 
 class ScoreScreen extends StatefulWidget {
@@ -24,10 +26,60 @@ class _ScoreScreenState extends State<ScoreScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Align(alignment: Alignment.centerLeft, child: Text("Your Score")),
+            Align(
+              alignment: Alignment.centerLeft,
+              child: Text(
+                "Your Score",
+                style: Theme.of(
+                  context,
+                ).textTheme.titleMedium!.copyWith(fontSize: FontSize.s18),
+              ),
+            ),
 
-            ScoreBar(value: 60),
-            Spacer(),
+            SizedBox(height: AppSize.s20),
+
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                ScoreBar(value: 60),
+                Spacer(flex: 1),
+                Column(
+                  spacing: AppSize.s10,
+                  children: [
+                    Text(
+                      "Correct",
+                      style: Theme.of(context).textTheme.titleMedium!.copyWith(
+                        color: Theme.of(context).colorScheme.primary,
+                      ),
+                    ),
+
+                    Text(
+                      "Incorrect",
+                      style: Theme.of(context).textTheme.titleMedium!.copyWith(
+                        color: Theme.of(context).colorScheme.error,
+                      ),
+                    ),
+                  ],
+                ),
+                Spacer(flex: 2),
+
+                Column(
+                  spacing: AppSize.s10,
+                  children: [
+                    AnswerNumberCircleAvatar(
+                      color: Theme.of(context).colorScheme.primary,
+                      number: 18,
+                    ),
+
+                    AnswerNumberCircleAvatar(
+                      color: Theme.of(context).colorScheme.error,
+                      number: 2,
+                    ),
+                  ],
+                ),
+              ],
+            ),
+            Spacer(flex: 1),
 
             SizedBox(
               width: double.infinity,
@@ -58,7 +110,7 @@ class _ScoreScreenState extends State<ScoreScreen> {
                 child: Text("Start again"),
               ),
             ),
-            Spacer(),
+            Spacer(flex: 2),
           ],
         ),
       ),
