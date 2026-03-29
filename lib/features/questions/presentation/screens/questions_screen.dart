@@ -5,6 +5,7 @@ import 'package:team_5_examapp/core/constants/color_manager.dart';
 import 'package:team_5_examapp/core/constants/values_manager.dart';
 import 'package:team_5_examapp/features/questions/presentation/widgets/question_progress_bar.dart';
 import 'package:team_5_examapp/features/questions/presentation/widgets/question_widget.dart';
+import 'package:team_5_examapp/features/questions/presentation/widgets/time_out_dialog.dart';
 
 class QuestionsScreen extends StatefulWidget {
   const QuestionsScreen({super.key});
@@ -15,6 +16,17 @@ class QuestionsScreen extends StatefulWidget {
 
 class _QuestionsScreenState extends State<QuestionsScreen> {
   bool isLast = false;
+
+  void showTimeOutDialog(BuildContext context) async {
+    await showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (context) {
+        return TimeOutDialog();
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -44,7 +56,7 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
 
             QuestionWidget(isRadio: false),
 
-            SizedBox(height: AppSize.s20),
+            SizedBox(height: AppSize.s50),
             Row(
               crossAxisAlignment: CrossAxisAlignment.center,
               spacing: AppSize.s16,

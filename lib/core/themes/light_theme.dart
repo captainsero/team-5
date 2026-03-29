@@ -42,7 +42,7 @@ abstract class AppTheme {
 
       headlineLarge: getSemiBoldStyle(
         color: AppColors.black,
-        fontSize: FontSize.s25,
+        fontSize: FontSize.s24,
         fontFamily: FontConstants.interFamily,
       ),
       headlineMedium: getMediumStyle(
