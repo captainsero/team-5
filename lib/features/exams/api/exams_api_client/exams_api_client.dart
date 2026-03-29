@@ -1,4 +1,3 @@
-
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 import 'package:retrofit/error_logger.dart';
@@ -17,7 +16,7 @@ abstract class ExamsApiClient {
 
   @GET(AppEndPoints.exams)
   Future<ExamsResponse> getExamsBySubject(
-      @Header('token') String token,
-      @Query('subjectId') String subjectId,
-      );
+    @Header('token') String token,
+    @Query('subjectId') String subjectId,
+  );
 }
