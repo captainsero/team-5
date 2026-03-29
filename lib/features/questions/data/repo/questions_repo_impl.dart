@@ -2,6 +2,8 @@ import 'package:injectable/injectable.dart';
 import 'package:team_5_examapp/config/base_response/base_response.dart';
 import 'package:team_5_examapp/features/questions/data/data_sources/questions_remote_data_source_contract.dart';
 import 'package:team_5_examapp/features/questions/data/models/question_dto.dart';
+import 'package:team_5_examapp/features/questions/data/models/responses/check_question_request.dart';
+import 'package:team_5_examapp/features/questions/data/models/responses/check_question_response.dart';
 import 'package:team_5_examapp/features/questions/domain/entities/question_model.dart';
 import 'package:team_5_examapp/features/questions/domain/repo/questions_repo_contract.dart';
 
@@ -24,6 +26,26 @@ class QuestionsRepoImpl implements QuestionsRepoContract {
         );
       case ErrorBaseResponse<List<QuestionDto>>():
         return ErrorBaseResponse<List<QuestionModel>>(
+          errorMessage: response.errorMessage,
+        );
+    }
+  }
+
+  @override
+  Future<BaseResponse<CheckQuestionResponse>> checkQuestions({
+    required CheckQuestionRequest checkQuestionRequest,
+    required String token,
+  }) async {
+    final response = await questionsRemoteDataSourceContract.checkQuestions(
+      checkQuestionRequest: checkQuestionRequest,
+      token: token,
+    );
+
+    switch (response) {
+      case SuccessBaseResponse<CheckQuestionResponse>():
+        return SuccessBaseResponse<CheckQuestionResponse>(data: response.data);
+      case ErrorBaseResponse<CheckQuestionResponse>():
+        return ErrorBaseResponse<CheckQuestionResponse>(
           errorMessage: response.errorMessage,
         );
     }
