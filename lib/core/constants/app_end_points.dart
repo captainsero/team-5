@@ -6,4 +6,5 @@ abstract class AppEndPoints {
   static const String signin = "$baseUrl/auth/signin";
 
   static const String questions = "$baseUrl/questions";
+  static const String checkQuestions = "$baseUrl/questions/check";
 }
