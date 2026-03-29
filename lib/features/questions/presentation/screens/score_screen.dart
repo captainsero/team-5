@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:team_5_examapp/core/constants/values_manager.dart';
+import 'package:team_5_examapp/features/questions/presentation/widgets/score_bar.dart';
 
 class ScoreScreen extends StatefulWidget {
   const ScoreScreen({super.key});
@@ -25,8 +26,7 @@ class _ScoreScreenState extends State<ScoreScreen> {
           children: [
             Align(alignment: Alignment.centerLeft, child: Text("Your Score")),
 
-            SizedBox(height: AppSize.s100),
-
+            ScoreBar(value: 60),
             Spacer(),
 
             SizedBox(
