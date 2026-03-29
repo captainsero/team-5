@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:team_5_examapp/core/constants/assets_manager.dart';
 import 'package:team_5_examapp/core/constants/values_manager.dart';
+import 'package:team_5_examapp/core/routing/routes_manager.dart';
 
 class TimeOutDialog extends StatelessWidget {
   const TimeOutDialog({super.key});
@@ -30,7 +31,7 @@ class TimeOutDialog extends StatelessWidget {
           width: double.infinity,
           child: ElevatedButton(
             onPressed: () {
-              context.pop();
+              context.go(Routes.scoreRoute);
             },
             child: Text('View Score'),
           ),
