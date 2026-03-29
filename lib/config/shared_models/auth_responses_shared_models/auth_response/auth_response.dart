@@ -1,14 +1,7 @@
-// To parse this JSON data, do
-//
-//     final registerResponse = registerResponseFromMap(jsonString);
-
 import 'package:json_annotation/json_annotation.dart';
-import 'package:team_5_examapp/features/auth/register/data/models/responses/user_response_dto.dart';
-part 'register_response.g.dart';
+import 'package:team_5_examapp/config/shared_models/auth_responses_shared_models/user_response_dto.dart';
 
-//RegisterResponse registerResponseFromMap(String str) => RegisterResponse.fromMap(json.decode(str));
-
-//String registerResponseToMap(RegisterResponse data) => json.encode(data.toMap());
+part 'auth_response.g.dart';
 
 @JsonSerializable()
 class AuthResponse {
