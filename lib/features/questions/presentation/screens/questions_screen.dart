@@ -14,6 +14,7 @@ class QuestionsScreen extends StatefulWidget {
 }
 
 class _QuestionsScreenState extends State<QuestionsScreen> {
+  bool isLast = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -37,11 +38,48 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
         padding: EdgeInsets.symmetric(horizontal: AppPadding.p20),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
+          spacing: AppSize.s20,
           children: [
-            SizedBox(height: AppSize.s20),
             QuestionProgressBar(currentQuestion: 10, totalQuestions: 20),
-            SizedBox(height: AppSize.s20),
+
             QuestionWidget(isRadio: false),
+
+            SizedBox(height: AppSize.s20),
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              spacing: AppSize.s16,
+              children: [
+                Expanded(
+                  child: ElevatedButton(
+                    onPressed: null,
+
+                    style: ElevatedButton.styleFrom().copyWith(
+                      backgroundColor: WidgetStatePropertyAll(
+                        Theme.of(context).colorScheme.onPrimary,
+                      ),
+
+                      side: WidgetStatePropertyAll(
+                        BorderSide(
+                          color: Theme.of(context).colorScheme.primary,
+                        ),
+                      ),
+                      foregroundColor: WidgetStatePropertyAll(
+                        Theme.of(context).colorScheme.primary,
+                      ),
+                    ),
+
+                    child: Text("Back"),
+                  ),
+                ),
+
+                Expanded(
+                  child: ElevatedButton(
+                    onPressed: () {},
+                    child: Text(isLast ? "Finish" : "Next"),
+                  ),
+                ),
+              ],
+            ),
           ],
         ),
       ),
