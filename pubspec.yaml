@@ -45,6 +45,7 @@ dependencies:
   json_annotation: ^4.11.0
   pinput: ^6.0.2
   retrofit: ^4.9.2
+  syncfusion_flutter_gauges: ^33.1.45
 
 dev_dependencies:
   build_runner: ^2.12.2
