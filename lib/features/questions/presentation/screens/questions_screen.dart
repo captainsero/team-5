@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:team_5_examapp/config/di/di.dart';
 import 'package:team_5_examapp/core/constants/assets_manager.dart';
 import 'package:team_5_examapp/core/constants/color_manager.dart';
 import 'package:team_5_examapp/core/constants/values_manager.dart';
+import 'package:team_5_examapp/core/routing/routes_manager.dart';
+import 'package:team_5_examapp/features/questions/presentation/view_model/cubit/questions_view_model.dart';
 import 'package:team_5_examapp/features/questions/presentation/widgets/question_progress_bar.dart';
 import 'package:team_5_examapp/features/questions/presentation/widgets/question_widget.dart';
 import 'package:team_5_examapp/features/questions/presentation/widgets/time_out_dialog.dart';
@@ -15,7 +19,7 @@ class QuestionsScreen extends StatefulWidget {
 }
 
 class _QuestionsScreenState extends State<QuestionsScreen> {
-  bool isLast = false;
+  final QuestionsViewModel viewModel = getIt.get<QuestionsViewModel>();
 
   void showTimeOutDialog(BuildContext context) async {
     await showDialog(
@@ -29,71 +33,133 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        leading: IconButton(
-          onPressed: () => context.pop(),
-          icon: Icon(Icons.arrow_back_ios),
-        ),
-        title: Text("Exam"),
-        actions: [
-          Image.asset(ImageAssets.clock),
-          Text(
-            "30:00",
-            style: Theme.of(
-              context,
-            ).textTheme.headlineMedium!.copyWith(color: AppColors.sucess),
-          ),
-        ],
-      ),
-      body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: AppPadding.p20),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          spacing: AppSize.s20,
-          children: [
-            QuestionProgressBar(currentQuestion: 10, totalQuestions: 20),
+    return BlocProvider(
+      create: (context) =>
+          viewModel..getAllQuestionsOnExam(examId: '670070a830a3c3c1944a9c63'),
+      child: BlocBuilder<QuestionsViewModel, QuestionsState>(
+        buildWhen: (previous, current) {
+          return previous.getAllQuestionsOnExamState !=
+                  current.getAllQuestionsOnExamState ||
+              previous.currentQuestion != current.currentQuestion ||
+              previous.currentAnswer != current.currentAnswer;
+        },
+        builder: (context, state) {
+          final currentQuestion = state.currentQuestion;
+          final isLast = state.isLast;
+          final questions = state.getAllQuestionsOnExamState.data;
+          final isLoading = state.getAllQuestionsOnExamState.isLoading;
+          final errorMassege = state.getAllQuestionsOnExamState.errorMessage;
+          bool isRadio = true;
 
-            QuestionWidget(isRadio: false),
-
-            SizedBox(height: AppSize.s50),
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              spacing: AppSize.s16,
-              children: [
-                Expanded(
-                  child: ElevatedButton(
-                    onPressed: null,
-
-                    style: ElevatedButton.styleFrom().copyWith(
-                      backgroundColor: WidgetStatePropertyAll(
-                        Theme.of(context).colorScheme.onPrimary,
-                      ),
-
-                      side: WidgetStatePropertyAll(
-                        BorderSide(
-                          color: Theme.of(context).colorScheme.primary,
-                        ),
-                      ),
-                      foregroundColor: WidgetStatePropertyAll(
-                        Theme.of(context).colorScheme.primary,
-                      ),
-                    ),
-
-                    child: Text("Back"),
-                  ),
+          if (!isLoading && errorMassege == null && questions != null) {
+            isRadio = questions[currentQuestion].type == 'single_choice';
+          }
+          if (!isLoading && questions == null && errorMassege != null) {
+            return Scaffold(
+              body: Center(
+                child: Text(
+                  errorMassege,
+                  style: Theme.of(context).textTheme.displaySmall,
                 ),
+              ),
+            );
+          }
 
-                Expanded(
-                  child: ElevatedButton(
-                    onPressed: () {},
-                    child: Text(isLast ? "Finish" : "Next"),
-                  ),
+          return Scaffold(
+            appBar: AppBar(
+              leading: IconButton(
+                onPressed: () => context.pop(),
+                icon: Icon(Icons.arrow_back_ios),
+              ),
+              title: Text("Exam"),
+              actions: [
+                Image.asset(ImageAssets.clock),
+                Text(
+                  isLoading ? '--:--' : questions![0].exam.duration.toString(),
+                  style: Theme.of(
+                    context,
+                  ).textTheme.headlineMedium!.copyWith(color: AppColors.sucess),
                 ),
               ],
             ),
-          ],
-        ),
+            body: Padding(
+              padding: EdgeInsets.symmetric(horizontal: AppPadding.p20),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                spacing: AppSize.s20,
+                children: [
+                  QuestionProgressBar(
+                    currentQuestion: currentQuestion + 1,
+                    totalQuestions: isLoading ? 40 : questions!.length,
+                  ),
+
+                  QuestionWidget(
+                    isRadio: isRadio,
+                    answers: isLoading
+                        ? []
+                        : questions![currentQuestion].answers,
+                    question: isLoading
+                        ? ''
+                        : questions![currentQuestion].question,
+                    questionId: isLoading ? '' : questions![currentQuestion].id,
+
+                  ),
+
+                  SizedBox(height: AppSize.s50),
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    spacing: AppSize.s16,
+                    children: [
+                      Expanded(
+                        child: ElevatedButton(
+                          onPressed: currentQuestion == 0
+                              ? null
+                              : () {
+                                  context
+                                      .read<QuestionsViewModel>()
+                                      .previousQuestion(questions!);
+                                },
+
+                          style: ElevatedButton.styleFrom().copyWith(
+                            backgroundColor: WidgetStatePropertyAll(
+                              Theme.of(context).colorScheme.onPrimary,
+                            ),
+
+                            side: WidgetStatePropertyAll(
+                              BorderSide(
+                                color: Theme.of(context).colorScheme.primary,
+                              ),
+                            ),
+                            foregroundColor: WidgetStatePropertyAll(
+                              Theme.of(context).colorScheme.primary,
+                            ),
+                          ),
+
+                          child: Text("Back"),
+                        ),
+                      ),
+
+                      Expanded(
+                        child: ElevatedButton(
+                          onPressed: () {
+                            context.read<QuestionsViewModel>().nextQuestion(
+                              questions!,
+                            );
+
+                            if (isLast) {
+                              context.push(Routes.scoreRoute);
+                            }
+                          },
+                          child: Text(isLast ? "Finish" : "Next"),
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          );
+        },
       ),
     );
   }
