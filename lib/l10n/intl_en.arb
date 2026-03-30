@@ -31,5 +31,18 @@
     "enterPassword": "Enter your password",
     "rememberMe": "Remember me",
     "dontHaveAccount": "Don't have an account?",
-    "signUp": "Sign up"
+    "signUp": "Sign up",
+
+    "noExamsFound": "No Exams Found",
+    "highLevel": "High Level",
+    "from": "From: 1.00",
+    "to": "To: 6.00",
+    "questions": "Questions",
+    "minutes": "Minutes",
+    "start": "Start",
+    "instructions": "Instructions",
+    "separator": "|",
+    "lorem": "• Lorem ipsum dolor sit amet consectetur."
+
+
 }

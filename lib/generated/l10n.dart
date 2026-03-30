@@ -303,6 +303,71 @@ class S {
   String get signUp {
     return Intl.message('Sign up', name: 'signUp', desc: '', args: []);
   }
+
+  /// `No Exams Found`
+  String get noExamsFound {
+    return Intl.message(
+      'No Exams Found',
+      name: 'noExamsFound',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `High Level`
+  String get highLevel {
+    return Intl.message('High Level', name: 'highLevel', desc: '', args: []);
+  }
+
+  /// `From: 1.00`
+  String get from {
+    return Intl.message('From: 1.00', name: 'from', desc: '', args: []);
+  }
+
+  /// `To: 6.00`
+  String get to {
+    return Intl.message('To: 6.00', name: 'to', desc: '', args: []);
+  }
+
+  /// `Questions`
+  String get questions {
+    return Intl.message('Questions', name: 'questions', desc: '', args: []);
+  }
+
+  /// `Minutes`
+  String get minutes {
+    return Intl.message('Minutes', name: 'minutes', desc: '', args: []);
+  }
+
+  /// `Start`
+  String get start {
+    return Intl.message('Start', name: 'start', desc: '', args: []);
+  }
+
+  /// `Instructions`
+  String get instructions {
+    return Intl.message(
+      'Instructions',
+      name: 'instructions',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `|`
+  String get separator {
+    return Intl.message('|', name: 'separator', desc: '', args: []);
+  }
+
+  /// `• Lorem ipsum dolor sit amet consectetur.`
+  String get lorem {
+    return Intl.message(
+      '• Lorem ipsum dolor sit amet consectetur.',
+      name: 'lorem',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

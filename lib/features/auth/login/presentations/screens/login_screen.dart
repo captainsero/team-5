@@ -25,10 +25,6 @@ class _LoginScreenState extends State<LoginScreen> {
 
   final loginViewModel = getIt.get<LoginViewModel>();
 
-  /// ✅ CHANGE 1:
-  /// نقل loadSavedEmail من build إلى initState
-  /// لأن build بيتنفذ مرات كثيرة وده كان bug
-
   @override
   void initState() {
     super.initState();
@@ -41,9 +37,6 @@ class _LoginScreenState extends State<LoginScreen> {
       }
     });
   }
-
-  /// ✅ CHANGE 2:
-  /// Dispose controllers لتجنب memory leak
 
   @override
   void dispose() {

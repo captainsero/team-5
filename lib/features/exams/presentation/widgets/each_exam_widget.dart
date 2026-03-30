@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:team_5_examapp/config/models/exam_model.dart';
+import 'package:team_5_examapp/core/constants/assets_manager.dart';
 import 'package:team_5_examapp/core/constants/color_manager.dart';
+import 'package:team_5_examapp/core/constants/values_manager.dart';
 import 'package:team_5_examapp/features/exams/presentation/widgets/start_exam_widget.dart';
+import 'package:team_5_examapp/generated/l10n.dart';
 
 class EachExamWidget extends StatelessWidget {
   final ExamModel exam;
@@ -19,15 +22,18 @@ class EachExamWidget extends StatelessWidget {
       },
       child: Container(
         width: double.infinity,
-        margin: const EdgeInsets.only(bottom: 16),
-        padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+        margin: EdgeInsets.only(bottom: AppSize.s16),
+        padding: EdgeInsets.symmetric(
+          horizontal: AppSize.s24,
+          vertical: AppSize.s16,
+        ),
         decoration: BoxDecoration(
           color: Colors.white,
-          borderRadius: BorderRadius.circular(20),
+          borderRadius: BorderRadius.circular(RadiusSize.r20),
           boxShadow: [
             BoxShadow(
               color: Colors.grey.withOpacity(0.3),
-              blurRadius: 5,
+              blurRadius: RadiusSize.r5,
               offset: const Offset(0, 3),
             ),
           ],
@@ -35,37 +41,37 @@ class EachExamWidget extends StatelessWidget {
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Image.asset("assets/images/Profit.png"),
-            const SizedBox(width: 20),
+            Image.asset(ImageAssets.profit),
+             SizedBox(width: AppSize.s20),
 
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    "High Level",
+                    S.of(context).highLevel,
                     style: Theme.of(context).textTheme.headlineMedium,
                   ),
 
                   Text(
-                    "${exam.numberOfQuestions} Questions",
+                    "${exam.numberOfQuestions} ${S.of(context).questions}",
                     style: Theme.of(
                       context,
                     ).textTheme.bodySmall?.copyWith(color: AppColors.grey),
                   ),
 
-                  const SizedBox(height: 10),
+                   SizedBox(height: AppSize.s10),
 
                   Row(
                     children: [
                       Text(
-                        "From: 1.00",
+                        S.of(context).from,
                         style: Theme.of(context).textTheme.bodyMedium,
                       ),
-                      SizedBox(width: 5),
+                      SizedBox(width: AppSize.s5),
 
                       Text(
-                        "To: 6.00",
+                        S.of(context).to,
                         style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                           fontWeight: FontWeight.bold,
                         ),
@@ -77,7 +83,7 @@ class EachExamWidget extends StatelessWidget {
             ),
 
             Text(
-              "${exam.duration} minutes",
+              "${exam.duration} ${S.of(context).minutes}",
               style: Theme.of(
                 context,
               ).textTheme.bodyMedium?.copyWith(color: AppColors.primary),

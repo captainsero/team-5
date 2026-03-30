@@ -55,9 +55,17 @@ class MessageLookup extends MessageLookupByLibrary {
     "forgetPasswordDis": MessageLookupByLibrary.simpleMessage(
       "Please enter your email associated to your account",
     ),
+    "from": MessageLookupByLibrary.simpleMessage("From: 1.00"),
+    "highLevel": MessageLookupByLibrary.simpleMessage("High Level"),
+    "instructions": MessageLookupByLibrary.simpleMessage("Instructions"),
     "invalidCode": MessageLookupByLibrary.simpleMessage("Invalid code"),
     "login": MessageLookupByLibrary.simpleMessage("Login"),
+    "lorem": MessageLookupByLibrary.simpleMessage(
+      "• Lorem ipsum dolor sit amet consectetur.",
+    ),
+    "minutes": MessageLookupByLibrary.simpleMessage("Minutes"),
     "newPassword": MessageLookupByLibrary.simpleMessage("New Password"),
+    "noExamsFound": MessageLookupByLibrary.simpleMessage("No Exams Found"),
     "password": MessageLookupByLibrary.simpleMessage("Password"),
     "passwordDoNotMatch": MessageLookupByLibrary.simpleMessage(
       "Password do not match",
@@ -72,12 +80,16 @@ class MessageLookup extends MessageLookupByLibrary {
     "pleaseConfirmPassword": MessageLookupByLibrary.simpleMessage(
       "Please confirm your password",
     ),
+    "questions": MessageLookupByLibrary.simpleMessage("Questions"),
     "rememberMe": MessageLookupByLibrary.simpleMessage("Remember me"),
     "resend": MessageLookupByLibrary.simpleMessage("Resend"),
     "resetPassword": MessageLookupByLibrary.simpleMessage("Reset Password"),
     "resetPasswordDis": MessageLookupByLibrary.simpleMessage(
       "Password must not be empty and must contain 6 characters with upper case letter and one number at least",
     ),
+    "separator": MessageLookupByLibrary.simpleMessage("|"),
     "signUp": MessageLookupByLibrary.simpleMessage("Sign up"),
+    "start": MessageLookupByLibrary.simpleMessage("Start"),
+    "to": MessageLookupByLibrary.simpleMessage("To: 6.00"),
   };
 }

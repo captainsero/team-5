@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:team_5_examapp/config/di/di.dart';
 import 'package:team_5_examapp/core/routing/routes_manager.dart';
+import 'package:team_5_examapp/features/auth/login/domain/use_cases/check_auth_use_case.dart';
 
-import 'config/di/di.dart';
-import 'features/auth/login/domain/use_cases/check_auth_use_case.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});

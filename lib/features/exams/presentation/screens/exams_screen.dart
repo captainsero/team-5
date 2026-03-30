@@ -1,28 +1,39 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:team_5_examapp/config/di/di.dart';
+import 'package:team_5_examapp/core/constants/font_manager.dart';
+import 'package:team_5_examapp/core/constants/values_manager.dart';
 import 'package:team_5_examapp/features/exams/presentation/view_model/exams_view_model.dart';
-import '../widgets/each_exam_widget.dart';
+import 'package:team_5_examapp/features/exams/presentation/widgets/each_exam_widget.dart';
+import 'package:team_5_examapp/features/subjects_portal/domain/models/subject_model.dart';
+import 'package:team_5_examapp/generated/l10n.dart';
+
 
 class ExamsScreen extends StatelessWidget {
-  final String subjectId;
+
+  final SubjectModel subject;
+
   final String token;
 
-  const ExamsScreen({super.key, required this.subjectId, required this.token});
+  const ExamsScreen({
+    super.key,
+    required this.subject,
+    required this.token,
+  });
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (_) =>
-          getIt<ExamsViewModel>()..getExams(token: token, subjectId: subjectId),
+          getIt<ExamsViewModel>()..getExams(token: token, subjectId: subject.id),
 
       child: Scaffold(
         appBar: AppBar(
           title: Text(
-            "Languages",
+            subject.name,
             style: Theme.of(context).textTheme.headlineLarge,
           ),
-          leadingWidth: 60,
+          leadingWidth: AppSize.s60,
 
           leading: IconButton(
             onPressed: () {},
@@ -31,7 +42,7 @@ class ExamsScreen extends StatelessWidget {
         ),
 
         body: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+          padding:  EdgeInsets.symmetric(horizontal: AppSize.s20, vertical: AppSize.s10),
 
           child: BlocBuilder<ExamsViewModel, ExamsState>(
             builder: (context, state) {
@@ -46,7 +57,7 @@ class ExamsScreen extends StatelessWidget {
               }
 
               if (examsState.data == null || examsState.data!.isEmpty) {
-                return const Center(child: Text("No Exams Found"));
+                return Center(child: Text(S.of(context).noExamsFound));
               }
 
               final exams = examsState.data!;
@@ -61,13 +72,13 @@ class ExamsScreen extends StatelessWidget {
                     children: [
                       if (index == 0 || exams[index - 1].title != exam.title)
                         Padding(
-                          padding: EdgeInsets.only(top: 10, bottom: 10),
+                          padding: EdgeInsets.only(top: AppSize.s10, bottom: AppSize.s10),
                           child: Text(
                             exam.title,
                             style: Theme.of(context).textTheme.titleLarge
                                 ?.copyWith(
                                   fontWeight: FontWeight.normal,
-                                  fontSize: 25,
+                                  fontSize: FontSize.s25,
                                 ),
                           ),
                         ),

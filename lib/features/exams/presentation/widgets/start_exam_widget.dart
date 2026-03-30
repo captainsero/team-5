@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:team_5_examapp/config/models/exam_model.dart';
+import 'package:team_5_examapp/core/constants/assets_manager.dart';
 import 'package:team_5_examapp/core/constants/color_manager.dart';
+import 'package:team_5_examapp/core/constants/font_manager.dart';
+import 'package:team_5_examapp/core/constants/values_manager.dart';
+import 'package:team_5_examapp/generated/l10n.dart';
 
 class StartExamScreen extends StatelessWidget {
   final ExamModel exam;
@@ -11,7 +15,7 @@ class StartExamScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leadingWidth: 80,
+        leadingWidth: AppSize.s80,
         leading: IconButton(
 
           onPressed: () => Navigator.pop(context),
@@ -20,7 +24,7 @@ class StartExamScreen extends StatelessWidget {
       ),
 
       body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+        padding:  EdgeInsets.symmetric(horizontal: AppPadding.p20, vertical: AppPadding.p10),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -28,38 +32,38 @@ class StartExamScreen extends StatelessWidget {
               children: [
                 Row(
                   children: [
-                    Image.asset("assets/images/Profit.png"),
-                    const SizedBox(width: 10),
+                    Image.asset(ImageAssets.profit),
+                     SizedBox(width: AppSize.s10),
 
                     Text(
                       exam.title,
                       style: Theme.of(
                         context,
-                      ).textTheme.headlineMedium?.copyWith(fontSize: 24),
+                      ).textTheme.headlineMedium?.copyWith(fontSize: FontSize.s24),
                     ),
 
                     const Spacer(),
 
                     Text(
-                      "${exam.duration} Minutes",
+                      "${exam.duration} ${S.of(context).minutes}",
                       style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                         color: AppColors.primary,
                       ),
                     ),
                   ],
                 ),
-                SizedBox(height: 10),
+                SizedBox(height: AppSize.s10),
                 Row(
                   children: [
                     Text(
-                      "High Level",
+                      S.of(context).highLevel,
                       style: Theme.of(context).textTheme.headlineSmall,
                     ),
-                    const SizedBox(width: 5),
-                    Text("|", style: TextStyle(color: AppColors.primary)),
-                    const SizedBox(width: 5),
+                     SizedBox(width: AppSize.s5),
+                    Text(S.of(context).separator, style: TextStyle(color: AppColors.primary)),
+                     SizedBox(width: AppSize.s5),
                     Text(
-                      "${exam.numberOfQuestions} Question",
+                      "${exam.numberOfQuestions} ${S.of(context).questions}",
                       style: Theme.of(context).textTheme.bodyMedium,
                     ),
                   ],
@@ -67,36 +71,36 @@ class StartExamScreen extends StatelessWidget {
               ],
             ),
 
-            const SizedBox(height: 20),
+            SizedBox(height: AppSize.s20),
 
-            Container(height: 1, color: Colors.grey.shade300),
+            Container(height: AppSize.s1, color: Colors.grey.shade300),
 
-            const SizedBox(height: 20),
+             SizedBox(height: AppSize.s20),
 
-            Text("Instructions", style: Theme.of(context).textTheme.titleLarge),
+            Text(S.of(context).instructions, style: Theme.of(context).textTheme.titleLarge),
 
-            const SizedBox(height: 10),
+             SizedBox(height: AppSize.s10),
 
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 10),
-              child: const Column(
+              padding:  EdgeInsets.symmetric(horizontal: AppPadding.p10),
+              child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text("• Lorem ipsum dolor sit amet consectetur."),
-                  SizedBox(height: 5),
-                  Text("• Lorem ipsum dolor sit amet consectetur."),
-                  SizedBox(height: 5),
-                  Text("• Lorem ipsum dolor sit amet consectetur."),
-                  SizedBox(height: 5),
-                  Text("• Lorem ipsum dolor sit amet consectetur."),
+                  Text(S.of(context).lorem),
+                  SizedBox(height: AppSize.s5),
+                  Text(S.of(context).lorem),
+                  SizedBox(height: AppSize.s5),
+                  Text(S.of(context).lorem),
+                  SizedBox(height: AppSize.s5),
+                  Text(S.of(context).lorem),
                 ],
               ),
             ),
 
-            SizedBox(height: 48),
+            SizedBox(height: AppSize.s48),
             SizedBox(
               width: double.infinity,
-              child: ElevatedButton(onPressed: () {}, child: Text("Start")),
+              child: ElevatedButton(onPressed: () {}, child: Text(S.of(context).start)),
             ),
           ],
         ),
