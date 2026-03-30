@@ -1,20 +1,26 @@
+import 'package:hive_ce/hive.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'answer_dto.g.dart';
 
+@HiveType(typeId: 0)
 @JsonSerializable()
 class AnswerDto {
-    @JsonKey(name: "answer")
-    final String answer;
-    @JsonKey(name: "key")
-    final String key;
+  @HiveField(0)
+  @JsonKey(name: "answer")
+  final String answer;
 
-    AnswerDto({
-        required this.answer,
-        required this.key,
-    });
+  @HiveField(1)
+  @JsonKey(name: "key")
+  final String key;
 
-    factory AnswerDto.fromJson(Map<String, dynamic> json) => _$AnswerDtoFromJson(json);
+  AnswerDto({
+    required this.answer,
+    required this.key,
+  });
 
-    Map<String, dynamic> toJson() => _$AnswerDtoToJson(this);
+  factory AnswerDto.fromJson(Map<String, dynamic> json) =>
+      _$AnswerDtoFromJson(json);
+
+  Map<String, dynamic> toJson() => _$AnswerDtoToJson(this);
 }
