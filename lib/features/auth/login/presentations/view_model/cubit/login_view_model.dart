@@ -17,7 +17,9 @@ class LoginViewModel extends Cubit<LoginState> {
   LoginViewModel({required this.loginUseCase}) : super(LoginState());
 
   void clearError() {
-    emit(state.copyWith(loginState: BaseState<UserModel>(isLoading: false)));
+    emit(
+      state.copyWith(loginState: state.loginState.copyWith(errorMessage: null)),
+    );
   }
 
   void toggleObscurePassword() {
@@ -48,7 +50,7 @@ class LoginViewModel extends Cubit<LoginState> {
     //Save email in secure storage  in case of successful login and rememberMe is true
 
     if (newState.data != null && rememberMe) {
-      SecureStorageService.write(
+      await SecureStorageService.write(
         key: SecureStorageKeys.userEmail,
         value: email,
       );

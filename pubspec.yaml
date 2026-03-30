@@ -45,6 +45,7 @@ dependencies:
   retrofit: ^4.9.2
   flutter_bloc: ^9.1.1
   csv_localizations: ^2.3.0
+  flutter_native_splash: ^2.4.7
 
   
   
