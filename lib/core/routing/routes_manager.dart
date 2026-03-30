@@ -4,6 +4,7 @@ import 'package:team_5_examapp/features/auth/forget_password/presentation/screen
 import 'package:team_5_examapp/features/auth/forget_password/presentation/screens/validation_code_view.dart';
 import 'package:team_5_examapp/features/auth/login_screen/presentations/screens/login_screen.dart';
 import 'package:team_5_examapp/features/auth/register/presentation/screens/register_screen.dart';
+import 'package:team_5_examapp/splash_screen.dart';
 
 class Routes {
   static const String splashRoute = "/";
@@ -14,18 +15,21 @@ class Routes {
   static const String registerRoute = "/register";
   static const String getExamsRoute = '/exams';
   static const String startExam = '/startExam';
-
 }
 
 class AppRouter {
   static final GoRouter router = GoRouter(
     initialLocation: Routes.loginRoute,
     routes: [
-        GoRoute(
+      GoRoute(
+        path: Routes.splashRoute,
+        builder: (context, state) => const SplashScreen(),
+      ),
+      GoRoute(
         path: Routes.registerRoute,
         name: Routes.registerRoute,
         builder: (_, _) => SignUpScreen(),
-        ),
+      ),
       GoRoute(
         path: Routes.loginRoute,
         name: Routes.loginRoute,
@@ -45,7 +49,8 @@ class AppRouter {
         path: Routes.resetPassRoute,
         name: Routes.resetPassRoute,
         builder: (_, _) => ResetPassView(),
-      ),GoRoute(
+      ),
+      GoRoute(
         path: Routes.resetPassRoute,
         name: Routes.resetPassRoute,
         builder: (_, _) => ResetPassView(),
