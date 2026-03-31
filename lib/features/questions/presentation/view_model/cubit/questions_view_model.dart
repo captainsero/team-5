@@ -37,12 +37,6 @@ class QuestionsViewModel extends Cubit<QuestionsState> {
       ),
     );
 
-    await SecureStorageService.write(
-      key: SecureStorageKeys.userToken,
-      value:
-          'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5YWFlMmRjY2ViMmM1OWY4NGEzYzgwYSIsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNzc0MzQxNzcyfQ.dmwjX7TEFbEDug4QV_fDzFsjnWFy936WML8ywAAL1Co',
-    );
-
     final token = await SecureStorageService.read(
       key: SecureStorageKeys.userToken,
     );
@@ -74,7 +68,6 @@ class QuestionsViewModel extends Cubit<QuestionsState> {
 
   Future<void> checkQuestions({
     required CheckQuestionRequest checkQuestionRequest,
-    required String token,
   }) async {
     emit(
       state.copyWith(
@@ -85,10 +78,15 @@ class QuestionsViewModel extends Cubit<QuestionsState> {
         ),
       ),
     );
+    
+    final token = await SecureStorageService.read(
+      key: SecureStorageKeys.userToken,
+    );
+    final tokenHandler = SecureStorageHandler.handle(token);
 
     final response = await checkQuestionsUseCase(
       checkQuestionRequest: checkQuestionRequest,
-      token: token,
+      token: tokenHandler.data ?? '',
     );
     final handler = ResponseHandler.handle<CheckQuestionResponse>(response);
     emit(
@@ -139,52 +137,37 @@ class QuestionsViewModel extends Cubit<QuestionsState> {
   }
 
   void selectAnswer({
-  required String questionId,
-  required String answerKey,
-}) async {
-  await answersBox?.put(
-    questionId,
-    CheckAnswerDto(
-      questionId: questionId,
-      correct: answerKey,
-    ),
-  );
+    required String questionId,
+    required String answerKey,
+  }) async {
+    await answersBox?.put(
+      questionId,
+      CheckAnswerDto(questionId: questionId, correct: answerKey),
+    );
 
-  emit(
-    state.copyWith(
-      currentAnswer: answerKey,
-    ),
-  );
-}
-
-void toggleMultiAnswer({
-  required String questionId,
-  required String answerKey,
-}) async {
-  final current = state.currentAnswer ?? '';
-  final List<String> selected = current.isEmpty ? [] : current.split(',');
-
-  if (selected.contains(answerKey)) {
-    selected.remove(answerKey);
-  } else {
-    selected.add(answerKey);
+    emit(state.copyWith(currentAnswer: answerKey));
   }
 
-  final updated = selected.join(',');
+  void toggleMultiAnswer({
+    required String questionId,
+    required String answerKey,
+  }) async {
+    final current = state.currentAnswer ?? '';
+    final List<String> selected = current.isEmpty ? [] : current.split(',');
 
-  await answersBox?.put(
-    questionId,
-    CheckAnswerDto(
-      questionId: questionId,
-      correct: updated,
-    ),
-  );
+    if (selected.contains(answerKey)) {
+      selected.remove(answerKey);
+    } else {
+      selected.add(answerKey);
+    }
 
-  emit(
-    state.copyWith(
-      currentAnswer: updated,
-    ),
-  );
-}
+    final updated = selected.join(',');
 
+    await answersBox?.put(
+      questionId,
+      CheckAnswerDto(questionId: questionId, correct: updated),
+    );
+
+    emit(state.copyWith(currentAnswer: updated));
+  }
 }
