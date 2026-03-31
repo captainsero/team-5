@@ -58,7 +58,8 @@ class AppRouter {
         path: Routes.scoreRoute,
         name: Routes.scoreRoute,
         builder: (context, state) {
-          return ScoreScreen(examId: state.extra.toString());
+          int time = int.parse(state.extra.toString());
+          return ScoreScreen(time: time);
         },
       ),
     ],
