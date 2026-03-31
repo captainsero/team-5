@@ -136,6 +136,8 @@ class QuestionsViewModel extends Cubit<QuestionsState> {
       ),
     );
 
+    await fillUnansweredQuestions();
+
     final answers = answersBox!.values.toList();
 
     final request = CheckQuestionRequest(answers: answers, time: time);
@@ -264,6 +266,28 @@ class QuestionsViewModel extends Cubit<QuestionsState> {
       await answersBox!.close();
       await Hive.deleteBoxFromDisk(name);
       answersBox = null;
+    }
+  }
+
+  Future<void> fillUnansweredQuestions() async {
+    if (!isAnswersBoxValid) {
+      return;
+    }
+
+    final questions = state.getAllQuestionsOnExamState.data;
+
+    if (questions == null || questions.isEmpty) {
+      return;
+    }
+
+    for (final question in questions) {
+      final existing = answersBox!.get(question.id);
+      if (existing == null) {
+        await answersBox!.put(
+          question.id,
+          CheckAnswerDto(questionId: question.id, correct: 'null'),
+        );
+      }
     }
   }
 }

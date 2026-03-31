@@ -20,7 +20,10 @@ class TimerText extends StatelessWidget {
           showDialog(
             context: context,
             barrierDismissible: false,
-            builder: (_) => TimeOutDialog(time: 0),
+            builder: (_) => TimeOutDialog(
+              time: 0,
+              examId: state.getAllQuestionsOnExamState.data![0].exam.id,
+            ),
           );
         }
       },
