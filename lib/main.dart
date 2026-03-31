@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hive_ce/hive.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:team_5_examapp/config/di/di.dart';
+import 'package:team_5_examapp/config/get_view_models/get_view_models.dart';
 import 'package:team_5_examapp/features/questions/data/models/answer_dto.dart';
 import 'package:team_5_examapp/features/questions/data/models/check_answer_dto.dart';
+import 'package:team_5_examapp/features/questions/presentation/view_model/cubit/questions_view_model.dart';
 import 'core/routing/routes_manager.dart';
 import 'core/themes/light_theme.dart';
 import 'generated/l10n.dart';
@@ -35,19 +38,26 @@ class MyApp extends StatelessWidget {
       splitScreenMode: true,
       ensureScreenSize: true,
       builder: (context, child) {
-        return MaterialApp.router(
-          title: 'Exam App',
-          debugShowCheckedModeBanner: false,
-          theme: AppTheme.lightTheme,
-          localizationsDelegates: const [
-            S.delegate,
-            GlobalMaterialLocalizations.delegate,
-            GlobalWidgetsLocalizations.delegate,
-            GlobalCupertinoLocalizations.delegate,
+        return MultiBlocProvider(
+          providers: [
+            BlocProvider<QuestionsViewModel>(
+              create: (_) => GetViewModels.questionsViewModel,
+            ),
           ],
-          supportedLocales: S.delegate.supportedLocales,
+          child: MaterialApp.router(
+            title: 'Exam App',
+            debugShowCheckedModeBanner: false,
+            theme: AppTheme.lightTheme,
+            localizationsDelegates: const [
+              S.delegate,
+              GlobalMaterialLocalizations.delegate,
+              GlobalWidgetsLocalizations.delegate,
+              GlobalCupertinoLocalizations.delegate,
+            ],
+            supportedLocales: S.delegate.supportedLocales,
 
-          routerConfig: AppRouter.router,
+            routerConfig: AppRouter.router,
+          ),
         );
       },
     );
