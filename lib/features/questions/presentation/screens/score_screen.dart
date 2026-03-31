@@ -5,7 +5,8 @@ import 'package:team_5_examapp/features/questions/presentation/widgets/answer_nu
 import 'package:team_5_examapp/features/questions/presentation/widgets/score_bar.dart';
 
 class ScoreScreen extends StatefulWidget {
-  const ScoreScreen({super.key});
+  const ScoreScreen({super.key, required this.examId});
+  final String examId;
 
   @override
   State<ScoreScreen> createState() => _ScoreScreenState();

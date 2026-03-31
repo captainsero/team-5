@@ -12,7 +12,8 @@ import 'package:team_5_examapp/features/questions/presentation/widgets/question_
 import 'package:team_5_examapp/features/questions/presentation/widgets/time_out_dialog.dart';
 
 class QuestionsScreen extends StatefulWidget {
-  const QuestionsScreen({super.key});
+  const QuestionsScreen({super.key, required this.examId});
+  final String examId;
 
   @override
   State<QuestionsScreen> createState() => _QuestionsScreenState();
@@ -102,7 +103,6 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
                         ? ''
                         : questions![currentQuestion].question,
                     questionId: isLoading ? '' : questions![currentQuestion].id,
-
                   ),
 
                   SizedBox(height: AppSize.s50),
@@ -147,7 +147,10 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
                             );
 
                             if (isLast) {
-                              context.push(Routes.scoreRoute);
+                              context.push(
+                                Routes.scoreRoute,
+                                extra: questions[currentQuestion].exam.id,
+                              );
                             }
                           },
                           child: Text(isLast ? "Finish" : "Next"),
