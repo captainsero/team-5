@@ -23,6 +23,7 @@ class RegisterRemoteSourceImplementation
       return SuccessBaseResponse<AuthResponse>(data: response);
     } catch (e) {
       return ErrorBaseResponse<AuthResponse>(error: e);
+      return ErrorBaseResponse<AuthResponse>(error: e);
     }
   }
 }

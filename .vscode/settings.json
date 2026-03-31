@@ -31,6 +31,12 @@
                 "user_response_dto.dart"
             ],
             "type": "manual"
+        },
+        "c:\\Users\\Rana\\Downloads\\team-5\\lib\\features\\auth": {
+            "order": [
+                "auth_shared_models"
+            ],
+            "type": "manual"
         }
     }
 }
