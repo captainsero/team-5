@@ -46,7 +46,7 @@ class QuestionsViewModel extends Cubit<QuestionsState> {
     emit(
       state.copyWith(
         remainingSeconds: totalSeconds,
-        totalSeconds: totalSeconds, // ✅ مهم
+        totalSeconds: totalSeconds, 
         isTimeUp: false,
       ),
     );
@@ -97,9 +97,12 @@ class QuestionsViewModel extends Cubit<QuestionsState> {
       final duration = handler.data![0].exam.duration;
       startTimer(duration);
     }
+    final data = answersBox?.get(handler.data![0].id);
+
 
     emit(
       state.copyWith(
+        currentAnswer: data?.correct ?? '',
         getAllQuestionsOnExamState: state.getAllQuestionsOnExamState.copyWith(
           isLoading: handler.isLoading,
           data: handler.data,
