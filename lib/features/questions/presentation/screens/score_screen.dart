@@ -1,18 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:team_5_examapp/config/get_view_models/get_view_models.dart';
 import 'package:team_5_examapp/core/constants/font_manager.dart';
 import 'package:team_5_examapp/core/constants/values_manager.dart';
+import 'package:team_5_examapp/features/questions/presentation/view_model/cubit/questions_view_model.dart';
 import 'package:team_5_examapp/features/questions/presentation/widgets/answer_number_circle_avatar.dart';
 import 'package:team_5_examapp/features/questions/presentation/widgets/score_bar.dart';
 
-class ScoreScreen extends StatefulWidget {
-  const ScoreScreen({super.key, required this.time});
+class ScoreScreen extends StatelessWidget {
   final int time;
+  const ScoreScreen({super.key, required this.time});
 
-  @override
-  State<ScoreScreen> createState() => _ScoreScreenState();
-}
-
-class _ScoreScreenState extends State<ScoreScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,95 +22,119 @@ class _ScoreScreenState extends State<ScoreScreen> {
       ),
       body: Padding(
         padding: EdgeInsets.all(AppPadding.p20),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Align(
-              alignment: Alignment.centerLeft,
-              child: Text(
-                "Your Score",
-                style: Theme.of(
-                  context,
-                ).textTheme.titleMedium!.copyWith(fontSize: FontSize.s18),
-              ),
-            ),
+        child: BlocBuilder<QuestionsViewModel, QuestionsState>(
+          buildWhen: (previous, current) =>
+              previous.checkQuestions != current.checkQuestions,
+          builder: (context, state) {
+            final data = state.checkQuestions.data;
+            final isLoading = state.checkQuestions.isLoading;
 
-            SizedBox(height: AppSize.s20),
+            final totalString = data?.total ?? '0%';
+            final percentValue =
+                (double.tryParse(
+                  totalString.replaceAll('%', ''),
+                )?.toStringAsFixed(0) ??
+                '0.0');
+            final finalValue = double.tryParse(percentValue);
 
-            Row(
+            return Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                ScoreBar(value: 60),
-                Spacer(flex: 1),
-                Column(
-                  spacing: AppSize.s10,
+                Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    "Your Score",
+                    style: Theme.of(
+                      context,
+                    ).textTheme.titleMedium!.copyWith(fontSize: FontSize.s18),
+                  ),
+                ),
+                SizedBox(height: AppSize.s20),
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    Text(
-                      "Correct",
-                      style: Theme.of(context).textTheme.titleMedium!.copyWith(
-                        color: Theme.of(context).colorScheme.primary,
-                      ),
+                    ScoreBar(value: finalValue ?? 0.0),
+                    Spacer(flex: 1),
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          "Correct",
+                          style: Theme.of(context).textTheme.titleMedium!
+                              .copyWith(
+                                color: Theme.of(context).colorScheme.primary,
+                              ),
+                        ),
+                        SizedBox(height: AppSize.s10),
+                        Text(
+                          "Incorrect",
+                          style: Theme.of(context).textTheme.titleMedium!
+                              .copyWith(
+                                color: Theme.of(context).colorScheme.error,
+                              ),
+                        ),
+                      ],
                     ),
-
-                    Text(
-                      "Incorrect",
-                      style: Theme.of(context).textTheme.titleMedium!.copyWith(
-                        color: Theme.of(context).colorScheme.error,
-                      ),
+                    Spacer(flex: 2),
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        AnswerNumberCircleAvatar(
+                          color: Theme.of(context).colorScheme.primary,
+                          number: data?.correct ?? 0,
+                        ),
+                        SizedBox(height: AppSize.s10),
+                        AnswerNumberCircleAvatar(
+                          color: Theme.of(context).colorScheme.error,
+                          number: data?.wrong ?? 0,
+                        ),
+                      ],
                     ),
                   ],
+                ),
+                Spacer(flex: 1),
+                SizedBox(
+                  width: double.infinity,
+                  child: ElevatedButton(
+                    onPressed: isLoading
+                        ? null
+                        : () {
+                            GetViewModels.questionsViewModel.checkQuestions(
+                              time: time,
+                            );
+                          },
+                    style: ElevatedButton.styleFrom().copyWith(
+                      backgroundColor: WidgetStatePropertyAll(
+                        Theme.of(context).colorScheme.onPrimary,
+                      ),
+                      side: WidgetStatePropertyAll(
+                        BorderSide(
+                          color: Theme.of(context).colorScheme.primary,
+                        ),
+                      ),
+                      foregroundColor: WidgetStatePropertyAll(
+                        Theme.of(context).colorScheme.primary,
+                      ),
+                    ),
+                    child: isLoading
+                        ? const CircularProgressIndicator()
+                        : Text("Show results"),
+                  ),
+                ),
+                SizedBox(height: AppSize.s20),
+                SizedBox(
+                  width: double.infinity,
+                  child: ElevatedButton(
+                    onPressed: () {
+                      // reset logic could go here
+                    },
+                    child: Text("Start again"),
+                  ),
                 ),
                 Spacer(flex: 2),
-
-                Column(
-                  spacing: AppSize.s10,
-                  children: [
-                    AnswerNumberCircleAvatar(
-                      color: Theme.of(context).colorScheme.primary,
-                      number: 18,
-                    ),
-
-                    AnswerNumberCircleAvatar(
-                      color: Theme.of(context).colorScheme.error,
-                      number: 2,
-                    ),
-                  ],
-                ),
               ],
-            ),
-            Spacer(flex: 1),
-
-            SizedBox(
-              width: double.infinity,
-              child: ElevatedButton(
-                onPressed: () {},
-                style: ElevatedButton.styleFrom().copyWith(
-                  backgroundColor: WidgetStatePropertyAll(
-                    Theme.of(context).colorScheme.onPrimary,
-                  ),
-
-                  side: WidgetStatePropertyAll(
-                    BorderSide(color: Theme.of(context).colorScheme.primary),
-                  ),
-                  foregroundColor: WidgetStatePropertyAll(
-                    Theme.of(context).colorScheme.primary,
-                  ),
-                ),
-                child: Text("Show results"),
-              ),
-            ),
-
-            SizedBox(height: AppSize.s20),
-
-            SizedBox(
-              width: double.infinity,
-              child: ElevatedButton(
-                onPressed: () {},
-                child: Text("Start again"),
-              ),
-            ),
-            Spacer(flex: 2),
-          ],
+            );
+          },
         ),
       ),
     );

@@ -46,7 +46,7 @@ class QuestionsViewModel extends Cubit<QuestionsState> {
     emit(
       state.copyWith(
         remainingSeconds: totalSeconds,
-        totalSeconds: totalSeconds, 
+        totalSeconds: totalSeconds,
         isTimeUp: false,
       ),
     );
@@ -98,7 +98,6 @@ class QuestionsViewModel extends Cubit<QuestionsState> {
       startTimer(duration);
     }
     final data = answersBox?.get(handler.data![0].id);
-
 
     emit(
       state.copyWith(
@@ -166,7 +165,10 @@ class QuestionsViewModel extends Cubit<QuestionsState> {
   void nextQuestion(List<QuestionModel> questions) {
     final current = state.currentQuestion;
 
-    if (current == questions.length - 1) return;
+    if (current == questions.length - 1) {
+      _timer!.cancel();
+      return;
+    }
 
     final nextIndex = current + 1;
 
@@ -232,11 +234,5 @@ class QuestionsViewModel extends Cubit<QuestionsState> {
     );
 
     emit(state.copyWith(currentAnswer: updated));
-  }
-
-  @override
-  Future<void> close() {
-    _timer?.cancel();
-    return super.close();
   }
 }

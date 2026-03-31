@@ -5,7 +5,7 @@ class QuestionsState {
       BaseState<List<QuestionModel>>(isLoading: true);
 
   BaseState<CheckQuestionResponse> checkQuestions =
-      BaseState<CheckQuestionResponse>(isLoading: true);
+      BaseState<CheckQuestionResponse>(isLoading: false);
 
   final int currentQuestion;
   final bool isLast;
