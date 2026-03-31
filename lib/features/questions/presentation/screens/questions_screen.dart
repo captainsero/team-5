@@ -22,7 +22,7 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
   @override
   void initState() {
     GetViewModels.questionsViewModel.getAllQuestionsOnExam(
-      examId: '670070a830a3c3c1944a9c63',
+      examId: widget.examId,
     );
     super.initState();
   }
