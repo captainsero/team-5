@@ -26,6 +26,10 @@ class QuestionsViewModel extends Cubit<QuestionsState> {
   final CheckQuestionsUseCase checkQuestionsUseCase;
   Box<CheckAnswerDto>? answersBox;
 
+  bool get isAnswersBoxValid {
+    return answersBox != null && answersBox!.isOpen && answersBox!.isNotEmpty;
+  }
+
   Future<void> getAllQuestionsOnExam({required String examId}) async {
     emit(
       state.copyWith(
@@ -66,9 +70,19 @@ class QuestionsViewModel extends Cubit<QuestionsState> {
     );
   }
 
-  Future<void> checkQuestions({
-    required CheckQuestionRequest checkQuestionRequest,
-  }) async {
+  Future<void> checkQuestions({required int time}) async {
+    if (!isAnswersBoxValid) {
+      emit(
+        state.copyWith(
+          checkQuestions: state.checkQuestions.copyWith(
+            isLoading: false,
+            errorMessage: 'Answers not ready yet',
+          ),
+        ),
+      );
+      return;
+    }
+
     emit(
       state.copyWith(
         checkQuestions: state.checkQuestions.copyWith(
@@ -78,17 +92,24 @@ class QuestionsViewModel extends Cubit<QuestionsState> {
         ),
       ),
     );
-    
+
+    final answers = answersBox!.values.toList();
+
+    final request = CheckQuestionRequest(answers: answers, time: time);
+
     final token = await SecureStorageService.read(
       key: SecureStorageKeys.userToken,
     );
+
     final tokenHandler = SecureStorageHandler.handle(token);
 
     final response = await checkQuestionsUseCase(
-      checkQuestionRequest: checkQuestionRequest,
+      checkQuestionRequest: request,
       token: tokenHandler.data ?? '',
     );
+
     final handler = ResponseHandler.handle<CheckQuestionResponse>(response);
+
     emit(
       state.copyWith(
         checkQuestions: state.checkQuestions.copyWith(
