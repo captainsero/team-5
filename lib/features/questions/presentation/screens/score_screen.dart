@@ -1,15 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:team_5_examapp/config/get_view_models/get_view_models.dart';
 import 'package:team_5_examapp/core/constants/font_manager.dart';
 import 'package:team_5_examapp/core/constants/values_manager.dart';
+import 'package:team_5_examapp/core/routing/routes_manager.dart';
 import 'package:team_5_examapp/features/questions/presentation/view_model/cubit/questions_view_model.dart';
 import 'package:team_5_examapp/features/questions/presentation/widgets/answer_number_circle_avatar.dart';
 import 'package:team_5_examapp/features/questions/presentation/widgets/score_bar.dart';
 
 class ScoreScreen extends StatelessWidget {
+  const ScoreScreen({super.key, required this.time, required this.examId});
   final int time;
-  const ScoreScreen({super.key, required this.time});
+  final String examId;
 
   @override
   Widget build(BuildContext context) {
@@ -126,7 +129,8 @@ class ScoreScreen extends StatelessWidget {
                   width: double.infinity,
                   child: ElevatedButton(
                     onPressed: () {
-                      // reset logic could go here
+                      GetViewModels.questionsViewModel.resetAnswersBox();
+                      context.go(Routes.questionsRoute, extra: examId);
                     },
                     child: Text("Start again"),
                   ),

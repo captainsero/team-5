@@ -69,6 +69,8 @@ class QuestionsViewModel extends Cubit<QuestionsState> {
   Future<void> getAllQuestionsOnExam({required String examId}) async {
     emit(
       state.copyWith(
+        currentQuestion: 0,
+        isLast: false,
         getAllQuestionsOnExamState: state.getAllQuestionsOnExamState.copyWith(
           isLoading: true,
           data: null,
@@ -234,5 +236,15 @@ class QuestionsViewModel extends Cubit<QuestionsState> {
     );
 
     emit(state.copyWith(currentAnswer: updated));
+  }
+
+  Future<void> resetAnswersBox() async {
+    if (answersBox != null && answersBox!.isOpen) {
+      final name = answersBox!.name;
+      await answersBox!.clear();
+      await answersBox!.close();
+      await Hive.deleteBoxFromDisk(name);
+      answersBox = null;
+    }
   }
 }

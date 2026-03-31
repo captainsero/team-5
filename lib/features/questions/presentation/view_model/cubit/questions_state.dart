@@ -28,7 +28,7 @@ class QuestionsState {
         getAllQuestionsOnExamState ??
         BaseState<List<QuestionModel>>(isLoading: true);
     this.checkQuestions =
-        checkQuestions ?? BaseState<CheckQuestionResponse>(isLoading: true);
+        checkQuestions ?? BaseState<CheckQuestionResponse>(isLoading: false);
   }
 
   QuestionsState copyWith({

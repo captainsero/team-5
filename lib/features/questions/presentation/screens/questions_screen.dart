@@ -130,7 +130,13 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
 
                           if (isLast) {
                             final minutes = state.remainingSeconds ~/ 60;
-                            context.push(Routes.scoreRoute, extra: minutes);
+                            context.go(
+                              Routes.scoreRoute,
+                              extra: {
+                                'time': minutes,
+                                'examId': questions[0].exam.id,
+                              },
+                            );
                           }
                         },
                         child: Text(isLast ? "Finish" : "Next"),
