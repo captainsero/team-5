@@ -1,4 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:team_5_examapp/features/auth/login/domain/models/user_model.dart';
 part 'user_request_dto.g.dart';
 
 @JsonSerializable()
@@ -50,4 +51,14 @@ class UserRequestDto {
       _$UserRequestDtoFromJson(json);
 
   Map<String, dynamic> toJson() => _$UserRequestDtoToJson(this);
+
+  UserModel toDomain() {
+    return UserModel(
+      username: username,
+      firstName: firstName,
+      lastName: lastName,
+      email: email,
+      phone: phone,
+    );
+  }
 }
