@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:bloc/bloc.dart';
 import 'package:hive_ce/hive.dart';
 import 'package:injectable/injectable.dart';
@@ -25,9 +27,43 @@ class QuestionsViewModel extends Cubit<QuestionsState> {
   final GetAllQuestionsOnExamUseCase getAllQuestionsOnExamUseCase;
   final CheckQuestionsUseCase checkQuestionsUseCase;
   Box<CheckAnswerDto>? answersBox;
+  Timer? _timer;
 
   bool get isAnswersBoxValid {
     return answersBox != null && answersBox!.isOpen && answersBox!.isNotEmpty;
+  }
+
+  String get formattedTime {
+    final minutes = state.remainingSeconds ~/ 60;
+    final seconds = state.remainingSeconds % 60;
+
+    return '${minutes.toString().padLeft(2, '0')}:${seconds.toString().padLeft(2, '0')}';
+  }
+
+  void startTimer(int durationInMinutes) {
+    final totalSeconds = durationInMinutes * 60;
+
+    emit(
+      state.copyWith(
+        remainingSeconds: totalSeconds,
+        totalSeconds: totalSeconds, // ✅ مهم
+        isTimeUp: false,
+      ),
+    );
+
+    _timer?.cancel();
+
+    _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
+      final current = state.remainingSeconds;
+
+      if (current <= 1) {
+        timer.cancel();
+
+        emit(state.copyWith(remainingSeconds: 0, isTimeUp: true));
+      } else {
+        emit(state.copyWith(remainingSeconds: current - 1));
+      }
+    });
   }
 
   Future<void> getAllQuestionsOnExam({required String examId}) async {
@@ -57,6 +93,9 @@ class QuestionsViewModel extends Cubit<QuestionsState> {
       final boxName = handler.data![0].exam.id;
 
       answersBox = await Hive.openBox<CheckAnswerDto>(boxName);
+
+      final duration = handler.data![0].exam.duration;
+      startTimer(duration);
     }
 
     emit(
@@ -190,5 +229,11 @@ class QuestionsViewModel extends Cubit<QuestionsState> {
     );
 
     emit(state.copyWith(currentAnswer: updated));
+  }
+
+  @override
+  Future<void> close() {
+    _timer?.cancel();
+    return super.close();
   }
 }

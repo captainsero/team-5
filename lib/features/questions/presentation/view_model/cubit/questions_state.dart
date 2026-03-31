@@ -10,6 +10,9 @@ class QuestionsState {
   final int currentQuestion;
   final bool isLast;
   final String? currentAnswer;
+  final int remainingSeconds;
+  final bool isTimeUp;
+  final int totalSeconds;
 
   QuestionsState({
     BaseState<List<QuestionModel>>? getAllQuestionsOnExamState,
@@ -17,6 +20,9 @@ class QuestionsState {
     this.currentQuestion = 0,
     this.isLast = false,
     this.currentAnswer,
+    this.remainingSeconds = 0,
+    this.isTimeUp = false,
+    this.totalSeconds = 0,
   }) {
     this.getAllQuestionsOnExamState =
         getAllQuestionsOnExamState ??
@@ -31,6 +37,9 @@ class QuestionsState {
     int? currentQuestion,
     bool? isLast,
     String? currentAnswer,
+    int? remainingSeconds,
+    bool? isTimeUp,
+    int? totalSeconds,
   }) {
     return QuestionsState(
       getAllQuestionsOnExamState:
@@ -39,6 +48,9 @@ class QuestionsState {
       currentQuestion: currentQuestion ?? this.currentQuestion,
       isLast: isLast ?? this.isLast,
       currentAnswer: currentAnswer ?? this.currentAnswer,
+      remainingSeconds: remainingSeconds ?? this.remainingSeconds,
+      isTimeUp: isTimeUp ?? this.isTimeUp,
+      totalSeconds: totalSeconds ?? this.totalSeconds,
     );
   }
 }

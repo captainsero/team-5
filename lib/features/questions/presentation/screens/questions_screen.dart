@@ -3,13 +3,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:team_5_examapp/config/di/di.dart';
 import 'package:team_5_examapp/core/constants/assets_manager.dart';
-import 'package:team_5_examapp/core/constants/color_manager.dart';
 import 'package:team_5_examapp/core/constants/values_manager.dart';
 import 'package:team_5_examapp/core/routing/routes_manager.dart';
 import 'package:team_5_examapp/features/questions/presentation/view_model/cubit/questions_view_model.dart';
 import 'package:team_5_examapp/features/questions/presentation/widgets/question_progress_bar.dart';
 import 'package:team_5_examapp/features/questions/presentation/widgets/question_widget.dart';
-import 'package:team_5_examapp/features/questions/presentation/widgets/time_out_dialog.dart';
+import 'package:team_5_examapp/features/questions/presentation/widgets/timer_text.dart';
 
 class QuestionsScreen extends StatefulWidget {
   const QuestionsScreen({super.key, required this.examId});
@@ -21,16 +20,6 @@ class QuestionsScreen extends StatefulWidget {
 
 class _QuestionsScreenState extends State<QuestionsScreen> {
   final QuestionsViewModel viewModel = getIt.get<QuestionsViewModel>();
-
-  void showTimeOutDialog(BuildContext context) async {
-    await showDialog(
-      context: context,
-      barrierDismissible: false,
-      builder: (context) {
-        return TimeOutDialog();
-      },
-    );
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -73,15 +62,7 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
                 icon: Icon(Icons.arrow_back_ios),
               ),
               title: Text("Exam"),
-              actions: [
-                Image.asset(ImageAssets.clock),
-                Text(
-                  isLoading ? '--:--' : questions![0].exam.duration.toString(),
-                  style: Theme.of(
-                    context,
-                  ).textTheme.headlineMedium!.copyWith(color: AppColors.sucess),
-                ),
-              ],
+              actions: [Image.asset(ImageAssets.clock), TimerText()],
             ),
             body: Padding(
               padding: EdgeInsets.symmetric(horizontal: AppPadding.p20),
@@ -147,10 +128,8 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
                             );
 
                             if (isLast) {
-                              context.push(
-                                Routes.scoreRoute,
-                                extra: questions[currentQuestion].exam.id,
-                              );
+                              final minutes = state.remainingSeconds ~/ 60;
+                              context.push(Routes.scoreRoute, extra: minutes);
                             }
                           },
                           child: Text(isLast ? "Finish" : "Next"),
@@ -165,5 +144,11 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
         },
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    viewModel.close();
+    super.dispose();
   }
 }

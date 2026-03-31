@@ -5,7 +5,8 @@ import 'package:team_5_examapp/core/constants/values_manager.dart';
 import 'package:team_5_examapp/core/routing/routes_manager.dart';
 
 class TimeOutDialog extends StatelessWidget {
-  const TimeOutDialog({super.key});
+  const TimeOutDialog({super.key, required this.time});
+  final int time;
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +32,7 @@ class TimeOutDialog extends StatelessWidget {
           width: double.infinity,
           child: ElevatedButton(
             onPressed: () {
-              context.go(Routes.scoreRoute);
+              context.go(Routes.scoreRoute, extra: time);
             },
             child: Text('View Score'),
           ),
