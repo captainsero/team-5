@@ -39,12 +39,12 @@ class CheckboxAnswerButton extends StatelessWidget {
               value: isSelected,
               onChanged: (_) => onTap(),
               activeColor: Theme.of(context).colorScheme.primary,
-              checkColor: Colors.white,
+              checkColor: Theme.of(context).colorScheme.onPrimary,
               fillColor: WidgetStateProperty.resolveWith<Color?>((states) {
                 if (states.contains(WidgetState.selected)) {
                   return Theme.of(context).colorScheme.primary;
                 }
-                return Colors.transparent;
+                return AppColors.transparent;
               }),
             ),
             Expanded(
