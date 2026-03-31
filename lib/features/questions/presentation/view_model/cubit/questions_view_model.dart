@@ -212,7 +212,26 @@ class QuestionsViewModel extends Cubit<QuestionsState> {
       CheckAnswerDto(questionId: questionId, correct: answerKey),
     );
 
-    emit(state.copyWith(currentAnswer: answerKey));
+    final questions = state.getAllQuestionsOnExamState.data;
+    if (questions != null) {
+      final updatedQuestions = questions.map((q) {
+        if (q.id == questionId) {
+          return q.copyWith(isAnswerd: true);
+        }
+        return q;
+      }).toList();
+
+      emit(
+        state.copyWith(
+          currentAnswer: answerKey,
+          getAllQuestionsOnExamState: state.getAllQuestionsOnExamState.copyWith(
+            data: updatedQuestions,
+          ),
+        ),
+      );
+    } else {
+      emit(state.copyWith(currentAnswer: answerKey));
+    }
   }
 
   void toggleMultiAnswer({

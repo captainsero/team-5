@@ -42,6 +42,7 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
         final questions = state.getAllQuestionsOnExamState.data;
         final isLoading = state.getAllQuestionsOnExamState.isLoading;
         final errorMassege = state.getAllQuestionsOnExamState.errorMessage;
+        final isAnswered = questions?[currentQuestion].isAnswerd ?? false;
         bool isRadio = true;
 
         if (!isLoading && errorMassege == null && questions != null) {
@@ -123,22 +124,24 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
 
                     Expanded(
                       child: ElevatedButton(
-                        onPressed: () {
-                          context.read<QuestionsViewModel>().nextQuestion(
-                            questions!,
-                          );
+                        onPressed: isAnswered
+                            ? () {
+                                context.read<QuestionsViewModel>().nextQuestion(
+                                  questions!,
+                                );
 
-                          if (isLast) {
-                            final minutes = state.remainingSeconds ~/ 60;
-                            context.go(
-                              Routes.scoreRoute,
-                              extra: {
-                                'time': minutes,
-                                'examId': questions[0].exam.id,
-                              },
-                            );
-                          }
-                        },
+                                if (isLast) {
+                                  final minutes = state.remainingSeconds ~/ 60;
+                                  context.go(
+                                    Routes.scoreRoute,
+                                    extra: {
+                                      'time': minutes,
+                                      'examId': questions[0].exam.id,
+                                    },
+                                  );
+                                }
+                              }
+                            : null,
                         child: Text(isLast ? "Finish" : "Next"),
                       ),
                     ),

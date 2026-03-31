@@ -39,6 +39,21 @@ class QuestionModel {
     required this.createdAt,
   });
 
+  QuestionModel copyWith({bool? isAnswerd, AnswerDto? userAnswer}) {
+    return QuestionModel(
+      isAnswerd ?? this.isAnswerd,
+      userAnswer ?? this.userAnswer,
+      id: id,
+      question: question,
+      answers: answers,
+      type: type,
+      correct: correct,
+      subject: subject,
+      exam: exam,
+      createdAt: createdAt,
+    );
+  }
+
   factory QuestionModel.fromJson(Map<String, dynamic> json) =>
       _$QuestionModelFromJson(json);
 
