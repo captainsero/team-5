@@ -50,12 +50,16 @@ class AppRouter {
       GoRoute(
         path: Routes.questionsRoute,
         name: Routes.questionsRoute,
-        builder: (_, _) => QuestionsScreen(),
+        builder: (context, state) {
+          return QuestionsScreen(examId: state.extra.toString());
+        },
       ),
       GoRoute(
         path: Routes.scoreRoute,
         name: Routes.scoreRoute,
-        builder: (_, _) => ScoreScreen(),
+        builder: (context, state) {
+          return ScoreScreen(examId: state.extra.toString());
+        },
       ),
     ],
   );
