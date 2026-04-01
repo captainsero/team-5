@@ -9,6 +9,7 @@ import 'package:team_5_examapp/features/questions/presentation/view_model/cubit/
 import 'package:team_5_examapp/features/questions/presentation/widgets/question_progress_bar.dart';
 import 'package:team_5_examapp/features/questions/presentation/widgets/question_widget.dart';
 import 'package:team_5_examapp/features/questions/presentation/widgets/timer_text.dart';
+import 'package:team_5_examapp/generated/l10n.dart';
 
 class QuestionsScreen extends StatefulWidget {
   const QuestionsScreen({super.key, required this.examId});
@@ -65,7 +66,7 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
               onPressed: () => context.pop(),
               icon: Icon(Icons.arrow_back_ios),
             ),
-            title: Text("Exam"),
+            title: Text(S.of(context).exam),
             actions: [Image.asset(ImageAssets.clock), TimerText()],
           ),
           body: Padding(
@@ -118,7 +119,7 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
                           ),
                         ),
 
-                        child: Text("Back"),
+                        child: Text(S.of(context).back),
                       ),
                     ),
 
@@ -142,7 +143,9 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
                                 }
                               }
                             : null,
-                        child: Text(isLast ? "Finish" : "Next"),
+                        child: Text(
+                          isLast ? S.of(context).finish : S.of(context).next,
+                        ),
                       ),
                     ),
                   ],

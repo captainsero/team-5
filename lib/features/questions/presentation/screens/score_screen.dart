@@ -8,6 +8,7 @@ import 'package:team_5_examapp/core/routing/routes_manager.dart';
 import 'package:team_5_examapp/features/questions/presentation/view_model/cubit/questions_view_model.dart';
 import 'package:team_5_examapp/features/questions/presentation/widgets/answer_number_circle_avatar.dart';
 import 'package:team_5_examapp/features/questions/presentation/widgets/score_bar.dart';
+import 'package:team_5_examapp/generated/l10n.dart';
 
 class ScoreScreen extends StatelessWidget {
   const ScoreScreen({super.key, required this.time, required this.examId});
@@ -20,7 +21,7 @@ class ScoreScreen extends StatelessWidget {
       appBar: AppBar(
         title: Padding(
           padding: EdgeInsets.only(left: AppPadding.p20),
-          child: Text("Exam Score"),
+          child: Text(S.of(context).examScore),
         ),
       ),
       body: Padding(
@@ -46,7 +47,7 @@ class ScoreScreen extends StatelessWidget {
                 Align(
                   alignment: Alignment.centerLeft,
                   child: Text(
-                    "Your Score",
+                    S.of(context).yourScore,
                     style: Theme.of(
                       context,
                     ).textTheme.titleMedium!.copyWith(fontSize: FontSize.s18),
@@ -62,7 +63,7 @@ class ScoreScreen extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          "Correct",
+                          S.of(context).correct,
                           style: Theme.of(context).textTheme.titleMedium!
                               .copyWith(
                                 color: Theme.of(context).colorScheme.primary,
@@ -70,7 +71,7 @@ class ScoreScreen extends StatelessWidget {
                         ),
                         SizedBox(height: AppSize.s10),
                         Text(
-                          "Incorrect",
+                          S.of(context).incorrect,
                           style: Theme.of(context).textTheme.titleMedium!
                               .copyWith(
                                 color: Theme.of(context).colorScheme.error,
@@ -121,7 +122,7 @@ class ScoreScreen extends StatelessWidget {
                     ),
                     child: isLoading
                         ? const CircularProgressIndicator()
-                        : Text("Show results"),
+                        : Text(S.of(context).showResults),
                   ),
                 ),
                 SizedBox(height: AppSize.s20),
@@ -132,7 +133,7 @@ class ScoreScreen extends StatelessWidget {
                       GetViewModels.questionsViewModel.resetAnswersBox();
                       context.go(Routes.questionsRoute, extra: examId);
                     },
-                    child: Text("Start again"),
+                    child: Text(S.of(context).startAgain),
                   ),
                 ),
                 Spacer(flex: 2),

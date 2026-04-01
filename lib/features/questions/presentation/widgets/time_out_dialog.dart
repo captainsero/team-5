@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:team_5_examapp/core/constants/assets_manager.dart';
 import 'package:team_5_examapp/core/constants/values_manager.dart';
 import 'package:team_5_examapp/core/routing/routes_manager.dart';
+import 'package:team_5_examapp/generated/l10n.dart';
 
 class TimeOutDialog extends StatelessWidget {
   const TimeOutDialog({super.key, required this.time, required this.examId});
@@ -20,7 +21,7 @@ class TimeOutDialog extends StatelessWidget {
         children: [
           Image.asset(ImageAssets.sandClock),
           Text(
-            'Time out !!',
+            S.of(context).timeOut,
             style: Theme.of(context).textTheme.headlineLarge!.copyWith(
               color: Theme.of(context).colorScheme.error,
               fontWeight: FontWeight.w400,
@@ -38,7 +39,7 @@ class TimeOutDialog extends StatelessWidget {
                 extra: {'time': time, 'examId': examId},
               );
             },
-            child: Text('View Score'),
+            child: Text(S.of(context).viewScore),
           ),
         ),
       ],
