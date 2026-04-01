@@ -303,6 +303,71 @@ class S {
   String get signUp {
     return Intl.message('Sign up', name: 'signUp', desc: '', args: []);
   }
+
+  /// `Exam`
+  String get exam {
+    return Intl.message('Exam', name: 'exam', desc: '', args: []);
+  }
+
+  /// `Back`
+  String get back {
+    return Intl.message('Back', name: 'back', desc: '', args: []);
+  }
+
+  /// `Finish`
+  String get finish {
+    return Intl.message('Finish', name: 'finish', desc: '', args: []);
+  }
+
+  /// `Next`
+  String get next {
+    return Intl.message('Next', name: 'next', desc: '', args: []);
+  }
+
+  /// `Exam Score`
+  String get examScore {
+    return Intl.message('Exam Score', name: 'examScore', desc: '', args: []);
+  }
+
+  /// `Your Score`
+  String get yourScore {
+    return Intl.message('Your Score', name: 'yourScore', desc: '', args: []);
+  }
+
+  /// `Correct`
+  String get correct {
+    return Intl.message('Correct', name: 'correct', desc: '', args: []);
+  }
+
+  /// `Incorrect`
+  String get incorrect {
+    return Intl.message('Incorrect', name: 'incorrect', desc: '', args: []);
+  }
+
+  /// `Show results`
+  String get showResults {
+    return Intl.message(
+      'Show results',
+      name: 'showResults',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Start again`
+  String get startAgain {
+    return Intl.message('Start again', name: 'startAgain', desc: '', args: []);
+  }
+
+  /// `Time out !!`
+  String get timeOut {
+    return Intl.message('Time out !!', name: 'timeOut', desc: '', args: []);
+  }
+
+  /// `View score`
+  String get viewScore {
+    return Intl.message('View score', name: 'viewScore', desc: '', args: []);
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

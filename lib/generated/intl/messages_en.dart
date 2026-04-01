@@ -22,9 +22,11 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+    "back": MessageLookupByLibrary.simpleMessage("Back"),
     "codeIsRequired": MessageLookupByLibrary.simpleMessage("Code is required"),
     "confirmPassword": MessageLookupByLibrary.simpleMessage("Confirm password"),
     "continueButton": MessageLookupByLibrary.simpleMessage("Continue"),
+    "correct": MessageLookupByLibrary.simpleMessage("Correct"),
     "didnotReceiveCode": MessageLookupByLibrary.simpleMessage(
       "Didn\'t recieve code? ",
     ),
@@ -51,13 +53,18 @@ class MessageLookup extends MessageLookupByLibrary {
     "enterYourPassword": MessageLookupByLibrary.simpleMessage(
       "Enter your passwrod",
     ),
+    "exam": MessageLookupByLibrary.simpleMessage("Exam"),
+    "examScore": MessageLookupByLibrary.simpleMessage("Exam Score"),
+    "finish": MessageLookupByLibrary.simpleMessage("Finish"),
     "forgetPassword": MessageLookupByLibrary.simpleMessage("Forget Password"),
     "forgetPasswordDis": MessageLookupByLibrary.simpleMessage(
       "Please enter your email associated to your account",
     ),
+    "incorrect": MessageLookupByLibrary.simpleMessage("Incorrect"),
     "invalidCode": MessageLookupByLibrary.simpleMessage("Invalid code"),
     "login": MessageLookupByLibrary.simpleMessage("Login"),
     "newPassword": MessageLookupByLibrary.simpleMessage("New Password"),
+    "next": MessageLookupByLibrary.simpleMessage("Next"),
     "password": MessageLookupByLibrary.simpleMessage("Password"),
     "passwordDoNotMatch": MessageLookupByLibrary.simpleMessage(
       "Password do not match",
@@ -78,6 +85,11 @@ class MessageLookup extends MessageLookupByLibrary {
     "resetPasswordDis": MessageLookupByLibrary.simpleMessage(
       "Password must not be empty and must contain 6 characters with upper case letter and one number at least",
     ),
+    "showResults": MessageLookupByLibrary.simpleMessage("Show results"),
     "signUp": MessageLookupByLibrary.simpleMessage("Sign up"),
+    "startAgain": MessageLookupByLibrary.simpleMessage("Start again"),
+    "timeOut": MessageLookupByLibrary.simpleMessage("Time out !!"),
+    "viewScore": MessageLookupByLibrary.simpleMessage("View score"),
+    "yourScore": MessageLookupByLibrary.simpleMessage("Your Score"),
   };
 }

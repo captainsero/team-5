@@ -31,5 +31,20 @@
     "enterPassword": "Enter your password",
     "rememberMe": "Remember me",
     "dontHaveAccount": "Don't have an account?",
-    "signUp": "Sign up"
+    "signUp": "Sign up",
+
+    "exam" : "Exam",
+    "back" : "Back",
+    "finish" : "Finish",
+    "next" : "Next",
+
+    "examScore" : "Exam Score",
+    "yourScore" : "Your Score",
+    "correct" : "Correct",
+    "incorrect" : "Incorrect",
+    "showResults" : "Show results",
+    "startAgain" : "Start again",
+
+    "timeOut" : "Time out !!",
+    "viewScore" : "View score"
 }
