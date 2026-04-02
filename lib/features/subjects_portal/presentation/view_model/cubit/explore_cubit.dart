@@ -15,26 +15,36 @@ class ExploreCubit extends Cubit<ExploreState> {
 
   ExploreCubit({required this.getAllSubjectsUseCase}) : super(ExploreState());
 
-  Future<void> getAllSubjects({required String token}) async {
+  Future<void> getAllSubjects() async {
+    emit(
+      state.copyWith(
+        subjectState: state.subjectState.copyWith(
+          isLoading: true,
+          errorMessage: null,
+          data: null,
+        ),
+      ),
+    );
+
     final token = await SecureStorageService.read(
       key: SecureStorageKeys.userToken,
     );
 
     final tokenHandler = SecureStorageHandler.handle(token);
 
-    emit(
-      state.copyWith(
-        subjectState: state.subjectState.copyWith(isLoading: true),
-      ),
-    );
-
     final subjects = await getAllSubjectsUseCase.call(tokenHandler.data!);
+
+    final handler = ResponseHandler.handle(subjects);
+
     emit(
       state.copyWith(
-        subjectState: state.subjectState.copyWith(isLoading: false),
+        subjectState: state.subjectState.copyWith(
+          isLoading: handler.isLoading,
+          data: handler.data,
+          errorMessage: handler.errorMessage,
+        ),
       ),
     );
-    ResponseHandler.handle(subjects);
   }
 
   Future<void> changeTab(int index) async {
