@@ -16,14 +16,14 @@
     "continueButton" : "Continue",
 
     "emailVerification" : "Email verification",
-    "emailVerificationDis" : "Please enter your code that send to your email adress",
-    "didnotReceiveCode" : "Didn't recieve code? ",
+    "emailVerificationDis" : "Please enter your code that send to your email address",
+    "didnotReceiveCode" : "Didn't receive code? ",
     "resend" : "Resend",
 
     "resetPassword" : "Reset Password",
     "resetPasswordDis" : "Password must not be empty and must contain 6 characters with upper case letter and one number at least",
     "newPassword" : "New Password",
-    "enterYourPassword" : "Enter your passwrod",
+    "enterYourPassword" : "Enter your password",
     "confirmPassword" : "Confirm password",
     
     "login": "Login",
