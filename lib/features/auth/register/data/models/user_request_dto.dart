@@ -1,9 +1,9 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:team_5_examapp/features/auth/login/domain/models/user_model.dart';
-part 'user_dto.g.dart';
+part 'user_request_dto.g.dart';
 
 @JsonSerializable()
-class UserDto {
+class UserRequestDto {
   @JsonKey(name: "username")
   String username;
   @JsonKey(name: "firstName")
@@ -19,7 +19,7 @@ class UserDto {
   @JsonKey(name: "phone")
   String phone;
 
-  UserDto({
+  UserRequestDto({
     required this.username,
     required this.firstName,
     required this.lastName,
@@ -29,7 +29,7 @@ class UserDto {
     required this.phone,
   });
 
-  UserDto copyWith({
+  UserRequestDto copyWith({
     String? username,
     String? firstName,
     String? lastName,
@@ -37,7 +37,7 @@ class UserDto {
     String? password,
     String? rePassword,
     String? phone,
-  }) => UserDto(
+  }) => UserRequestDto(
     username: username ?? this.username,
     firstName: firstName ?? this.firstName,
     lastName: lastName ?? this.lastName,
@@ -47,10 +47,10 @@ class UserDto {
     phone: phone ?? this.phone,
   );
 
-  factory UserDto.fromJson(Map<String, dynamic> json) =>
-      _$UserDtoFromJson(json);
+  factory UserRequestDto.fromJson(Map<String, dynamic> json) =>
+      _$UserRequestDtoFromJson(json);
 
-  Map<String, dynamic> toJson() => _$UserDtoToJson(this);
+  Map<String, dynamic> toJson() => _$UserRequestDtoToJson(this);
 
   UserModel toDomain() {
     return UserModel(

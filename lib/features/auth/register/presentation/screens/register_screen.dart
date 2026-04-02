@@ -175,7 +175,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             : () async {
                                 if (_formKey.currentState!.validate()) {
                                   await viewModel.registerUser(
-                                    userInfo: UserDto(
+                                    userInfo: UserRequestDto(
                                       username: _userNameController.text,
                                       firstName: _firstNameController.text,
                                       lastName: _lastNameController.text,

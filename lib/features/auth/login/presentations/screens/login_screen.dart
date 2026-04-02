@@ -162,6 +162,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                       password: _passwordController.text.trim(),
                                       rememberMe: state.rememberMe,
                                     );
+                                    context.go(Routes.mainSurveyRoute);
                                   }
                                 },
                           child: loginState.isLoading
