@@ -16,39 +16,33 @@ class ExploreCubit extends Cubit<ExploreState> {
   ExploreCubit({required this.getAllSubjectsUseCase}) : super(ExploreState());
 
   Future<void> getAllSubjects() async {
-    final tokenResponse = await SecureStorageService.read(
-      key: SecureStorageKeys.userToken,
-    );
-
-    final tokenHandler = SecureStorageHandler.handle(tokenResponse);
-    final token = tokenHandler.data;
-
-    if (token == null || token.isEmpty) {
-      emit(
-        state.copyWith(
-          subjectState: state.subjectState.copyWith(
-            isLoading: false,
-            data: null,
-            errorMessage: 'Missing auth token. Please login again.',
-          ),
-        ),
-      );
-      return;
-    }
-
     emit(
       state.copyWith(
-        subjectState: state.subjectState.copyWith(isLoading: true),
+        subjectState: state.subjectState.copyWith(
+          isLoading: true,
+          errorMessage: null,
+          data: null,
+        ),
       ),
     );
 
-    final subjectsResponse = await getAllSubjectsUseCase.call(token);
-    final newSubjectState = ResponseHandler.handle(subjectsResponse);
+    final token = await SecureStorageService.read(
+      key: SecureStorageKeys.userToken,
+    );
+
+    final tokenHandler = SecureStorageHandler.handle(token);
+
+    final subjects = await getAllSubjectsUseCase.call(tokenHandler.data!);
+
+    final handler = ResponseHandler.handle(subjects);
 
     emit(
       state.copyWith(
-        subjectState: newSubjectState,
-        filteredSubjects: newSubjectState.data ?? const [],
+        subjectState: state.subjectState.copyWith(
+          isLoading: handler.isLoading,
+          data: handler.data,
+          errorMessage: handler.errorMessage,
+        ),
       ),
     );
   }
@@ -64,9 +58,7 @@ class ExploreCubit extends Cubit<ExploreState> {
     final results = trimmed.isEmpty
         ? source
         : source.where((subject) {
-            return subject.name
-                .toLowerCase()
-                .contains(trimmed.toLowerCase());
+            return subject.name.toLowerCase().contains(trimmed.toLowerCase());
           }).toList();
 
     emit(state.copyWith(searchQuery: query, filteredSubjects: results));

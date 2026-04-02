@@ -6,22 +6,8 @@ import 'package:team_5_examapp/features/subjects_portal/presentation/view_model/
 import 'package:team_5_examapp/features/subjects_portal/presentation/widgets/custom_search_bar.dart';
 import 'package:team_5_examapp/features/subjects_portal/presentation/widgets/subject_card.dart';
 
-class ExploreScreen extends StatefulWidget {
+class ExploreScreen extends StatelessWidget {
   const ExploreScreen({super.key});
-
-  @override
-  State<ExploreScreen> createState() => _ExploreScreenState();
-}
-
-class _ExploreScreenState extends State<ExploreScreen> {
-  @override
-  void initState() {
-    super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      if (!mounted) return;
-      context.read<ExploreCubit>().getAllSubjects();
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -29,57 +15,51 @@ class _ExploreScreenState extends State<ExploreScreen> {
       builder: (context, state) {
         final subjectState = state.subjectState;
 
+        // Loading
         if (subjectState.isLoading) {
-          return Scaffold(
-            appBar: AppBar(
-              title: Text(
-                AppConstants.surveyAppBarTitle,
-                style: TextStyle(color: AppColors.primary),
-              ),
-            ),
-            body: const Center(child: CircularProgressIndicator()),
-          );
+          return Center(child: CircularProgressIndicator());
         }
 
+        // Error
         if (subjectState.errorMessage != null) {
-          return Scaffold(
-            appBar: AppBar(
-              title: Text(
-                AppConstants.surveyAppBarTitle,
-                style: TextStyle(color: AppColors.primary),
-              ),
-            ),
-            body: Center(child: Text(subjectState.errorMessage!)),
-          );
+          return Center(child: Text(subjectState.errorMessage!));
         }
 
-        final subjects = state.filteredSubjects;
-        return SafeArea(
-          child: Scaffold(
-            body: SingleChildScrollView(
-              child: Column(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.all(16.0),
-                    child: Text(
-                      AppConstants.surveyAppBarTitle,
-                      style: TextStyle(color: AppColors.primary),
-                      textAlign: TextAlign.start,
-                    ),
-                  ),
-                  const CustomSearchBar(),
-                  ListView.builder(
-                    itemCount: subjects.length,
-                    shrinkWrap: true,
-                    physics: const NeverScrollableScrollPhysics(),
-                    itemBuilder: (context, index) {
-                      final subject = subjects[index];
-                      return SubjectCard(subject: subject);
-                    },
-                  ),
-                ],
-              ),
+        // Empty
+        if (subjectState.data == null || subjectState.data!.isEmpty) {
+          return Center(child: Text('No subjects available'));
+        }
+
+        // Success
+        final subjects = subjectState.data!;
+
+        return Scaffold(
+          appBar: AppBar(
+            title: Text(
+              AppConstants.surveyAppBarTitle,
+              style: TextStyle(color: AppColors.primary),
             ),
+          ),
+          body: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Text(
+                  AppConstants.surveyAppBarTitle,
+                  style: TextStyle(color: AppColors.primary),
+                ),
+              ),
+              CustomSearchBar(),
+              Expanded(
+                child: ListView.builder(
+                  itemCount: subjects.length,
+                  itemBuilder: (context, index) {
+                    return SubjectCard(subject: subjects[index]);
+                  },
+                ),
+              ),
+            ],
           ),
         );
       },
