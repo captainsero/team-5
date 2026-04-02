@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:team_5_examapp/config/models/exam_model.dart';
 import 'package:team_5_examapp/core/constants/assets_manager.dart';
 import 'package:team_5_examapp/core/constants/color_manager.dart';
 import 'package:team_5_examapp/core/constants/font_manager.dart';
 import 'package:team_5_examapp/core/constants/values_manager.dart';
+import 'package:team_5_examapp/core/routing/routes_manager.dart';
 import 'package:team_5_examapp/generated/l10n.dart';
 
 class StartExamScreen extends StatelessWidget {
@@ -17,14 +19,16 @@ class StartExamScreen extends StatelessWidget {
       appBar: AppBar(
         leadingWidth: AppSize.s80,
         leading: IconButton(
-
           onPressed: () => Navigator.pop(context),
           icon: const Icon(Icons.arrow_back_ios),
         ),
       ),
 
       body: Padding(
-        padding:  EdgeInsets.symmetric(horizontal: AppPadding.p20, vertical: AppPadding.p10),
+        padding: EdgeInsets.symmetric(
+          horizontal: AppPadding.p20,
+          vertical: AppPadding.p10,
+        ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -33,13 +37,12 @@ class StartExamScreen extends StatelessWidget {
                 Row(
                   children: [
                     Image.asset(ImageAssets.profit),
-                     SizedBox(width: AppSize.s10),
+                    SizedBox(width: AppSize.s10),
 
                     Text(
                       exam.title,
-                      style: Theme.of(
-                        context,
-                      ).textTheme.headlineMedium?.copyWith(fontSize: FontSize.s24),
+                      style: Theme.of(context).textTheme.headlineMedium
+                          ?.copyWith(fontSize: FontSize.s24),
                     ),
 
                     const Spacer(),
@@ -59,9 +62,12 @@ class StartExamScreen extends StatelessWidget {
                       S.of(context).highLevel,
                       style: Theme.of(context).textTheme.headlineSmall,
                     ),
-                     SizedBox(width: AppSize.s5),
-                    Text(S.of(context).separator, style: TextStyle(color: AppColors.primary)),
-                     SizedBox(width: AppSize.s5),
+                    SizedBox(width: AppSize.s5),
+                    Text(
+                      S.of(context).separator,
+                      style: TextStyle(color: AppColors.primary),
+                    ),
+                    SizedBox(width: AppSize.s5),
                     Text(
                       "${exam.numberOfQuestions} ${S.of(context).questions}",
                       style: Theme.of(context).textTheme.bodyMedium,
@@ -75,14 +81,17 @@ class StartExamScreen extends StatelessWidget {
 
             Container(height: AppSize.s1, color: Colors.grey.shade300),
 
-             SizedBox(height: AppSize.s20),
+            SizedBox(height: AppSize.s20),
 
-            Text(S.of(context).instructions, style: Theme.of(context).textTheme.titleLarge),
+            Text(
+              S.of(context).instructions,
+              style: Theme.of(context).textTheme.titleLarge,
+            ),
 
-             SizedBox(height: AppSize.s10),
+            SizedBox(height: AppSize.s10),
 
             Padding(
-              padding:  EdgeInsets.symmetric(horizontal: AppPadding.p10),
+              padding: EdgeInsets.symmetric(horizontal: AppPadding.p10),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -100,7 +109,11 @@ class StartExamScreen extends StatelessWidget {
             SizedBox(height: AppSize.s48),
             SizedBox(
               width: double.infinity,
-              child: ElevatedButton(onPressed: () {}, child: Text(S.of(context).start)),
+              child: ElevatedButton(
+                onPressed: () =>
+                    context.push(Routes.questionsRoute, extra: exam.id),
+                child: Text(S.of(context).start),
+              ),
             ),
           ],
         ),
