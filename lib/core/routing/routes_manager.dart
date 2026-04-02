@@ -1,4 +1,6 @@
 import 'package:go_router/go_router.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:team_5_examapp/config/di/di.dart';
 import 'package:team_5_examapp/features/auth/forget_password/presentation/screens/forget_pass_view.dart';
 import 'package:team_5_examapp/features/auth/forget_password/presentation/screens/reset_pass_view.dart';
 import 'package:team_5_examapp/features/auth/forget_password/presentation/screens/validation_code_view.dart';
@@ -8,6 +10,7 @@ import 'package:team_5_examapp/features/subjects_portal/presentation/screens/pro
 import 'package:team_5_examapp/features/subjects_portal/presentation/screens/main_survey_screen.dart';
 import 'package:team_5_examapp/features/subjects_portal/presentation/screens/results.dart';
 import 'package:team_5_examapp/features/subjects_portal/presentation/screens/subject_details.dart';
+import 'package:team_5_examapp/features/subjects_portal/presentation/view_model/cubit/explore_cubit.dart';
 
 class Routes {
   static const String splashRoute = "/";
@@ -16,7 +19,7 @@ class Routes {
   static const String validationCodeRoute = "/validationCode";
   static const String resetPassRoute = "/resetPass";
   static const String registerRoute = "/register";
-  static const String subjectDetailsRoute = "/subjectDetails";
+  static const String subjectDetailsRoute = "/subjectDetails/:id";
   static const String profileRoute = "/profile";
   static const String resultsRoute = "/results";
   static const String mainSurveyRoute = "/mainSurvey";
@@ -60,8 +63,7 @@ class AppRouter {
         path: Routes.subjectDetailsRoute,
         name: Routes.subjectDetailsRoute,
         builder: (context, state) {
-          final id = int.parse(state.pathParameters['id']!); // get parameter
-
+          final id = state.pathParameters['id'] ?? '';
           return SubjectDetails(id: id);
         },
       ),
@@ -73,7 +75,10 @@ class AppRouter {
       GoRoute(
         path: Routes.mainSurveyRoute,
         name: Routes.mainSurveyRoute,
-        builder: (context, state) => const MainSurveyScreen(),
+        builder: (context, state) => BlocProvider(
+          create: (_) => getIt.get<ExploreCubit>(),
+          child: const MainSurveyScreen(),
+        ),
       ),
     ],
   );

@@ -1,7 +1,7 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:team_5_examapp/config/shared_models/get_all_subjects_response/meta_data_model/meta_data_dto.dart';
+import 'package:team_5_examapp/config/models/get_all_subjects_response/meta_data_model/meta_data_dto.dart';
 
-import 'package:team_5_examapp/config/shared_models/get_all_subjects_response/subject_dto/subject_dto.dart';
+import 'package:team_5_examapp/config/models/get_all_subjects_response/subject_dto/subject_dto.dart';
 
 part 'all_subject_response_model.g.dart';
 

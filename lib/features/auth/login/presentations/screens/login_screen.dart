@@ -24,13 +24,19 @@ class _LoginScreenState extends State<LoginScreen> {
   final loginViewModel = getIt.get<LoginViewModel>();
 
   @override
-  Widget build(BuildContext context) {
+  void initState() {
+    super.initState();
     loginViewModel.loadSavedEmail().then((_) {
-      if (loginViewModel.state.savedEmail != null) {
-        _emailController.text = loginViewModel.state.savedEmail!;
+      if (!mounted) return;
+      final saved = loginViewModel.state.savedEmail;
+      if (saved != null && saved.isNotEmpty) {
+        _emailController.text = saved;
       }
     });
+  }
 
+  @override
+  Widget build(BuildContext context) {
     return BlocProvider<LoginViewModel>(
       create: (context) => loginViewModel,
       child: BlocConsumer<LoginViewModel, LoginState>(
@@ -39,6 +45,7 @@ class _LoginScreenState extends State<LoginScreen> {
             ScaffoldMessenger.of(context).showSnackBar(
               const SnackBar(content: Text("Login successful! Welcome")),
             );
+            context.go(Routes.mainSurveyRoute);
           }
         },
         listenWhen: (previous, current) =>
@@ -162,7 +169,6 @@ class _LoginScreenState extends State<LoginScreen> {
                                       password: _passwordController.text.trim(),
                                       rememberMe: state.rememberMe,
                                     );
-                                    context.go(Routes.mainSurveyRoute);
                                   }
                                 },
                           child: loginState.isLoading

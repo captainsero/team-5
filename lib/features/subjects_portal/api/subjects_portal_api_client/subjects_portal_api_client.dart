@@ -1,7 +1,7 @@
 import 'package:retrofit/retrofit.dart';
 import 'package:injectable/injectable.dart';
 import 'package:dio/dio.dart';
-import 'package:team_5_examapp/config/shared_models/get_all_subjects_response/all_subjects_response_model/all_subject_response_model.dart';
+import 'package:team_5_examapp/config/models/get_all_subjects_response/all_subjects_response_model/all_subject_response_model.dart';
 import 'package:team_5_examapp/core/constants/app_end_points.dart';
 
 part 'subjects_portal_api_client.g.dart';

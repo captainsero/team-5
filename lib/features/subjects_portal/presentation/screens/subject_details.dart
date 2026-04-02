@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class SubjectDetails extends StatelessWidget {
   const SubjectDetails({super.key, required this.id});
 
-  final int id;
+  final String id;
 
   @override
   Widget build(BuildContext context) {

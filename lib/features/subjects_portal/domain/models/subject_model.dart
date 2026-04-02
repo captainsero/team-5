@@ -1,4 +1,4 @@
-import 'package:team_5_examapp/config/shared_models/get_all_subjects_response/subject_dto/subject_dto.dart';
+import 'package:team_5_examapp/config/models/get_all_subjects_response/subject_dto/subject_dto.dart';
 
 class SubjectModel {
   final String id;

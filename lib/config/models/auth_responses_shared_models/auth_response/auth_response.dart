@@ -1,5 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:team_5_examapp/config/shared_models/auth_responses_shared_models/user_response_dto.dart';
+import 'package:team_5_examapp/config/models/auth_responses_shared_models/user_response_dto.dart';
 
 part 'auth_response.g.dart';
 

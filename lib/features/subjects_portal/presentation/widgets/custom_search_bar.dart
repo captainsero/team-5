@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:team_5_examapp/core/constants/color_manager.dart';
+import 'package:team_5_examapp/features/subjects_portal/presentation/view_model/cubit/explore_cubit.dart';
 
 class CustomSearchBar extends StatelessWidget {
   const CustomSearchBar({super.key});
@@ -24,7 +26,7 @@ class CustomSearchBar extends StatelessWidget {
             Expanded(
               child: TextField(
                 onChanged: (value) {
-                  // connect to cubit here later
+                  context.read<ExploreCubit>().search(value);
                 },
                 decoration: InputDecoration(
                   hintText: "Search subjects...",
