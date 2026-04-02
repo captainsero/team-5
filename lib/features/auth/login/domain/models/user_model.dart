@@ -1,4 +1,4 @@
-import 'package:team_5_examapp/config/shared_models/auth_responses_shared_models/auth_response/auth_response.dart';
+import 'package:team_5_examapp/config/models/auth_responses_shared_models/auth_response/auth_response.dart';
 
 class UserModel {
   final String username;

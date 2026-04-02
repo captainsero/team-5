@@ -1,7 +1,7 @@
 import 'package:injectable/injectable.dart';
 import 'package:team_5_examapp/config/base_response/base_response.dart';
 import 'package:team_5_examapp/config/models/exam_model.dart';
-import 'package:team_5_examapp/features/exams/data/models/exams_dto.dart';
+import 'package:team_5_examapp/config/models/exams_dto.dart';
 import '../data_sources/exams_remote_data_source_contract.dart';
 import '../../domain/repo/exams_repo_contract.dart';
 

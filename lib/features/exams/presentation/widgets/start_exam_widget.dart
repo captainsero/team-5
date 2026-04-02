@@ -109,11 +109,11 @@ class StartExamScreen extends StatelessWidget {
             SizedBox(height: AppSize.s48),
             SizedBox(
               width: double.infinity,
-              child: ElevatedButton(
-                onPressed: () =>
-                    context.push(Routes.questionsRoute, extra: exam.id),
-                child: Text(S.of(context).start),
-              ),
+              // child: ElevatedButton(
+              //   onPressed: () =>
+              //       context.push(Routes.questionsRoute, extra: exam.id),
+              //   child: Text(S.of(context).start),
+              // ),
             ),
           ],
         ),

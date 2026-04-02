@@ -1,6 +1,6 @@
 import 'package:injectable/injectable.dart';
 import 'package:team_5_examapp/config/base_response/base_response.dart';
-import 'package:team_5_examapp/features/exams/data/models/exams_dto.dart';
+import 'package:team_5_examapp/config/models/exams_dto.dart';
 import '../../data/data_sources/exams_remote_data_source_contract.dart';
 import '../exams_api_client/exams_api_client.dart';
 
