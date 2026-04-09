@@ -1,4 +1,5 @@
 part of 'forget_pass_view_model.dart';
+
 class ForgetPassState {
   BaseState<ForgetPasswordResponse> forgetPasswordState =
       BaseState<ForgetPasswordResponse>(isLoading: false);
@@ -15,14 +16,11 @@ class ForgetPassState {
     BaseState<ForgetPasswordResponse>? resetPasswordState,
   }) {
     this.forgetPasswordState =
-        forgetPasswordState ??
-        BaseState<ForgetPasswordResponse>(isLoading: false);
+        forgetPasswordState ?? BaseState<ForgetPasswordResponse>();
     this.confirmValidationState =
-        confirmValidationState ??
-        BaseState<ForgetPasswordResponse>(isLoading: false);
+        confirmValidationState ?? BaseState<ForgetPasswordResponse>();
     this.resetPasswordState =
-        resetPasswordState ??
-        BaseState<ForgetPasswordResponse>(isLoading: false);
+        resetPasswordState ?? BaseState<ForgetPasswordResponse>();
   }
 
   ForgetPassState copyWith({
