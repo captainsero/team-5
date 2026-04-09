@@ -24,6 +24,7 @@ abstract class ForgetPassApiClient {
 
   @PUT(AppEndPoints.resetPassword)
   Future<ForgetPasswordResponse> resetPassword({
+    //! need the API to raplace the map with a model
     @Body() required Map<String, dynamic> resetPassDto,
   });
 }
