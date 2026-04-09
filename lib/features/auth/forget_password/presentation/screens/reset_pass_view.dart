@@ -4,7 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:team_5_examapp/config/app_validator.dart';
 import 'package:team_5_examapp/config/di/di.dart';
 import 'package:team_5_examapp/core/constants/values_manager.dart';
-import 'package:team_5_examapp/core/routing/routes_manager.dart';
+import 'package:team_5_examapp/core/routing/routes_path.dart';
 import 'package:team_5_examapp/features/auth/forget_password/presentation/view_model/cubit/forget_pass_view_model.dart';
 import 'package:team_5_examapp/generated/l10n.dart';
 
@@ -98,7 +98,7 @@ class _ResetPassViewState extends State<ResetPassView> {
                     if (!state.resetPasswordState.isLoading &&
                         state.resetPasswordState.data != null &&
                         state.resetPasswordState.errorMessage == null) {
-                      context.go(Routes.loginRoute);
+                      context.go(RoutesPath.loginRoute);
                     }
                   },
                   builder: (context, state) {

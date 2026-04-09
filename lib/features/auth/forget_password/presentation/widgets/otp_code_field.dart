@@ -5,7 +5,7 @@ import 'package:pinput/pinput.dart';
 import 'package:team_5_examapp/config/app_validator.dart';
 import 'package:team_5_examapp/config/di/di.dart';
 import 'package:team_5_examapp/core/constants/values_manager.dart';
-import 'package:team_5_examapp/core/routing/routes_manager.dart';
+import 'package:team_5_examapp/core/routing/routes_path.dart';
 import 'package:team_5_examapp/features/auth/forget_password/presentation/view_model/cubit/forget_pass_view_model.dart';
 
 class OtpCodeField extends StatefulWidget {
@@ -72,7 +72,7 @@ class _OtpCodeFieldState extends State<OtpCodeField> {
           if (!state.confirmValidationState.isLoading &&
               state.confirmValidationState.data != null &&
               state.confirmValidationState.errorMessage == null) {
-            context.push(Routes.resetPassRoute);
+            context.push(RoutesPath.resetPassRoute);
           }
         },
         buildWhen: (previous, current) =>

@@ -1,46 +1,38 @@
 import 'package:go_router/go_router.dart';
+import 'package:team_5_examapp/core/routing/routes_path.dart';
 import 'package:team_5_examapp/features/auth/forget_password/presentation/screens/forget_pass_view.dart';
 import 'package:team_5_examapp/features/auth/forget_password/presentation/screens/reset_pass_view.dart';
 import 'package:team_5_examapp/features/auth/forget_password/presentation/screens/otp_verification_view.dart';
 import 'package:team_5_examapp/features/auth/login/presentations/screens/login_screen.dart';
 import 'package:team_5_examapp/features/auth/register/presentation/screens/register_screen.dart';
 
-class Routes {
-  static const String splashRoute = "/";
-  static const String loginRoute = "/login";
-  static const String forgetPasswordRoute = "/forgetPassword";
-  static const String otpVerificationRoute = "/validationCode";
-  static const String resetPassRoute = "/resetPass";
-  static const String registerRoute = "/register";
-}
-
 class AppRouter {
   static final GoRouter router = GoRouter(
-    initialLocation: Routes.loginRoute,
+    initialLocation: RoutesPath.loginRoute,
     routes: [
       GoRoute(
-        path: Routes.registerRoute,
-        name: Routes.registerRoute,
+        path: RoutesPath.registerRoute,
+        name: RoutesPath.registerRoute,
         builder: (_, _) => SignUpScreen(),
       ),
       GoRoute(
-        path: Routes.loginRoute,
-        name: Routes.loginRoute,
+        path: RoutesPath.loginRoute,
+        name: RoutesPath.loginRoute,
         builder: (_, _) => LoginScreen(),
       ),
       GoRoute(
-        path: Routes.forgetPasswordRoute,
-        name: Routes.forgetPasswordRoute,
+        path: RoutesPath.forgetPasswordRoute,
+        name: RoutesPath.forgetPasswordRoute,
         builder: (_, _) => ForgetPassView(),
       ),
       GoRoute(
-        path: Routes.otpVerificationRoute,
-        name: Routes.otpVerificationRoute,
+        path: RoutesPath.otpVerificationRoute,
+        name: RoutesPath.otpVerificationRoute,
         builder: (_, _) => OtpVerificationView(),
       ),
       GoRoute(
-        path: Routes.resetPassRoute,
-        name: Routes.resetPassRoute,
+        path: RoutesPath.resetPassRoute,
+        name: RoutesPath.resetPassRoute,
         builder: (_, _) => ResetPassView(),
       ),
     ],
