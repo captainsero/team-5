@@ -8,8 +8,9 @@ abstract class DioModule {
   Dio get dio => Dio(
     BaseOptions(
       baseUrl: AppEndPoints.baseUrl,
-      connectTimeout: const Duration(seconds: 10),
-      receiveTimeout: const Duration(seconds: 10),
+      sendTimeout: const Duration(seconds: 20),
+      connectTimeout: const Duration(seconds: 20),
+      receiveTimeout: const Duration(seconds: 20),
     ),
   );
 }
