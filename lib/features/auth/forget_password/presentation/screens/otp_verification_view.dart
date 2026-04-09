@@ -4,17 +4,17 @@ import 'package:team_5_examapp/config/di/di.dart';
 import 'package:team_5_examapp/core/constants/font_manager.dart';
 import 'package:team_5_examapp/core/constants/values_manager.dart';
 import 'package:team_5_examapp/features/auth/forget_password/presentation/view_model/cubit/forget_pass_view_model.dart';
-import 'package:team_5_examapp/features/auth/forget_password/presentation/widgets/validation_code_field.dart';
+import 'package:team_5_examapp/features/auth/forget_password/presentation/widgets/otp_code_field.dart';
 import 'package:team_5_examapp/generated/l10n.dart';
 
-class ValidationCodeView extends StatefulWidget {
-  const ValidationCodeView({super.key});
+class OtpVerificationView extends StatefulWidget {
+  const OtpVerificationView({super.key});
 
   @override
-  State<ValidationCodeView> createState() => _ValidationCodeViewState();
+  State<OtpVerificationView> createState() => _OtpVerificationViewState();
 }
 
-class _ValidationCodeViewState extends State<ValidationCodeView> {
+class _OtpVerificationViewState extends State<OtpVerificationView> {
   final viewModel = getIt.get<ForgetPassViewModel>();
   @override
   Widget build(BuildContext context) {
@@ -47,7 +47,7 @@ class _ValidationCodeViewState extends State<ValidationCodeView> {
 
             SizedBox(height: AppSize.s30),
 
-            ValidationCodeField(),
+            OtpCodeField(),
 
             SizedBox(height: AppSize.s30),
 

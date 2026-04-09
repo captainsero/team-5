@@ -8,14 +8,14 @@ import 'package:team_5_examapp/core/constants/values_manager.dart';
 import 'package:team_5_examapp/core/routing/routes_manager.dart';
 import 'package:team_5_examapp/features/auth/forget_password/presentation/view_model/cubit/forget_pass_view_model.dart';
 
-class ValidationCodeField extends StatefulWidget {
-  const ValidationCodeField({super.key});
+class OtpCodeField extends StatefulWidget {
+  const OtpCodeField({super.key});
 
   @override
-  State<ValidationCodeField> createState() => _ValidationCodeFieldState();
+  State<OtpCodeField> createState() => _OtpCodeFieldState();
 }
 
-class _ValidationCodeFieldState extends State<ValidationCodeField> {
+class _OtpCodeFieldState extends State<OtpCodeField> {
   final _formKey = GlobalKey<FormState>();
   final _pinController = TextEditingController();
   final _focusNode = FocusNode();

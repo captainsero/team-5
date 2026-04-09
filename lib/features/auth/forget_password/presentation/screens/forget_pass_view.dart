@@ -95,7 +95,7 @@ class _ForgetPassViewState extends State<ForgetPassView> {
                     if (!state.forgetPasswordState.isLoading &&
                         state.forgetPasswordState.data != null &&
                         state.forgetPasswordState.errorMessage == null) {
-                      context.push(Routes.validationCodeRoute);
+                      context.push(Routes.otpVerificationRoute);
                     }
                   },
                   buildWhen: (previous, current) =>
