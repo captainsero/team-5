@@ -72,15 +72,25 @@ class _ForgetPassViewState extends State<ForgetPassView> {
                       previous.forgetPasswordState !=
                       current.forgetPasswordState,
                   builder: (context, state) {
-                    return TextFormField(
-                      controller: _emailController,
-                      forceErrorText: state.forgetPasswordState.errorMessage,
-                      decoration: InputDecoration(
-                        labelText: S.of(context).email,
-                        hintText: S.of(context).enterYourEmail,
-                      ),
-                      validator: AppValidator.validateEmail,
-                      onChanged: (value) {},
+                    return Column(
+                      children: [
+                        TextFormField(
+                          controller: _emailController,
+                          decoration: InputDecoration(
+                            labelText: S.of(context).email,
+                            hintText: S.of(context).enterYourEmail,
+                          ),
+                          validator: AppValidator.validateEmail,
+                        ),
+
+                        Text(
+                          state.forgetPasswordState.errorMessage ?? '',
+                          style: Theme.of(context).textTheme.bodyLarge!
+                              .copyWith(
+                                color: Theme.of(context).colorScheme.error,
+                              ),
+                        ),
+                      ],
                     );
                   },
                 ),
@@ -108,8 +118,6 @@ class _ForgetPassViewState extends State<ForgetPassView> {
                         onPressed: state.forgetPasswordState.isLoading
                             ? null
                             : () async {
-                                //TODO: solve the validation error
-                                viewModel.clearError();
                                 if (_formKey.currentState!.validate()) {
                                   String email = _emailController.text;
                                   await viewModel.forgetPassword(email: email);
