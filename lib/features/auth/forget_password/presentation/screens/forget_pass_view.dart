@@ -108,6 +108,7 @@ class _ForgetPassViewState extends State<ForgetPassView> {
                         onPressed: state.forgetPasswordState.isLoading
                             ? null
                             : () async {
+                                //TODO: solve the validation error
                                 viewModel.clearError();
                                 if (_formKey.currentState!.validate()) {
                                   String email = _emailController.text;

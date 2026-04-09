@@ -26,50 +26,41 @@ class _ResetPassViewState extends State<ResetPassView> {
   Widget build(BuildContext context) {
     return BlocProvider<ForgetPassViewModel>(
       create: (context) => viewModel,
-      child: BlocConsumer<ForgetPassViewModel, ForgetPassState>(
-        listenWhen: (previous, current) =>
-            previous.resetPasswordState != current.resetPasswordState,
-        listener: (context, state) {
-          if (!state.resetPasswordState.isLoading &&
-              state.resetPasswordState.data != null &&
-              state.resetPasswordState.errorMessage == null) {
-            context.go(Routes.loginRoute);
-          }
-        },
-        buildWhen: (previous, current) =>
-            previous.resetPasswordState != current.resetPasswordState,
-        builder: (context, state) {
-          return Scaffold(
-            appBar: AppBar(
-              leading: IconButton(
-                onPressed: () => context.pop(),
-                icon: Icon(Icons.arrow_back_ios),
-              ),
-              title: Text(S.of(context).passwrod),
-            ),
-            body: SingleChildScrollView(
-              padding: EdgeInsets.all(AppPadding.p20),
-              child: Form(
-                key: _formKey,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Text(
-                      S.of(context).resetPassword,
-                      style: Theme.of(context).textTheme.headlineMedium,
-                    ),
+      child: Scaffold(
+        appBar: AppBar(
+          leading: IconButton(
+            onPressed: () => context.pop(),
+            icon: Icon(Icons.arrow_back_ios),
+          ),
+          title: Text(S.of(context).passwrod),
+        ),
+        body: SingleChildScrollView(
+          padding: EdgeInsets.all(AppPadding.p20),
+          child: Form(
+            key: _formKey,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Text(
+                  S.of(context).resetPassword,
+                  style: Theme.of(context).textTheme.headlineMedium,
+                ),
 
-                    SizedBox(height: AppSize.s16),
+                SizedBox(height: AppSize.s16),
 
-                    Text(
-                      S.of(context).resetPasswordDis,
-                      textAlign: TextAlign.center,
-                      style: Theme.of(context).textTheme.bodyLarge,
-                    ),
+                Text(
+                  S.of(context).resetPasswordDis,
+                  textAlign: TextAlign.center,
+                  style: Theme.of(context).textTheme.bodyLarge,
+                ),
 
-                    SizedBox(height: AppSize.s30),
+                SizedBox(height: AppSize.s30),
 
-                    TextFormField(
+                BlocBuilder<ForgetPassViewModel, ForgetPassState>(
+                  buildWhen: (previous, current) =>
+                      previous.resetPasswordState != current.resetPasswordState,
+                  builder: (context, state) {
+                    return TextFormField(
                       controller: _newPasswordController,
                       obscureText: true,
                       forceErrorText: state.resetPasswordState.errorMessage,
@@ -78,35 +69,47 @@ class _ResetPassViewState extends State<ResetPassView> {
                         hintText: S.of(context).enterYourPassword,
                       ),
                       validator: AppValidator.validatePassword,
-                      onChanged: (_) {
-                        viewModel.clearError();
-                      },
-                    ),
+                      onChanged: (_) {},
+                    );
+                  },
+                ),
 
-                    SizedBox(height: AppSize.s30),
+                SizedBox(height: AppSize.s30),
 
-                    TextFormField(
-                      controller: _confirmPasswordController,
-                      obscureText: true,
-                      decoration: InputDecoration(
-                        labelText: S.of(context).confirmPassword,
-                        hintText: S.of(context).confirmPassword,
-                      ),
-                      validator: (value) =>
-                          AppValidator.validateConfirmPassword(
-                            value,
-                            _newPasswordController.text,
-                          ),
-                    ),
+                TextFormField(
+                  controller: _confirmPasswordController,
+                  obscureText: true,
+                  decoration: InputDecoration(
+                    labelText: S.of(context).confirmPassword,
+                    hintText: S.of(context).confirmPassword,
+                  ),
+                  validator: (value) => AppValidator.validateConfirmPassword(
+                    value,
+                    _newPasswordController.text,
+                  ),
+                ),
 
-                    SizedBox(height: AppSize.s30),
+                SizedBox(height: AppSize.s30),
 
-                    SizedBox(
+                BlocConsumer<ForgetPassViewModel, ForgetPassState>(
+                  listenWhen: (previous, current) =>
+                      previous.resetPasswordState != current.resetPasswordState,
+                  listener: (context, state) {
+                    if (!state.resetPasswordState.isLoading &&
+                        state.resetPasswordState.data != null &&
+                        state.resetPasswordState.errorMessage == null) {
+                      context.go(Routes.loginRoute);
+                    }
+                  },
+                  builder: (context, state) {
+                    return SizedBox(
                       width: double.infinity,
                       child: ElevatedButton(
                         onPressed: state.resetPasswordState.isLoading
                             ? null
                             : () async {
+                                //TODO: solve the validation error
+                                await viewModel.clearError();
                                 if (_formKey.currentState!.validate()) {
                                   String newPasswrod =
                                       _newPasswordController.text;
@@ -117,13 +120,13 @@ class _ResetPassViewState extends State<ResetPassView> {
                               },
                         child: Text(S.of(context).continueButton),
                       ),
-                    ),
-                  ],
+                    );
+                  },
                 ),
-              ),
+              ],
             ),
-          );
-        },
+          ),
+        ),
       ),
     );
   }
