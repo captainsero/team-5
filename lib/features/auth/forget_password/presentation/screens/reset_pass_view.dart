@@ -60,16 +60,26 @@ class _ResetPassViewState extends State<ResetPassView> {
                   buildWhen: (previous, current) =>
                       previous.resetPasswordState != current.resetPasswordState,
                   builder: (context, state) {
-                    return TextFormField(
-                      controller: _newPasswordController,
-                      obscureText: true,
-                      forceErrorText: state.resetPasswordState.errorMessage,
-                      decoration: InputDecoration(
-                        labelText: S.of(context).newPassword,
-                        hintText: S.of(context).enterYourPassword,
-                      ),
-                      validator: AppValidator.validatePassword,
-                      onChanged: (_) {},
+                    return Column(
+                      children: [
+                        TextFormField(
+                          controller: _newPasswordController,
+                          obscureText: true,
+                          decoration: InputDecoration(
+                            labelText: S.of(context).newPassword,
+                            hintText: S.of(context).enterYourPassword,
+                          ),
+                          validator: AppValidator.validatePassword,
+                        ),
+
+                        Text(
+                          state.resetPasswordState.errorMessage ?? '',
+                          style: Theme.of(context).textTheme.bodyLarge!
+                              .copyWith(
+                                color: Theme.of(context).colorScheme.error,
+                              ),
+                        ),
+                      ],
                     );
                   },
                 ),
@@ -108,8 +118,6 @@ class _ResetPassViewState extends State<ResetPassView> {
                         onPressed: state.resetPasswordState.isLoading
                             ? null
                             : () async {
-                                //TODO: solve the validation error
-                                await viewModel.clearError();
                                 if (_formKey.currentState!.validate()) {
                                   String newPasswrod =
                                       _newPasswordController.text;
