@@ -1,11 +1,8 @@
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:team_5_examapp/config/di/di.dart';
 import 'package:team_5_examapp/core/routing/routes_path.dart';
 import 'package:team_5_examapp/features/auth/forget_password/presentation/screens/forget_pass_view.dart';
 import 'package:team_5_examapp/features/auth/forget_password/presentation/screens/reset_pass_view.dart';
 import 'package:team_5_examapp/features/auth/forget_password/presentation/screens/otp_verification_view.dart';
-import 'package:team_5_examapp/features/auth/forget_password/presentation/view_model/cubit/forget_pass_view_model.dart';
 import 'package:team_5_examapp/features/auth/login/presentations/screens/login_screen.dart';
 import 'package:team_5_examapp/features/auth/register/presentation/screens/register_screen.dart';
 
@@ -26,40 +23,17 @@ class AppRouter {
       GoRoute(
         path: RoutesPath.forgetPasswordRoute,
         name: RoutesPath.forgetPasswordRoute,
-        builder: (_, _) {
-          final ForgetPassViewModel forgetPassViewModel = getIt
-              .get<ForgetPassViewModel>();
-          return BlocProvider<ForgetPassViewModel>(
-            create: (context) => forgetPassViewModel,
-            child: ForgetPassView(forgetPassViewModel: forgetPassViewModel),
-          );
-        },
+        builder: (_, _) => ForgetPassView(),
       ),
       GoRoute(
         path: RoutesPath.otpVerificationRoute,
         name: RoutesPath.otpVerificationRoute,
-        builder: (_, state) {
-          final ForgetPassViewModel forgetPassViewModel =
-              state.extra as ForgetPassViewModel;
-          return BlocProvider<ForgetPassViewModel>.value(
-            value: forgetPassViewModel,
-            child: OtpVerificationView(
-              forgetPassViewModel: forgetPassViewModel,
-            ),
-          );
-        },
+        builder: (_, _) => OtpVerificationView(),
       ),
       GoRoute(
         path: RoutesPath.resetPassRoute,
         name: RoutesPath.resetPassRoute,
-        builder: (_, state) {
-          final ForgetPassViewModel forgetPassViewModel =
-              state.extra as ForgetPassViewModel;
-          return BlocProvider<ForgetPassViewModel>.value(
-            value: forgetPassViewModel,
-            child: ResetPassView(forgetPassViewModel: forgetPassViewModel),
-          );
-        },
+        builder: (_, _) => ResetPassView(),
       ),
     ],
   );
