@@ -3,8 +3,8 @@
 //     final allSubjectsResponseModel = allSubjectsResponseModelFromMap(jsonString);
 
 import 'package:json_annotation/json_annotation.dart';
-import 'package:team_5_examapp/features/subjects_portal/data/models/meta_data_model/meta_data_model.dart';
-import 'package:team_5_examapp/features/subjects_portal/data/models/subject_dto/subject_dto.dart';
+import 'package:team_5_examapp/config/models/meta_data_model/meta_data_model.dart';
+import 'package:team_5_examapp/config/models/subject_dto/subject_dto.dart';
 
 part 'all_subjects_response_model.g.dart';
 

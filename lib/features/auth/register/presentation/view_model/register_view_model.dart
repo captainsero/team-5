@@ -2,7 +2,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 import 'package:team_5_examapp/config/base_state/base_state.dart';
 import 'package:team_5_examapp/config/response_handler/response_handler.dart';
-import 'package:team_5_examapp/features/auth/auth_shared_models/responses/register_response.dart';
+import 'package:team_5_examapp/features/auth/auth_shared_models/responses/auth_response.dart';
 import 'package:team_5_examapp/features/auth/register/data/models/user_request_dto.dart';
 import 'package:team_5_examapp/features/auth/register/domain/use_cases/register_use_case.dart';
 
@@ -18,7 +18,7 @@ class RegisterViewModel extends Cubit<RegisterState> {
     emit(state.copyWith(registerUserState: BaseState(isLoading: false)));
   }
 
-  Future<void> registerUser({required UserDto userInfo}) async {
+  Future<void> registerUser({required UserRequestDto userInfo}) async {
     emit(
       state.copyWith(
         registerUserState: state.registerUserState.copyWith(isLoading: true),
