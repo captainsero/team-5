@@ -118,50 +118,30 @@ class ForgetPassViewModel extends Cubit<ForgetPassState> {
         resetPasswordState: state.resetPasswordState.copyWith(isLoading: true),
       ),
     );
-
-    //TODO: access the email from repo
-    final emailResponse = await SecureStorageService.read(
-      key: SecureStorageKeys.userEmail,
+    //TODO: Test when the api is back
+    final response = await resetPassUseCase(
+      resetPassDto: ResetPassDto(newPassword: newPassword),
     );
 
-    switch (emailResponse) {
-      case SuccessBaseResponse<String>(data: final email):
-        final response = await resetPassUseCase(
-          resetPassDto: ResetPassDto(email: email, newPassword: newPassword),
-        );
-
-        switch (response) {
-          case SuccessBaseResponse():
-            emit(
-              state.copyWith(
-                resetPasswordState: state.resetPasswordState.copyWith(
-                  isLoading: false,
-                  data: response.data,
-                  errorMessage: null,
-                ),
-              ),
-            );
-            break;
-          case ErrorBaseResponse():
-            emit(
-              state.copyWith(
-                resetPasswordState: state.resetPasswordState.copyWith(
-                  isLoading: false,
-                  data: null,
-                  errorMessage: response.errorMessage,
-                ),
-              ),
-            );
-            break;
-        }
-        break;
-
-      case ErrorBaseResponse<String>():
+    switch (response) {
+      case SuccessBaseResponse():
         emit(
           state.copyWith(
             resetPasswordState: state.resetPasswordState.copyWith(
               isLoading: false,
-              errorMessage: 'Please start again later.',
+              data: response.data,
+              errorMessage: null,
+            ),
+          ),
+        );
+        break;
+      case ErrorBaseResponse():
+        emit(
+          state.copyWith(
+            resetPasswordState: state.resetPasswordState.copyWith(
+              isLoading: false,
+              data: null,
+              errorMessage: response.errorMessage,
             ),
           ),
         );
