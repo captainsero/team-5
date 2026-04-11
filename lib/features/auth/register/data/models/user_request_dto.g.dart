@@ -1,35 +1,29 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'user_response_dto.dart';
+part of 'user_request_dto.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-UserResponseDto _$UserResponseDtoFromJson(Map<String, dynamic> json) =>
-    UserResponseDto(
+UserRequestDto _$UserRequestDtoFromJson(Map<String, dynamic> json) =>
+    UserRequestDto(
       username: json['username'] as String,
       firstName: json['firstName'] as String,
       lastName: json['lastName'] as String,
       email: json['email'] as String,
+      password: json['password'] as String,
+      rePassword: json['rePassword'] as String,
       phone: json['phone'] as String,
-      role: json['role'] as String?,
-      isVerified: json['isVerified'] as bool?,
-      id: json['_id'] as String?,
-      createdAt: json['createdAt'] == null
-          ? null
-          : DateTime.parse(json['createdAt'] as String),
     );
 
-Map<String, dynamic> _$UserResponseDtoToJson(UserResponseDto instance) =>
+Map<String, dynamic> _$UserRequestDtoToJson(UserRequestDto instance) =>
     <String, dynamic>{
       'username': instance.username,
       'firstName': instance.firstName,
       'lastName': instance.lastName,
       'email': instance.email,
+      'password': instance.password,
+      'rePassword': instance.rePassword,
       'phone': instance.phone,
-      'role': instance.role,
-      'isVerified': instance.isVerified,
-      '_id': instance.id,
-      'createdAt': instance.createdAt?.toIso8601String(),
     };

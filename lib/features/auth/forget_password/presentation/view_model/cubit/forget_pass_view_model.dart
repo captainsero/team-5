@@ -2,6 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:injectable/injectable.dart';
 import 'package:team_5_examapp/config/base_response/base_response.dart';
 import 'package:team_5_examapp/config/base_state/base_state.dart';
+import 'package:team_5_examapp/config/response_handler/response_handler.dart';
 import 'package:team_5_examapp/config/secure_storage/secure_storage_keys.dart';
 import 'package:team_5_examapp/config/secure_storage/secure_storage_service.dart';
 import 'package:team_5_examapp/features/auth/forget_password/data/models/reset_pass_dto.dart';
@@ -45,35 +46,24 @@ class ForgetPassViewModel extends Cubit<ForgetPassState> {
 
     final response = await forgetPassUseCase(email: email);
 
-    switch (response) {
-      case SuccessBaseResponse():
-        await SecureStorageService.write(
-          key: SecureStorageKeys.userEmail,
-          value: email,
-        );
+    final responseHandler = ResponseHandler.handle(response);
 
-        emit(
-          state.copyWith(
-            forgetPasswordState: state.forgetPasswordState.copyWith(
-              isLoading: false,
-              data: response.data,
-              errorMessage: null,
-            ),
-          ),
-        );
-        break;
-
-      case ErrorBaseResponse():
-        emit(
-          state.copyWith(
-            forgetPasswordState: state.forgetPasswordState.copyWith(
-              isLoading: false,
-              errorMessage: response.errorMessage,
-            ),
-          ),
-        );
-        break;
+    if (responseHandler.errorMessage == null && responseHandler.data != null) {
+      await SecureStorageService.write(
+        key: SecureStorageKeys.userEmail,
+        value: email,
+      );
     }
+
+    emit(
+      state.copyWith(
+        forgetPasswordState: state.forgetPasswordState.copyWith(
+          isLoading: responseHandler.isLoading,
+          data: responseHandler.data,
+          errorMessage: responseHandler.errorMessage,
+        ),
+      ),
+    );
   }
 
   Future<void> confirmValidationCode({required String resetCode}) async {
@@ -87,29 +77,17 @@ class ForgetPassViewModel extends Cubit<ForgetPassState> {
 
     final response = await confirmValidationCodeUseCase(resetCode: resetCode);
 
-    switch (response) {
-      case SuccessBaseResponse():
-        emit(
-          state.copyWith(
-            confirmValidationState: state.confirmValidationState.copyWith(
-              isLoading: false,
-              data: response.data,
-              errorMessage: null,
-            ),
-          ),
-        );
-        break;
-      case ErrorBaseResponse():
-        emit(
-          state.copyWith(
-            confirmValidationState: state.confirmValidationState.copyWith(
-              isLoading: false,
-              errorMessage: response.errorMessage,
-            ),
-          ),
-        );
-        break;
-    }
+    final responseHandler = ResponseHandler.handle(response);
+
+    emit(
+      state.copyWith(
+        confirmValidationState: state.confirmValidationState.copyWith(
+          isLoading: responseHandler.isLoading,
+          data: responseHandler.data,
+          errorMessage: responseHandler.errorMessage,
+        ),
+      ),
+    );
   }
 
   Future<void> resetPassword({required String newPassword}) async {
@@ -118,55 +96,22 @@ class ForgetPassViewModel extends Cubit<ForgetPassState> {
         resetPasswordState: state.resetPasswordState.copyWith(isLoading: true),
       ),
     );
-
-    //* Didn't delete the email, you can use in login feature @mohamedabda28
-    final emailResponse = await SecureStorageService.read(
-      key: SecureStorageKeys.userEmail,
+    //TODO: Test when the api is back
+    final response = await resetPassUseCase(
+      resetPassDto: ResetPassDto(newPassword: newPassword),
     );
 
-    switch (emailResponse) {
-      case SuccessBaseResponse<String>(data: final email):
-        final response = await resetPassUseCase(
-          resetPassDto: ResetPassDto(email: email, newPassword: newPassword),
-        );
+    final responseHandler = ResponseHandler.handle(response);
 
-        switch (response) {
-          case SuccessBaseResponse():
-            emit(
-              state.copyWith(
-                resetPasswordState: state.resetPasswordState.copyWith(
-                  isLoading: false,
-                  data: response.data,
-                  errorMessage: null,
-                ),
-              ),
-            );
-            break;
-          case ErrorBaseResponse():
-            emit(
-              state.copyWith(
-                resetPasswordState: state.resetPasswordState.copyWith(
-                  isLoading: false,
-                  data: null,
-                  errorMessage: response.errorMessage,
-                ),
-              ),
-            );
-            break;
-        }
-        break;
-
-      case ErrorBaseResponse<String>():
-        emit(
-          state.copyWith(
-            resetPasswordState: state.resetPasswordState.copyWith(
-              isLoading: false,
-              errorMessage: 'Please start again later.',
-            ),
-          ),
-        );
-        break;
-    }
+    emit(
+      state.copyWith(
+        resetPasswordState: state.resetPasswordState.copyWith(
+          isLoading: responseHandler.isLoading,
+          data: responseHandler.data,
+          errorMessage: responseHandler.errorMessage,
+        ),
+      ),
+    );
   }
 
   Future<void> resendCode() async {
@@ -176,7 +121,6 @@ class ForgetPassViewModel extends Cubit<ForgetPassState> {
 
     switch (emailResponse) {
       case SuccessBaseResponse<String>(data: final email):
-        // reuse the existing logic
         await forgetPassword(email: email);
         break;
 

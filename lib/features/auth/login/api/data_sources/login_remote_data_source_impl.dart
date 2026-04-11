@@ -1,7 +1,6 @@
-import 'dart:async';
 import 'package:injectable/injectable.dart';
 import 'package:team_5_examapp/config/base_response/base_response.dart';
-import 'package:team_5_examapp/features/auth/auth_shared_models/responses/auth_response.dart';
+import 'package:team_5_examapp/config/shared_models/auth_responses_shared_models/auth_response/auth_response.dart';
 import 'package:team_5_examapp/features/auth/login/api/auth_api_client/login_api_client.dart';
 import 'package:team_5_examapp/features/auth/login/data/data_sources/login_remote_data_source_contract.dart';
 import 'package:team_5_examapp/features/auth/login/data/models/login_request_model.dart';
@@ -23,7 +22,10 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSourceContract {
       );
       return SuccessBaseResponse<AuthResponse>(data: response);
     } catch (e) {
-      return ErrorBaseResponse<AuthResponse>(error: e);
+      return ErrorBaseResponse<AuthResponse>(
+        error: e,
+        errorMessage: e.toString(),
+      );
     }
   }
 }
