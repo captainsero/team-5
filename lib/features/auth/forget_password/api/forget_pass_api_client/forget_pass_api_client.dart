@@ -14,16 +14,19 @@ abstract class ForgetPassApiClient {
 
   @POST(AppEndPoints.forgetPassword)
   Future<ForgetPasswordResponse> forgetPassword({
+    //! need the API to use Body()
     @BodyExtra('email') required String email,
   });
 
   @POST(AppEndPoints.verifyResetCode)
   Future<ForgetPasswordResponse> confirmValidationCode({
+    //! need the API to use Body()
     @BodyExtra('resetCode') required String resetCode,
   });
 
   @PUT(AppEndPoints.resetPassword)
   Future<ForgetPasswordResponse> resetPassword({
+    //! need the API to raplace the map with a model
     @Body() required Map<String, dynamic> resetPassDto,
   });
 }
