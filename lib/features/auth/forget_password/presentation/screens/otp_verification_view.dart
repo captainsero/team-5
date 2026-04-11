@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:team_5_examapp/config/di/di.dart';
 import 'package:team_5_examapp/core/constants/font_manager.dart';
 import 'package:team_5_examapp/core/constants/values_manager.dart';
 import 'package:team_5_examapp/features/auth/forget_password/presentation/view_model/cubit/forget_pass_view_model.dart';
@@ -8,14 +7,14 @@ import 'package:team_5_examapp/features/auth/forget_password/presentation/widget
 import 'package:team_5_examapp/generated/l10n.dart';
 
 class OtpVerificationView extends StatefulWidget {
-  const OtpVerificationView({super.key});
+  const OtpVerificationView({super.key, required this.forgetPassViewModel});
+  final ForgetPassViewModel forgetPassViewModel;
 
   @override
   State<OtpVerificationView> createState() => _OtpVerificationViewState();
 }
 
 class _OtpVerificationViewState extends State<OtpVerificationView> {
-  final viewModel = getIt.get<ForgetPassViewModel>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -47,7 +46,7 @@ class _OtpVerificationViewState extends State<OtpVerificationView> {
 
             SizedBox(height: AppSize.s30),
 
-            OtpCodeField(),
+            OtpCodeField(forgetPassViewModel: widget.forgetPassViewModel),
 
             SizedBox(height: AppSize.s30),
 
@@ -61,7 +60,8 @@ class _OtpVerificationViewState extends State<OtpVerificationView> {
                   ).textTheme.titleSmall!.copyWith(fontSize: FontSize.s16),
                 ),
                 TextButton(
-                  onPressed: () async => await viewModel.resendCode(),
+                  onPressed: () async =>
+                      await widget.forgetPassViewModel.resendCode(),
                   style: TextButton.styleFrom(
                     padding: EdgeInsets.zero,
                     minimumSize: Size(AppSize.s0, AppSize.s0),
