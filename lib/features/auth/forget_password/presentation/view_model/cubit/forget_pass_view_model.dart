@@ -119,7 +119,7 @@ class ForgetPassViewModel extends Cubit<ForgetPassState> {
       ),
     );
 
-    //* Didn't delete the email, you can use in login feature @mohamedabda28
+    //TODO: access the email from repo
     final emailResponse = await SecureStorageService.read(
       key: SecureStorageKeys.userEmail,
     );

@@ -72,6 +72,7 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i358.ForgetPassApiClient>(
       () => _i358.ForgetPassApiClient(gh<_i361.Dio>()),
     );
+    gh.factory<_i716.AuthApiClient>(() => _i716.AuthApiClient(gh<_i361.Dio>()));
     gh.factory<_i453.RegisterApiClient>(
       () => _i453.RegisterApiClient(gh<_i361.Dio>()),
     );
