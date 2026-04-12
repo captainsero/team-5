@@ -1,10 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
-<<<<<<<< HEAD:lib/features/auth/auth_shared_models/responses/auth_response.dart
-import 'package:team_5_examapp/features/auth/auth_shared_models/responses/user_response_dto.dart';
-part 'auth_response.g.dart';
-========
 import 'package:team_5_examapp/config/shared_models/auth_responses_shared_models/user_response_dto.dart';
->>>>>>>> demo:lib/config/shared_models/auth_responses_shared_models/auth_response/auth_response.dart
 
 part 'auth_response.g.dart';
 
