@@ -12,7 +12,7 @@ import 'package:team_5_examapp/features/questions/presentation/screens/questions
 import 'package:team_5_examapp/features/questions/presentation/screens/score_screen.dart';
 import 'package:team_5_examapp/features/questions/presentation/view_model/cubit/questions_view_model.dart';
 
-class AppRouter {
+abstract class AppRouter {
   static final GoRouter router = GoRouter(
     initialLocation: RoutesPath.loginRoute,
     routes: [
