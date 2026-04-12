@@ -14,7 +14,7 @@ class CheckQuestionsUseCase {
     required CheckQuestionRequest checkQuestionRequest,
     required String token,
   }) async {
-    return await questionsRepo.checkQuestions(
+    return questionsRepo.checkQuestions(
       checkQuestionRequest: checkQuestionRequest,
       token: token,
     );

@@ -13,7 +13,7 @@ class GetAllQuestionsOnExamUseCase {
     required String token,
     required String examId,
   }) async {
-    return await questionsRepo.getAllQuestionsOnExam(
+    return questionsRepo.getAllQuestionsOnExam(
       token: token,
       examId: examId,
     );
