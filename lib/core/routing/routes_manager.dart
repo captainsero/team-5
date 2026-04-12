@@ -64,15 +64,15 @@ class AppRouter {
         },
       ),
       GoRoute(
-        path: Routes.questionsRoute,
-        name: Routes.questionsRoute,
+        path: RoutesPath.questionsRoute,
+        name: RoutesPath.questionsRoute,
         builder: (context, state) {
           return QuestionsScreen(examId: state.extra.toString());
         },
       ),
       GoRoute(
-        path: Routes.scoreRoute,
-        name: Routes.scoreRoute,
+        path: RoutesPath.scoreRoute,
+        name: RoutesPath.scoreRoute,
         builder: (context, state) {
           final extra = state.extra as Map<String, dynamic>;
           final int time = extra['time'];

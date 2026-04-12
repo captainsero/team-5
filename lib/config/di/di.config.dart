@@ -91,6 +91,14 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i453.RegisterApiClient>(
       () => _i453.RegisterApiClient(gh<_i361.Dio>()),
     );
+    gh.factory<_i108.QuestionsApiClient>(
+      () => _i108.QuestionsApiClient(gh<_i361.Dio>()),
+    );
+    gh.factory<_i26.QuestionsRemoteDataSourceContract>(
+      () => _i1041.QuestionsRemoteDataSourceImpl(
+        questionsApiClient: gh<_i108.QuestionsApiClient>(),
+      ),
+    );
     gh.factory<_i426.ForgetPassRemoteDataSourceContract>(
       () => _i970.ForgetPassRemoteDataSourceImpl(
         forgetPassApiClient: gh<_i358.ForgetPassApiClient>(),
@@ -99,6 +107,12 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i821.RegisterRemoteSourceContract>(
       () => _i1056.RegisterRemoteSourceImplementation(
         registerApiClient: gh<_i453.RegisterApiClient>(),
+      ),
+    );
+    gh.factory<_i46.QuestionsRepoContract>(
+      () => _i92.QuestionsRepoImpl(
+        questionsRemoteDataSourceContract:
+            gh<_i26.QuestionsRemoteDataSourceContract>(),
       ),
     );
     gh.factory<_i183.AuthRemoteDataSourceContract>(

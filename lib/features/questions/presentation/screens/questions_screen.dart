@@ -4,7 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:team_5_examapp/config/get_view_models/get_view_models.dart';
 import 'package:team_5_examapp/core/constants/assets_manager.dart';
 import 'package:team_5_examapp/core/constants/values_manager.dart';
-import 'package:team_5_examapp/core/routing/routes_manager.dart';
+import 'package:team_5_examapp/core/routing/routes_path.dart';
 import 'package:team_5_examapp/features/questions/presentation/view_model/cubit/questions_view_model.dart';
 import 'package:team_5_examapp/features/questions/presentation/widgets/question_progress_bar.dart';
 import 'package:team_5_examapp/features/questions/presentation/widgets/question_widget.dart';
@@ -134,7 +134,7 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
                                 if (isLast) {
                                   final minutes = state.remainingSeconds ~/ 60;
                                   context.go(
-                                    Routes.scoreRoute,
+                                    RoutesPath.scoreRoute,
                                     extra: {
                                       'time': minutes,
                                       'examId': questions[0].exam.id,

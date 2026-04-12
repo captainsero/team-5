@@ -4,7 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:team_5_examapp/config/get_view_models/get_view_models.dart';
 import 'package:team_5_examapp/core/constants/font_manager.dart';
 import 'package:team_5_examapp/core/constants/values_manager.dart';
-import 'package:team_5_examapp/core/routing/routes_manager.dart';
+import 'package:team_5_examapp/core/routing/routes_path.dart';
 import 'package:team_5_examapp/features/questions/presentation/view_model/cubit/questions_view_model.dart';
 import 'package:team_5_examapp/features/questions/presentation/widgets/answer_number_circle_avatar.dart';
 import 'package:team_5_examapp/features/questions/presentation/widgets/score_bar.dart';
@@ -131,7 +131,7 @@ class ScoreScreen extends StatelessWidget {
                   child: ElevatedButton(
                     onPressed: () {
                       GetViewModels.questionsViewModel.resetAnswersBox();
-                      context.go(Routes.questionsRoute, extra: examId);
+                      context.go(RoutesPath.questionsRoute, extra: examId);
                     },
                     child: Text(S.of(context).startAgain),
                   ),
