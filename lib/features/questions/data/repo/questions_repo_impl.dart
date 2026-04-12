@@ -36,18 +36,9 @@ class QuestionsRepoImpl implements QuestionsRepoContract {
     required CheckQuestionRequest checkQuestionRequest,
     required String token,
   }) async {
-    final response = await questionsRemoteDataSourceContract.checkQuestions(
+    return await questionsRemoteDataSourceContract.checkQuestions(
       checkQuestionRequest: checkQuestionRequest,
       token: token,
     );
-
-    switch (response) {
-      case SuccessBaseResponse<CheckQuestionResponse>():
-        return SuccessBaseResponse<CheckQuestionResponse>(data: response.data);
-      case ErrorBaseResponse<CheckQuestionResponse>():
-        return ErrorBaseResponse<CheckQuestionResponse>(
-          errorMessage: response.errorMessage,
-        );
-    }
   }
 }
