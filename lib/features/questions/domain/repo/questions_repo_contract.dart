@@ -3,7 +3,7 @@ import 'package:team_5_examapp/features/questions/data/models/responses/check_qu
 import 'package:team_5_examapp/features/questions/data/models/responses/check_question_response.dart';
 import 'package:team_5_examapp/features/questions/domain/entities/question_model.dart';
 
-abstract class QuestionsRepoContract {
+abstract interface class QuestionsRepoContract {
   Future<BaseResponse<List<QuestionModel>>> getAllQuestionsOnExam({
     required String token,
     required String examId,
