@@ -9,7 +9,7 @@ import 'package:team_5_examapp/features/questions/data/models/responses/question
 
 part 'questions_api_client.g.dart';
 
-@injectable
+@lazySingleton
 @RestApi()
 abstract class QuestionsApiClient {
   @factoryMethod
