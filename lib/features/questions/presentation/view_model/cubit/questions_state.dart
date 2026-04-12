@@ -1,6 +1,5 @@
 part of 'questions_view_model.dart';
-
-class QuestionsState {
+class QuestionsState extends Equatable {
   BaseState<List<QuestionEntity>> getAllQuestionsOnExamState =
       BaseState<List<QuestionEntity>>(isLoading: true);
 
@@ -53,4 +52,16 @@ class QuestionsState {
       totalSeconds: totalSeconds ?? this.totalSeconds,
     );
   }
+
+  @override
+  List<Object?> get props => [
+    getAllQuestionsOnExamState,
+    checkQuestions,
+    currentQuestion,
+    isLast,
+    currentAnswer,
+    remainingSeconds,
+    isTimeUp,
+    totalSeconds,
+  ];
 }
