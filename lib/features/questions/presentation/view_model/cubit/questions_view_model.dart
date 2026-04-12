@@ -15,6 +15,7 @@ import 'package:team_5_examapp/features/questions/data/models/responses/check_qu
 import 'package:team_5_examapp/features/questions/domain/entities/question_entity.dart';
 import 'package:team_5_examapp/features/questions/domain/use_cases/check_questions_use_case.dart';
 import 'package:team_5_examapp/features/questions/domain/use_cases/get_all_questions_on_exam_use_case.dart';
+import 'package:team_5_examapp/generated/l10n.dart';
 
 part 'questions_state.dart';
 
@@ -120,7 +121,7 @@ class QuestionsViewModel extends Cubit<QuestionsState> {
         state.copyWith(
           checkQuestions: state.checkQuestions.copyWith(
             isLoading: false,
-            errorMessage: 'Answers not ready yet',
+            errorMessage: S.current.answersNotReady,
           ),
         ),
       );

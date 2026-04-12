@@ -22,6 +22,9 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+    "answersNotReady": MessageLookupByLibrary.simpleMessage(
+      "Answers not ready yet",
+    ),
     "back": MessageLookupByLibrary.simpleMessage("Back"),
     "codeIsRequired": MessageLookupByLibrary.simpleMessage("Code is required"),
     "confirmPassword": MessageLookupByLibrary.simpleMessage("Confirm password"),

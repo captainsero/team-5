@@ -368,6 +368,16 @@ class S {
   String get viewScore {
     return Intl.message('View score', name: 'viewScore', desc: '', args: []);
   }
+
+  /// `Answers not ready yet`
+  String get answersNotReady {
+    return Intl.message(
+      'Answers not ready yet',
+      name: 'answersNotReady',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

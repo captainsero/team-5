@@ -1,4 +1,5 @@
 part of 'questions_view_model.dart';
+// ignore: must_be_immutable
 class QuestionsState extends Equatable {
   BaseState<List<QuestionEntity>> getAllQuestionsOnExamState =
       BaseState<List<QuestionEntity>>(isLoading: true);
