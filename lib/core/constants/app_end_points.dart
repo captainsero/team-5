@@ -1,10 +1,11 @@
-abstract class AppEndPoints {
-  static const String baseUrl = "https://exam.elevateegy.com/api/v1";
-  static const String forgetPassword = "$baseUrl/auth/forgotPassword";
-  static const String verifyResetCode = "$baseUrl/auth/verifyResetCode";
-  static const String resetPassword = "$baseUrl/auth/resetPassword";
-  static const String signin = "$baseUrl/auth/signin";
+import 'package:team_5_examapp/core/constants/base_urls.dart';
 
-  static const String questions = "$baseUrl/questions";
-  static const String checkQuestions = "$baseUrl/questions/check";
+abstract class AppEndPoints {
+  static const String _baseUrl = BaseUrls.baseUrl;
+  static const String forgetPassword = "$_baseUrl/auth/forgotPassword";
+  static const String verifyResetCode = "$_baseUrl/auth/verifyResetCode";
+  static const String resetPassword = "$_baseUrl/auth/resetPassword";
+  static const String signin = "$_baseUrl/auth/signin";
+  static const String signUp = "$_baseUrl/auth/signup";
+  static const String getAllSubjects = "$_baseUrl/subjects";
 }

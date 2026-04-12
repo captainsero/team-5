@@ -3,8 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:team_5_examapp/config/di/di.dart';
 import 'package:team_5_examapp/core/constants/values_manager.dart';
-import 'package:team_5_examapp/core/routing/routes_manager.dart';
-import 'package:team_5_examapp/features/auth/register/data/models/user_dto.dart';
+import 'package:team_5_examapp/core/routing/routes_path.dart';
+import 'package:team_5_examapp/features/auth/register/data/models/user_request_dto.dart';
 import 'package:team_5_examapp/features/auth/register/presentation/view_model/register_view_model.dart';
 
 import '../../../../../config/app_validator.dart';
@@ -38,7 +38,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
           if (!state.registerUserState.isLoading &&
               state.registerUserState.data != null &&
               state.registerUserState.errorMessage == null) {
-            context.go(Routes.loginRoute);
+            context.go(RoutesPath.loginRoute);
           }
         },
         buildWhen: (previous, current) =>
@@ -175,7 +175,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             : () async {
                                 if (_formKey.currentState!.validate()) {
                                   await viewModel.registerUser(
-                                    userInfo: UserDto(
+                                    userInfo: UserRequestDto(
                                       username: _userNameController.text,
                                       firstName: _firstNameController.text,
                                       lastName: _lastNameController.text,
