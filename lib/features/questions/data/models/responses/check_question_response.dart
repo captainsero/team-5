@@ -33,13 +33,3 @@ class CheckQuestionResponse {
 
   Map<String, dynamic> toJson() => _$CheckQuestionResponseToJson(this);
 }
-
-@JsonSerializable()
-class Answers {
-  Answers();
-
-  factory Answers.fromJson(Map<String, dynamic> json) =>
-      _$AnswersFromJson(json);
-
-  Map<String, dynamic> toJson() => _$AnswersToJson(this);
-}

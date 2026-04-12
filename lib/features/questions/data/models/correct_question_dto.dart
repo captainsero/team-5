@@ -1,5 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:team_5_examapp/features/questions/data/models/responses/check_question_response.dart';
+import 'package:team_5_examapp/features/questions/data/models/answer_dto.dart';
 
 part 'correct_question_dto.g.dart';
 
@@ -12,7 +12,8 @@ class CorrectQuestionDto {
     @JsonKey(name: "correctAnswer")
     final String correctAnswer;
     @JsonKey(name: "answers")
-    final Answers answers;
+    // TODO: review when api is working
+    final AnswerDto answers;
 
     CorrectQuestionDto({
         required this.qid,
