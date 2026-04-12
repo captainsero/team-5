@@ -10,6 +10,7 @@ import 'package:team_5_examapp/features/auth/login/presentations/screens/login_s
 import 'package:team_5_examapp/features/auth/register/presentation/screens/register_screen.dart';
 import 'package:team_5_examapp/features/questions/presentation/screens/questions_screen.dart';
 import 'package:team_5_examapp/features/questions/presentation/screens/score_screen.dart';
+import 'package:team_5_examapp/features/questions/presentation/view_model/cubit/questions_view_model.dart';
 
 class AppRouter {
   static final GoRouter router = GoRouter(
@@ -67,7 +68,15 @@ class AppRouter {
         path: RoutesPath.questionsRoute,
         name: RoutesPath.questionsRoute,
         builder: (context, state) {
-          return QuestionsScreen(examId: state.extra.toString());
+          final QuestionsViewModel questionsViewModel = getIt
+              .get<QuestionsViewModel>();
+          return BlocProvider<QuestionsViewModel>(
+            create: (context) => questionsViewModel,
+            child: QuestionsScreen(
+              examId: state.extra.toString(),
+              questionsViewModel: questionsViewModel,
+            ),
+          );
         },
       ),
       GoRoute(
@@ -77,8 +86,17 @@ class AppRouter {
           final extra = state.extra as Map<String, dynamic>;
           final int time = extra['time'];
           final String examId = extra['examId'];
+          final QuestionsViewModel questionsViewModel =
+              extra['questionsViewModel'];
 
-          return ScoreScreen(time: time, examId: examId);
+          return BlocProvider<QuestionsViewModel>.value(
+            value: questionsViewModel,
+            child: ScoreScreen(
+              time: time,
+              examId: examId,
+              questionsViewModel: questionsViewModel,
+            ),
+          );
         },
       ),
     ],
