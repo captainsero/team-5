@@ -2,10 +2,10 @@ import 'package:json_annotation/json_annotation.dart';
 import 'package:team_5_examapp/config/models/exam_model.dart';
 import 'package:team_5_examapp/features/questions/data/models/answer_dto.dart';
 
-part 'question_model.g.dart';
+part 'question_entity.g.dart';
 
 @JsonSerializable()
-class QuestionModel {
+class QuestionEntity {
   @JsonKey(name: "_id")
   final String id;
   @JsonKey(name: "question")
@@ -26,7 +26,7 @@ class QuestionModel {
   bool isAnswerd = false;
   AnswerDto? userAnswer;
 
-  QuestionModel(
+  QuestionEntity(
     this.isAnswerd,
     this.userAnswer, {
     required this.id,
@@ -39,8 +39,8 @@ class QuestionModel {
     required this.createdAt,
   });
 
-  QuestionModel copyWith({bool? isAnswerd, AnswerDto? userAnswer}) {
-    return QuestionModel(
+  QuestionEntity copyWith({bool? isAnswerd, AnswerDto? userAnswer}) {
+    return QuestionEntity(
       isAnswerd ?? this.isAnswerd,
       userAnswer ?? this.userAnswer,
       id: id,
@@ -54,8 +54,8 @@ class QuestionModel {
     );
   }
 
-  factory QuestionModel.fromJson(Map<String, dynamic> json) =>
-      _$QuestionModelFromJson(json);
+  factory QuestionEntity.fromJson(Map<String, dynamic> json) =>
+      _$QuestionEntityFromJson(json);
 
-  Map<String, dynamic> toJson() => _$QuestionModelToJson(this);
+  Map<String, dynamic> toJson() => _$QuestionEntityToJson(this);
 }

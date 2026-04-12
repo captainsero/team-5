@@ -1,8 +1,8 @@
 part of 'questions_view_model.dart';
 
 class QuestionsState {
-  BaseState<List<QuestionModel>> getAllQuestionsOnExamState =
-      BaseState<List<QuestionModel>>(isLoading: true);
+  BaseState<List<QuestionEntity>> getAllQuestionsOnExamState =
+      BaseState<List<QuestionEntity>>(isLoading: true);
 
   BaseState<CheckQuestionResponse> checkQuestions =
       BaseState<CheckQuestionResponse>(isLoading: false);
@@ -15,7 +15,7 @@ class QuestionsState {
   final int totalSeconds;
 
   QuestionsState({
-    BaseState<List<QuestionModel>>? getAllQuestionsOnExamState,
+    BaseState<List<QuestionEntity>>? getAllQuestionsOnExamState,
     BaseState<CheckQuestionResponse>? checkQuestions,
     this.currentQuestion = 0,
     this.isLast = false,
@@ -26,13 +26,13 @@ class QuestionsState {
   }) {
     this.getAllQuestionsOnExamState =
         getAllQuestionsOnExamState ??
-        BaseState<List<QuestionModel>>(isLoading: true);
+        BaseState<List<QuestionEntity>>(isLoading: true);
     this.checkQuestions =
         checkQuestions ?? BaseState<CheckQuestionResponse>(isLoading: false);
   }
 
   QuestionsState copyWith({
-    BaseState<List<QuestionModel>>? getAllQuestionsOnExamState,
+    BaseState<List<QuestionEntity>>? getAllQuestionsOnExamState,
     BaseState<CheckQuestionResponse>? checkQuestions,
     int? currentQuestion,
     bool? isLast,

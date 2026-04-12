@@ -1,7 +1,7 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:team_5_examapp/config/models/exam_model.dart';
 import 'package:team_5_examapp/features/questions/data/models/answer_dto.dart';
-import 'package:team_5_examapp/features/questions/domain/entities/question_model.dart';
+import 'package:team_5_examapp/features/questions/domain/entities/question_entity.dart';
 
 part 'question_dto.g.dart';
 
@@ -40,7 +40,7 @@ class QuestionDto {
 
   Map<String, dynamic> toJson() => _$QuestionDtoToJson(this);
 
-  QuestionModel toDomain() => QuestionModel(
+  QuestionEntity toDomain() => QuestionEntity(
     false, // IsAnswerd (bool)
     null, // userAnswer
     id: id,

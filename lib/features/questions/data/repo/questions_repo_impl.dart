@@ -4,7 +4,7 @@ import 'package:team_5_examapp/features/questions/data/data_sources/questions_re
 import 'package:team_5_examapp/features/questions/data/models/question_dto.dart';
 import 'package:team_5_examapp/features/questions/data/models/responses/check_question_request.dart';
 import 'package:team_5_examapp/features/questions/data/models/responses/check_question_response.dart';
-import 'package:team_5_examapp/features/questions/domain/entities/question_model.dart';
+import 'package:team_5_examapp/features/questions/domain/entities/question_entity.dart';
 import 'package:team_5_examapp/features/questions/domain/repo/questions_repo_contract.dart';
 
 @Injectable(as: QuestionsRepoContract)
@@ -13,7 +13,7 @@ class QuestionsRepoImpl implements QuestionsRepoContract {
 
   QuestionsRepoImpl({required this.questionsRemoteDataSourceContract});
   @override
-  Future<BaseResponse<List<QuestionModel>>> getAllQuestionsOnExam({
+  Future<BaseResponse<List<QuestionEntity>>> getAllQuestionsOnExam({
     required String token,
     required String examId,
   }) async {
@@ -21,11 +21,11 @@ class QuestionsRepoImpl implements QuestionsRepoContract {
         .getAllQuestionsOnExam(token: token, examId: examId);
     switch (response) {
       case SuccessBaseResponse<List<QuestionDto>>():
-        return SuccessBaseResponse<List<QuestionModel>>(
+        return SuccessBaseResponse<List<QuestionEntity>>(
           data: response.data.map((dto) => dto.toDomain()).toList(),
         );
       case ErrorBaseResponse<List<QuestionDto>>():
-        return ErrorBaseResponse<List<QuestionModel>>(
+        return ErrorBaseResponse<List<QuestionEntity>>(
           errorMessage: response.errorMessage,
         );
     }

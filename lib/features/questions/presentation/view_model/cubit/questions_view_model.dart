@@ -11,7 +11,7 @@ import 'package:team_5_examapp/config/secure_storage/secure_storage_service.dart
 import 'package:team_5_examapp/features/questions/data/models/check_answer_dto.dart';
 import 'package:team_5_examapp/features/questions/data/models/responses/check_question_request.dart';
 import 'package:team_5_examapp/features/questions/data/models/responses/check_question_response.dart';
-import 'package:team_5_examapp/features/questions/domain/entities/question_model.dart';
+import 'package:team_5_examapp/features/questions/domain/entities/question_entity.dart';
 import 'package:team_5_examapp/features/questions/domain/use_cases/check_questions_use_case.dart';
 import 'package:team_5_examapp/features/questions/domain/use_cases/get_all_questions_on_exam_use_case.dart';
 
@@ -89,7 +89,7 @@ class QuestionsViewModel extends Cubit<QuestionsState> {
       examId: examId,
     );
 
-    final handler = ResponseHandler.handle<List<QuestionModel>>(response);
+    final handler = ResponseHandler.handle<List<QuestionEntity>>(response);
 
     if (handler.data != null) {
       final boxName = handler.data![0].exam.id;
@@ -166,7 +166,7 @@ class QuestionsViewModel extends Cubit<QuestionsState> {
     );
   }
 
-  void nextQuestion(List<QuestionModel> questions) {
+  void nextQuestion(List<QuestionEntity> questions) {
     final current = state.currentQuestion;
 
     if (current == questions.length - 1) {
@@ -187,7 +187,7 @@ class QuestionsViewModel extends Cubit<QuestionsState> {
     );
   }
 
-  void previousQuestion(List<QuestionModel> questions) {
+  void previousQuestion(List<QuestionEntity> questions) {
     final current = state.currentQuestion;
 
     if (current == 0) return;
