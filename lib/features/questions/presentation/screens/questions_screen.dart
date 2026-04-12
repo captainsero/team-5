@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:team_5_examapp/config/get_view_models/get_view_models.dart';
 import 'package:team_5_examapp/core/constants/assets_manager.dart';
 import 'package:team_5_examapp/core/constants/values_manager.dart';
 import 'package:team_5_examapp/core/routing/routes_path.dart';
@@ -12,8 +11,13 @@ import 'package:team_5_examapp/features/questions/presentation/widgets/timer_tex
 import 'package:team_5_examapp/generated/l10n.dart';
 
 class QuestionsScreen extends StatefulWidget {
-  const QuestionsScreen({super.key, required this.examId});
+  const QuestionsScreen({
+    super.key,
+    required this.examId,
+    required this.questionsViewModel,
+  });
   final String examId;
+  final QuestionsViewModel questionsViewModel;
 
   @override
   State<QuestionsScreen> createState() => _QuestionsScreenState();
@@ -22,9 +26,7 @@ class QuestionsScreen extends StatefulWidget {
 class _QuestionsScreenState extends State<QuestionsScreen> {
   @override
   void initState() {
-    GetViewModels.questionsViewModel.getAllQuestionsOnExam(
-      examId: widget.examId,
-    );
+    widget.questionsViewModel.getAllQuestionsOnExam(examId: widget.examId);
     super.initState();
   }
 
@@ -138,6 +140,8 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
                                     extra: {
                                       'time': minutes,
                                       'examId': questions[0].exam.id,
+                                      'questionsViewModel':
+                                          widget.questionsViewModel,
                                     },
                                   );
                                 }

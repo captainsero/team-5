@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:team_5_examapp/config/get_view_models/get_view_models.dart';
 import 'package:team_5_examapp/core/constants/font_manager.dart';
 import 'package:team_5_examapp/core/constants/values_manager.dart';
 import 'package:team_5_examapp/core/routing/routes_path.dart';
@@ -11,9 +10,15 @@ import 'package:team_5_examapp/features/questions/presentation/widgets/score_bar
 import 'package:team_5_examapp/generated/l10n.dart';
 
 class ScoreScreen extends StatelessWidget {
-  const ScoreScreen({super.key, required this.time, required this.examId});
+  const ScoreScreen({
+    super.key,
+    required this.time,
+    required this.examId,
+    required this.questionsViewModel,
+  });
   final int time;
   final String examId;
+  final QuestionsViewModel questionsViewModel;
 
   @override
   Widget build(BuildContext context) {
@@ -103,9 +108,7 @@ class ScoreScreen extends StatelessWidget {
                     onPressed: isLoading
                         ? null
                         : () {
-                            GetViewModels.questionsViewModel.checkQuestions(
-                              time: time,
-                            );
+                            questionsViewModel.checkQuestions(time: time);
                           },
                     style: ElevatedButton.styleFrom().copyWith(
                       backgroundColor: WidgetStatePropertyAll(
@@ -130,7 +133,7 @@ class ScoreScreen extends StatelessWidget {
                   width: double.infinity,
                   child: ElevatedButton(
                     onPressed: () {
-                      GetViewModels.questionsViewModel.resetAnswersBox();
+                      questionsViewModel.resetAnswersBox();
                       context.go(RoutesPath.questionsRoute, extra: examId);
                     },
                     child: Text(S.of(context).startAgain),
