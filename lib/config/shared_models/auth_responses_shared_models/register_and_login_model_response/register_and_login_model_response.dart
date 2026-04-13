@@ -1,10 +1,10 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:team_5_examapp/config/shared_models/auth_responses_shared_models/user_response_dto.dart';
 
-part 'auth_response.g.dart';
+part 'register_and_login_model_response.g.dart';
 
 @JsonSerializable()
-class AuthResponse {
+class RegisterAndLoginModelResponse {
   @JsonKey(name: "message")
   String message;
   @JsonKey(name: "token")
@@ -12,24 +12,24 @@ class AuthResponse {
   @JsonKey(name: "user")
   UserResponseDto userResponseDto;
 
-  AuthResponse({
+  RegisterAndLoginModelResponse({
     required this.message,
     required this.token,
     required this.userResponseDto,
   });
 
-  AuthResponse copyWith({
+  RegisterAndLoginModelResponse copyWith({
     String? message,
     String? token,
     UserResponseDto? userResponseDto,
-  }) => AuthResponse(
+  }) => RegisterAndLoginModelResponse(
     message: message ?? this.message,
     token: token ?? this.token,
     userResponseDto: userResponseDto ?? this.userResponseDto,
   );
 
-  factory AuthResponse.fromJson(Map<String, dynamic> json) =>
-      _$AuthResponseFromJson(json);
+  factory RegisterAndLoginModelResponse.fromJson(Map<String, dynamic> json) =>
+      _$RegisterAndLoginModelResponseFromJson(json);
 
-  Map<String, dynamic> toJson() => _$AuthResponseToJson(this);
+  Map<String, dynamic> toJson() => _$RegisterAndLoginModelResponseToJson(this);
 }

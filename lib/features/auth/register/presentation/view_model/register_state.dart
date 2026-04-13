@@ -1,16 +1,18 @@
 part of 'register_view_model.dart';
 
 class RegisterState {
-  BaseState<AuthResponse> registerUserState = BaseState<AuthResponse>(
-    isLoading: false,
-  );
+  BaseState<RegisterAndLoginModelResponse> registerUserState =
+      BaseState<RegisterAndLoginModelResponse>(isLoading: false);
 
-  RegisterState({BaseState<AuthResponse>? registerUserState}) {
+  RegisterState({BaseState<RegisterAndLoginModelResponse>? registerUserState}) {
     this.registerUserState =
-        registerUserState ?? BaseState<AuthResponse>(isLoading: false);
+        registerUserState ??
+        BaseState<RegisterAndLoginModelResponse>(isLoading: false);
   }
 
-  RegisterState copyWith({BaseState<AuthResponse>? registerUserState}) {
+  RegisterState copyWith({
+    BaseState<RegisterAndLoginModelResponse>? registerUserState,
+  }) {
     return RegisterState(
       registerUserState: registerUserState ?? this.registerUserState,
     );

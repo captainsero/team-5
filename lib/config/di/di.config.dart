@@ -72,7 +72,9 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i358.ForgetPassApiClient>(
       () => _i358.ForgetPassApiClient(gh<_i361.Dio>()),
     );
-    gh.factory<_i716.AuthApiClient>(() => _i716.AuthApiClient(gh<_i361.Dio>()));
+    gh.factory<_i716.LoginApiClient>(
+      () => _i716.LoginApiClient(gh<_i361.Dio>()),
+    );
     gh.factory<_i453.RegisterApiClient>(
       () => _i453.RegisterApiClient(gh<_i361.Dio>()),
     );
@@ -87,7 +89,15 @@ extension GetItInjectableX on _i174.GetIt {
       ),
     );
     gh.factory<_i183.AuthRemoteDataSourceContract>(
-      () => _i584.AuthRemoteDataSourceImpl(gh<_i716.AuthApiClient>()),
+      () => _i584.AuthRemoteDataSourceImpl(gh<_i716.LoginApiClient>()),
+    );
+    gh.factory<_i844.AuthRepoContract>(
+      () => _i1001.AuthRepoImpl(
+        remoteDataSource: gh<_i183.AuthRemoteDataSourceContract>(),
+      ),
+    );
+    gh.factory<_i685.LoginUseCase>(
+      () => _i685.LoginUseCase(repo: gh<_i844.AuthRepoContract>()),
     );
     gh.factory<_i65.RegisterRepoContract>(
       () => _i695.RegisterRepoImplementation(
@@ -105,10 +115,8 @@ extension GetItInjectableX on _i174.GetIt {
         registerRepoContract: gh<_i65.RegisterRepoContract>(),
       ),
     );
-    gh.factory<_i844.AuthRepoContract>(
-      () => _i1001.AuthRepoImpl(
-        remoteDataSource: gh<_i183.AuthRemoteDataSourceContract>(),
-      ),
+    gh.factory<_i370.LoginViewModel>(
+      () => _i370.LoginViewModel(loginUseCase: gh<_i685.LoginUseCase>()),
     );
     gh.factory<_i146.ConfirmValidationCodeUseCase>(
       () => _i146.ConfirmValidationCodeUseCase(
@@ -129,18 +137,12 @@ extension GetItInjectableX on _i174.GetIt {
       () =>
           _i656.RegisterViewModel(registerUseCase: gh<_i118.RegisterUseCase>()),
     );
-    gh.factory<_i685.LoginUseCase>(
-      () => _i685.LoginUseCase(repo: gh<_i844.AuthRepoContract>()),
-    );
     gh.factory<_i128.ForgetPassViewModel>(
       () => _i128.ForgetPassViewModel(
         forgetPassUseCase: gh<_i335.ForgetPassUseCase>(),
         confirmValidationCodeUseCase: gh<_i146.ConfirmValidationCodeUseCase>(),
         resetPassUseCase: gh<_i262.ResetPassUseCase>(),
       ),
-    );
-    gh.factory<_i370.LoginViewModel>(
-      () => _i370.LoginViewModel(loginUseCase: gh<_i685.LoginUseCase>()),
     );
     return this;
   }
