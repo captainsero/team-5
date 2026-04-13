@@ -80,13 +80,16 @@ class _ForgetPassViewState extends State<ForgetPassView> {
                         ),
                         validator: AppValidator.validateEmail,
                       ),
-
-                      Text(
-                        state.forgetPasswordState.errorMessage ?? '',
-                        style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-                          color: Theme.of(context).colorScheme.error,
+                      
+                      if (state.forgetPasswordState.errorMessage != null &&
+                          state.forgetPasswordState.isLoading)
+                        Text(
+                          state.forgetPasswordState.errorMessage ?? '',
+                          style: Theme.of(context).textTheme.bodyLarge!
+                              .copyWith(
+                                color: Theme.of(context).colorScheme.error,
+                              ),
                         ),
-                      ),
                     ],
                   );
                 },
