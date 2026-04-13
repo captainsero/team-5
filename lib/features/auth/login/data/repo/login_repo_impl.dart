@@ -2,7 +2,7 @@ import 'package:injectable/injectable.dart';
 import 'package:team_5_examapp/config/base_response/base_response.dart';
 import 'package:team_5_examapp/config/secure_storage/secure_storage_keys.dart';
 import 'package:team_5_examapp/config/secure_storage/secure_storage_service.dart';
-import 'package:team_5_examapp/config/shared_models/auth_responses_shared_models/auth_response/auth_response.dart';
+import 'package:team_5_examapp/config/shared_models/auth_responses_shared_models/register_and_login_model_response/register_and_login_model_response.dart';
 import 'package:team_5_examapp/features/auth/login/data/data_sources/login_remote_data_source_contract.dart';
 import 'package:team_5_examapp/features/auth/login/domain/models/user_model.dart';
 import 'package:team_5_examapp/features/auth/login/domain/repo/login_repo_contract.dart';
@@ -21,7 +21,7 @@ class AuthRepoImpl implements AuthRepoContract {
     );
 
     switch (response) {
-      case SuccessBaseResponse<AuthResponse>():
+      case SuccessBaseResponse<RegisterAndLoginModelResponse>():
 
         // Save token
         SecureStorageService.write(
@@ -34,7 +34,7 @@ class AuthRepoImpl implements AuthRepoContract {
 
         return SuccessBaseResponse<UserModel>(data: user);
 
-      case ErrorBaseResponse<AuthResponse>():
+      case ErrorBaseResponse<RegisterAndLoginModelResponse>():
         return ErrorBaseResponse<UserModel>(
           errorMessage: response.errorMessage,
         );

@@ -1,4 +1,4 @@
-import 'package:team_5_examapp/config/shared_models/auth_responses_shared_models/auth_response/auth_response.dart';
+import 'package:team_5_examapp/config/shared_models/auth_responses_shared_models/register_and_login_model_response/register_and_login_model_response.dart';
 
 class UserModel {
   final String username;
@@ -15,7 +15,9 @@ class UserModel {
     required this.phone,
   });
 
-  factory UserModel.fromAuthResponse(AuthResponse authResponse) {
+  factory UserModel.fromAuthResponse(
+    RegisterAndLoginModelResponse authResponse,
+  ) {
     return UserModel(
       username: authResponse.userResponseDto.username,
       firstName: authResponse.userResponseDto.firstName,

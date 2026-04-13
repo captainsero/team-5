@@ -1,15 +1,18 @@
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 import 'package:retrofit/retrofit.dart';
-import 'package:team_5_examapp/config/shared_models/auth_responses_shared_models/auth_response/auth_response.dart';
+import 'package:team_5_examapp/config/shared_models/auth_responses_shared_models/register_and_login_model_response/register_and_login_model_response.dart';
 import 'package:team_5_examapp/core/constants/app_end_points.dart';
 part 'login_api_client.g.dart';
 
 @RestApi()
 @injectable
-abstract class AuthApiClient {
+abstract class LoginApiClient {
   @factoryMethod
-  factory AuthApiClient(Dio dio) = _AuthApiClient;
+  factory LoginApiClient(Dio dio) = _LoginApiClient;
+
   @POST(AppEndPoints.signin)
-  Future<AuthResponse> login({@Body() required Map<String, dynamic> loginBody});
+  Future<RegisterAndLoginModelResponse> login({
+    @Body() required Map<String, dynamic> loginBody,
+  });
 }
