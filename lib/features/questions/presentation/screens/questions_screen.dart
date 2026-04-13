@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:team_5_examapp/config/shared_models/extra_score_screen_model.dart';
 import 'package:team_5_examapp/core/constants/assets_manager.dart';
 import 'package:team_5_examapp/core/constants/values_manager.dart';
 import 'package:team_5_examapp/core/routing/routes_path.dart';
@@ -140,12 +141,12 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
                                   final minutes = state.remainingSeconds ~/ 60;
                                   context.go(
                                     RoutesPath.scoreRoute,
-                                    extra: {
-                                      'time': minutes,
-                                      'examId': questions[0].exam.id,
-                                      'questionsViewModel':
+                                    extra: ExtraScoreScreenModel(
+                                      time: minutes,
+                                      examId: questions[0].exam.id,
+                                      questionsViewModel:
                                           widget.questionsViewModel,
-                                    },
+                                    ),
                                   );
                                 }
                               }

@@ -1,6 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:team_5_examapp/config/di/di.dart';
+import 'package:team_5_examapp/config/shared_models/extra_score_screen_model.dart';
 import 'package:team_5_examapp/core/routing/routes_path.dart';
 import 'package:team_5_examapp/features/auth/forget_password/presentation/screens/forget_pass_view.dart';
 import 'package:team_5_examapp/features/auth/forget_password/presentation/screens/reset_pass_view.dart';
@@ -83,18 +84,13 @@ abstract class AppRouter {
         path: RoutesPath.scoreRoute,
         name: RoutesPath.scoreRoute,
         builder: (context, state) {
-          final extra = state.extra as Map<String, dynamic>;
-          final int time = extra['time'];
-          final String examId = extra['examId'];
-          final QuestionsViewModel questionsViewModel =
-              extra['questionsViewModel'];
-
+          final extra = state.extra as ExtraScoreScreenModel;
           return BlocProvider<QuestionsViewModel>.value(
-            value: questionsViewModel,
+            value: extra.questionsViewModel,
             child: ScoreScreen(
-              time: time,
-              examId: examId,
-              questionsViewModel: questionsViewModel,
+              time: extra.time,
+              examId: extra.examId,
+              questionsViewModel: extra.questionsViewModel,
             ),
           );
         },
