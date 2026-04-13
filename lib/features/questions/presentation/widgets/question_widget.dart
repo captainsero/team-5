@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:team_5_examapp/core/constants/values_manager.dart';
 import 'package:team_5_examapp/features/questions/data/models/answer_dto.dart';
+import 'package:team_5_examapp/features/questions/presentation/view_model/cubit/questions_events.dart';
 import 'package:team_5_examapp/features/questions/presentation/view_model/cubit/questions_view_model.dart';
 import 'package:team_5_examapp/features/questions/presentation/widgets/checkbox_answer_button.dart';
 import 'package:team_5_examapp/features/questions/presentation/widgets/radio_answer_button.dart';
@@ -47,9 +48,11 @@ class QuestionWidget extends StatelessWidget {
                         value: answer.key,
                         isSelected: selectedAnswer == answer.key,
                         onTap: () {
-                          context.read<QuestionsViewModel>().selectAnswer(
-                            questionId: questionId,
-                            answerKey: answer.key,
+                          context.read<QuestionsViewModel>().doEvent(
+                            SelectAnswerEvent(
+                              questionId: questionId,
+                              answerKey: answer.key,
+                            ),
                           );
                         },
                       ),
@@ -71,9 +74,11 @@ class QuestionWidget extends StatelessWidget {
                       value: answer.key,
                       isSelected: selectedList.contains(answer.key),
                       onTap: () {
-                        context.read<QuestionsViewModel>().toggleMultiAnswer(
-                          questionId: questionId,
-                          answerKey: answer.key,
+                        context.read<QuestionsViewModel>().doEvent(
+                          ToggleMultiAnswerEvent(
+                            questionId: questionId,
+                            answerKey: answer.key,
+                          ),
                         );
                       },
                     ),

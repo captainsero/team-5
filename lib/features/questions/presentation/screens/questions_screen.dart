@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:team_5_examapp/core/constants/assets_manager.dart';
 import 'package:team_5_examapp/core/constants/values_manager.dart';
 import 'package:team_5_examapp/core/routing/routes_path.dart';
+import 'package:team_5_examapp/features/questions/presentation/view_model/cubit/questions_events.dart';
 import 'package:team_5_examapp/features/questions/presentation/view_model/cubit/questions_view_model.dart';
 import 'package:team_5_examapp/features/questions/presentation/widgets/question_progress_bar.dart';
 import 'package:team_5_examapp/features/questions/presentation/widgets/question_widget.dart';
@@ -26,7 +27,9 @@ class QuestionsScreen extends StatefulWidget {
 class _QuestionsScreenState extends State<QuestionsScreen> {
   @override
   void initState() {
-    widget.questionsViewModel.getAllQuestionsOnExam(examId: widget.examId);
+    widget.questionsViewModel.doEvent(
+      GetAllQuestionsOnExamEvent(examId: widget.examId),
+    );
     super.initState();
   }
 
@@ -101,9 +104,9 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
                         onPressed: currentQuestion == 0
                             ? null
                             : () {
-                                context
-                                    .read<QuestionsViewModel>()
-                                    .previousQuestion(questions!);
+                                context.read<QuestionsViewModel>().doEvent(
+                                  PreviousQuestionEvent(questions: questions!),
+                                );
                               },
 
                         style: ElevatedButton.styleFrom().copyWith(
@@ -129,8 +132,8 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
                       child: ElevatedButton(
                         onPressed: isAnswered
                             ? () {
-                                context.read<QuestionsViewModel>().nextQuestion(
-                                  questions!,
+                                context.read<QuestionsViewModel>().doEvent(
+                                  NextQuestionEvent(questions: questions!),
                                 );
 
                                 if (isLast) {

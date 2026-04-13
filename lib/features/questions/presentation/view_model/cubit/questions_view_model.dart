@@ -15,6 +15,7 @@ import 'package:team_5_examapp/features/questions/data/models/responses/check_qu
 import 'package:team_5_examapp/features/questions/domain/entities/question_entity.dart';
 import 'package:team_5_examapp/features/questions/domain/use_cases/check_questions_use_case.dart';
 import 'package:team_5_examapp/features/questions/domain/use_cases/get_all_questions_on_exam_use_case.dart';
+import 'package:team_5_examapp/features/questions/presentation/view_model/cubit/questions_events.dart';
 import 'package:team_5_examapp/generated/l10n.dart';
 
 part 'questions_state.dart';
@@ -31,18 +32,40 @@ class QuestionsViewModel extends Cubit<QuestionsState> {
   Box<CheckAnswerDto>? answersBox;
   Timer? _timer;
 
-  bool get isAnswersBoxValid {
+  void doEvent(QuestionsEvents event) {
+    switch (event) {
+      case GetAllQuestionsOnExamEvent():
+        _getAllQuestionsOnExam(examId: event.examId);
+        break;
+      case CheckQuestionsEvent():
+        _checkQuestions(time: event.time);
+        break;
+      case NextQuestionEvent():
+        _nextQuestion(questions: event.questions);
+        break;
+      case PreviousQuestionEvent():
+        _previousQuestion(questions: event.questions);
+        break;
+      case SelectAnswerEvent():
+        _selectAnswer(questionId: event.questionId, answerKey: event.answerKey);
+        break;
+      case ToggleMultiAnswerEvent():
+        _toggleMultiAnswer(
+          questionId: event.questionId,
+          answerKey: event.answerKey,
+        );
+        break;
+      case ResetAnswerBoxEvent():
+        _resetAnswersBox();
+        break;
+    }
+  }
+
+  bool get _isAnswersBoxValid {
     return answersBox != null && answersBox!.isOpen && answersBox!.isNotEmpty;
   }
 
-  String get formattedTime {
-    final minutes = state.remainingSeconds ~/ 60;
-    final seconds = state.remainingSeconds % 60;
-
-    return '${minutes.toString().padLeft(2, '0')}:${seconds.toString().padLeft(2, '0')}';
-  }
-
-  void startTimer(int durationInMinutes) {
+  void _startTimer(int durationInMinutes) {
     final totalSeconds = durationInMinutes * 60;
 
     emit(
@@ -68,7 +91,7 @@ class QuestionsViewModel extends Cubit<QuestionsState> {
     });
   }
 
-  Future<void> getAllQuestionsOnExam({required String examId}) async {
+  Future<void> _getAllQuestionsOnExam({required String examId}) async {
     emit(
       state.copyWith(
         currentQuestion: 0,
@@ -99,7 +122,7 @@ class QuestionsViewModel extends Cubit<QuestionsState> {
       answersBox = await Hive.openBox<CheckAnswerDto>(boxName);
 
       final duration = handler.data![0].exam.duration;
-      startTimer(duration);
+      _startTimer(duration);
     }
     final data = answersBox?.get(handler.data![0].id);
 
@@ -115,8 +138,8 @@ class QuestionsViewModel extends Cubit<QuestionsState> {
     );
   }
 
-  Future<void> checkQuestions({required int time}) async {
-    if (!isAnswersBoxValid) {
+  Future<void> _checkQuestions({required int time}) async {
+    if (!_isAnswersBoxValid) {
       emit(
         state.copyWith(
           checkQuestions: state.checkQuestions.copyWith(
@@ -138,7 +161,7 @@ class QuestionsViewModel extends Cubit<QuestionsState> {
       ),
     );
 
-    await fillUnansweredQuestions();
+    await _fillUnansweredQuestions();
 
     final answers = answersBox!.values.toList();
 
@@ -168,7 +191,7 @@ class QuestionsViewModel extends Cubit<QuestionsState> {
     );
   }
 
-  void nextQuestion(List<QuestionEntity> questions) {
+  void _nextQuestion({required List<QuestionEntity> questions}) {
     final current = state.currentQuestion;
 
     if (current == questions.length - 1) {
@@ -189,7 +212,7 @@ class QuestionsViewModel extends Cubit<QuestionsState> {
     );
   }
 
-  void previousQuestion(List<QuestionEntity> questions) {
+  void _previousQuestion({required List<QuestionEntity> questions}) {
     final current = state.currentQuestion;
 
     if (current == 0) return;
@@ -207,7 +230,7 @@ class QuestionsViewModel extends Cubit<QuestionsState> {
     );
   }
 
-  void selectAnswer({
+  void _selectAnswer({
     required String questionId,
     required String answerKey,
   }) async {
@@ -238,7 +261,7 @@ class QuestionsViewModel extends Cubit<QuestionsState> {
     }
   }
 
-  void toggleMultiAnswer({
+  void _toggleMultiAnswer({
     required String questionId,
     required String answerKey,
   }) async {
@@ -261,7 +284,7 @@ class QuestionsViewModel extends Cubit<QuestionsState> {
     emit(state.copyWith(currentAnswer: updated));
   }
 
-  Future<void> resetAnswersBox() async {
+  Future<void> _resetAnswersBox() async {
     if (answersBox != null && answersBox!.isOpen) {
       final name = answersBox!.name;
       await answersBox!.clear();
@@ -271,8 +294,8 @@ class QuestionsViewModel extends Cubit<QuestionsState> {
     }
   }
 
-  Future<void> fillUnansweredQuestions() async {
-    if (!isAnswersBoxValid) {
+  Future<void> _fillUnansweredQuestions() async {
+    if (!_isAnswersBoxValid) {
       return;
     }
 
