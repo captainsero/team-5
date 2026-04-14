@@ -10,12 +10,8 @@ class GetAllQuestionsOnExamUseCase {
   GetAllQuestionsOnExamUseCase({required this.questionsRepo});
 
   Future<BaseResponse<List<QuestionEntity>>> call({
-    required String token,
     required String examId,
   }) async {
-    return questionsRepo.getAllQuestionsOnExam(
-      token: token,
-      examId: examId,
-    );
+    return questionsRepo.getAllQuestionsOnExam(examId: examId);
   }
 }

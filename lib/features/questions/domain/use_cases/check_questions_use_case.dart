@@ -12,11 +12,9 @@ class CheckQuestionsUseCase {
 
   Future<BaseResponse<CheckQuestionResponse>> call({
     required CheckQuestionRequest checkQuestionRequest,
-    required String token,
   }) async {
     return questionsRepo.checkQuestions(
       checkQuestionRequest: checkQuestionRequest,
-      token: token,
     );
   }
 }

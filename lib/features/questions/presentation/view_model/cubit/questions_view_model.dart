@@ -6,9 +6,6 @@ import 'package:hive_ce/hive.dart';
 import 'package:injectable/injectable.dart';
 import 'package:team_5_examapp/config/base_state/base_state.dart';
 import 'package:team_5_examapp/config/response_handler/response_handler.dart';
-import 'package:team_5_examapp/config/response_handler/secure_storage_handler.dart';
-import 'package:team_5_examapp/config/secure_storage/secure_storage_keys.dart';
-import 'package:team_5_examapp/config/secure_storage/secure_storage_service.dart';
 import 'package:team_5_examapp/features/questions/data/models/check_answer_dto.dart';
 import 'package:team_5_examapp/features/questions/data/models/responses/check_question_request.dart';
 import 'package:team_5_examapp/features/questions/data/models/responses/check_question_response.dart';
@@ -104,15 +101,7 @@ class QuestionsViewModel extends Cubit<QuestionsState> {
       ),
     );
 
-    final token = await SecureStorageService.read(
-      key: SecureStorageKeys.userToken,
-    );
-    final tokenHandler = SecureStorageHandler.handle(token);
-
-    final response = await getAllQuestionsOnExamUseCase(
-      token: tokenHandler.data ?? '',
-      examId: examId,
-    );
+    final response = await getAllQuestionsOnExamUseCase(examId: examId);
 
     final handler = ResponseHandler.handle<List<QuestionEntity>>(response);
 
@@ -167,16 +156,7 @@ class QuestionsViewModel extends Cubit<QuestionsState> {
 
     final request = CheckQuestionRequest(answers: answers, time: time);
 
-    final token = await SecureStorageService.read(
-      key: SecureStorageKeys.userToken,
-    );
-
-    final tokenHandler = SecureStorageHandler.handle(token);
-
-    final response = await checkQuestionsUseCase(
-      checkQuestionRequest: request,
-      token: tokenHandler.data ?? '',
-    );
+    final response = await checkQuestionsUseCase(checkQuestionRequest: request);
 
     final handler = ResponseHandler.handle<CheckQuestionResponse>(response);
 

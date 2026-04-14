@@ -5,12 +5,10 @@ import 'package:team_5_examapp/features/questions/domain/entities/question_entit
 
 abstract interface class QuestionsRepoContract {
   Future<BaseResponse<List<QuestionEntity>>> getAllQuestionsOnExam({
-    required String token,
     required String examId,
   });
 
-    Future<BaseResponse<CheckQuestionResponse>> checkQuestions({
+  Future<BaseResponse<CheckQuestionResponse>> checkQuestions({
     required CheckQuestionRequest checkQuestionRequest,
-    required String token
   });
 }
