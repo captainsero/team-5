@@ -40,5 +40,6 @@
     "startAgain": "Start again",
     "timeOut": "Time out !!",
     "viewScore": "View score",
-    "answersNotReady": "Answers not ready yet"
+    "answersNotReady": "Answers not ready yet",
+    "noQuestionsFound": "No questions found"
 }

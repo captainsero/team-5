@@ -120,19 +120,31 @@ class QuestionsViewModel extends Cubit<QuestionsState> {
 
       final duration = handler.data![0].exam!.duration;
       _startTimer(duration);
-    }
-    final data = answersBox?.get(handler.data![0].id);
 
-    emit(
-      state.copyWith(
-        currentAnswer: data?.correct ?? '',
-        getAllQuestionsOnExamState: state.getAllQuestionsOnExamState.copyWith(
-          isLoading: handler.isLoading,
-          data: handler.data,
-          errorMessage: handler.errorMessage,
+      final data = answersBox?.get(handler.data![0].id);
+
+      emit(
+        state.copyWith(
+          currentAnswer: data?.correct ?? '',
+          getAllQuestionsOnExamState: state.getAllQuestionsOnExamState.copyWith(
+            isLoading: handler.isLoading,
+            data: handler.data,
+            errorMessage: handler.errorMessage,
+          ),
         ),
-      ),
-    );
+      );
+    } else if (handler.data != null && handler.data!.isNotEmpty) {
+      emit(
+        state.copyWith(
+          currentAnswer: null,
+          getAllQuestionsOnExamState: state.getAllQuestionsOnExamState.copyWith(
+            isLoading: handler.isLoading,
+            data: handler.data,
+            errorMessage: handler.errorMessage ?? S.current.noQuestionsFound,
+          ),
+        ),
+      );
+    }
   }
 
   Future<void> _checkQuestions({required int time}) async {

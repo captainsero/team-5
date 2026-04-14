@@ -378,6 +378,16 @@ class S {
       args: [],
     );
   }
+
+  /// `No questions found`
+  String get noQuestionsFound {
+    return Intl.message(
+      'No questions found',
+      name: 'noQuestionsFound',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {
