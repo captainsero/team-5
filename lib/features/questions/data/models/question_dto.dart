@@ -57,6 +57,5 @@ class QuestionDto {
     correct: correct,
     subject: subject,
     exam: exam,
-    createdAt: createdAt,
   );
 }

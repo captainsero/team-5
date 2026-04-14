@@ -9,8 +9,6 @@ class QuestionEntity {
   final String? correct;
   final dynamic subject;
   final ExamModel? exam;
-  final DateTime? createdAt;
-
   bool? isAnswerd;
   AnswerDto? userAnswer;
 
@@ -24,7 +22,6 @@ class QuestionEntity {
     this.correct,
     this.subject,
     this.exam,
-    this.createdAt,
   });
 
   QuestionEntity copyWith({
@@ -37,7 +34,6 @@ class QuestionEntity {
     String? correct,
     dynamic subject,
     ExamModel? exam,
-    DateTime? createdAt,
   }) {
     return QuestionEntity(
       isAnswerd ?? this.isAnswerd,
@@ -49,7 +45,6 @@ class QuestionEntity {
       correct: correct ?? this.correct,
       subject: subject ?? this.subject,
       exam: exam ?? this.exam,
-      createdAt: createdAt ?? this.createdAt,
     );
   }
 }
