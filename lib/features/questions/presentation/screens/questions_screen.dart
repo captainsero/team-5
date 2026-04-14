@@ -144,6 +144,9 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
 
                                 if (isLast) {
                                   final minutes = state.remainingSeconds ~/ 60;
+                                  widget.questionsViewModel.doEvent(
+                                    StopTimerEvent(),
+                                  );
                                   context.go(
                                     RoutesPath.scoreRoute,
                                     extra: ExtraScoreScreenModel(

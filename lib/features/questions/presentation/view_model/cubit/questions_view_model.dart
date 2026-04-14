@@ -55,6 +55,9 @@ class QuestionsViewModel extends Cubit<QuestionsState> {
       case ResetAnswerBoxEvent():
         _resetAnswersBox();
         break;
+      case StopTimerEvent():
+        _stopTimer();
+        break;
     }
   }
 
@@ -86,6 +89,11 @@ class QuestionsViewModel extends Cubit<QuestionsState> {
         emit(state.copyWith(remainingSeconds: current - 1));
       }
     });
+  }
+
+  void _stopTimer() {
+    _timer?.cancel();
+    _timer = null;
   }
 
   Future<void> _getAllQuestionsOnExam({required String examId}) async {
@@ -294,5 +302,11 @@ class QuestionsViewModel extends Cubit<QuestionsState> {
         );
       }
     }
+  }
+
+  @override
+  Future<void> close() {
+    _stopTimer();
+    return super.close();
   }
 }

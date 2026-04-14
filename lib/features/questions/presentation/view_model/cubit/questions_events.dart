@@ -41,3 +41,5 @@ class ToggleMultiAnswerEvent extends QuestionsEvents {
 }
 
 class ResetAnswerBoxEvent extends QuestionsEvents {}
+
+class StopTimerEvent extends QuestionsEvents {}
