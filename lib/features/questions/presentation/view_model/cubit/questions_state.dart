@@ -1,12 +1,8 @@
 part of 'questions_view_model.dart';
-// ignore: must_be_immutable
+
 class QuestionsState extends Equatable {
-  BaseState<List<QuestionEntity>> getAllQuestionsOnExamState =
-      BaseState<List<QuestionEntity>>(isLoading: true);
-
-  BaseState<CheckQuestionResponse> checkQuestions =
-      BaseState<CheckQuestionResponse>(isLoading: false);
-
+  final BaseState<List<QuestionEntity>> getAllQuestionsOnExamState;
+  final BaseState<CheckQuestionResponse> checkQuestions;
   final int currentQuestion;
   final bool isLast;
   final String? currentAnswer;
@@ -23,13 +19,11 @@ class QuestionsState extends Equatable {
     this.remainingSeconds = 0,
     this.isTimeUp = false,
     this.totalSeconds = 0,
-  }) {
-    this.getAllQuestionsOnExamState =
-        getAllQuestionsOnExamState ??
-        BaseState<List<QuestionEntity>>(isLoading: true);
-    this.checkQuestions =
-        checkQuestions ?? BaseState<CheckQuestionResponse>(isLoading: false);
-  }
+  }) : getAllQuestionsOnExamState =
+           getAllQuestionsOnExamState ??
+           BaseState<List<QuestionEntity>>(isLoading: true),
+       checkQuestions =
+           checkQuestions ?? BaseState<CheckQuestionResponse>(isLoading: false);
 
   QuestionsState copyWith({
     BaseState<List<QuestionEntity>>? getAllQuestionsOnExamState,

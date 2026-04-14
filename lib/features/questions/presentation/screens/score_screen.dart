@@ -39,13 +39,15 @@ class ScoreScreen extends StatelessWidget {
             final data = state.checkQuestions.data;
             final isLoading = state.checkQuestions.isLoading;
 
-            final totalString = data?.total ?? '0%';
-            final percentValue =
+            final scorePercentageText = data?.total ?? '0%';
+            final roundedScorePercentageText =
                 (double.tryParse(
-                  totalString.replaceAll('%', ''),
+                  scorePercentageText.replaceAll('%', ''),
                 )?.toStringAsFixed(0) ??
                 '0.0');
-            final finalValue = double.tryParse(percentValue);
+            final scorePercentageValue = double.tryParse(
+              roundedScorePercentageText,
+            );
 
             return Column(
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -63,7 +65,7 @@ class ScoreScreen extends StatelessWidget {
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    ScoreBar(value: finalValue ?? 0.0),
+                    ScoreBar(value: scorePercentageValue ?? 0.0),
                     Spacer(flex: 1),
                     Column(
                       mainAxisAlignment: MainAxisAlignment.center,

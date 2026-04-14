@@ -83,16 +83,21 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
               children: [
                 QuestionProgressBar(
                   currentQuestion: currentQuestion + 1,
-                  totalQuestions: isLoading ? 40 : questions!.length,
+                  // TODO: test it when exam exist in the API
+                  totalQuestions: questions!.length,
                 ),
 
                 QuestionWidget(
                   isRadio: isRadio,
-                  answers: isLoading ? [] : questions![currentQuestion].answers ?? [],
+                  answers: isLoading
+                      ? []
+                      : questions[currentQuestion].answers ?? [],
                   question: isLoading
                       ? ''
-                      : questions![currentQuestion].question ?? '',
-                  questionId: isLoading ? '' : questions![currentQuestion].id ?? '',
+                      : questions[currentQuestion].question ?? '',
+                  questionId: isLoading
+                      ? ''
+                      : questions[currentQuestion].id ?? '',
                 ),
 
                 SizedBox(height: AppSize.s50),
@@ -106,7 +111,7 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
                             ? null
                             : () {
                                 context.read<QuestionsViewModel>().doEvent(
-                                  PreviousQuestionEvent(questions: questions!),
+                                  PreviousQuestionEvent(questions: questions),
                                 );
                               },
 
@@ -134,7 +139,7 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
                         onPressed: isAnswered
                             ? () {
                                 context.read<QuestionsViewModel>().doEvent(
-                                  NextQuestionEvent(questions: questions!),
+                                  NextQuestionEvent(questions: questions),
                                 );
 
                                 if (isLast) {
