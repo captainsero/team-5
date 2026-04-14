@@ -44,14 +44,14 @@ class QuestionWidget extends StatelessWidget {
                     return Padding(
                       padding: const EdgeInsets.only(bottom: 12),
                       child: RadioAnswerButton(
-                        text: answer.answer,
-                        value: answer.key,
+                        text: answer.answer ?? '',
+                        value: answer.key ?? '',
                         isSelected: selectedAnswer == answer.key,
                         onTap: () {
                           context.read<QuestionsViewModel>().doEvent(
                             SelectAnswerEvent(
                               questionId: questionId,
-                              answerKey: answer.key,
+                              answerKey: answer.key ?? '',
                             ),
                           );
                         },
@@ -70,14 +70,14 @@ class QuestionWidget extends StatelessWidget {
                   return Padding(
                     padding: const EdgeInsets.only(bottom: 12),
                     child: CheckboxAnswerButton(
-                      text: answer.answer,
-                      value: answer.key,
+                      text: answer.answer ?? '',
+                      value: answer.key ?? '',
                       isSelected: selectedList.contains(answer.key),
                       onTap: () {
                         context.read<QuestionsViewModel>().doEvent(
                           ToggleMultiAnswerEvent(
                             questionId: questionId,
-                            answerKey: answer.key,
+                            answerKey: answer.key ?? '',
                           ),
                         );
                       },

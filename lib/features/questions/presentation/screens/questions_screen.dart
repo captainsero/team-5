@@ -88,11 +88,11 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
 
                 QuestionWidget(
                   isRadio: isRadio,
-                  answers: isLoading ? [] : questions![currentQuestion].answers,
+                  answers: isLoading ? [] : questions![currentQuestion].answers ?? [],
                   question: isLoading
                       ? ''
-                      : questions![currentQuestion].question,
-                  questionId: isLoading ? '' : questions![currentQuestion].id,
+                      : questions![currentQuestion].question ?? '',
+                  questionId: isLoading ? '' : questions![currentQuestion].id ?? '',
                 ),
 
                 SizedBox(height: AppSize.s50),
@@ -143,7 +143,7 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
                                     RoutesPath.scoreRoute,
                                     extra: ExtraScoreScreenModel(
                                       time: minutes,
-                                      examId: questions[0].exam.id,
+                                      examId: questions[0].exam!.id,
                                       questionsViewModel:
                                           widget.questionsViewModel,
                                     ),

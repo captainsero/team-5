@@ -84,15 +84,15 @@ extension GetItInjectableX on _i174.GetIt {
     final gh = _i526.GetItHelper(this, environment, environmentFilter);
     final dioModule = _$DioModule();
     gh.singleton<_i361.Dio>(() => dioModule.dio);
+    gh.lazySingleton<_i108.QuestionsApiClient>(
+      () => _i108.QuestionsApiClient(gh<_i361.Dio>()),
+    );
     gh.factory<_i358.ForgetPassApiClient>(
       () => _i358.ForgetPassApiClient(gh<_i361.Dio>()),
     );
     gh.factory<_i716.AuthApiClient>(() => _i716.AuthApiClient(gh<_i361.Dio>()));
     gh.factory<_i453.RegisterApiClient>(
       () => _i453.RegisterApiClient(gh<_i361.Dio>()),
-    );
-    gh.factory<_i108.QuestionsApiClient>(
-      () => _i108.QuestionsApiClient(gh<_i361.Dio>()),
     );
     gh.factory<_i26.QuestionsRemoteDataSourceContract>(
       () => _i1041.QuestionsRemoteDataSourceImpl(

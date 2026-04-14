@@ -15,7 +15,7 @@ import 'package:team_5_examapp/features/questions/presentation/view_model/cubit/
 
 abstract class AppRouter {
   static final GoRouter router = GoRouter(
-    initialLocation: RoutesPath.loginRoute,
+    initialLocation: RoutesPath.questionsRoute,
     routes: [
       GoRoute(
         path: RoutesPath.registerRoute,

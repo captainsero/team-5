@@ -8,31 +8,38 @@ part 'question_dto.g.dart';
 @JsonSerializable()
 class QuestionDto {
   @JsonKey(name: "_id")
-  final String id;
+  final String? id;
+
   @JsonKey(name: "question")
-  final String question;
+  final String? question;
+
   @JsonKey(name: "answers")
-  final List<AnswerDto> answers;
+  final List<AnswerDto>? answers;
+
   @JsonKey(name: "type")
-  final String type;
+  final String? type;
+
   @JsonKey(name: "correct")
-  final String correct;
+  final String? correct;
+
   @JsonKey(name: "subject")
   final dynamic subject;
+
   @JsonKey(name: "exam")
-  final ExamModel exam;
+  final ExamModel? exam;
+
   @JsonKey(name: "createdAt")
-  final DateTime createdAt;
+  final DateTime? createdAt;
 
   QuestionDto({
-    required this.id,
-    required this.question,
-    required this.answers,
-    required this.type,
-    required this.correct,
-    required this.subject,
-    required this.exam,
-    required this.createdAt,
+    this.id,
+    this.question,
+    this.answers,
+    this.type,
+    this.correct,
+    this.subject,
+    this.exam,
+    this.createdAt,
   });
 
   factory QuestionDto.fromJson(Map<String, dynamic> json) =>
@@ -41,11 +48,11 @@ class QuestionDto {
   Map<String, dynamic> toJson() => _$QuestionDtoToJson(this);
 
   QuestionEntity toDomain() => QuestionEntity(
-    false, // IsAnswerd (bool)
-    null, // userAnswer
+    false,
+    null,
     id: id,
     question: question,
-    answers: answers,
+    answers: answers ?? [],
     type: type,
     correct: correct,
     subject: subject,

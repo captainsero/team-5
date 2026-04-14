@@ -117,11 +117,11 @@ class QuestionsViewModel extends Cubit<QuestionsState> {
     final handler = ResponseHandler.handle<List<QuestionEntity>>(response);
 
     if (handler.data != null) {
-      final boxName = handler.data![0].exam.id;
+      final boxName = handler.data![0].exam!.id;
 
       answersBox = await Hive.openBox<CheckAnswerDto>(boxName);
 
-      final duration = handler.data![0].exam.duration;
+      final duration = handler.data![0].exam!.duration;
       _startTimer(duration);
     }
     final data = answersBox?.get(handler.data![0].id);
@@ -310,7 +310,7 @@ class QuestionsViewModel extends Cubit<QuestionsState> {
       if (existing == null) {
         await answersBox!.put(
           question.id,
-          CheckAnswerDto(questionId: question.id, correct: 'null'),
+          CheckAnswerDto(questionId: question.id ?? '', correct: 'null'),
         );
       }
     }

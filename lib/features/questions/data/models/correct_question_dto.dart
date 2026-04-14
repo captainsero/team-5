@@ -5,24 +5,27 @@ part 'correct_question_dto.g.dart';
 
 @JsonSerializable()
 class CorrectQuestionDto {
-    @JsonKey(name: "QID")
-    final String qid;
-    @JsonKey(name: "Question")
-    final String question;
-    @JsonKey(name: "correctAnswer")
-    final String correctAnswer;
-    @JsonKey(name: "answers")
-    // TODO: review when api is working
-    final AnswerDto answers;
+  @JsonKey(name: "QID")
+  final String? qid;
 
-    CorrectQuestionDto({
-        required this.qid,
-        required this.question,
-        required this.correctAnswer,
-        required this.answers,
-    });
+  @JsonKey(name: "Question")
+  final String? question;
 
-    factory CorrectQuestionDto.fromJson(Map<String, dynamic> json) => _$CorrectQuestionDtoFromJson(json);
+  @JsonKey(name: "correctAnswer")
+  final String? correctAnswer;
 
-    Map<String, dynamic> toJson() => _$CorrectQuestionDtoToJson(this);
+  @JsonKey(name: "answers")
+  final AnswerDto? answers;
+
+  CorrectQuestionDto({
+    this.qid,
+    this.question,
+    this.correctAnswer,
+    this.answers,
+  });
+
+  factory CorrectQuestionDto.fromJson(Map<String, dynamic> json) =>
+      _$CorrectQuestionDtoFromJson(json);
+
+  Map<String, dynamic> toJson() => _$CorrectQuestionDtoToJson(this);
 }
