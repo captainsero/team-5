@@ -46,20 +46,32 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
       builder: (context, state) {
         final currentQuestion = state.currentQuestion;
         final isLast = state.isLast;
-        final questions = state.getAllQuestionsOnExamState.data;
+        final questions = state.getAllQuestionsOnExamState.data ?? [];
         final isLoading = state.getAllQuestionsOnExamState.isLoading;
-        final errorMassege = state.getAllQuestionsOnExamState.errorMessage;
-        final isAnswered = questions?[currentQuestion].isAnswerd ?? false;
+        final errorMessage = state.getAllQuestionsOnExamState.errorMessage;
+        final isAnswered = questions.isEmpty
+            ? false
+            : questions[currentQuestion].isAnswerd ?? false;
         bool isRadio = true;
 
-        if (!isLoading && errorMassege == null && questions != null) {
-          isRadio = questions[currentQuestion].type == 'single_choice';
+        if (state.getAllQuestionsOnExamState.isLoading) {
+          return const Scaffold(
+            body: Center(child: CircularProgressIndicator()),
+          );
         }
-        if (!isLoading && questions == null && errorMassege != null) {
+
+        if (errorMessage != null || questions.isEmpty) {
           return Scaffold(
+            appBar: AppBar(
+              leading: IconButton(
+                onPressed: () => context.pop(),
+                icon: const Icon(Icons.arrow_back_ios),
+              ),
+              title: Text(S.of(context).exam),
+            ),
             body: Center(
               child: Text(
-                errorMassege,
+                errorMessage ?? S.current.noQuestionsFound,
                 style: Theme.of(context).textTheme.displaySmall,
               ),
             ),
@@ -84,7 +96,7 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
                 QuestionProgressBar(
                   currentQuestion: currentQuestion + 1,
                   // TODO: test it when exam exist in the API
-                  totalQuestions: questions!.length,
+                  totalQuestions: questions.length,
                 ),
 
                 QuestionWidget(

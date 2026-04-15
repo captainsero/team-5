@@ -109,11 +109,13 @@ class QuestionsViewModel extends Cubit<QuestionsState> {
       ),
     );
 
-    final response = await getAllQuestionsOnExamUseCase(examId: examId);
+    final response = await getAllQuestionsOnExamUseCase(
+      examId: '670070a830a3c3c1944a9c63',
+    );
 
     final handler = ResponseHandler.handle<List<QuestionEntity>>(response);
 
-    if (handler.data != null) {
+    if (handler.data != null && handler.data!.isNotEmpty) {
       final boxName = handler.data![0].exam!.id;
 
       answersBox = await Hive.openBox<CheckAnswerDto>(boxName);
@@ -125,22 +127,21 @@ class QuestionsViewModel extends Cubit<QuestionsState> {
 
       emit(
         state.copyWith(
-          currentAnswer: data?.correct ?? '',
-          getAllQuestionsOnExamState: state.getAllQuestionsOnExamState.copyWith(
-            isLoading: handler.isLoading,
-            data: handler.data,
-            errorMessage: handler.errorMessage,
-          ),
-        ),
-      );
-    } else if (handler.data != null && handler.data!.isNotEmpty) {
-      emit(
-        state.copyWith(
-          currentAnswer: null,
+          currentAnswer: data?.correct,
           getAllQuestionsOnExamState: state.getAllQuestionsOnExamState.copyWith(
             isLoading: handler.isLoading,
             data: handler.data,
             errorMessage: handler.errorMessage ?? S.current.noQuestionsFound,
+          ),
+        ),
+      );
+    } else {
+      emit(
+        state.copyWith(
+          getAllQuestionsOnExamState: state.getAllQuestionsOnExamState.copyWith(
+            isLoading: handler.isLoading,
+            data: handler.data,
+            errorMessage: handler.errorMessage,
           ),
         ),
       );
