@@ -189,20 +189,20 @@ class S {
     );
   }
 
-  /// `Please enter your code that send to your email adress`
+  /// `Please enter your code that send to your email address`
   String get emailVerificationDis {
     return Intl.message(
-      'Please enter your code that send to your email adress',
+      'Please enter your code that send to your email address',
       name: 'emailVerificationDis',
       desc: '',
       args: [],
     );
   }
 
-  /// `Didn't recieve code? `
+  /// `Didn't receive code? `
   String get didnotReceiveCode {
     return Intl.message(
-      'Didn\'t recieve code? ',
+      'Didn\'t receive code? ',
       name: 'didnotReceiveCode',
       desc: '',
       args: [],

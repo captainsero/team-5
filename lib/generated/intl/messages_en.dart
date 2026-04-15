@@ -31,7 +31,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "continueButton": MessageLookupByLibrary.simpleMessage("Continue"),
     "correct": MessageLookupByLibrary.simpleMessage("Correct"),
     "didnotReceiveCode": MessageLookupByLibrary.simpleMessage(
-      "Didn\'t recieve code? ",
+      "Didn\'t receive code? ",
     ),
     "dontHaveAccount": MessageLookupByLibrary.simpleMessage(
       "Don\'t have an account?",
@@ -44,7 +44,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "Email verification",
     ),
     "emailVerificationDis": MessageLookupByLibrary.simpleMessage(
-      "Please enter your code that send to your email adress",
+      "Please enter your code that send to your email address",
     ),
     "enterAValidEmail": MessageLookupByLibrary.simpleMessage(
       "Enter a Valid email",
