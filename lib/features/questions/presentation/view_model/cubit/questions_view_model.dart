@@ -110,7 +110,7 @@ class QuestionsViewModel extends Cubit<QuestionsState> {
     );
 
     final response = await getAllQuestionsOnExamUseCase(
-      examId: '670070a830a3c3c1944a9c63',
+      examId: '69d980117c82914570305dd5',
     );
 
     final handler = ResponseHandler.handle<List<QuestionEntity>>(response);
@@ -131,7 +131,7 @@ class QuestionsViewModel extends Cubit<QuestionsState> {
           getAllQuestionsOnExamState: state.getAllQuestionsOnExamState.copyWith(
             isLoading: handler.isLoading,
             data: handler.data,
-            errorMessage: handler.errorMessage ?? S.current.noQuestionsFound,
+            errorMessage: handler.errorMessage,
           ),
         ),
       );
@@ -292,6 +292,7 @@ class QuestionsViewModel extends Cubit<QuestionsState> {
       await answersBox!.close();
       await Hive.deleteBoxFromDisk(name);
       answersBox = null;
+      emit(state.copyWith(currentQuestion: 0, isLast: false, isTimeUp: false));
     }
   }
 

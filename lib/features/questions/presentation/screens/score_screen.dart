@@ -25,6 +25,7 @@ class ScoreScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         title: Padding(
           padding: EdgeInsets.only(left: AppPadding.p20),
           child: Text(S.of(context).examScore),
@@ -139,7 +140,10 @@ class ScoreScreen extends StatelessWidget {
                   child: ElevatedButton(
                     onPressed: () {
                       questionsViewModel.doEvent(ResetAnswerBoxEvent());
-                      context.go(RoutesPath.questionsRoute, extra: examId);
+                      context.pushReplacement(
+                        RoutesPath.questionsRoute,
+                        extra: examId,
+                      );
                     },
                     child: Text(S.of(context).startAgain),
                   ),

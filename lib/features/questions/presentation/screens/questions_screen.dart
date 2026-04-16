@@ -71,7 +71,7 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
             ),
             body: Center(
               child: Text(
-                errorMessage ?? S.current.noQuestionsFound,
+                errorMessage ?? 'S.current.noQuestionsFound',
                 style: Theme.of(context).textTheme.displaySmall,
               ),
             ),
@@ -95,7 +95,6 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
               children: [
                 QuestionProgressBar(
                   currentQuestion: currentQuestion + 1,
-                  // TODO: test it when exam exist in the API
                   totalQuestions: questions.length,
                 ),
 
@@ -159,7 +158,7 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
                                   widget.questionsViewModel.doEvent(
                                     StopTimerEvent(),
                                   );
-                                  context.go(
+                                  context.push(
                                     RoutesPath.scoreRoute,
                                     extra: ExtraScoreScreenModel(
                                       time: minutes,
