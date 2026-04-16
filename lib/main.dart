@@ -13,8 +13,8 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   // Avoid 0× screen scale before layout; otherwise `.sp` font sizes become 0 and StrutStyle asserts.
   await ScreenUtil.ensureScreenSize();
-  configureDependencies();
-
+  await configureDependencies();
+  
   final dir = getIt<Directory>();
   await HiveService.init(dir);
 

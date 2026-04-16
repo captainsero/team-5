@@ -9,6 +9,8 @@
 // coverage:ignore-file
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
+import 'dart:io' as _i497;
+
 import 'package:dio/dio.dart' as _i361;
 import 'package:get_it/get_it.dart' as _i174;
 import 'package:injectable/injectable.dart' as _i526;
@@ -73,17 +75,25 @@ import '../../features/questions/domain/use_cases/get_all_questions_on_exam_use_
     as _i266;
 import '../../features/questions/presentation/view_model/cubit/questions_view_model.dart'
     as _i659;
+import '../app_module/app_module.dart' as _i432;
 import '../dio/dio_module.dart' as _i977;
+import '../hive_service/hive_service.dart' as _i893;
 
 extension GetItInjectableX on _i174.GetIt {
   // initializes the registration of main-scope dependencies inside of GetIt
-  _i174.GetIt init({
+  Future<_i174.GetIt> init({
     String? environment,
     _i526.EnvironmentFilter? environmentFilter,
-  }) {
+  }) async {
     final gh = _i526.GetItHelper(this, environment, environmentFilter);
+    final appModule = _$AppModule();
     final dioModule = _$DioModule();
+    await gh.factoryAsync<_i497.Directory>(
+      () => appModule.appDocumentsDirectory,
+      preResolve: true,
+    );
     gh.singleton<_i361.Dio>(() => dioModule.dio);
+    gh.singleton<_i893.HiveService>(() => _i893.HiveService());
     gh.lazySingleton<_i108.QuestionsApiClient>(
       () => _i108.QuestionsApiClient(gh<_i361.Dio>()),
     );
@@ -190,5 +200,7 @@ extension GetItInjectableX on _i174.GetIt {
     return this;
   }
 }
+
+class _$AppModule extends _i432.AppModule {}
 
 class _$DioModule extends _i977.DioModule {}
