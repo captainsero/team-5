@@ -85,7 +85,10 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
               icon: Icon(Icons.arrow_back_ios),
             ),
             title: Text(S.of(context).exam),
-            actions: [Image.asset(ImageAssets.clock), TimerText()],
+            actions: [
+              Image.asset(ImageAssets.clock),
+              TimerText(questionsViewModel: widget.questionsViewModel),
+            ],
           ),
           body: Padding(
             padding: EdgeInsets.symmetric(horizontal: AppPadding.p20),

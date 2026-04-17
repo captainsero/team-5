@@ -5,7 +5,8 @@ import 'package:team_5_examapp/features/questions/presentation/view_model/cubit/
 import 'package:team_5_examapp/features/questions/presentation/widgets/time_out_dialog.dart';
 
 class TimerText extends StatelessWidget {
-  const TimerText({super.key});
+  const TimerText({super.key, required this.questionsViewModel});
+  final QuestionsViewModel questionsViewModel;
 
   @override
   Widget build(BuildContext context) {
@@ -22,6 +23,7 @@ class TimerText extends StatelessWidget {
             builder: (_) => TimeOutDialog(
               time: 0,
               examId: state.getAllQuestionsOnExamState.data![0].exam!.id,
+              questionsViewModel: questionsViewModel,
             ),
           );
         }

@@ -1,14 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:team_5_examapp/config/shared_models/extra_score_screen_model.dart';
 import 'package:team_5_examapp/core/constants/assets_manager.dart';
 import 'package:team_5_examapp/core/constants/values_manager.dart';
 import 'package:team_5_examapp/core/routing/routes_path.dart';
+import 'package:team_5_examapp/features/questions/presentation/view_model/cubit/questions_view_model.dart';
 import 'package:team_5_examapp/generated/l10n.dart';
 
 class TimeOutDialog extends StatelessWidget {
-  const TimeOutDialog({super.key, required this.time, required this.examId});
+  const TimeOutDialog({
+    super.key,
+    required this.time,
+    required this.examId,
+    required this.questionsViewModel,
+  });
   final int time;
   final String examId;
+  final QuestionsViewModel questionsViewModel;
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +44,11 @@ class TimeOutDialog extends StatelessWidget {
             onPressed: () {
               context.go(
                 RoutesPath.scoreRoute,
-                extra: {'time': time, 'examId': examId},
+                extra: ExtraScoreScreenModel(
+                  time: time,
+                  examId: examId,
+                  questionsViewModel: questionsViewModel,
+                ),
               );
             },
             child: Text(S.of(context).viewScore),
