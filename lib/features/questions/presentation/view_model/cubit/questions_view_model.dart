@@ -62,7 +62,7 @@ class QuestionsViewModel extends Cubit<QuestionsState> {
   }
 
   bool get _isAnswersBoxValid {
-    return answersBox != null && answersBox!.isOpen && answersBox!.isNotEmpty;
+    return answersBox != null && answersBox!.isOpen;
   }
 
   void _startTimer(int durationInMinutes) {
