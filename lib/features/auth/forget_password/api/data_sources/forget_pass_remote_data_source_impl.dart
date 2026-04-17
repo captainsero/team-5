@@ -2,6 +2,8 @@ import 'package:injectable/injectable.dart';
 import 'package:team_5_examapp/config/base_response/base_response.dart';
 import 'package:team_5_examapp/features/auth/forget_password/api/forget_pass_api_client/forget_pass_api_client.dart';
 import 'package:team_5_examapp/features/auth/forget_password/data/data_sources/forget_pass_remote_data_source_contract.dart';
+import 'package:team_5_examapp/features/auth/forget_password/data/models/requests/confirm_validation_code_request.dart';
+import 'package:team_5_examapp/features/auth/forget_password/data/models/requests/forget_pass_request.dart';
 import 'package:team_5_examapp/features/auth/forget_password/data/models/reset_pass_dto.dart';
 import 'package:team_5_examapp/features/auth/forget_password/data/models/responses/forget_password_response.dart';
 
@@ -13,23 +15,28 @@ class ForgetPassRemoteDataSourceImpl
 
   @override
   Future<BaseResponse<ForgetPasswordResponse>> forgetPassword({
-    required String email,
+    required ForgetPassRequest forgetPassReuest,
   }) async {
     try {
-      final response = await forgetPassApiClient.forgetPassword(email: email);
+      print("Start");
+      final response = await forgetPassApiClient.forgetPassword(
+        forgetPassRequest: forgetPassReuest,
+      );
+      print(response.message);
       return SuccessBaseResponse<ForgetPasswordResponse>(data: response);
     } catch (e) {
+      print(e);
       return ErrorBaseResponse<ForgetPasswordResponse>(error: e);
     }
   }
 
   @override
   Future<BaseResponse<ForgetPasswordResponse>> confirmValidationCode({
-    required String resetCode,
+    required ConfirmValidationCodeRequest confirmValidationCodeRequest,
   }) async {
     try {
       final response = await forgetPassApiClient.confirmValidationCode(
-        resetCode: resetCode,
+        confirmValidationCodeRequest: confirmValidationCodeRequest,
       );
       return SuccessBaseResponse(data: response);
     } catch (e) {
@@ -43,7 +50,7 @@ class ForgetPassRemoteDataSourceImpl
   }) async {
     try {
       final response = await forgetPassApiClient.resetPassword(
-        resetPassDto: resetPassDto.toJson(),
+        resetPassDto: resetPassDto,
       );
       return SuccessBaseResponse<ForgetPasswordResponse>(data: response);
     } catch (e) {

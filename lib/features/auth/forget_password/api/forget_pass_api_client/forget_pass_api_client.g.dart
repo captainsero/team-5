@@ -20,11 +20,14 @@ class _ForgetPassApiClient implements ForgetPassApiClient {
   final ParseErrorLogger? errorLogger;
 
   @override
-  Future<ForgetPasswordResponse> forgetPassword({required String email}) async {
+  Future<ForgetPasswordResponse> forgetPassword({
+    required ForgetPassRequest forgetPassRequest,
+  }) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    final _data = <String, dynamic>{'email': email};
+    final _data = <String, dynamic>{};
+    _data.addAll(forgetPassRequest.toJson());
     final _options = _setStreamType<ForgetPasswordResponse>(
       Options(method: 'POST', headers: _headers, extra: _extra)
           .compose(
@@ -48,12 +51,13 @@ class _ForgetPassApiClient implements ForgetPassApiClient {
 
   @override
   Future<ForgetPasswordResponse> confirmValidationCode({
-    required String resetCode,
+    required ConfirmValidationCodeRequest confirmValidationCodeRequest,
   }) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    final _data = <String, dynamic>{'resetCode': resetCode};
+    final _data = <String, dynamic>{};
+    _data.addAll(confirmValidationCodeRequest.toJson());
     final _options = _setStreamType<ForgetPasswordResponse>(
       Options(method: 'POST', headers: _headers, extra: _extra)
           .compose(
@@ -77,13 +81,13 @@ class _ForgetPassApiClient implements ForgetPassApiClient {
 
   @override
   Future<ForgetPasswordResponse> resetPassword({
-    required Map<String, dynamic> resetPassDto,
+    required ResetPassDto resetPassDto,
   }) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
-    _data.addAll(resetPassDto);
+    _data.addAll(resetPassDto.toJson());
     final _options = _setStreamType<ForgetPasswordResponse>(
       Options(method: 'PUT', headers: _headers, extra: _extra)
           .compose(
