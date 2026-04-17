@@ -10,7 +10,7 @@ import 'package:team_5_examapp/features/questions/presentation/widgets/answer_nu
 import 'package:team_5_examapp/features/questions/presentation/widgets/score_bar.dart';
 import 'package:team_5_examapp/generated/l10n.dart';
 
-class ScoreScreen extends StatelessWidget {
+class ScoreScreen extends StatefulWidget {
   const ScoreScreen({
     super.key,
     required this.time,
@@ -20,6 +20,17 @@ class ScoreScreen extends StatelessWidget {
   final int time;
   final String examId;
   final QuestionsViewModel questionsViewModel;
+
+  @override
+  State<ScoreScreen> createState() => _ScoreScreenState();
+}
+
+class _ScoreScreenState extends State<ScoreScreen> {
+  @override
+  void initState() {
+    widget.questionsViewModel.doEvent(CheckQuestionsEvent(time: widget.time));
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -112,9 +123,7 @@ class ScoreScreen extends StatelessWidget {
                     onPressed: isLoading
                         ? null
                         : () {
-                            questionsViewModel.doEvent(
-                              CheckQuestionsEvent(time: time),
-                            );
+                            //TODO: navigate to results screen
                           },
                     style: ElevatedButton.styleFrom().copyWith(
                       backgroundColor: WidgetStatePropertyAll(
@@ -139,10 +148,10 @@ class ScoreScreen extends StatelessWidget {
                   width: double.infinity,
                   child: ElevatedButton(
                     onPressed: () {
-                      questionsViewModel.doEvent(ResetAnswerBoxEvent());
+                      widget.questionsViewModel.doEvent(ResetAnswerBoxEvent());
                       context.pushReplacement(
                         RoutesPath.questionsRoute,
-                        extra: examId,
+                        extra: widget.examId,
                       );
                     },
                     child: Text(S.of(context).startAgain),
