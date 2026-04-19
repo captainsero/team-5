@@ -1,7 +1,7 @@
 part of 'login_view_model.dart';
 
 class LoginState {
-  final BaseState<UserModel> loginState;
+  final BaseState<UserEntity> loginState;
 
   final bool isLoginAttempted;
   final bool rememberMe;
@@ -9,15 +9,15 @@ class LoginState {
   final String? savedEmail;
 
   LoginState({
-    BaseState<UserModel>? loginState,
+    BaseState<UserEntity>? loginState,
     this.isLoginAttempted = false,
     this.rememberMe = false,
     this.obscurePassword = true,
     this.savedEmail,
-  }) : loginState = loginState ?? BaseState<UserModel>(isLoading: false);
+  }) : loginState = loginState ?? BaseState<UserEntity>(isLoading: false);
 
   LoginState copyWith({
-    BaseState<UserModel>? loginState,
+    BaseState<UserEntity>? loginState,
     bool? isLoginAttempted,
     bool? rememberMe,
     bool? obscurePassword,

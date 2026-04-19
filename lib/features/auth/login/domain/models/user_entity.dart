@@ -1,13 +1,13 @@
 import 'package:team_5_examapp/config/shared_models/auth_responses_shared_models/register_and_login_model_response/register_and_login_model_response.dart';
 
-class UserModel {
+class UserEntity {
   final String username;
   final String firstName;
   final String lastName;
   final String email;
   final String phone;
 
-  UserModel({
+  UserEntity({
     required this.username,
     required this.firstName,
     required this.lastName,
@@ -15,10 +15,10 @@ class UserModel {
     required this.phone,
   });
 
-  factory UserModel.fromAuthResponse(
+  factory UserEntity.fromAuthResponse(
     RegisterAndLoginModelResponse authResponse,
   ) {
-    return UserModel(
+    return UserEntity(
       username: authResponse.userResponseDto.username,
       firstName: authResponse.userResponseDto.firstName,
       lastName: authResponse.userResponseDto.lastName,

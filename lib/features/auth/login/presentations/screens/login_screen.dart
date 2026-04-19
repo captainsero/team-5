@@ -21,6 +21,7 @@ class _LoginScreenState extends State<LoginScreen> {
   final _formKey = GlobalKey<FormState>();
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
+  final ValueNotifier<bool> _obscurePassword = ValueNotifier<bool>(true);
   final loginViewModel = getIt.get<LoginViewModel>();
 
   @override
@@ -37,7 +38,7 @@ class _LoginScreenState extends State<LoginScreen> {
         listener: (context, state) {
           if (state.loginState.data != null) {
             ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(content: Text("Login successful! Welcome")),
+              SnackBar(content: Text(S.of(context).loginSuccessful)),
             );
           }
         },
@@ -85,31 +86,38 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                         SizedBox(height: AppSize.s16),
 
-                        TextFormField(
-                          controller: _passwordController,
-                          obscureText: state.obscurePassword,
-                          forceErrorText: loginState.errorMessage,
-                          decoration: InputDecoration(
-                            hintText: S.of(context).enterPassword,
-                            labelText: S.of(context).password,
-                            suffixIcon: IconButton(
-                              icon: Icon(
-                                state.obscurePassword
-                                    ? Icons.visibility_off
-                                    : Icons.visibility,
+                        ValueListenableBuilder<bool>(
+                          valueListenable: _obscurePassword,
+                          builder: (context, isObscured, child) {
+                            return TextFormField(
+                              controller: _passwordController,
+                              obscureText: isObscured,
+                              forceErrorText: loginState.errorMessage,
+                              decoration: InputDecoration(
+                                hintText: S.of(context).enterPassword,
+                                labelText: S.of(context).password,
+                                suffixIcon: IconButton(
+                                  icon: Icon(
+                                    isObscured
+                                        ? Icons.visibility_off
+                                        : Icons.visibility,
+                                  ),
+                                  onPressed: () {
+                                    // Update the notifier directly instead of calling the ViewModel
+                                    _obscurePassword.value =
+                                        !_obscurePassword.value;
+                                  },
+                                ),
                               ),
-                              onPressed: () {
-                                loginViewModel.toggleObscurePassword();
+                              autovalidateMode: showErrors
+                                  ? AutovalidateMode.onUserInteraction
+                                  : AutovalidateMode.disabled,
+                              validator: (value) =>
+                                  AppValidator.validatePassword(value),
+                              onChanged: (value) {
+                                loginViewModel.clearError();
                               },
-                            ),
-                          ),
-                          autovalidateMode: showErrors
-                              ? AutovalidateMode.onUserInteraction
-                              : AutovalidateMode.disabled,
-                          validator: (value) =>
-                              AppValidator.validatePassword(value),
-                          onChanged: (value) {
-                            loginViewModel.clearError();
+                            );
                           },
                         ),
 

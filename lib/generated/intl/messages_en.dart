@@ -24,6 +24,9 @@ class MessageLookup extends MessageLookupByLibrary {
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
     "codeIsRequired": MessageLookupByLibrary.simpleMessage("Code is required"),
     "confirmPassword": MessageLookupByLibrary.simpleMessage("Confirm password"),
+    "connectionTimeout": MessageLookupByLibrary.simpleMessage(
+      "Request timed out. Please check your internet connection.",
+    ),
     "continueButton": MessageLookupByLibrary.simpleMessage("Continue"),
     "didnotReceiveCode": MessageLookupByLibrary.simpleMessage(
       "Didn\'t recieve code? ",
@@ -51,13 +54,25 @@ class MessageLookup extends MessageLookupByLibrary {
     "enterYourPassword": MessageLookupByLibrary.simpleMessage(
       "Enter your passwrod",
     ),
+    "errorMessageGeneric": MessageLookupByLibrary.simpleMessage(
+      "Something went wrong. Please try again.",
+    ),
     "forgetPassword": MessageLookupByLibrary.simpleMessage("Forget Password"),
     "forgetPasswordDis": MessageLookupByLibrary.simpleMessage(
       "Please enter your email associated to your account",
     ),
     "invalidCode": MessageLookupByLibrary.simpleMessage("Invalid code"),
     "login": MessageLookupByLibrary.simpleMessage("Login"),
+    "loginSuccessful": MessageLookupByLibrary.simpleMessage(
+      "Login successful! Welcome",
+    ),
+    "networkError": MessageLookupByLibrary.simpleMessage(
+      "Network error. Please check your connection.",
+    ),
     "newPassword": MessageLookupByLibrary.simpleMessage("New Password"),
+    "notFound": MessageLookupByLibrary.simpleMessage(
+      "Requested resource not found.",
+    ),
     "password": MessageLookupByLibrary.simpleMessage("Password"),
     "passwordDoNotMatch": MessageLookupByLibrary.simpleMessage(
       "Password do not match",
@@ -73,10 +88,16 @@ class MessageLookup extends MessageLookupByLibrary {
       "Please confirm your password",
     ),
     "rememberMe": MessageLookupByLibrary.simpleMessage("Remember me"),
+    "requestTimeout": MessageLookupByLibrary.simpleMessage(
+      "Request timed out. Please try again.",
+    ),
     "resend": MessageLookupByLibrary.simpleMessage("Resend"),
     "resetPassword": MessageLookupByLibrary.simpleMessage("Reset Password"),
     "resetPasswordDis": MessageLookupByLibrary.simpleMessage(
       "Password must not be empty and must contain 6 characters with upper case letter and one number at least",
+    ),
+    "serverError": MessageLookupByLibrary.simpleMessage(
+      "Server error. Please try again later.",
     ),
     "signUp": MessageLookupByLibrary.simpleMessage("Sign up"),
   };

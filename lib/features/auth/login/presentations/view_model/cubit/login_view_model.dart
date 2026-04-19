@@ -5,7 +5,7 @@ import 'package:team_5_examapp/config/base_state/base_state.dart';
 import 'package:team_5_examapp/config/response_handler/response_handler.dart';
 import 'package:team_5_examapp/config/secure_storage/secure_storage_keys.dart';
 import 'package:team_5_examapp/config/secure_storage/secure_storage_service.dart';
-import 'package:team_5_examapp/features/auth/login/domain/models/user_model.dart';
+import 'package:team_5_examapp/features/auth/login/domain/models/user_entity.dart';
 import 'package:team_5_examapp/features/auth/login/domain/use_cases/login_use_cases.dart';
 
 part 'login_state.dart';
@@ -17,7 +17,7 @@ class LoginViewModel extends Cubit<LoginState> {
   LoginViewModel({required this.loginUseCase}) : super(LoginState());
 
   void clearError() {
-    emit(state.copyWith(loginState: BaseState<UserModel>(isLoading: false)));
+    emit(state.copyWith(loginState: BaseState<UserEntity>(isLoading: false)));
   }
 
   void toggleObscurePassword() {

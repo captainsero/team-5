@@ -4,7 +4,7 @@ import 'package:team_5_examapp/config/secure_storage/secure_storage_keys.dart';
 import 'package:team_5_examapp/config/secure_storage/secure_storage_service.dart';
 import 'package:team_5_examapp/config/shared_models/auth_responses_shared_models/register_and_login_model_response/register_and_login_model_response.dart';
 import 'package:team_5_examapp/features/auth/login/data/data_sources/login_remote_data_source_contract.dart';
-import 'package:team_5_examapp/features/auth/login/domain/models/user_model.dart';
+import 'package:team_5_examapp/features/auth/login/domain/models/user_entity.dart';
 import 'package:team_5_examapp/features/auth/login/domain/repo/login_repo_contract.dart';
 
 @Injectable(as: AuthRepoContract)
@@ -14,7 +14,7 @@ class AuthRepoImpl implements AuthRepoContract {
   AuthRepoImpl({required this.remoteDataSource});
 
   @override
-  Future<BaseResponse<UserModel>> login(String email, String password) async {
+  Future<BaseResponse<UserEntity>> login(String email, String password) async {
     final response = await remoteDataSource.login(
       email: email,
       password: password,
@@ -30,12 +30,13 @@ class AuthRepoImpl implements AuthRepoContract {
         );
 
         // Map to User domain model
-        final user = UserModel.fromAuthResponse(response.data);
 
-        return SuccessBaseResponse<UserModel>(data: user);
+        return SuccessBaseResponse<UserEntity>(
+          data: response.data.toDomain(response.data.userResponseDto),
+        );
 
       case ErrorBaseResponse<RegisterAndLoginModelResponse>():
-        return ErrorBaseResponse<UserModel>(
+        return ErrorBaseResponse<UserEntity>(
           errorMessage: response.errorMessage,
         );
     }

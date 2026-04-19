@@ -6,7 +6,7 @@ import 'package:team_5_examapp/core/constants/app_end_points.dart';
 part 'login_api_client.g.dart';
 
 @RestApi()
-@injectable
+@lazySingleton
 abstract class LoginApiClient {
   @factoryMethod
   factory LoginApiClient(Dio dio) = _LoginApiClient;

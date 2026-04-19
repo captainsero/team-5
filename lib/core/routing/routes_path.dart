@@ -5,4 +5,5 @@ class RoutesPath {
   static const String otpVerificationRoute = "/validationCode";
   static const String resetPassRoute = "/resetPass";
   static const String registerRoute = "/register";
+  static const String errorRoute = "/error";
 }

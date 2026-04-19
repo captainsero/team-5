@@ -31,10 +31,10 @@ import '../../features/auth/forget_password/domain/use_cases/reset_pass_use_case
     as _i262;
 import '../../features/auth/forget_password/presentation/view_model/cubit/forget_pass_view_model.dart'
     as _i128;
-import '../../features/auth/login/api/auth_api_client/login_api_client.dart'
-    as _i716;
 import '../../features/auth/login/api/data_sources/login_remote_data_source_impl.dart'
     as _i584;
+import '../../features/auth/login/api/login_api_client/login_api_client.dart'
+    as _i251;
 import '../../features/auth/login/data/data_sources/login_remote_data_source_contract.dart'
     as _i183;
 import '../../features/auth/login/data/repo/login_repo_impl.dart' as _i1001;
@@ -72,11 +72,14 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i358.ForgetPassApiClient>(
       () => _i358.ForgetPassApiClient(gh<_i361.Dio>()),
     );
-    gh.factory<_i716.LoginApiClient>(
-      () => _i716.LoginApiClient(gh<_i361.Dio>()),
+    gh.factory<_i251.LoginApiClient>(
+      () => _i251.LoginApiClient(gh<_i361.Dio>()),
     );
     gh.factory<_i453.RegisterApiClient>(
       () => _i453.RegisterApiClient(gh<_i361.Dio>()),
+    );
+    gh.factory<_i183.AuthRemoteDataSourceContract>(
+      () => _i584.AuthRemoteDataSourceImpl(gh<_i251.LoginApiClient>()),
     );
     gh.factory<_i426.ForgetPassRemoteDataSourceContract>(
       () => _i970.ForgetPassRemoteDataSourceImpl(
@@ -87,9 +90,6 @@ extension GetItInjectableX on _i174.GetIt {
       () => _i1056.RegisterRemoteSourceImplementation(
         registerApiClient: gh<_i453.RegisterApiClient>(),
       ),
-    );
-    gh.factory<_i183.AuthRemoteDataSourceContract>(
-      () => _i584.AuthRemoteDataSourceImpl(gh<_i716.LoginApiClient>()),
     );
     gh.factory<_i844.AuthRepoContract>(
       () => _i1001.AuthRepoImpl(

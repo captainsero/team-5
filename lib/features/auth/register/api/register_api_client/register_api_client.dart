@@ -5,7 +5,7 @@ import 'package:team_5_examapp/config/shared_models/auth_responses_shared_models
 import 'package:team_5_examapp/core/constants/app_end_points.dart';
 part 'register_api_client.g.dart';
 
-@injectable
+@lazySingleton
 @RestApi()
 abstract class RegisterApiClient {
   @factoryMethod

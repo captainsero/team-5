@@ -15,9 +15,6 @@ class RegisterRepoImplementation implements RegisterRepoContract {
   Future<BaseResponse<RegisterAndLoginModelResponse>> register({
     required UserRequestDto userInfo,
   }) async {
-    final response = await registerRemoteSourceContract.register(
-      userInfo: userInfo,
-    );
-    return response;
+    return await registerRemoteSourceContract.register(userInfo: userInfo);
   }
 }

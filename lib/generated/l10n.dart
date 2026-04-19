@@ -303,6 +303,76 @@ class S {
   String get signUp {
     return Intl.message('Sign up', name: 'signUp', desc: '', args: []);
   }
+
+  /// `Request timed out. Please check your internet connection.`
+  String get connectionTimeout {
+    return Intl.message(
+      'Request timed out. Please check your internet connection.',
+      name: 'connectionTimeout',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Server error. Please try again later.`
+  String get serverError {
+    return Intl.message(
+      'Server error. Please try again later.',
+      name: 'serverError',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Requested resource not found.`
+  String get notFound {
+    return Intl.message(
+      'Requested resource not found.',
+      name: 'notFound',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Something went wrong. Please try again.`
+  String get errorMessageGeneric {
+    return Intl.message(
+      'Something went wrong. Please try again.',
+      name: 'errorMessageGeneric',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Network error. Please check your connection.`
+  String get networkError {
+    return Intl.message(
+      'Network error. Please check your connection.',
+      name: 'networkError',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Request timed out. Please try again.`
+  String get requestTimeout {
+    return Intl.message(
+      'Request timed out. Please try again.',
+      name: 'requestTimeout',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Login successful! Welcome`
+  String get loginSuccessful {
+    return Intl.message(
+      'Login successful! Welcome',
+      name: 'loginSuccessful',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

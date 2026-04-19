@@ -1,5 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:team_5_examapp/config/shared_models/auth_responses_shared_models/user_response_dto.dart';
+import 'package:team_5_examapp/features/auth/login/domain/models/user_entity.dart';
 
 part 'register_and_login_model_response.g.dart';
 
@@ -32,4 +33,14 @@ class RegisterAndLoginModelResponse {
       _$RegisterAndLoginModelResponseFromJson(json);
 
   Map<String, dynamic> toJson() => _$RegisterAndLoginModelResponseToJson(this);
+
+  UserEntity toDomain(UserResponseDto userResponseDto) {
+    return UserEntity(
+      username: userResponseDto.username,
+      firstName: userResponseDto.firstName,
+      lastName: userResponseDto.lastName,
+      email: userResponseDto.email,
+      phone: userResponseDto.phone,
+    );
+  }
 }

@@ -1,5 +1,5 @@
-import 'dart:async';
-import 'package:dio/dio.dart';
+import 'package:flutter/widgets.dart';
+import 'package:team_5_examapp/config/base_response/error_base_response_extension.dart';
 
 sealed class BaseResponse<T> {}
 
@@ -9,56 +9,12 @@ class SuccessBaseResponse<T> extends BaseResponse<T> {
 }
 
 class ErrorBaseResponse<T> extends BaseResponse<T> {
-  late String errorMessage;
+  final Object? error;
+  final String? errorMessage;
 
-  ErrorBaseResponse({Object? error, String? errorMessage}) {
-    this.errorMessage =
-        _extractErrorMessage(error: error) ??
-        errorMessage ??
-        "Something went wrong. Please try again later.";
-  }
+  ErrorBaseResponse({this.error, this.errorMessage});
 
-  static String? _extractErrorMessage({Object? error}) {
-    // 1️⃣ PRIORITY: Extract message from API response
-    if (error is DioException) {
-      final data = error.response?.data;
-      final messageFromApi = (data is Map<String, dynamic>)
-          ? data['message']?.toString()
-          : null;
-
-      if (messageFromApi != null && messageFromApi.isNotEmpty) {
-        return messageFromApi;
-      }
-    }
-
-    // 2️⃣ FALLBACK: DioException type-based messages
-    if (error is DioException) {
-      switch (error.type) {
-        case DioExceptionType.connectionTimeout:
-        case DioExceptionType.sendTimeout:
-        case DioExceptionType.receiveTimeout:
-          return "Request timed out. Please check your internet connection.";
-
-        case DioExceptionType.badResponse:
-          final statusCode = error.response?.statusCode ?? 0;
-          if (statusCode >= 500) return "Server error. Please try again later.";
-          if (statusCode == 404) return "Requested resource not found.";
-          return "Something went wrong. Please try again.";
-
-        case DioExceptionType.unknown:
-          return "Network error. Please check your connection.";
-
-        default:
-          return "Something went wrong. Please try again.";
-      }
-    }
-
-    // 3️⃣ TimeoutException fallback
-    if (error is TimeoutException) {
-      return "Request timed out. Please try again.";
-    }
-
-    // 4️⃣ Final fallback
-    return null;
-  }
+  //to call extension function to call it
+  String getErrorMessage(BuildContext context) =>
+      handleErrorMessage(context, error);
 }
