@@ -51,17 +51,31 @@ class MessageLookup extends MessageLookupByLibrary {
       "Enter your password",
     ),
     "enterYourEmail": MessageLookupByLibrary.simpleMessage("Enter your email"),
+    "enterYourFirstName": MessageLookupByLibrary.simpleMessage(
+      "Enter your first name",
+    ),
+    "enterYourLastName": MessageLookupByLibrary.simpleMessage(
+      "Enter your last name",
+    ),
     "enterYourPassword": MessageLookupByLibrary.simpleMessage(
       "Enter your passwrod",
+    ),
+    "enterYourPhone": MessageLookupByLibrary.simpleMessage(
+      "Enter your phone number",
+    ),
+    "enterYourUserName": MessageLookupByLibrary.simpleMessage(
+      "Enter your user name",
     ),
     "errorMessageGeneric": MessageLookupByLibrary.simpleMessage(
       "Something went wrong. Please try again.",
     ),
+    "firstName": MessageLookupByLibrary.simpleMessage("First name"),
     "forgetPassword": MessageLookupByLibrary.simpleMessage("Forget Password"),
     "forgetPasswordDis": MessageLookupByLibrary.simpleMessage(
       "Please enter your email associated to your account",
     ),
     "invalidCode": MessageLookupByLibrary.simpleMessage("Invalid code"),
+    "lastName": MessageLookupByLibrary.simpleMessage("Last name"),
     "login": MessageLookupByLibrary.simpleMessage("Login"),
     "loginSuccessful": MessageLookupByLibrary.simpleMessage(
       "Login successful! Welcome",
@@ -84,6 +98,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "Password must be at least 8 characters and include upper, lower, number and special character",
     ),
     "passwrod": MessageLookupByLibrary.simpleMessage("Password"),
+    "phone": MessageLookupByLibrary.simpleMessage("Phone number"),
     "pleaseConfirmPassword": MessageLookupByLibrary.simpleMessage(
       "Please confirm your password",
     ),
@@ -100,5 +115,6 @@ class MessageLookup extends MessageLookupByLibrary {
       "Server error. Please try again later.",
     ),
     "signUp": MessageLookupByLibrary.simpleMessage("Sign up"),
+    "userName": MessageLookupByLibrary.simpleMessage("User name"),
   };
 }

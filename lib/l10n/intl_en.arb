@@ -34,5 +34,13 @@
     "errorMessageGeneric": "Something went wrong. Please try again.",
     "networkError": "Network error. Please check your connection.",
     "requestTimeout": "Request timed out. Please try again.",
-    "loginSuccessful": "Login successful! Welcome"
+    "loginSuccessful": "Login successful! Welcome",
+    "userName": "User name",
+    "enterYourUserName": "Enter your user name",
+    "firstName": "First name",
+    "enterYourFirstName": "Enter your first name",
+    "lastName": "Last name",
+    "enterYourLastName": "Enter your last name",
+    "phone": "Phone number",
+    "enterYourPhone": "Enter your phone number"
 }
