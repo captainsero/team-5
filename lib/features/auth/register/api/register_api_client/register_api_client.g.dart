@@ -20,7 +20,7 @@ class _RegisterApiClient implements RegisterApiClient {
   final ParseErrorLogger? errorLogger;
 
   @override
-  Future<AuthResponse> register({
+  Future<RegisterAndLoginModelResponse> register({
     required Map<String, dynamic> registerResponse,
   }) async {
     final _extra = <String, dynamic>{};
@@ -28,7 +28,7 @@ class _RegisterApiClient implements RegisterApiClient {
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     _data.addAll(registerResponse);
-    final _options = _setStreamType<AuthResponse>(
+    final _options = _setStreamType<RegisterAndLoginModelResponse>(
       Options(method: 'POST', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
@@ -39,9 +39,9 @@ class _RegisterApiClient implements RegisterApiClient {
           .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
     );
     final _result = await _dio.fetch<Map<String, dynamic>>(_options);
-    late AuthResponse _value;
+    late RegisterAndLoginModelResponse _value;
     try {
-      _value = AuthResponse.fromJson(_result.data!);
+      _value = RegisterAndLoginModelResponse.fromJson(_result.data!);
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options, response: _result);
       rethrow;

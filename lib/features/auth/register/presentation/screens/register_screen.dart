@@ -3,9 +3,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:team_5_examapp/config/di/di.dart';
 import 'package:team_5_examapp/core/constants/values_manager.dart';
-import 'package:team_5_examapp/core/routing/routes_manager.dart';
-import 'package:team_5_examapp/features/auth/register/data/models/user_dto.dart';
+import 'package:team_5_examapp/core/routing/routes_path.dart';
+import 'package:team_5_examapp/features/auth/register/data/models/user_request_dto.dart';
 import 'package:team_5_examapp/features/auth/register/presentation/view_model/register_view_model.dart';
+import 'package:team_5_examapp/generated/l10n.dart';
 
 import '../../../../../config/app_validator.dart';
 
@@ -38,7 +39,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
           if (!state.registerUserState.isLoading &&
               state.registerUserState.data != null &&
               state.registerUserState.errorMessage == null) {
-            context.go(Routes.loginRoute);
+            context.go(RoutesPath.loginRoute);
           }
         },
         buildWhen: (previous, current) =>
@@ -50,7 +51,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 icon: const Icon(Icons.arrow_back_ios),
                 onPressed: context.pop,
               ),
-              title: const Text('Sign Up'),
+              title: Text(S.of(context).signUp),
             ),
             body: SingleChildScrollView(
               padding: EdgeInsets.all(AppPadding.p20),
@@ -63,8 +64,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       controller: _userNameController,
                       validator: AppValidator.validateName,
                       decoration: InputDecoration(
-                        labelText: 'User name',
-                        hintText: "Enter your user name",
+                        labelText: S.of(context).userName,
+                        hintText: S.of(context).enterYourUserName,
                       ),
                       onChanged: (value) => viewModel.clearError(),
                     ),
@@ -78,8 +79,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             controller: _firstNameController,
                             validator: AppValidator.validateName,
                             decoration: InputDecoration(
-                              labelText: 'First name',
-                              hintText: "Enter your First Name",
+                              labelText: S.of(context).firstName,
+                              hintText: S.of(context).enterYourFirstName,
                             ),
 
                             onChanged: (value) => viewModel.clearError(),
@@ -92,8 +93,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             controller: _lastNameController,
                             validator: AppValidator.validateName,
                             decoration: InputDecoration(
-                              labelText: 'Last name',
-                              hintText: "Enter your last name",
+                              labelText: S.of(context).lastName,
+                              hintText: S.of(context).enterYourLastName,
                             ),
 
                             onChanged: (value) => viewModel.clearError(),
@@ -109,8 +110,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       validator: AppValidator.validateEmail,
                       forceErrorText: state.registerUserState.errorMessage,
                       decoration: InputDecoration(
-                        labelText: 'Email',
-                        hintText: "Enter your Email",
+                        labelText: S.of(context).email,
+                        hintText: S.of(context).enterYourEmail,
                       ),
                       onChanged: (value) => viewModel.clearError(),
                     ),
@@ -125,8 +126,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             validator: AppValidator.validatePassword,
                             obscureText: true,
                             decoration: InputDecoration(
-                              labelText: 'Password',
-                              hintText: "Enter your Password",
+                              labelText: S.of(context).password,
+                              hintText: S.of(context).enterYourPassword,
                             ),
 
                             onChanged: (value) => viewModel.clearError(),
@@ -144,8 +145,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
                             obscureText: true,
                             decoration: InputDecoration(
-                              labelText: 'Confirm password',
-                              hintText: "Confirm your Password",
+                              labelText: S.of(context).confirmPassword,
+                              hintText: S.of(context).enterYourPassword,
                             ),
 
                             onChanged: (value) => viewModel.clearError(),
@@ -160,8 +161,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       controller: _phoneController,
                       validator: AppValidator.validatePhone,
                       decoration: InputDecoration(
-                        labelText: 'Phone number',
-                        hintText: "Enter your phone number",
+                        labelText: S.of(context).phone,
+                        hintText: S.of(context).enterYourPhone,
                       ),
                       onChanged: (value) => viewModel.clearError(),
                     ),
@@ -175,7 +176,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             : () async {
                                 if (_formKey.currentState!.validate()) {
                                   await viewModel.registerUser(
-                                    userInfo: UserDto(
+                                    userInfo: UserRequestDto(
                                       username: _userNameController.text,
                                       firstName: _firstNameController.text,
                                       lastName: _lastNameController.text,
@@ -188,7 +189,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                   );
                                 }
                               },
-                        child: Text("Sign Up"),
+                        child: Text(S.of(context).signUp),
                       ),
                     ),
                   ],

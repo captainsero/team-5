@@ -9,7 +9,7 @@ class ResetPassDto {
   @JsonKey(name: "newPassword")
   final String newPassword;
 
-  ResetPassDto({required this.email, required this.newPassword});
+  ResetPassDto({this.email, required this.newPassword});
 
   factory ResetPassDto.fromJson(Map<String, dynamic> json) =>
       _$ResetPassDtoFromJson(json);

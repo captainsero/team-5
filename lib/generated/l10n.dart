@@ -303,6 +303,146 @@ class S {
   String get signUp {
     return Intl.message('Sign up', name: 'signUp', desc: '', args: []);
   }
+
+  /// `Request timed out. Please check your internet connection.`
+  String get connectionTimeout {
+    return Intl.message(
+      'Request timed out. Please check your internet connection.',
+      name: 'connectionTimeout',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Server error. Please try again later.`
+  String get serverError {
+    return Intl.message(
+      'Server error. Please try again later.',
+      name: 'serverError',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Requested resource not found.`
+  String get notFound {
+    return Intl.message(
+      'Requested resource not found.',
+      name: 'notFound',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Something went wrong. Please try again.`
+  String get errorMessageGeneric {
+    return Intl.message(
+      'Something went wrong. Please try again.',
+      name: 'errorMessageGeneric',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Network error. Please check your connection.`
+  String get networkError {
+    return Intl.message(
+      'Network error. Please check your connection.',
+      name: 'networkError',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Request timed out. Please try again.`
+  String get requestTimeout {
+    return Intl.message(
+      'Request timed out. Please try again.',
+      name: 'requestTimeout',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Login successful! Welcome`
+  String get loginSuccessful {
+    return Intl.message(
+      'Login successful! Welcome',
+      name: 'loginSuccessful',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `User name`
+  String get userName {
+    return Intl.message('User name', name: 'userName', desc: '', args: []);
+  }
+
+  /// `Enter your user name`
+  String get enterYourUserName {
+    return Intl.message(
+      'Enter your user name',
+      name: 'enterYourUserName',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `First name`
+  String get firstName {
+    return Intl.message('First name', name: 'firstName', desc: '', args: []);
+  }
+
+  /// `Enter your first name`
+  String get enterYourFirstName {
+    return Intl.message(
+      'Enter your first name',
+      name: 'enterYourFirstName',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Last name`
+  String get lastName {
+    return Intl.message('Last name', name: 'lastName', desc: '', args: []);
+  }
+
+  /// `Enter your last name`
+  String get enterYourLastName {
+    return Intl.message(
+      'Enter your last name',
+      name: 'enterYourLastName',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Phone number`
+  String get phone {
+    return Intl.message('Phone number', name: 'phone', desc: '', args: []);
+  }
+
+  /// `Enter your phone number`
+  String get enterYourPhone {
+    return Intl.message(
+      'Enter your phone number',
+      name: 'enterYourPhone',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Error`
+  String get error {
+    return Intl.message('Error', name: 'error', desc: '', args: []);
+  }
+
+  /// `OK`
+  String get ok {
+    return Intl.message('OK', name: 'ok', desc: '', args: []);
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

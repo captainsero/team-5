@@ -1,5 +1,8 @@
 import 'package:injectable/injectable.dart';
 import 'package:team_5_examapp/config/base_response/base_response.dart';
+import 'package:team_5_examapp/config/response_handler/secure_storage_handler.dart';
+import 'package:team_5_examapp/config/secure_storage/secure_storage_keys.dart';
+import 'package:team_5_examapp/config/secure_storage/secure_storage_service.dart';
 import 'package:team_5_examapp/features/auth/forget_password/data/data_sources/forget_pass_remote_data_source_contract.dart';
 import 'package:team_5_examapp/features/auth/forget_password/data/models/reset_pass_dto.dart';
 import 'package:team_5_examapp/features/auth/forget_password/data/models/responses/forget_password_response.dart';
@@ -15,55 +18,31 @@ class ForgetPassRepoImpl implements ForgetPassRepoContract {
   Future<BaseResponse<ForgetPasswordResponse>> forgetPassword({
     required String email,
   }) async {
-    final response = await forgetPassRemoteDataSourceContract.forgetPassword(
+    return await forgetPassRemoteDataSourceContract.forgetPassword(
       email: email,
     );
-    switch (response) {
-      case SuccessBaseResponse<ForgetPasswordResponse>():
-        return SuccessBaseResponse<ForgetPasswordResponse>(
-          data: response.data,
-        );
-      case ErrorBaseResponse<ForgetPasswordResponse>():
-        return ErrorBaseResponse<ForgetPasswordResponse>(
-          errorMessage: response.errorMessage,
-        );
-    }
   }
 
   @override
   Future<BaseResponse<ForgetPasswordResponse>> confirmValidationCode({
     required String resetCode,
   }) async {
-    final response = await forgetPassRemoteDataSourceContract
-        .confirmValidationCode(resetCode: resetCode);
-    switch (response) {
-      case SuccessBaseResponse<ForgetPasswordResponse>():
-        return SuccessBaseResponse<ForgetPasswordResponse>(
-          data: response.data,
-        );
-      case ErrorBaseResponse<ForgetPasswordResponse>():
-        return ErrorBaseResponse<ForgetPasswordResponse>(
-          errorMessage: response.errorMessage,
-        );
-    }
+    return await forgetPassRemoteDataSourceContract.confirmValidationCode(
+      resetCode: resetCode,
+    );
   }
 
   @override
   Future<BaseResponse<ForgetPasswordResponse>> resetPassword({
     required ResetPassDto resetPassDto,
   }) async {
-    final response = await forgetPassRemoteDataSourceContract.resetPassword(
+    final emailResponse = await SecureStorageService.read(
+      key: SecureStorageKeys.userEmail,
+    );
+    final storageHandler = SecureStorageHandler.handle(emailResponse);
+    resetPassDto.email = storageHandler.data ?? '';
+    return await forgetPassRemoteDataSourceContract.resetPassword(
       resetPassDto: resetPassDto,
     );
-    switch (response) {
-      case SuccessBaseResponse<ForgetPasswordResponse>():
-        return SuccessBaseResponse<ForgetPasswordResponse>(
-          data: response.data,
-        );
-      case ErrorBaseResponse<ForgetPasswordResponse>():
-        return ErrorBaseResponse<ForgetPasswordResponse>(
-          errorMessage: response.errorMessage,
-        );
-    }
   }
 }

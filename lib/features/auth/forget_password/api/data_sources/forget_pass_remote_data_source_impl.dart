@@ -1,5 +1,3 @@
-import 'dart:async';
-import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 import 'package:team_5_examapp/config/base_response/base_response.dart';
 import 'package:team_5_examapp/features/auth/forget_password/api/forget_pass_api_client/forget_pass_api_client.dart';
@@ -21,26 +19,7 @@ class ForgetPassRemoteDataSourceImpl
       final response = await forgetPassApiClient.forgetPassword(email: email);
       return SuccessBaseResponse<ForgetPasswordResponse>(data: response);
     } catch (e) {
-      if (e is DioException) {
-        final data = e.response?.data;
-        final messageFromApi = (data is Map<String, dynamic>)
-            ? data['message']?.toString()
-            : null;
-        return ErrorBaseResponse<ForgetPasswordResponse>(
-          errorMessage:
-              messageFromApi ??
-              e.message ??
-              "Something went wrong. Please try again later.",
-        );
-      } else if (e is TimeoutException) {
-        return ErrorBaseResponse<ForgetPasswordResponse>(
-          errorMessage: "Request timed out. Please try again later.",
-        );
-      }
-
-      return ErrorBaseResponse<ForgetPasswordResponse>(
-        errorMessage: "Something went wrong. Please try again later.",
-      );
+      return ErrorBaseResponse<ForgetPasswordResponse>(error: e);
     }
   }
 
@@ -54,26 +33,7 @@ class ForgetPassRemoteDataSourceImpl
       );
       return SuccessBaseResponse(data: response);
     } catch (e) {
-      if (e is DioException) {
-        final data = e.response?.data;
-        final messageFromApi = (data is Map<String, dynamic>)
-            ? data['message']?.toString()
-            : null;
-        return ErrorBaseResponse<ForgetPasswordResponse>(
-          errorMessage:
-              messageFromApi ??
-              e.message ??
-              "Something went wrong. Please try again later.",
-        );
-      } else if (e is TimeoutException) {
-        return ErrorBaseResponse<ForgetPasswordResponse>(
-          errorMessage: "Request timed out. Please try again later.",
-        );
-      }
-
-      return ErrorBaseResponse<ForgetPasswordResponse>(
-        errorMessage: "Something went wrong. Please try again later.",
-      );
+      return ErrorBaseResponse<ForgetPasswordResponse>(error: e);
     }
   }
 
@@ -87,25 +47,7 @@ class ForgetPassRemoteDataSourceImpl
       );
       return SuccessBaseResponse<ForgetPasswordResponse>(data: response);
     } catch (e) {
-      if (e is DioException) {
-        final data = e.response?.data;
-        final messageFromApi = (data is Map<String, dynamic>)
-            ? data['message']?.toString()
-            : null;
-        return ErrorBaseResponse<ForgetPasswordResponse>(
-          errorMessage:
-              messageFromApi ??
-              e.message ??
-              "Something went wrong. Please try again later.",
-        );
-      } else if (e is TimeoutException) {
-        return ErrorBaseResponse<ForgetPasswordResponse>(
-          errorMessage: "Request timed out. Please try again later.",
-        );
-      }
-      return ErrorBaseResponse<ForgetPasswordResponse>(
-        errorMessage: "Something went wrong. Please try again later.",
-      );
+      return ErrorBaseResponse<ForgetPasswordResponse>(error: e);
     }
   }
 }

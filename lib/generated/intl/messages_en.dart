@@ -24,6 +24,9 @@ class MessageLookup extends MessageLookupByLibrary {
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
     "codeIsRequired": MessageLookupByLibrary.simpleMessage("Code is required"),
     "confirmPassword": MessageLookupByLibrary.simpleMessage("Confirm password"),
+    "connectionTimeout": MessageLookupByLibrary.simpleMessage(
+      "Request timed out. Please check your internet connection.",
+    ),
     "continueButton": MessageLookupByLibrary.simpleMessage("Continue"),
     "didnotReceiveCode": MessageLookupByLibrary.simpleMessage(
       "Didn\'t recieve code? ",
@@ -48,16 +51,44 @@ class MessageLookup extends MessageLookupByLibrary {
       "Enter your password",
     ),
     "enterYourEmail": MessageLookupByLibrary.simpleMessage("Enter your email"),
+    "enterYourFirstName": MessageLookupByLibrary.simpleMessage(
+      "Enter your first name",
+    ),
+    "enterYourLastName": MessageLookupByLibrary.simpleMessage(
+      "Enter your last name",
+    ),
     "enterYourPassword": MessageLookupByLibrary.simpleMessage(
       "Enter your passwrod",
     ),
+    "enterYourPhone": MessageLookupByLibrary.simpleMessage(
+      "Enter your phone number",
+    ),
+    "enterYourUserName": MessageLookupByLibrary.simpleMessage(
+      "Enter your user name",
+    ),
+    "error": MessageLookupByLibrary.simpleMessage("Error"),
+    "errorMessageGeneric": MessageLookupByLibrary.simpleMessage(
+      "Something went wrong. Please try again.",
+    ),
+    "firstName": MessageLookupByLibrary.simpleMessage("First name"),
     "forgetPassword": MessageLookupByLibrary.simpleMessage("Forget Password"),
     "forgetPasswordDis": MessageLookupByLibrary.simpleMessage(
       "Please enter your email associated to your account",
     ),
     "invalidCode": MessageLookupByLibrary.simpleMessage("Invalid code"),
+    "lastName": MessageLookupByLibrary.simpleMessage("Last name"),
     "login": MessageLookupByLibrary.simpleMessage("Login"),
+    "loginSuccessful": MessageLookupByLibrary.simpleMessage(
+      "Login successful! Welcome",
+    ),
+    "networkError": MessageLookupByLibrary.simpleMessage(
+      "Network error. Please check your connection.",
+    ),
     "newPassword": MessageLookupByLibrary.simpleMessage("New Password"),
+    "notFound": MessageLookupByLibrary.simpleMessage(
+      "Requested resource not found.",
+    ),
+    "ok": MessageLookupByLibrary.simpleMessage("OK"),
     "password": MessageLookupByLibrary.simpleMessage("Password"),
     "passwordDoNotMatch": MessageLookupByLibrary.simpleMessage(
       "Password do not match",
@@ -69,15 +100,23 @@ class MessageLookup extends MessageLookupByLibrary {
       "Password must be at least 8 characters and include upper, lower, number and special character",
     ),
     "passwrod": MessageLookupByLibrary.simpleMessage("Password"),
+    "phone": MessageLookupByLibrary.simpleMessage("Phone number"),
     "pleaseConfirmPassword": MessageLookupByLibrary.simpleMessage(
       "Please confirm your password",
     ),
     "rememberMe": MessageLookupByLibrary.simpleMessage("Remember me"),
+    "requestTimeout": MessageLookupByLibrary.simpleMessage(
+      "Request timed out. Please try again.",
+    ),
     "resend": MessageLookupByLibrary.simpleMessage("Resend"),
     "resetPassword": MessageLookupByLibrary.simpleMessage("Reset Password"),
     "resetPasswordDis": MessageLookupByLibrary.simpleMessage(
       "Password must not be empty and must contain 6 characters with upper case letter and one number at least",
     ),
+    "serverError": MessageLookupByLibrary.simpleMessage(
+      "Server error. Please try again later.",
+    ),
     "signUp": MessageLookupByLibrary.simpleMessage("Sign up"),
+    "userName": MessageLookupByLibrary.simpleMessage("User name"),
   };
 }
