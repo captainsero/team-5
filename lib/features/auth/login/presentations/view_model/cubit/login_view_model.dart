@@ -1,6 +1,6 @@
 import 'package:bloc/bloc.dart';
+import 'package:equatable/equatable.dart';
 import 'package:injectable/injectable.dart';
-import 'package:team_5_examapp/config/base_response/base_response.dart';
 import 'package:team_5_examapp/config/base_state/base_state.dart';
 import 'package:team_5_examapp/config/response_handler/response_handler.dart';
 import 'package:team_5_examapp/config/secure_storage/secure_storage_keys.dart';
@@ -36,7 +36,7 @@ class LoginViewModel extends Cubit<LoginState> {
     emit(
       state.copyWith(
         isLoginAttempted: true,
-        loginState: state.loginState.copyWith(isLoading: true),
+        loginState: const BaseState<UserEntity>(isLoading: true),
       ),
     );
 
@@ -45,25 +45,23 @@ class LoginViewModel extends Cubit<LoginState> {
 
     emit(state.copyWith(loginState: newState));
 
-    //Save email in secure storage  in case of successful login and rememberMe is true
-
-    if (newState.data != null && rememberMe) {
-      SecureStorageService.write(
-        key: SecureStorageKeys.userEmail,
-        value: email,
-      );
-    } else {
-      await SecureStorageService.delete(key: SecureStorageKeys.userEmail);
+    if (newState.data != null) {
+      if (rememberMe) {
+        await SecureStorageService.write(
+          key: SecureStorageKeys.userEmail,
+          value: email,
+        );
+      } else {
+        await SecureStorageService.delete(key: SecureStorageKeys.userEmail);
+      }
     }
   }
 
   Future<void> loadSavedEmail() async {
-    final response = await SecureStorageService.read(
-      key: SecureStorageKeys.userEmail,
-    );
+    final savedEmail = await loginUseCase.getSavedEmail();
 
-    if (response is SuccessBaseResponse<String>) {
-      emit(state.copyWith(savedEmail: response.data, rememberMe: true));
+    if (savedEmail != null && savedEmail.isNotEmpty) {
+      emit(state.copyWith(savedEmail: savedEmail, rememberMe: true));
     }
   }
 }

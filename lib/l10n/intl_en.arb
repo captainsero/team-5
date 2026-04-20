@@ -42,5 +42,7 @@
     "lastName": "Last name",
     "enterYourLastName": "Enter your last name",
     "phone": "Phone number",
-    "enterYourPhone": "Enter your phone number"
+    "enterYourPhone": "Enter your phone number",
+    "error": "Error",
+    "ok": "OK"
 }

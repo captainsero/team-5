@@ -41,4 +41,15 @@ class AuthRepoImpl implements AuthRepoContract {
         );
     }
   }
+
+  @override
+  Future<String?> getSavedEmail() async {
+    final loadedToken = await SecureStorageService.read(
+      key: SecureStorageKeys.userEmail,
+    );
+    if (loadedToken is SuccessBaseResponse<String>) {
+      return loadedToken.data;
+    }
+    return null;
+  }
 }

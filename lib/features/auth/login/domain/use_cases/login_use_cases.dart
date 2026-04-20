@@ -12,4 +12,8 @@ class LoginUseCase {
   Future<BaseResponse<UserEntity>> call(String email, String password) {
     return repo.login(email, password);
   }
+
+  Future<String?> getSavedEmail() {
+    return repo.getSavedEmail();
+  }
 }

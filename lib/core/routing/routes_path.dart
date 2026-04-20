@@ -6,4 +6,5 @@ class RoutesPath {
   static const String resetPassRoute = "/resetPass";
   static const String registerRoute = "/register";
   static const String errorRoute = "/error";
+  static const String homeRoute = "/home";
 }

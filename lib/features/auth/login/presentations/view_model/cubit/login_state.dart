@@ -1,6 +1,6 @@
 part of 'login_view_model.dart';
 
-class LoginState {
+class LoginState extends Equatable {
   final BaseState<UserEntity> loginState;
 
   final bool isLoginAttempted;
@@ -31,4 +31,13 @@ class LoginState {
       savedEmail: savedEmail ?? this.savedEmail,
     );
   }
+
+  @override
+  List<Object?> get props => [
+    loginState,
+    isLoginAttempted,
+    rememberMe,
+    obscurePassword,
+    savedEmail,
+  ];
 }

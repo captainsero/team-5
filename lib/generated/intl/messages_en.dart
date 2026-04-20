@@ -66,6 +66,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "enterYourUserName": MessageLookupByLibrary.simpleMessage(
       "Enter your user name",
     ),
+    "error": MessageLookupByLibrary.simpleMessage("Error"),
     "errorMessageGeneric": MessageLookupByLibrary.simpleMessage(
       "Something went wrong. Please try again.",
     ),
@@ -87,6 +88,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "notFound": MessageLookupByLibrary.simpleMessage(
       "Requested resource not found.",
     ),
+    "ok": MessageLookupByLibrary.simpleMessage("OK"),
     "password": MessageLookupByLibrary.simpleMessage("Password"),
     "passwordDoNotMatch": MessageLookupByLibrary.simpleMessage(
       "Password do not match",

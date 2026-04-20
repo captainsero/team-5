@@ -21,29 +21,60 @@ class _LoginScreenState extends State<LoginScreen> {
   final _formKey = GlobalKey<FormState>();
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
-  final ValueNotifier<bool> _obscurePassword = ValueNotifier<bool>(true);
   final loginViewModel = getIt.get<LoginViewModel>();
 
   @override
-  Widget build(BuildContext context) {
+  void initState() {
+    super.initState();
     loginViewModel.loadSavedEmail().then((_) {
-      if (loginViewModel.state.savedEmail != null) {
-        _emailController.text = loginViewModel.state.savedEmail!;
+      if (!mounted) return;
+      final saved = loginViewModel.state.savedEmail;
+      if (saved != null && saved.isNotEmpty) {
+        _emailController.text = saved;
       }
     });
+  }
 
+  @override
+  Widget build(BuildContext context) {
     return BlocProvider<LoginViewModel>(
       create: (context) => loginViewModel,
       child: BlocConsumer<LoginViewModel, LoginState>(
+        listenWhen: (previous, current) =>
+            previous.loginState.errorMessage !=
+                current.loginState.errorMessage ||
+            previous.loginState.data != current.loginState.data,
         listener: (context, state) {
+          final message = state.loginState.errorMessage;
+
+          if (message != null && message.isNotEmpty) {
+            WidgetsBinding.instance.addPostFrameCallback((_) {
+              if (!context.mounted) return;
+              showDialog<void>(
+                context: context,
+                builder: (ctx) => AlertDialog(
+                  title: const Text('Login Failed'),
+                  content: Text(message),
+                  actions: [
+                    TextButton(
+                      onPressed: () {
+                        Navigator.of(ctx).pop();
+                        loginViewModel.clearError();
+                      },
+                      child: const Text('OK'),
+                    ),
+                  ],
+                ),
+              );
+            });
+          }
+
           if (state.loginState.data != null) {
             ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(content: Text(S.of(context).loginSuccessful)),
+              const SnackBar(content: Text("Login successful! Welcome")),
             );
           }
         },
-        listenWhen: (previous, current) =>
-            previous.loginState != current.loginState,
         builder: (context, state) {
           final loginState = state.loginState;
           final showErrors = state.isLoginAttempted;
@@ -67,9 +98,10 @@ class _LoginScreenState extends State<LoginScreen> {
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
                         SizedBox(height: AppSize.s20),
+
+                        /// Email
                         TextFormField(
                           controller: _emailController,
-                          forceErrorText: loginState.errorMessage,
                           decoration: InputDecoration(
                             hintText: S.of(context).enterYourEmail,
                             labelText: S.of(context).email,
@@ -80,49 +112,40 @@ class _LoginScreenState extends State<LoginScreen> {
                               : AutovalidateMode.disabled,
                           validator: (value) =>
                               AppValidator.validateEmail(value),
-                          onChanged: (value) {
-                            loginViewModel.clearError();
-                          },
+                          onChanged: (_) => loginViewModel.clearError(),
                         ),
+
                         SizedBox(height: AppSize.s16),
 
-                        ValueListenableBuilder<bool>(
-                          valueListenable: _obscurePassword,
-                          builder: (context, isObscured, child) {
-                            return TextFormField(
-                              controller: _passwordController,
-                              obscureText: isObscured,
-                              forceErrorText: loginState.errorMessage,
-                              decoration: InputDecoration(
-                                hintText: S.of(context).enterPassword,
-                                labelText: S.of(context).password,
-                                suffixIcon: IconButton(
-                                  icon: Icon(
-                                    isObscured
-                                        ? Icons.visibility_off
-                                        : Icons.visibility,
-                                  ),
-                                  onPressed: () {
-                                    // Update the notifier directly instead of calling the ViewModel
-                                    _obscurePassword.value =
-                                        !_obscurePassword.value;
-                                  },
-                                ),
+                        /// Password
+                        TextFormField(
+                          controller: _passwordController,
+                          obscureText: state.obscurePassword,
+                          decoration: InputDecoration(
+                            hintText: S.of(context).enterPassword,
+                            labelText: S.of(context).password,
+                            suffixIcon: IconButton(
+                              icon: Icon(
+                                state.obscurePassword
+                                    ? Icons.visibility_off
+                                    : Icons.visibility,
                               ),
-                              autovalidateMode: showErrors
-                                  ? AutovalidateMode.onUserInteraction
-                                  : AutovalidateMode.disabled,
-                              validator: (value) =>
-                                  AppValidator.validatePassword(value),
-                              onChanged: (value) {
-                                loginViewModel.clearError();
+                              onPressed: () {
+                                loginViewModel.toggleObscurePassword();
                               },
-                            );
-                          },
+                            ),
+                          ),
+                          autovalidateMode: showErrors
+                              ? AutovalidateMode.onUserInteraction
+                              : AutovalidateMode.disabled,
+                          validator: (value) =>
+                              AppValidator.validatePassword(value),
+                          onChanged: (_) => loginViewModel.clearError(),
                         ),
 
                         SizedBox(height: AppSize.s16),
 
+                        /// Remember me + forget password
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
@@ -158,8 +181,10 @@ class _LoginScreenState extends State<LoginScreen> {
                             ),
                           ],
                         ),
+
                         SizedBox(height: AppSize.s48),
 
+                        /// Login Button
                         ElevatedButton(
                           onPressed: loginState.isLoading
                               ? null
@@ -183,8 +208,10 @@ class _LoginScreenState extends State<LoginScreen> {
                                 )
                               : Text(S.of(context).login),
                         ),
+
                         SizedBox(height: AppSize.s16),
 
+                        /// Register
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
@@ -209,6 +236,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             ),
                           ],
                         ),
+
                         SizedBox(height: AppSize.s20),
                       ],
                     ),
