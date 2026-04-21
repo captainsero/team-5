@@ -9,6 +9,8 @@
 // coverage:ignore-file
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
+import 'dart:io' as _i497;
+
 import 'package:dio/dio.dart' as _i361;
 import 'package:get_it/get_it.dart' as _i174;
 import 'package:injectable/injectable.dart' as _i526;
@@ -58,6 +60,21 @@ import '../../features/auth/register/domain/use_cases/register_use_case.dart'
     as _i118;
 import '../../features/auth/register/presentation/view_model/register_view_model.dart'
     as _i656;
+import '../../features/questions/api/data_sources/questions_remote_data_source_impl.dart'
+    as _i1041;
+import '../../features/questions/api/questions_api_client/questions_api_client.dart'
+    as _i108;
+import '../../features/questions/data/data_sources/questions_remote_data_source_contract.dart'
+    as _i26;
+import '../../features/questions/data/repo/questions_repo_impl.dart' as _i92;
+import '../../features/questions/domain/repo/questions_repo_contract.dart'
+    as _i46;
+import '../../features/questions/domain/use_cases/check_questions_use_case.dart'
+    as _i653;
+import '../../features/questions/domain/use_cases/get_all_questions_on_exam_use_case.dart'
+    as _i266;
+import '../../features/questions/presentation/view_model/cubit/questions_view_model.dart'
+    as _i659;
 import '../../features/subjects_portal/api/data_sources/subjects_portal_remote_data_source_impl.dart'
     as _i224;
 import '../../features/subjects_portal/api/subjects_portal_api_client/subjects_portal_api_client.dart'
@@ -72,28 +89,44 @@ import '../../features/subjects_portal/domain/use_cases/get_all_subjects_use_cas
     as _i770;
 import '../../features/subjects_portal/presentation/view_model/cubit/explore_cubit.dart'
     as _i345;
+import '../app_module/app_module.dart' as _i432;
 import '../dio/dio_module.dart' as _i977;
+import '../hive_service/hive_service.dart' as _i893;
 
 extension GetItInjectableX on _i174.GetIt {
   // initializes the registration of main-scope dependencies inside of GetIt
-  _i174.GetIt init({
+  Future<_i174.GetIt> init({
     String? environment,
     _i526.EnvironmentFilter? environmentFilter,
-  }) {
+  }) async {
     final gh = _i526.GetItHelper(this, environment, environmentFilter);
+    final appModule = _$AppModule();
     final dioModule = _$DioModule();
+    await gh.factoryAsync<_i497.Directory>(
+      () => appModule.appDocumentsDirectory,
+      preResolve: true,
+    );
     gh.singleton<_i361.Dio>(() => dioModule.dio);
+    gh.singleton<_i893.HiveService>(() => _i893.HiveService());
     gh.lazySingleton<_i251.LoginApiClient>(
       () => _i251.LoginApiClient(gh<_i361.Dio>()),
     );
     gh.lazySingleton<_i453.RegisterApiClient>(
       () => _i453.RegisterApiClient(gh<_i361.Dio>()),
     );
+    gh.lazySingleton<_i108.QuestionsApiClient>(
+      () => _i108.QuestionsApiClient(gh<_i361.Dio>()),
+    );
     gh.factory<_i358.ForgetPassApiClient>(
       () => _i358.ForgetPassApiClient(gh<_i361.Dio>()),
     );
     gh.factory<_i625.SubjectsPortalApiClient>(
       () => _i625.SubjectsPortalApiClient(gh<_i361.Dio>()),
+    );
+    gh.factory<_i26.QuestionsRemoteDataSourceContract>(
+      () => _i1041.QuestionsRemoteDataSourceImpl(
+        questionsApiClient: gh<_i108.QuestionsApiClient>(),
+      ),
     );
     gh.factory<_i183.AuthRemoteDataSourceContract>(
       () => _i584.AuthRemoteDataSourceImpl(gh<_i251.LoginApiClient>()),
@@ -106,6 +139,12 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i821.RegisterRemoteSourceContract>(
       () => _i1056.RegisterRemoteSourceImplementation(
         registerApiClient: gh<_i453.RegisterApiClient>(),
+      ),
+    );
+    gh.factory<_i46.QuestionsRepoContract>(
+      () => _i92.QuestionsRepoImpl(
+        questionsRemoteDataSourceContract:
+            gh<_i26.QuestionsRemoteDataSourceContract>(),
       ),
     );
     gh.factory<_i844.AuthRepoContract>(
@@ -122,6 +161,22 @@ extension GetItInjectableX on _i174.GetIt {
       () => _i192.SubjectsPortalRepoimpl(
         subjectsPortalRemoteDataSourceContract:
             gh<_i420.SubjectsPortalRemoteDataSourceContract>(),
+      ),
+    );
+    gh.factory<_i653.CheckQuestionsUseCase>(
+      () => _i653.CheckQuestionsUseCase(
+        questionsRepo: gh<_i46.QuestionsRepoContract>(),
+      ),
+    );
+    gh.factory<_i266.GetAllQuestionsOnExamUseCase>(
+      () => _i266.GetAllQuestionsOnExamUseCase(
+        questionsRepo: gh<_i46.QuestionsRepoContract>(),
+      ),
+    );
+    gh.factory<_i659.QuestionsViewModel>(
+      () => _i659.QuestionsViewModel(
+        getAllQuestionsOnExamUseCase: gh<_i266.GetAllQuestionsOnExamUseCase>(),
+        checkQuestionsUseCase: gh<_i653.CheckQuestionsUseCase>(),
       ),
     );
     gh.factory<_i770.GetAllSubjectsUseCase>(
@@ -185,5 +240,7 @@ extension GetItInjectableX on _i174.GetIt {
     return this;
   }
 }
+
+class _$AppModule extends _i432.AppModule {}
 
 class _$DioModule extends _i977.DioModule {}

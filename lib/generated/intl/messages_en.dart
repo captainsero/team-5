@@ -22,14 +22,19 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+    "answersNotReady": MessageLookupByLibrary.simpleMessage(
+      "Answers not ready yet",
+    ),
+    "back": MessageLookupByLibrary.simpleMessage("Back"),
     "codeIsRequired": MessageLookupByLibrary.simpleMessage("Code is required"),
     "confirmPassword": MessageLookupByLibrary.simpleMessage("Confirm password"),
     "connectionTimeout": MessageLookupByLibrary.simpleMessage(
       "Request timed out. Please check your internet connection.",
     ),
     "continueButton": MessageLookupByLibrary.simpleMessage("Continue"),
+    "correct": MessageLookupByLibrary.simpleMessage("Correct"),
     "didnotReceiveCode": MessageLookupByLibrary.simpleMessage(
-      "Didn\'t recieve code? ",
+      "Didn\'t receive code? ",
     ),
     "dontHaveAccount": MessageLookupByLibrary.simpleMessage(
       "Don\'t have an account?",
@@ -42,7 +47,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "Email verification",
     ),
     "emailVerificationDis": MessageLookupByLibrary.simpleMessage(
-      "Please enter your code that send to your email adress",
+      "Please enter your code that send to your email address",
     ),
     "enterAValidEmail": MessageLookupByLibrary.simpleMessage(
       "Enter a Valid email",
@@ -71,10 +76,14 @@ class MessageLookup extends MessageLookupByLibrary {
       "Something went wrong. Please try again.",
     ),
     "firstName": MessageLookupByLibrary.simpleMessage("First name"),
+    "exam": MessageLookupByLibrary.simpleMessage("Exam"),
+    "examScore": MessageLookupByLibrary.simpleMessage("Exam Score"),
+    "finish": MessageLookupByLibrary.simpleMessage("Finish"),
     "forgetPassword": MessageLookupByLibrary.simpleMessage("Forget Password"),
     "forgetPasswordDis": MessageLookupByLibrary.simpleMessage(
       "Please enter your email associated to your account",
     ),
+    "incorrect": MessageLookupByLibrary.simpleMessage("Incorrect"),
     "invalidCode": MessageLookupByLibrary.simpleMessage("Invalid code"),
     "lastName": MessageLookupByLibrary.simpleMessage("Last name"),
     "login": MessageLookupByLibrary.simpleMessage("Login"),
@@ -89,6 +98,10 @@ class MessageLookup extends MessageLookupByLibrary {
       "Requested resource not found.",
     ),
     "ok": MessageLookupByLibrary.simpleMessage("OK"),
+    "next": MessageLookupByLibrary.simpleMessage("Next"),
+    "noQuestionsFound": MessageLookupByLibrary.simpleMessage(
+      "No questions found",
+    ),
     "password": MessageLookupByLibrary.simpleMessage("Password"),
     "passwordDoNotMatch": MessageLookupByLibrary.simpleMessage(
       "Password do not match",
@@ -116,7 +129,12 @@ class MessageLookup extends MessageLookupByLibrary {
     "serverError": MessageLookupByLibrary.simpleMessage(
       "Server error. Please try again later.",
     ),
+    "showResults": MessageLookupByLibrary.simpleMessage("Show results"),
     "signUp": MessageLookupByLibrary.simpleMessage("Sign up"),
     "userName": MessageLookupByLibrary.simpleMessage("User name"),
+    "startAgain": MessageLookupByLibrary.simpleMessage("Start again"),
+    "timeOut": MessageLookupByLibrary.simpleMessage("Time out !!"),
+    "viewScore": MessageLookupByLibrary.simpleMessage("View score"),
+    "yourScore": MessageLookupByLibrary.simpleMessage("Your Score"),
   };
 }

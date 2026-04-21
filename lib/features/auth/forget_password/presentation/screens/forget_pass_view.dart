@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:team_5_examapp/config/app_validator.dart';
-import 'package:team_5_examapp/config/di/di.dart';
 import 'package:team_5_examapp/core/constants/values_manager.dart';
 import 'package:team_5_examapp/core/routing/routes_path.dart';
 import 'package:team_5_examapp/features/auth/forget_password/presentation/view_model/cubit/forget_pass_view_model.dart';
@@ -19,7 +18,6 @@ class ForgetPassView extends StatefulWidget {
 class _ForgetPassViewState extends State<ForgetPassView> {
   final _formKey = GlobalKey<FormState>();
   final _emailController = TextEditingController(text: '');
-  ForgetPassViewModel viewModel = getIt.get<ForgetPassViewModel>();
 
   @override
   void initState() {
@@ -29,7 +27,7 @@ class _ForgetPassViewState extends State<ForgetPassView> {
 
   Future<void> _loadEmail() async {
     if (!mounted) return;
-    String email = await viewModel.getUserEmail();
+    String email = await widget.forgetPassViewModel.getUserEmail();
     _emailController.text = email;
   }
 
@@ -81,12 +79,15 @@ class _ForgetPassViewState extends State<ForgetPassView> {
                         validator: AppValidator.validateEmail,
                       ),
 
-                      Text(
-                        state.forgetPasswordState.errorMessage ?? '',
-                        style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-                          color: Theme.of(context).colorScheme.error,
+                      if (state.forgetPasswordState.errorMessage != null &&
+                          state.forgetPasswordState.isLoading)
+                        Text(
+                          state.forgetPasswordState.errorMessage ?? '',
+                          style: Theme.of(context).textTheme.bodyLarge!
+                              .copyWith(
+                                color: Theme.of(context).colorScheme.error,
+                              ),
                         ),
-                      ),
                     ],
                   );
                 },
@@ -118,7 +119,9 @@ class _ForgetPassViewState extends State<ForgetPassView> {
                           : () async {
                               if (_formKey.currentState!.validate()) {
                                 String email = _emailController.text;
-                                await viewModel.forgetPassword(email: email);
+                                await widget.forgetPassViewModel.forgetPassword(
+                                  email: email,
+                                );
                               }
                             },
                       child: Text(S.of(context).continueButton),

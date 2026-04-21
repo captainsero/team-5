@@ -4,6 +4,8 @@ import 'package:team_5_examapp/config/response_handler/secure_storage_handler.da
 import 'package:team_5_examapp/config/secure_storage/secure_storage_keys.dart';
 import 'package:team_5_examapp/config/secure_storage/secure_storage_service.dart';
 import 'package:team_5_examapp/features/auth/forget_password/data/data_sources/forget_pass_remote_data_source_contract.dart';
+import 'package:team_5_examapp/features/auth/forget_password/data/models/requests/confirm_validation_code_request.dart';
+import 'package:team_5_examapp/features/auth/forget_password/data/models/requests/forget_pass_request.dart';
 import 'package:team_5_examapp/features/auth/forget_password/data/models/reset_pass_dto.dart';
 import 'package:team_5_examapp/features/auth/forget_password/data/models/responses/forget_password_response.dart';
 import 'package:team_5_examapp/features/auth/forget_password/domain/repo/forget_pass_repo_contract.dart';
@@ -19,7 +21,7 @@ class ForgetPassRepoImpl implements ForgetPassRepoContract {
     required String email,
   }) async {
     return await forgetPassRemoteDataSourceContract.forgetPassword(
-      email: email,
+      forgetPassReuest: ForgetPassRequest(email: email),
     );
   }
 
@@ -28,7 +30,9 @@ class ForgetPassRepoImpl implements ForgetPassRepoContract {
     required String resetCode,
   }) async {
     return await forgetPassRemoteDataSourceContract.confirmValidationCode(
-      resetCode: resetCode,
+      confirmValidationCodeRequest: ConfirmValidationCodeRequest(
+        resetCode: resetCode,
+      ),
     );
   }
 

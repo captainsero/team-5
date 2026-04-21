@@ -189,20 +189,20 @@ class S {
     );
   }
 
-  /// `Please enter your code that send to your email adress`
+  /// `Please enter your code that send to your email address`
   String get emailVerificationDis {
     return Intl.message(
-      'Please enter your code that send to your email adress',
+      'Please enter your code that send to your email address',
       name: 'emailVerificationDis',
       desc: '',
       args: [],
     );
   }
 
-  /// `Didn't recieve code? `
+  /// `Didn't receive code? `
   String get didnotReceiveCode {
     return Intl.message(
-      'Didn\'t recieve code? ',
+      'Didn\'t receive code? ',
       name: 'didnotReceiveCode',
       desc: '',
       args: [],
@@ -442,6 +442,91 @@ class S {
   /// `OK`
   String get ok {
     return Intl.message('OK', name: 'ok', desc: '', args: []);
+  }
+
+  /// `Exam`
+  String get exam {
+    return Intl.message('Exam', name: 'exam', desc: '', args: []);
+  }
+
+  /// `Back`
+  String get back {
+    return Intl.message('Back', name: 'back', desc: '', args: []);
+  }
+
+  /// `Finish`
+  String get finish {
+    return Intl.message('Finish', name: 'finish', desc: '', args: []);
+  }
+
+  /// `Next`
+  String get next {
+    return Intl.message('Next', name: 'next', desc: '', args: []);
+  }
+
+  /// `Exam Score`
+  String get examScore {
+    return Intl.message('Exam Score', name: 'examScore', desc: '', args: []);
+  }
+
+  /// `Your Score`
+  String get yourScore {
+    return Intl.message('Your Score', name: 'yourScore', desc: '', args: []);
+  }
+
+  /// `Correct`
+  String get correct {
+    return Intl.message('Correct', name: 'correct', desc: '', args: []);
+  }
+
+  /// `Incorrect`
+  String get incorrect {
+    return Intl.message('Incorrect', name: 'incorrect', desc: '', args: []);
+  }
+
+  /// `Show results`
+  String get showResults {
+    return Intl.message(
+      'Show results',
+      name: 'showResults',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Start again`
+  String get startAgain {
+    return Intl.message('Start again', name: 'startAgain', desc: '', args: []);
+  }
+
+  /// `Time out !!`
+  String get timeOut {
+    return Intl.message('Time out !!', name: 'timeOut', desc: '', args: []);
+  }
+
+  /// `View score`
+  String get viewScore {
+    return Intl.message('View score', name: 'viewScore', desc: '', args: []);
+  }
+
+  /// `Answers not ready yet`
+  String get answersNotReady {
+    return Intl.message(
+      'Answers not ready yet',
+      name: 'answersNotReady',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `No questions found`
+  String get noQuestionsFound {
+    return Intl.message(
+      'No questions found',
+      name: 'noQuestionsFound',
+      desc: '',
+      args: [],
+    );
   }
 }
 

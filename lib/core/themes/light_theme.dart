@@ -15,7 +15,6 @@ abstract class AppTheme {
       primary: AppColors.primary,
       onPrimary: AppColors.white,
       //! The secondary color can't be grey
-      
       secondary: AppColors.lightBlue,
       onSecondary: AppColors.white,
       error: AppColors.error,
@@ -43,12 +42,12 @@ abstract class AppTheme {
 
       headlineLarge: getSemiBoldStyle(
         color: AppColors.black,
-        fontSize: FontSize.s25,
+        fontSize: FontSize.s24,
         fontFamily: FontConstants.interFamily,
       ),
       headlineMedium: getMediumStyle(
         color: AppColors.black,
-        fontSize: FontSize.s18,
+        fontSize: FontSize.s22,
         fontFamily: FontConstants.interFamily,
       ),
       headlineSmall: getRegularStyle(
@@ -115,6 +114,7 @@ abstract class AppTheme {
         fontFamily: FontConstants.interFamily,
       ),
       leadingWidth: AppSize.s25,
+      actionsPadding: EdgeInsets.only(right: AppPadding.p20),
       titleSpacing: AppSize.s0,
       elevation: 0,
     ),
@@ -182,6 +182,12 @@ abstract class AppTheme {
       ),
 
       contentPadding: EdgeInsets.all(AppPadding.p16),
+    ),
+
+    progressIndicatorTheme: ProgressIndicatorThemeData(
+      color: AppColors.primary, // progress color
+      linearTrackColor: AppColors.trackGrey, // background track
+      borderRadius: BorderRadius.circular(RadiusSize.r8), // rounded edges
     ),
   );
 }

@@ -96,7 +96,6 @@ class ForgetPassViewModel extends Cubit<ForgetPassState> {
         resetPasswordState: state.resetPasswordState.copyWith(isLoading: true),
       ),
     );
-
     final response = await resetPassUseCase(
       resetPassDto: ResetPassDto(newPassword: newPassword),
     );

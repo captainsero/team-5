@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class ScreenSize {
+abstract class ScreenSize {
   static late  double width;
   static late double height;
 

@@ -1,6 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:team_5_examapp/config/di/di.dart';
+import 'package:team_5_examapp/config/shared_models/extra_score_screen_model.dart';
 import 'package:team_5_examapp/core/routing/routes_path.dart';
 import 'package:team_5_examapp/features/auth/forget_password/presentation/screens/forget_pass_view.dart';
 import 'package:team_5_examapp/features/auth/forget_password/presentation/screens/reset_pass_view.dart';
@@ -8,8 +9,11 @@ import 'package:team_5_examapp/features/auth/forget_password/presentation/screen
 import 'package:team_5_examapp/features/auth/forget_password/presentation/view_model/cubit/forget_pass_view_model.dart';
 import 'package:team_5_examapp/features/auth/login/presentations/screens/login_screen.dart';
 import 'package:team_5_examapp/features/auth/register/presentation/screens/register_screen.dart';
+import 'package:team_5_examapp/features/questions/presentation/screens/questions_screen.dart';
+import 'package:team_5_examapp/features/questions/presentation/screens/score_screen.dart';
+import 'package:team_5_examapp/features/questions/presentation/view_model/cubit/questions_view_model.dart';
 
-class AppRouter {
+abstract class AppRouter {
   static final GoRouter router = GoRouter(
     initialLocation: RoutesPath.loginRoute,
     routes: [
@@ -58,6 +62,36 @@ class AppRouter {
           return BlocProvider<ForgetPassViewModel>.value(
             value: forgetPassViewModel,
             child: ResetPassView(forgetPassViewModel: forgetPassViewModel),
+          );
+        },
+      ),
+      GoRoute(
+        path: RoutesPath.questionsRoute,
+        name: RoutesPath.questionsRoute,
+        builder: (context, state) {
+          final QuestionsViewModel questionsViewModel = getIt
+              .get<QuestionsViewModel>();
+          return BlocProvider<QuestionsViewModel>(
+            create: (context) => questionsViewModel,
+            child: QuestionsScreen(
+              examId: state.extra.toString(),
+              questionsViewModel: questionsViewModel,
+            ),
+          );
+        },
+      ),
+      GoRoute(
+        path: RoutesPath.scoreRoute,
+        name: RoutesPath.scoreRoute,
+        builder: (context, state) {
+          final extra = state.extra as ExtraScoreScreenModel;
+          return BlocProvider<QuestionsViewModel>.value(
+            value: extra.questionsViewModel,
+            child: ScoreScreen(
+              time: extra.time,
+              examId: extra.examId,
+              questionsViewModel: extra.questionsViewModel,
+            ),
           );
         },
       ),

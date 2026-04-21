@@ -69,12 +69,15 @@ class _ResetPassViewState extends State<ResetPassView> {
                         validator: AppValidator.validatePassword,
                       ),
 
-                      Text(
-                        state.resetPasswordState.errorMessage ?? '',
-                        style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-                          color: Theme.of(context).colorScheme.error,
+                      if (state.resetPasswordState.errorMessage != null &&
+                          state.resetPasswordState.isLoading)
+                        Text(
+                          state.resetPasswordState.errorMessage ?? '',
+                          style: Theme.of(context).textTheme.bodyLarge!
+                              .copyWith(
+                                color: Theme.of(context).colorScheme.error,
+                              ),
                         ),
-                      ),
                     ],
                   );
                 },
