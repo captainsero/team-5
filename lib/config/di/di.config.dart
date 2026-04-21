@@ -58,6 +58,20 @@ import '../../features/auth/register/domain/use_cases/register_use_case.dart'
     as _i118;
 import '../../features/auth/register/presentation/view_model/register_view_model.dart'
     as _i656;
+import '../../features/subjects_portal/api/data_sources/subjects_portal_remote_data_source_impl.dart'
+    as _i224;
+import '../../features/subjects_portal/api/subjects_portal_api_client/subjects_portal_api_client.dart'
+    as _i625;
+import '../../features/subjects_portal/data/data%20sources_contracts/subjects_portal_remote_data_source_contract.dart'
+    as _i420;
+import '../../features/subjects_portal/data/repo/subjects_portal_repo_impl.dart'
+    as _i192;
+import '../../features/subjects_portal/domain/repo/subjects_portal_repo_contract.dart'
+    as _i1001;
+import '../../features/subjects_portal/domain/use_cases/get_all_subjects_use_case.dart'
+    as _i770;
+import '../../features/subjects_portal/presentation/view_model/cubit/explore_cubit.dart'
+    as _i345;
 import '../dio/dio_module.dart' as _i977;
 
 extension GetItInjectableX on _i174.GetIt {
@@ -69,14 +83,17 @@ extension GetItInjectableX on _i174.GetIt {
     final gh = _i526.GetItHelper(this, environment, environmentFilter);
     final dioModule = _$DioModule();
     gh.singleton<_i361.Dio>(() => dioModule.dio);
+    gh.lazySingleton<_i251.LoginApiClient>(
+      () => _i251.LoginApiClient(gh<_i361.Dio>()),
+    );
+    gh.lazySingleton<_i453.RegisterApiClient>(
+      () => _i453.RegisterApiClient(gh<_i361.Dio>()),
+    );
     gh.factory<_i358.ForgetPassApiClient>(
       () => _i358.ForgetPassApiClient(gh<_i361.Dio>()),
     );
-    gh.factory<_i251.LoginApiClient>(
-      () => _i251.LoginApiClient(gh<_i361.Dio>()),
-    );
-    gh.factory<_i453.RegisterApiClient>(
-      () => _i453.RegisterApiClient(gh<_i361.Dio>()),
+    gh.factory<_i625.SubjectsPortalApiClient>(
+      () => _i625.SubjectsPortalApiClient(gh<_i361.Dio>()),
     );
     gh.factory<_i183.AuthRemoteDataSourceContract>(
       () => _i584.AuthRemoteDataSourceImpl(gh<_i251.LoginApiClient>()),
@@ -94,6 +111,22 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i844.AuthRepoContract>(
       () => _i1001.AuthRepoImpl(
         remoteDataSource: gh<_i183.AuthRemoteDataSourceContract>(),
+      ),
+    );
+    gh.factory<_i420.SubjectsPortalRemoteDataSourceContract>(
+      () => _i224.SubjectsPortalRemoteDataSourceImpl(
+        subjectsPortalApiClient: gh<_i625.SubjectsPortalApiClient>(),
+      ),
+    );
+    gh.factory<_i1001.SubjectsPortalRepoContract>(
+      () => _i192.SubjectsPortalRepoimpl(
+        subjectsPortalRemoteDataSourceContract:
+            gh<_i420.SubjectsPortalRemoteDataSourceContract>(),
+      ),
+    );
+    gh.factory<_i770.GetAllSubjectsUseCase>(
+      () => _i770.GetAllSubjectsUseCase(
+        repo: gh<_i1001.SubjectsPortalRepoContract>(),
       ),
     );
     gh.factory<_i685.LoginUseCase>(
@@ -117,6 +150,11 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.factory<_i370.LoginViewModel>(
       () => _i370.LoginViewModel(loginUseCase: gh<_i685.LoginUseCase>()),
+    );
+    gh.factory<_i345.ExploreCubit>(
+      () => _i345.ExploreCubit(
+        getAllSubjectsUseCase: gh<_i770.GetAllSubjectsUseCase>(),
+      ),
     );
     gh.factory<_i146.ConfirmValidationCodeUseCase>(
       () => _i146.ConfirmValidationCodeUseCase(
