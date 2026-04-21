@@ -50,8 +50,6 @@ dependencies:
   pinput: ^6.0.2
   retrofit: ^4.9.2
   syncfusion_flutter_gauges: ^33.1.45
-  flutter_bloc: ^9.1.1
-  equatable: ^2.0.8
   
   
 
