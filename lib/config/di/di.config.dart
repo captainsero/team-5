@@ -58,6 +58,16 @@ import '../../features/auth/register/domain/use_cases/register_use_case.dart'
     as _i118;
 import '../../features/auth/register/presentation/view_model/register_view_model.dart'
     as _i656;
+import '../../features/profile/api/data_sources/profile_remote_data_source_impl.dart'
+    as _i684;
+import '../../features/profile/api/profile_api_client/profile_api_client.dart'
+    as _i1000;
+import '../../features/profile/data/data_sources/profile_remote_data_source_contract.dart'
+    as _i427;
+import '../../features/profile/data/repo/profile_repo_impl.dart' as _i256;
+import '../../features/profile/domain/repo/profile_repo_contract.dart' as _i541;
+import '../../features/profile/domain/use_case/get_profile_info_use_case.dart'
+    as _i899;
 import '../dio/dio_module.dart' as _i977;
 
 extension GetItInjectableX on _i174.GetIt {
@@ -69,14 +79,17 @@ extension GetItInjectableX on _i174.GetIt {
     final gh = _i526.GetItHelper(this, environment, environmentFilter);
     final dioModule = _$DioModule();
     gh.singleton<_i361.Dio>(() => dioModule.dio);
-    gh.factory<_i358.ForgetPassApiClient>(
-      () => _i358.ForgetPassApiClient(gh<_i361.Dio>()),
-    );
-    gh.factory<_i251.LoginApiClient>(
+    gh.lazySingleton<_i251.LoginApiClient>(
       () => _i251.LoginApiClient(gh<_i361.Dio>()),
     );
-    gh.factory<_i453.RegisterApiClient>(
+    gh.lazySingleton<_i453.RegisterApiClient>(
       () => _i453.RegisterApiClient(gh<_i361.Dio>()),
+    );
+    gh.lazySingleton<_i1000.ProfileApiClient>(
+      () => _i1000.ProfileApiClient(gh<_i361.Dio>()),
+    );
+    gh.factory<_i358.ForgetPassApiClient>(
+      () => _i358.ForgetPassApiClient(gh<_i361.Dio>()),
     );
     gh.factory<_i183.AuthRemoteDataSourceContract>(
       () => _i584.AuthRemoteDataSourceImpl(gh<_i251.LoginApiClient>()),
@@ -91,9 +104,25 @@ extension GetItInjectableX on _i174.GetIt {
         registerApiClient: gh<_i453.RegisterApiClient>(),
       ),
     );
+    gh.factory<_i427.ProfileRemoteDataSourceContract>(
+      () => _i684.ProfileRemoteDataSourceImpl(
+        profileApiClient: gh<_i1000.ProfileApiClient>(),
+      ),
+    );
     gh.factory<_i844.AuthRepoContract>(
       () => _i1001.AuthRepoImpl(
         remoteDataSource: gh<_i183.AuthRemoteDataSourceContract>(),
+      ),
+    );
+    gh.factory<_i541.ProfileRepoContract>(
+      () => _i256.ProfileRepoImpl(
+        profileRemoteDataSourceContract:
+            gh<_i427.ProfileRemoteDataSourceContract>(),
+      ),
+    );
+    gh.factory<_i899.GetProfileInfoUseCase>(
+      () => _i899.GetProfileInfoUseCase(
+        profileRepoContract: gh<_i541.ProfileRepoContract>(),
       ),
     );
     gh.factory<_i685.LoginUseCase>(

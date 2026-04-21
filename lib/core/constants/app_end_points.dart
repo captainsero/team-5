@@ -8,4 +8,6 @@ abstract class AppEndPoints {
   static const String signin = "$_baseUrl/auth/signin";
   static const String signUp = "$_baseUrl/auth/signup";
   static const String getAllSubjects = "$_baseUrl/subjects";
+  static const String getLoggedUserInfo = "$_baseUrl/auth/profileData";
+  static const String editProfileInfo = "$_baseUrl/auth/editProfile";
 }
