@@ -34,12 +34,6 @@ class ExploreScreen extends StatelessWidget {
         final subjects = subjectState.data!;
 
         return Scaffold(
-          appBar: AppBar(
-            title: Text(
-              AppConstants.surveyAppBarTitle,
-              style: TextStyle(color: AppColors.primary),
-            ),
-          ),
           body: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [

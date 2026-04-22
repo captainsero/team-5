@@ -45,8 +45,9 @@ class LoginViewModel extends Cubit<LoginState> {
     final response = await loginUseCase(email, password);
     final newState = ResponseHandler.handle(response);
 
-    emit(state.copyWith(loginState: newState));
-
+    if (!isClosed) {
+      emit(state.copyWith(loginState: newState));
+    }
     //Save email in secure storage  in case of successful login and rememberMe is true
 
     if (newState.data != null && rememberMe) {

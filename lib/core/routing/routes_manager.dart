@@ -15,21 +15,28 @@ import 'package:team_5_examapp/features/questions/presentation/screens/questions
 import 'package:team_5_examapp/features/questions/presentation/screens/score_screen.dart';
 import 'package:team_5_examapp/features/questions/presentation/view_model/cubit/questions_view_model.dart';
 import 'package:team_5_examapp/features/subjects_portal/domain/models/subject_model.dart';
+import 'package:team_5_examapp/features/subjects_portal/presentation/screens/main_survey_screen.dart';
+import 'package:team_5_examapp/splash_screen.dart';
 
 abstract class AppRouter {
   static final GoRouter router = GoRouter(
     initialLocation: RoutesPath.loginRoute,
     routes: [
       GoRoute(
-        path: RoutesPath.registerRoute,
-        name: RoutesPath.registerRoute,
-        builder: (_, _) => SignUpScreen(),
+        path: RoutesPath.splashRoute,
+        builder: (context, state) => const SplashScreen(),
       ),
       GoRoute(
         path: RoutesPath.loginRoute,
         name: RoutesPath.loginRoute,
         builder: (_, _) => LoginScreen(),
       ),
+      GoRoute(
+        path: RoutesPath.registerRoute,
+        name: RoutesPath.registerRoute,
+        builder: (_, _) => SignUpScreen(),
+      ),
+
       GoRoute(
         path: RoutesPath.forgetPasswordRoute,
         name: RoutesPath.forgetPasswordRoute,
@@ -67,6 +74,11 @@ abstract class AppRouter {
             child: ResetPassView(forgetPassViewModel: forgetPassViewModel),
           );
         },
+      ),
+      GoRoute(
+        path: RoutesPath.mainSurveyRoute,
+        name: RoutesPath.mainSurveyRoute,
+        builder: (_, _) => MainSurveyScreen(),
       ),
       GoRoute(
         path: RoutesPath.questionsRoute,
@@ -109,11 +121,6 @@ abstract class AppRouter {
           }
           return ExamsScreen(subject: subject, token: token);
         },
-      ),
-      GoRoute(
-        path: RoutesPath.registerRoute,
-        name: RoutesPath.registerRoute,
-        builder: (_, _) => SignUpScreen(),
       ),
     ],
   );

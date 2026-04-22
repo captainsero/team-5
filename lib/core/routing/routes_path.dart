@@ -6,10 +6,10 @@ class RoutesPath {
   static const String resetPassRoute = "/resetPass";
   static const String registerRoute = "/register";
   static const String errorRoute = "/error";
-  static const String homeRoute = "/home";
-  static const String questionsRoute = "/questions";
-  static const String scoreRoute = "/score";
+  static const String mainSurveyRoute = "/mainSurvey";
   static const String getExamsRoute = '/subjects/exams/:subjectId/:token';
   static const String startExam = '/startExam';
+  static const String questionsRoute = "/questions";
+  static const String scoreRoute = "/score";
   static const String resultsRoute = '/results';
 }

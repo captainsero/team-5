@@ -18,12 +18,8 @@ class _MainSurveyScreenState extends State<MainSurveyScreen> {
   Widget build(BuildContext context) {
     return BlocBuilder<ExploreCubit, ExploreState>(
       builder: (context, state) {
-        final pages = const [
-          ExploreScreen(),
-          ResultsScreen(),
-          ProfileScreen(),
-        ];
-    
+        final pages = const [ExploreScreen(), ResultsScreen(), ProfileScreen()];
+
         return Scaffold(
           body: IndexedStack(index: state.currentIndex, children: pages),
           bottomNavigationBar: const CustomBottomNavBar(),

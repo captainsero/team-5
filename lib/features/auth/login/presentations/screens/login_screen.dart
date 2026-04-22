@@ -228,6 +228,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
                                       rememberMe: state.rememberMe,
                                     );
+                                    context.go(RoutesPath.mainSurveyRoute);
                                   }
                                 },
 
