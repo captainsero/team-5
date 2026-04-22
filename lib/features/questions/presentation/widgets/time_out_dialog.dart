@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:team_5_examapp/config/shared_models/extra_score_screen_model.dart';
+import 'package:team_5_examapp/config/models/extra_score_screen_model.dart';
 import 'package:team_5_examapp/core/constants/assets_manager.dart';
 import 'package:team_5_examapp/core/constants/values_manager.dart';
 import 'package:team_5_examapp/core/routing/routes_path.dart';

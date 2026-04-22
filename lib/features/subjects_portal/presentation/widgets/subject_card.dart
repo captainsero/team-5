@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:team_5_examapp/core/constants/color_manager.dart';
+import 'package:team_5_examapp/core/routing/routes_path.dart';
 import 'package:team_5_examapp/features/subjects_portal/domain/models/subject_model.dart';
 
 class SubjectCard extends StatelessWidget {
@@ -20,7 +21,7 @@ class SubjectCard extends StatelessWidget {
           leading: Image.network(subject.icon),
           title: Text(subject.name),
           onTap: () {
-            GoRouter.of(context).go('/subjectDetails/${subject.id}');
+            GoRouter.of(context).go(RoutesPath.getExamsRoute, extra: subject);
           },
         ),
       ),

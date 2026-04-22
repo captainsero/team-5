@@ -42,6 +42,8 @@ import '../../features/auth/login/data/data_sources/login_remote_data_source_con
 import '../../features/auth/login/data/repo/login_repo_impl.dart' as _i1001;
 import '../../features/auth/login/domain/repo/login_repo_contract.dart'
     as _i844;
+import '../../features/auth/login/domain/use_cases/check_auth_use_case.dart'
+    as _i119;
 import '../../features/auth/login/domain/use_cases/login_use_cases.dart'
     as _i685;
 import '../../features/auth/login/presentations/view_model/cubit/login_view_model.dart'
@@ -60,6 +62,17 @@ import '../../features/auth/register/domain/use_cases/register_use_case.dart'
     as _i118;
 import '../../features/auth/register/presentation/view_model/register_view_model.dart'
     as _i656;
+import '../../features/exams/api/data_sources/exams_remote_data_source_impl.dart'
+    as _i21;
+import '../../features/exams/api/exams_api_client/exams_api_client.dart'
+    as _i598;
+import '../../features/exams/data/data_sources/exams_remote_data_source_contract.dart'
+    as _i286;
+import '../../features/exams/data/repo/exams_repo_impl.dart' as _i646;
+import '../../features/exams/domain/repo/exams_repo_contract.dart' as _i827;
+import '../../features/exams/domain/use_cases/get_exams_use_case.dart' as _i854;
+import '../../features/exams/presentation/view_model/exams_view_model.dart'
+    as _i66;
 import '../../features/questions/api/data_sources/questions_remote_data_source_impl.dart'
     as _i1041;
 import '../../features/questions/api/questions_api_client/questions_api_client.dart'
@@ -106,6 +119,7 @@ extension GetItInjectableX on _i174.GetIt {
       () => appModule.appDocumentsDirectory,
       preResolve: true,
     );
+    gh.factory<_i119.CheckAuthUseCase>(() => _i119.CheckAuthUseCase());
     gh.singleton<_i361.Dio>(() => dioModule.dio);
     gh.singleton<_i893.HiveService>(() => _i893.HiveService());
     gh.lazySingleton<_i251.LoginApiClient>(
@@ -120,6 +134,9 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i358.ForgetPassApiClient>(
       () => _i358.ForgetPassApiClient(gh<_i361.Dio>()),
     );
+    gh.factory<_i598.ExamsApiClient>(
+      () => _i598.ExamsApiClient(gh<_i361.Dio>()),
+    );
     gh.factory<_i625.SubjectsPortalApiClient>(
       () => _i625.SubjectsPortalApiClient(gh<_i361.Dio>()),
     );
@@ -127,6 +144,10 @@ extension GetItInjectableX on _i174.GetIt {
       () => _i1041.QuestionsRemoteDataSourceImpl(
         questionsApiClient: gh<_i108.QuestionsApiClient>(),
       ),
+    );
+    gh.factory<_i286.ExamsRemoteDataSourceContract>(
+      () =>
+          _i21.ExamsRemoteDataSourceImpl(apiClient: gh<_i598.ExamsApiClient>()),
     );
     gh.factory<_i183.AuthRemoteDataSourceContract>(
       () => _i584.AuthRemoteDataSourceImpl(gh<_i251.LoginApiClient>()),
@@ -156,6 +177,14 @@ extension GetItInjectableX on _i174.GetIt {
       () => _i224.SubjectsPortalRemoteDataSourceImpl(
         subjectsPortalApiClient: gh<_i625.SubjectsPortalApiClient>(),
       ),
+    );
+    gh.factory<_i827.ExamsRepoContract>(
+      () => _i646.ExamsRepoImpl(
+        remoteDataSource: gh<_i286.ExamsRemoteDataSourceContract>(),
+      ),
+    );
+    gh.factory<_i854.GetExamsBySubjectUseCase>(
+      () => _i854.GetExamsBySubjectUseCase(repo: gh<_i827.ExamsRepoContract>()),
     );
     gh.factory<_i1001.SubjectsPortalRepoContract>(
       () => _i192.SubjectsPortalRepoimpl(
@@ -197,6 +226,9 @@ extension GetItInjectableX on _i174.GetIt {
         forgetPassRemoteDataSourceContract:
             gh<_i426.ForgetPassRemoteDataSourceContract>(),
       ),
+    );
+    gh.factory<_i66.ExamsViewModel>(
+      () => _i66.ExamsViewModel(useCase: gh<_i854.GetExamsBySubjectUseCase>()),
     );
     gh.factory<_i118.RegisterUseCase>(
       () => _i118.RegisterUseCase(

@@ -123,7 +123,7 @@ class _ScoreScreenState extends State<ScoreScreen> {
                     onPressed: isLoading
                         ? null
                         : () {
-                            //TODO: navigate to results screen
+                            context.go(RoutesPath.resultsRoute);
                           },
                     style: ElevatedButton.styleFrom().copyWith(
                       backgroundColor: WidgetStatePropertyAll(

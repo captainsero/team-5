@@ -189,20 +189,20 @@ class S {
     );
   }
 
-  /// `Please enter your code that send to your email address`
+  /// `Please enter your code that send to your email adress`
   String get emailVerificationDis {
     return Intl.message(
-      'Please enter your code that send to your email address',
+      'Please enter your code that send to your email adress',
       name: 'emailVerificationDis',
       desc: '',
       args: [],
     );
   }
 
-  /// `Didn't receive code? `
+  /// `Didn't recieve code? `
   String get didnotReceiveCode {
     return Intl.message(
-      'Didn\'t receive code? ',
+      'Didn\'t recieve code? ',
       name: 'didnotReceiveCode',
       desc: '',
       args: [],
@@ -302,6 +302,156 @@ class S {
   /// `Sign up`
   String get signUp {
     return Intl.message('Sign up', name: 'signUp', desc: '', args: []);
+  }
+
+  /// `Exam`
+  String get exam {
+    return Intl.message('Exam', name: 'exam', desc: '', args: []);
+  }
+
+  /// `Back`
+  String get back {
+    return Intl.message('Back', name: 'back', desc: '', args: []);
+  }
+
+  /// `Finish`
+  String get finish {
+    return Intl.message('Finish', name: 'finish', desc: '', args: []);
+  }
+
+  /// `Next`
+  String get next {
+    return Intl.message('Next', name: 'next', desc: '', args: []);
+  }
+
+  /// `Exam Score`
+  String get examScore {
+    return Intl.message('Exam Score', name: 'examScore', desc: '', args: []);
+  }
+
+  /// `Your Score`
+  String get yourScore {
+    return Intl.message('Your Score', name: 'yourScore', desc: '', args: []);
+  }
+
+  /// `Correct`
+  String get correct {
+    return Intl.message('Correct', name: 'correct', desc: '', args: []);
+  }
+
+  /// `Incorrect`
+  String get incorrect {
+    return Intl.message('Incorrect', name: 'incorrect', desc: '', args: []);
+  }
+
+  /// `Show results`
+  String get showResults {
+    return Intl.message(
+      'Show results',
+      name: 'showResults',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Start again`
+  String get startAgain {
+    return Intl.message('Start again', name: 'startAgain', desc: '', args: []);
+  }
+
+  /// `Time out !!`
+  String get timeOut {
+    return Intl.message('Time out !!', name: 'timeOut', desc: '', args: []);
+  }
+
+  /// `View score`
+  String get viewScore {
+    return Intl.message('View score', name: 'viewScore', desc: '', args: []);
+  }
+
+  /// `Answers not ready yet`
+  String get answersNotReady {
+    return Intl.message(
+      'Answers not ready yet',
+      name: 'answersNotReady',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `No questions found`
+  String get noQuestionsFound {
+    return Intl.message(
+      'No questions found',
+      name: 'noQuestionsFound',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `No Exams Found`
+  String get noExamsFound {
+    return Intl.message(
+      'No Exams Found',
+      name: 'noExamsFound',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `High Level`
+  String get highLevel {
+    return Intl.message('High Level', name: 'highLevel', desc: '', args: []);
+  }
+
+  /// `From: 1.00`
+  String get from {
+    return Intl.message('From: 1.00', name: 'from', desc: '', args: []);
+  }
+
+  /// `To: 6.00`
+  String get to {
+    return Intl.message('To: 6.00', name: 'to', desc: '', args: []);
+  }
+
+  /// `Questions`
+  String get questions {
+    return Intl.message('Questions', name: 'questions', desc: '', args: []);
+  }
+
+  /// `Minutes`
+  String get minutes {
+    return Intl.message('Minutes', name: 'minutes', desc: '', args: []);
+  }
+
+  /// `Start`
+  String get start {
+    return Intl.message('Start', name: 'start', desc: '', args: []);
+  }
+
+  /// `Instructions`
+  String get instructions {
+    return Intl.message(
+      'Instructions',
+      name: 'instructions',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `|`
+  String get separator {
+    return Intl.message('|', name: 'separator', desc: '', args: []);
+  }
+
+  /// `• Lorem ipsum dolor sit amet consectetur.`
+  String get lorem {
+    return Intl.message(
+      '• Lorem ipsum dolor sit amet consectetur.',
+      name: 'lorem',
+      desc: '',
+      args: [],
+    );
   }
 
   /// `Request timed out. Please check your internet connection.`
@@ -444,89 +594,19 @@ class S {
     return Intl.message('OK', name: 'ok', desc: '', args: []);
   }
 
-  /// `Exam`
-  String get exam {
-    return Intl.message('Exam', name: 'exam', desc: '', args: []);
-  }
-
-  /// `Back`
-  String get back {
-    return Intl.message('Back', name: 'back', desc: '', args: []);
-  }
-
-  /// `Finish`
-  String get finish {
-    return Intl.message('Finish', name: 'finish', desc: '', args: []);
-  }
-
-  /// `Next`
-  String get next {
-    return Intl.message('Next', name: 'next', desc: '', args: []);
-  }
-
-  /// `Exam Score`
-  String get examScore {
-    return Intl.message('Exam Score', name: 'examScore', desc: '', args: []);
-  }
-
-  /// `Your Score`
-  String get yourScore {
-    return Intl.message('Your Score', name: 'yourScore', desc: '', args: []);
-  }
-
-  /// `Correct`
-  String get correct {
-    return Intl.message('Correct', name: 'correct', desc: '', args: []);
-  }
-
-  /// `Incorrect`
-  String get incorrect {
-    return Intl.message('Incorrect', name: 'incorrect', desc: '', args: []);
-  }
-
-  /// `Show results`
-  String get showResults {
+  /// `An error occurred`
+  String get errorOcurred {
     return Intl.message(
-      'Show results',
-      name: 'showResults',
+      'An error occurred',
+      name: 'errorOcurred',
       desc: '',
       args: [],
     );
   }
 
-  /// `Start again`
-  String get startAgain {
-    return Intl.message('Start again', name: 'startAgain', desc: '', args: []);
-  }
-
-  /// `Time out !!`
-  String get timeOut {
-    return Intl.message('Time out !!', name: 'timeOut', desc: '', args: []);
-  }
-
-  /// `View score`
-  String get viewScore {
-    return Intl.message('View score', name: 'viewScore', desc: '', args: []);
-  }
-
-  /// `Answers not ready yet`
-  String get answersNotReady {
-    return Intl.message(
-      'Answers not ready yet',
-      name: 'answersNotReady',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `No questions found`
-  String get noQuestionsFound {
-    return Intl.message(
-      'No questions found',
-      name: 'noQuestionsFound',
-      desc: '',
-      args: [],
-    );
+  /// `Go Back`
+  String get goBack {
+    return Intl.message('Go Back', name: 'goBack', desc: '', args: []);
   }
 }
 

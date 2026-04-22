@@ -9,11 +9,11 @@ import 'package:team_5_examapp/features/subjects_portal/presentation/view_model/
 import 'package:team_5_examapp/config/hive_service/hive_service.dart';
 import 'core/routing/routes_manager.dart';
 import 'core/themes/light_theme.dart';
+
 import 'generated/l10n.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  // Avoid 0× screen scale before layout; otherwise `.sp` font sizes become 0 and StrutStyle asserts.
   await ScreenUtil.ensureScreenSize();
   await configureDependencies();
 

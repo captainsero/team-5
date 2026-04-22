@@ -10,4 +10,5 @@ abstract class AppEndPoints {
   static const String getAllSubjects = "$_baseUrl/subjects";
   static const String questions = "$_baseUrl/questions";
   static const String checkQuestions = "$_baseUrl/questions/check";
+  static const String exams = "$_baseUrl/exams";
 }
