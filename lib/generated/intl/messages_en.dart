@@ -22,6 +22,8 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+    "Update": MessageLookupByLibrary.simpleMessage("Update"),
+    "change": MessageLookupByLibrary.simpleMessage("Change"),
     "codeIsRequired": MessageLookupByLibrary.simpleMessage("Code is required"),
     "confirmPassword": MessageLookupByLibrary.simpleMessage("Confirm password"),
     "connectionTimeout": MessageLookupByLibrary.simpleMessage(
@@ -104,6 +106,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "pleaseConfirmPassword": MessageLookupByLibrary.simpleMessage(
       "Please confirm your password",
     ),
+    "profile": MessageLookupByLibrary.simpleMessage("Profile"),
     "rememberMe": MessageLookupByLibrary.simpleMessage("Remember me"),
     "requestTimeout": MessageLookupByLibrary.simpleMessage(
       "Request timed out. Please try again.",
@@ -117,6 +120,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "Server error. Please try again later.",
     ),
     "signUp": MessageLookupByLibrary.simpleMessage("Sign up"),
+    "star": MessageLookupByLibrary.simpleMessage("*"),
     "userName": MessageLookupByLibrary.simpleMessage("User name"),
   };
 }

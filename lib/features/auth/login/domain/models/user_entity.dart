@@ -1,18 +1,18 @@
 import 'package:team_5_examapp/config/shared_models/auth_responses_shared_models/register_and_login_model_response/register_and_login_model_response.dart';
 
 class UserEntity {
-  final String username;
-  final String firstName;
-  final String lastName;
-  final String email;
-  final String phone;
+  final String? username;
+  final String? firstName;
+  final String? lastName;
+  final String? email;
+  final String? phone;
 
   UserEntity({
-    required this.username,
-    required this.firstName,
-    required this.lastName,
-    required this.email,
-    required this.phone,
+    this.username,
+    this.firstName,
+    this.lastName,
+    this.email,
+    this.phone,
   });
 
   factory UserEntity.fromAuthResponse(

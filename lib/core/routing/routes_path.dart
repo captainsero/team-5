@@ -7,4 +7,5 @@ class RoutesPath {
   static const String registerRoute = "/register";
   static const String errorRoute = "/error";
   static const String homeRoute = "/home";
+  static const String profileRoute = "/profile";
 }

@@ -8,10 +8,12 @@ import 'package:team_5_examapp/features/auth/forget_password/presentation/screen
 import 'package:team_5_examapp/features/auth/forget_password/presentation/view_model/cubit/forget_pass_view_model.dart';
 import 'package:team_5_examapp/features/auth/login/presentations/screens/login_screen.dart';
 import 'package:team_5_examapp/features/auth/register/presentation/screens/register_screen.dart';
+import 'package:team_5_examapp/features/profile/presentation/screens/profile_view.dart';
+import 'package:team_5_examapp/features/profile/presentation/view_model/profile_view_model.dart';
 
 class AppRouter {
   static final GoRouter router = GoRouter(
-    initialLocation: RoutesPath.loginRoute,
+    initialLocation: RoutesPath.profileRoute,
     routes: [
       GoRoute(
         path: RoutesPath.registerRoute,
@@ -59,6 +61,16 @@ class AppRouter {
             value: forgetPassViewModel,
             child: ResetPassView(forgetPassViewModel: forgetPassViewModel),
           );
+        },
+      ),
+      GoRoute(
+        path: RoutesPath.profileRoute,
+        name: RoutesPath.profileRoute,
+        builder: (_, state) {
+          final ProfileViewModel profileViewModel = getIt
+              .get<ProfileViewModel>();
+
+          return ProfileView(viewModel: profileViewModel);
         },
       ),
     ],
