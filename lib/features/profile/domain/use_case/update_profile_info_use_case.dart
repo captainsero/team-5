@@ -1,19 +1,19 @@
+import 'package:injectable/injectable.dart';
 import 'package:team_5_examapp/config/base_response/base_response.dart';
-import 'package:team_5_examapp/config/shared_models/auth_responses_shared_models/register_and_login_model_response/register_and_login_model_response.dart';
-import 'package:team_5_examapp/features/auth/register/data/models/user_request_dto.dart';
+import 'package:team_5_examapp/features/auth/login/domain/models/user_entity.dart';
 import 'package:team_5_examapp/features/profile/domain/repo/profile_repo_contract.dart';
-
+@injectable
 class UpdateProfileInfoUseCase {
   ProfileRepoContract profileRepoContract;
 
   UpdateProfileInfoUseCase({required this.profileRepoContract});
 
-  Future<BaseResponse<RegisterAndLoginModelResponse>> call({
+  Future<BaseResponse<UserEntity>> call({
     required String token,
-    required UserRequestDto userRequestDto,
+    required UserEntity userEntity,
   }) {
     return profileRepoContract.updateProfileInfo(
-      userRequestDto: userRequestDto,
+      userEntity: userEntity,
       token: token,
     );
   }

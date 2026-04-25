@@ -6,6 +6,7 @@ import 'package:team_5_examapp/config/di/di.dart';
 import 'package:team_5_examapp/core/constants/color_manager.dart';
 import 'package:team_5_examapp/core/constants/font_manager.dart';
 import 'package:team_5_examapp/core/constants/values_manager.dart';
+import 'package:team_5_examapp/core/routing/routes_manager.dart';
 import 'package:team_5_examapp/core/routing/routes_path.dart';
 import 'package:team_5_examapp/features/auth/login/presentations/view_model/cubit/login_view_model.dart';
 import 'package:team_5_examapp/generated/l10n.dart';
@@ -26,13 +27,6 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   void initState() {
     super.initState();
-    loginViewModel.loadSavedEmail().then((_) {
-      if (!mounted) return;
-      final saved = loginViewModel.state.savedEmail;
-      if (saved != null && saved.isNotEmpty) {
-        _emailController.text = saved;
-      }
-    });
   }
 
   @override
@@ -41,10 +35,16 @@ class _LoginScreenState extends State<LoginScreen> {
       create: (context) => loginViewModel,
       child: BlocConsumer<LoginViewModel, LoginState>(
         listenWhen: (previous, current) =>
+            previous.savedEmail != current.savedEmail ||
             previous.loginState.errorMessage !=
                 current.loginState.errorMessage ||
             previous.loginState.data != current.loginState.data,
         listener: (context, state) {
+          final saved = state.savedEmail;
+          if (saved != null && saved.isNotEmpty && _emailController.text != saved) {
+            _emailController.text = saved;
+          }
+
           final message = state.loginState.errorMessage;
 
           if (message != null && message.isNotEmpty) {
@@ -76,6 +76,12 @@ class _LoginScreenState extends State<LoginScreen> {
           }
         },
         builder: (context, state) {
+          if (state.isInitializing) {
+            return const Scaffold(
+              body: Center(child: CircularProgressIndicator()),
+            );
+          }
+
           final loginState = state.loginState;
           final showErrors = state.isLoginAttempted;
 
@@ -195,6 +201,8 @@ class _LoginScreenState extends State<LoginScreen> {
                                       password: _passwordController.text.trim(),
                                       rememberMe: state.rememberMe,
                                     );
+                                    context.go(RoutesPath.profileRoute);
+                                    
                                   }
                                 },
                           child: loginState.isLoading

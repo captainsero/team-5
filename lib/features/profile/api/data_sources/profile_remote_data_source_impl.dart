@@ -1,6 +1,6 @@
 import 'package:injectable/injectable.dart';
 import 'package:team_5_examapp/config/base_response/base_response.dart';
-import 'package:team_5_examapp/config/shared_models/auth_responses_shared_models/register_and_login_model_response/register_and_login_model_response.dart';
+import 'package:team_5_examapp/config/shared_models/auth_responses_shared_models/user_response_dto.dart';
 import 'package:team_5_examapp/features/auth/register/data/models/user_request_dto.dart';
 import 'package:team_5_examapp/features/profile/api/profile_api_client/profile_api_client.dart';
 import 'package:team_5_examapp/features/profile/data/data_sources/profile_remote_data_source_contract.dart';
@@ -12,16 +12,16 @@ class ProfileRemoteDataSourceImpl implements ProfileRemoteDataSourceContract {
   ProfileRemoteDataSourceImpl({required this.profileApiClient});
 
   @override
-  Future<BaseResponse<RegisterAndLoginModelResponse>> getProfileInfo({
+  Future<BaseResponse<UserResponseDto>> getProfileInfo({
     required String token,
   }) async {
     try {
-      final response = profileApiClient.getProfileInfo(token: token);
-      return SuccessBaseResponse<RegisterAndLoginModelResponse>(
-        data: await response,
+      final response = await profileApiClient.getProfileInfo(token: token);
+      return SuccessBaseResponse<UserResponseDto>(
+        data: response.userResponseDto,
       );
     } catch (e) {
-      return ErrorBaseResponse<RegisterAndLoginModelResponse>(
+      return ErrorBaseResponse<UserResponseDto>(
         error: e,
         errorMessage: e.toString(),
       );
@@ -29,7 +29,7 @@ class ProfileRemoteDataSourceImpl implements ProfileRemoteDataSourceContract {
   }
 
   @override
-  Future<BaseResponse<RegisterAndLoginModelResponse>> updateProfileInfo({
+  Future<BaseResponse<UserResponseDto>> updateProfileInfo({
     required String token,
     required UserRequestDto userRequestDto,
   }) async {
@@ -38,9 +38,11 @@ class ProfileRemoteDataSourceImpl implements ProfileRemoteDataSourceContract {
         token: token,
         userRequestDto: userRequestDto,
       );
-      return SuccessBaseResponse<RegisterAndLoginModelResponse>(data: response);
+      return SuccessBaseResponse<UserResponseDto>(
+        data: response.userResponseDto,
+      );
     } catch (e) {
-      return ErrorBaseResponse<RegisterAndLoginModelResponse>(
+      return ErrorBaseResponse<UserResponseDto>(
         error: e,
         errorMessage: e.toString(),
       );

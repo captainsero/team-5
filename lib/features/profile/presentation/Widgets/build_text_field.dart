@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 Widget buildTextField(
   TextEditingController controller, {
   TextInputType? keyboardType,
+  void Function(String)? onChanged,
 }) {
   return TextFormField(
     controller: controller,
@@ -25,5 +26,6 @@ Widget buildTextField(
       filled: true,
       fillColor: Colors.white,
     ),
+    onChanged: onChanged,
   );
 }

@@ -121,6 +121,9 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "signUp": MessageLookupByLibrary.simpleMessage("Sign up"),
     "star": MessageLookupByLibrary.simpleMessage("*"),
+    "updateSuccessful": MessageLookupByLibrary.simpleMessage(
+      "Profile updated successfully!",
+    ),
     "userName": MessageLookupByLibrary.simpleMessage("User name"),
   };
 }

@@ -5,15 +5,15 @@ part 'user_response_dto.g.dart';
 @JsonSerializable()
 class UserResponseDto {
   @JsonKey(name: "username")
-  String username;
+  String? username;
   @JsonKey(name: "firstName")
-  String firstName;
+  String? firstName;
   @JsonKey(name: "lastName")
-  String lastName;
+  String? lastName;
   @JsonKey(name: "email")
-  String email;
+  String? email;
   @JsonKey(name: "phone")
-  String phone;
+  String? phone;
   @JsonKey(name: "role")
   String? role;
   @JsonKey(name: "isVerified")
@@ -24,11 +24,11 @@ class UserResponseDto {
   DateTime? createdAt;
 
   UserResponseDto({
-    required this.username,
-    required this.firstName,
-    required this.lastName,
-    required this.email,
-    required this.phone,
+    this.username,
+    this.firstName,
+    this.lastName,
+    this.email,
+    this.phone,
     this.role,
     this.isVerified,
     this.id,

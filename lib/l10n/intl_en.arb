@@ -48,5 +48,6 @@
     "profile": "Profile",
     "Update": "Update",
     "change": "Change",
-    "star": "*"
+    "star": "*",
+    "updateSuccessful": "Profile updated successfully!"
 }

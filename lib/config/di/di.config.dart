@@ -68,6 +68,10 @@ import '../../features/profile/data/repo/profile_repo_impl.dart' as _i256;
 import '../../features/profile/domain/repo/profile_repo_contract.dart' as _i541;
 import '../../features/profile/domain/use_case/get_profile_info_use_case.dart'
     as _i899;
+import '../../features/profile/domain/use_case/update_profile_info_use_case.dart'
+    as _i476;
+import '../../features/profile/presentation/view_model/profile_view_model.dart'
+    as _i15;
 import '../dio/dio_module.dart' as _i977;
 
 extension GetItInjectableX on _i174.GetIt {
@@ -125,12 +129,23 @@ extension GetItInjectableX on _i174.GetIt {
         profileRepoContract: gh<_i541.ProfileRepoContract>(),
       ),
     );
+    gh.factory<_i476.UpdateProfileInfoUseCase>(
+      () => _i476.UpdateProfileInfoUseCase(
+        profileRepoContract: gh<_i541.ProfileRepoContract>(),
+      ),
+    );
     gh.factory<_i685.LoginUseCase>(
       () => _i685.LoginUseCase(repo: gh<_i844.AuthRepoContract>()),
     );
     gh.factory<_i65.RegisterRepoContract>(
       () => _i695.RegisterRepoImplementation(
         registerRemoteSourceContract: gh<_i821.RegisterRemoteSourceContract>(),
+      ),
+    );
+    gh.factory<_i15.ProfileViewModel>(
+      () => _i15.ProfileViewModel(
+        getProfileInfoUseCase: gh<_i899.GetProfileInfoUseCase>(),
+        updateProfileInfoUseCase: gh<_i476.UpdateProfileInfoUseCase>(),
       ),
     );
     gh.factory<_i222.ForgetPassRepoContract>(

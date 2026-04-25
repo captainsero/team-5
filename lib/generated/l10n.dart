@@ -463,6 +463,16 @@ class S {
   String get star {
     return Intl.message('*', name: 'star', desc: '', args: []);
   }
+
+  /// `Profile updated successfully!`
+  String get updateSuccessful {
+    return Intl.message(
+      'Profile updated successfully!',
+      name: 'updateSuccessful',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

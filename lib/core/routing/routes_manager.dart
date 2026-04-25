@@ -13,7 +13,7 @@ import 'package:team_5_examapp/features/profile/presentation/view_model/profile_
 
 class AppRouter {
   static final GoRouter router = GoRouter(
-    initialLocation: RoutesPath.profileRoute,
+    initialLocation: RoutesPath.loginRoute,
     routes: [
       GoRoute(
         path: RoutesPath.registerRoute,
@@ -67,10 +67,13 @@ class AppRouter {
         path: RoutesPath.profileRoute,
         name: RoutesPath.profileRoute,
         builder: (_, state) {
-          final ProfileViewModel profileViewModel = getIt
-              .get<ProfileViewModel>();
+          final profileViewModel = getIt.get<ProfileViewModel>();
 
-          return ProfileView(viewModel: profileViewModel);
+          // 2. Wrap it here so the entire ProfileView has access to the context
+          return BlocProvider<ProfileViewModel>(
+            create: (context) => profileViewModel,
+            child: ProfileView(viewModel: profileViewModel),
+          );
         },
       ),
     ],

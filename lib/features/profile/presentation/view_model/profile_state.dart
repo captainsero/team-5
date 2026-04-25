@@ -1,34 +1,42 @@
 part of 'profile_view_model.dart';
 
 class ProfileState extends Equatable {
-  final BaseState<RegisterAndLoginModelResponse> profileState;
-  final bool isDirty = false;
-  final bool isUpdated = false;
+  final BaseState<UserEntity> profileState;
+  final UserEntity? originalUser;
+  final UserEntity? editedUser;
+  final bool isDirty;
+  final bool updateSuccess;
 
-  ProfileState({
-    bool isDirty = false,
-    bool isUpdated = false,
-    BaseState<RegisterAndLoginModelResponse>? profileState,
-  }) : profileState =
-           profileState ??
-           BaseState<RegisterAndLoginModelResponse>(
-             isLoading: false,
-             data: null,
-             errorMessage: null,
-           );
-
-  @override
-  List<Object?> get props => [profileState, isDirty, isUpdated];
+  const ProfileState({
+    required this.profileState,
+    this.originalUser,
+    this.editedUser,
+    this.isDirty = false,
+    this.updateSuccess = false,
+  });
 
   ProfileState copyWith({
-    BaseState<RegisterAndLoginModelResponse>? profileState,
+    BaseState<UserEntity>? profileState,
+    UserEntity? originalUser,
+    UserEntity? editedUser,
     bool? isDirty,
-    bool? isUpdated,
+    bool? updateSuccess,
   }) {
     return ProfileState(
       profileState: profileState ?? this.profileState,
+      originalUser: originalUser ?? this.originalUser,
+      editedUser: editedUser ?? this.editedUser,
       isDirty: isDirty ?? this.isDirty,
-      isUpdated: isUpdated ?? this.isUpdated,
+      updateSuccess: updateSuccess ?? this.updateSuccess,
     );
   }
+
+  @override
+  List<Object?> get props => [
+    profileState,
+    originalUser,
+    editedUser,
+    isDirty,
+    updateSuccess,
+  ];
 }

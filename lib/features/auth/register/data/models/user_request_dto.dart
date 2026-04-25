@@ -20,13 +20,13 @@ class UserRequestDto {
   final String? phone;
 
   UserRequestDto({
-    required this.username,
-    required this.firstName,
-    required this.lastName,
-    required this.email,
-    required this.password,
+    this.username,
+    this.firstName,
+    this.lastName,
+    this.email,
+    this.password,
     this.rePassword,
-    required this.phone,
+    this.phone,
   });
 
   UserRequestDto copyWith({

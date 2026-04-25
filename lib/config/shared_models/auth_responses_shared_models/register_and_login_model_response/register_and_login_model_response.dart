@@ -9,13 +9,13 @@ class RegisterAndLoginModelResponse {
   @JsonKey(name: "message")
   String message;
   @JsonKey(name: "token")
-  String token;
+  String? token;
   @JsonKey(name: "user")
   UserResponseDto userResponseDto;
 
   RegisterAndLoginModelResponse({
     required this.message,
-    required this.token,
+    this.token,
     required this.userResponseDto,
   });
 
@@ -34,13 +34,15 @@ class RegisterAndLoginModelResponse {
 
   Map<String, dynamic> toJson() => _$RegisterAndLoginModelResponseToJson(this);
 
-  UserEntity toDomain(UserResponseDto userResponseDto) {
+  UserEntity toEntity(
+    RegisterAndLoginModelResponse registerAndLoginModelResponse,
+  ) {
     return UserEntity(
-      username: userResponseDto.username,
-      firstName: userResponseDto.firstName,
-      lastName: userResponseDto.lastName,
-      email: userResponseDto.email,
-      phone: userResponseDto.phone,
+      username: registerAndLoginModelResponse.userResponseDto.username,
+      firstName: registerAndLoginModelResponse.userResponseDto.firstName,
+      lastName: registerAndLoginModelResponse.userResponseDto.lastName,
+      email: registerAndLoginModelResponse.userResponseDto.email,
+      phone: registerAndLoginModelResponse.userResponseDto.phone,
     );
   }
 }

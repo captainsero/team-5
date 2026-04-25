@@ -24,15 +24,17 @@ class AuthRepoImpl implements AuthRepoContract {
       case SuccessBaseResponse<RegisterAndLoginModelResponse>():
 
         // Save token
-        SecureStorageService.write(
-          key: SecureStorageKeys.userToken,
-          value: response.data.token,
-        );
+        if (response.data.token != null && response.data.token!.isNotEmpty) {
+          await SecureStorageService.write(
+            key: SecureStorageKeys.userToken,
+            value: response.data.token!,
+          );
+        }
 
         // Map to User domain model
 
         return SuccessBaseResponse<UserEntity>(
-          data: response.data.toDomain(response.data.userResponseDto),
+          data: response.data.toEntity(response.data),
         );
 
       case ErrorBaseResponse<RegisterAndLoginModelResponse>():

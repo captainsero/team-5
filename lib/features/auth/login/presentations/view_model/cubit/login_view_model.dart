@@ -14,7 +14,15 @@ part 'login_state.dart';
 class LoginViewModel extends Cubit<LoginState> {
   final LoginUseCase loginUseCase;
 
-  LoginViewModel({required this.loginUseCase}) : super(LoginState());
+  LoginViewModel({required this.loginUseCase}) : super(LoginState()) {
+    initialize();
+  }
+
+  Future<void> initialize() async {
+    emit(state.copyWith(isInitializing: true));
+    await loadSavedEmail();
+    emit(state.copyWith(isInitializing: false));
+  }
 
   void clearError() {
     emit(state.copyWith(loginState: BaseState<UserEntity>(isLoading: false)));
