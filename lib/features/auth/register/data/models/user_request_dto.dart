@@ -2,31 +2,31 @@ import 'package:json_annotation/json_annotation.dart';
 import 'package:team_5_examapp/features/auth/login/domain/models/user_entity.dart';
 part 'user_request_dto.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(includeIfNull: false)
 class UserRequestDto {
   @JsonKey(name: "username")
-  String username;
+  final String? username;
   @JsonKey(name: "firstName")
-  String firstName;
+  final String? firstName;
   @JsonKey(name: "lastName")
-  String lastName;
+  final String? lastName;
   @JsonKey(name: "email")
-  String email;
+  final String? email;
   @JsonKey(name: "password")
-  String password;
+  final String? password;
   @JsonKey(name: "rePassword")
-  String rePassword;
+  final String? rePassword;
   @JsonKey(name: "phone")
-  String phone;
+  final String? phone;
 
   UserRequestDto({
-    required this.username,
-    required this.firstName,
-    required this.lastName,
-    required this.email,
-    required this.password,
-    required this.rePassword,
-    required this.phone,
+    this.username,
+    this.firstName,
+    this.lastName,
+    this.email,
+    this.password,
+    this.rePassword,
+    this.phone,
   });
 
   UserRequestDto copyWith({

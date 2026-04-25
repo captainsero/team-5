@@ -1,29 +1,47 @@
-import 'package:team_5_examapp/config/shared_models/auth_responses_shared_models/register_and_login_model_response/register_and_login_model_response.dart';
+import 'package:equatable/equatable.dart';
+import 'package:team_5_examapp/features/auth/register/data/models/user_request_dto.dart';
 
-class UserEntity {
-  final String username;
-  final String firstName;
-  final String lastName;
-  final String email;
-  final String phone;
+class UserEntity extends Equatable {
+  final String? username;
+  final String? firstName;
+  final String? lastName;
+  final String? email;
+  final String? phone;
 
-  UserEntity({
-    required this.username,
-    required this.firstName,
-    required this.lastName,
-    required this.email,
-    required this.phone,
+  const UserEntity({
+    this.username,
+    this.firstName,
+    this.lastName,
+    this.email,
+    this.phone,
   });
 
-  factory UserEntity.fromAuthResponse(
-    RegisterAndLoginModelResponse authResponse,
-  ) {
+  @override
+  List<Object?> get props => [username, firstName, lastName, email, phone];
+
+  UserRequestDto toRequestDto() {
+    return UserRequestDto(
+      username: username,
+      firstName: firstName,
+      lastName: lastName,
+      email: email,
+      phone: phone,
+    );
+  }
+
+  UserEntity copyWith({
+    String? username,
+    String? firstName,
+    String? lastName,
+    String? email,
+    String? phone,
+  }) {
     return UserEntity(
-      username: authResponse.userResponseDto.username,
-      firstName: authResponse.userResponseDto.firstName,
-      lastName: authResponse.userResponseDto.lastName,
-      email: authResponse.userResponseDto.email,
-      phone: authResponse.userResponseDto.phone,
+      username: username ?? this.username,
+      firstName: firstName ?? this.firstName,
+      lastName: lastName ?? this.lastName,
+      email: email ?? this.email,
+      phone: phone ?? this.phone,
     );
   }
 }

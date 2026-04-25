@@ -70,5 +70,10 @@
     "error": "Error",
     "ok": "OK",
     "errorOcurred": "An error occurred",
-    "goBack": "Go Back"
+    "goBack": "Go Back",
+    "profile": "Profile",
+    "Update": "Update",
+    "change": "Change",
+    "star": "*",
+    "updateSuccessful": "Profile updated successfully!"
 }

@@ -12,4 +12,5 @@ class RoutesPath {
   static const String questionsRoute = "/questions";
   static const String scoreRoute = "/score";
   static const String resultsRoute = '/results';
+  static const String profileRoute = "/profile";
 }

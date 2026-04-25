@@ -608,6 +608,36 @@ class S {
   String get goBack {
     return Intl.message('Go Back', name: 'goBack', desc: '', args: []);
   }
+
+  /// `Profile`
+  String get profile {
+    return Intl.message('Profile', name: 'profile', desc: '', args: []);
+  }
+
+  /// `Update`
+  String get Update {
+    return Intl.message('Update', name: 'Update', desc: '', args: []);
+  }
+
+  /// `Change`
+  String get change {
+    return Intl.message('Change', name: 'change', desc: '', args: []);
+  }
+
+  /// `*`
+  String get star {
+    return Intl.message('*', name: 'star', desc: '', args: []);
+  }
+
+  /// `Profile updated successfully!`
+  String get updateSuccessful {
+    return Intl.message(
+      'Profile updated successfully!',
+      name: 'updateSuccessful',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

@@ -9,6 +9,8 @@ import 'package:team_5_examapp/features/auth/forget_password/presentation/screen
 import 'package:team_5_examapp/features/auth/forget_password/presentation/view_model/cubit/forget_pass_view_model.dart';
 import 'package:team_5_examapp/features/auth/login/presentations/screens/login_screen.dart';
 import 'package:team_5_examapp/features/auth/register/presentation/screens/register_screen.dart';
+import 'package:team_5_examapp/features/profile/presentation/screens/profile_view.dart';
+import 'package:team_5_examapp/features/profile/presentation/view_model/profile_view_model.dart';
 import 'package:team_5_examapp/features/error/error_screen.dart';
 import 'package:team_5_examapp/features/exams/presentation/screens/exams_screen.dart';
 import 'package:team_5_examapp/features/questions/presentation/screens/questions_screen.dart';
@@ -120,6 +122,19 @@ abstract class AppRouter {
             return ErrorScreen();
           }
           return ExamsScreen(subject: subject, token: token);
+        },
+      ),
+      GoRoute(
+        path: RoutesPath.profileRoute,
+        name: RoutesPath.profileRoute,
+        builder: (_, state) {
+          final profileViewModel = getIt.get<ProfileViewModel>();
+
+          // 2. Wrap it here so the entire ProfileView has access to the context
+          return BlocProvider<ProfileViewModel>(
+            create: (context) => profileViewModel,
+            child: ProfileView(viewModel: profileViewModel),
+          );
         },
       ),
     ],

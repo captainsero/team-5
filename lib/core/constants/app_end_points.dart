@@ -11,4 +11,6 @@ abstract class AppEndPoints {
   static const String questions = "$_baseUrl/questions";
   static const String checkQuestions = "$_baseUrl/questions/check";
   static const String exams = "$_baseUrl/exams";
+  static const String profileInfo = "$_baseUrl/auth/profileData";
+  static const String editProfile = "$_baseUrl/auth/editProfile";
 }

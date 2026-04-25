@@ -26,6 +26,8 @@ class MessageLookup extends MessageLookupByLibrary {
       "Answers not ready yet",
     ),
     "back": MessageLookupByLibrary.simpleMessage("Back"),
+    "Update": MessageLookupByLibrary.simpleMessage("Update"),
+    "change": MessageLookupByLibrary.simpleMessage("Change"),
     "codeIsRequired": MessageLookupByLibrary.simpleMessage("Code is required"),
     "confirmPassword": MessageLookupByLibrary.simpleMessage("Confirm password"),
     "connectionTimeout": MessageLookupByLibrary.simpleMessage(
@@ -127,7 +129,6 @@ class MessageLookup extends MessageLookupByLibrary {
     "pleaseConfirmPassword": MessageLookupByLibrary.simpleMessage(
       "Please confirm your password",
     ),
-    "questions": MessageLookupByLibrary.simpleMessage("Questions"),
     "rememberMe": MessageLookupByLibrary.simpleMessage("Remember me"),
     "requestTimeout": MessageLookupByLibrary.simpleMessage(
       "Request timed out. Please try again.",
@@ -147,6 +148,10 @@ class MessageLookup extends MessageLookupByLibrary {
     "startAgain": MessageLookupByLibrary.simpleMessage("Start again"),
     "timeOut": MessageLookupByLibrary.simpleMessage("Time out !!"),
     "to": MessageLookupByLibrary.simpleMessage("To: 6.00"),
+    "star": MessageLookupByLibrary.simpleMessage("*"),
+    "updateSuccessful": MessageLookupByLibrary.simpleMessage(
+      "Profile updated successfully!",
+    ),
     "userName": MessageLookupByLibrary.simpleMessage("User name"),
     "viewScore": MessageLookupByLibrary.simpleMessage("View score"),
     "yourScore": MessageLookupByLibrary.simpleMessage("Your Score"),
