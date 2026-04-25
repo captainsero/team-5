@@ -1,11 +1,10 @@
 import 'dart:async';
-import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 import 'package:team_5_examapp/config/base_response/base_response.dart';
+import 'package:team_5_examapp/config/shared_models/auth_responses_shared_models/register_and_login_model_response/register_and_login_model_response.dart';
 import 'package:team_5_examapp/features/auth/register/api/register_api_client/register_api_client.dart';
-import 'package:team_5_examapp/features/auth/register/data/models/responses/register_response.dart';
-import 'package:team_5_examapp/features/auth/register/data/models/user_dto.dart';
-import '../../data/data_sources/register_remote_source_contract.dart';
+import 'package:team_5_examapp/features/auth/register/data/data_sources/register_remote_source_contract.dart';
+import 'package:team_5_examapp/features/auth/register/data/models/user_request_dto.dart';
 
 @Injectable(as: RegisterRemoteSourceContract)
 class RegisterRemoteSourceImplementation
@@ -14,34 +13,16 @@ class RegisterRemoteSourceImplementation
   RegisterApiClient registerApiClient;
 
   @override
-  Future<BaseResponse<AuthResponse>> register({
-    required UserDto userInfo,
+  Future<BaseResponse<RegisterAndLoginModelResponse>> register({
+    required UserRequestDto userInfo,
   }) async {
     try {
       final response = await registerApiClient.register(
         registerResponse: userInfo.toJson(),
       );
-      return SuccessBaseResponse<AuthResponse>(data: response);
+      return SuccessBaseResponse<RegisterAndLoginModelResponse>(data: response);
     } catch (e) {
-      if (e is DioException) {
-        final data = e.response?.data;
-        final messageFromApi = (data is Map<String, dynamic>)
-            ? data['message']?.toString()
-            : null;
-        return ErrorBaseResponse<AuthResponse>(
-          errorMessage:
-              messageFromApi ??
-              e.message ??
-              "Something went wrong. Please try again later.",
-        );
-      } else if (e is TimeoutException) {
-        return ErrorBaseResponse<AuthResponse>(
-          errorMessage: "Request timed out. Please try again later.",
-        );
-      }
-      return ErrorBaseResponse<AuthResponse>(
-        errorMessage: "Something went wrong. Please try again later.",
-      );
+      return ErrorBaseResponse<RegisterAndLoginModelResponse>(error: e);
     }
   }
 }

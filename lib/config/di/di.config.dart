@@ -31,20 +31,19 @@ import '../../features/auth/forget_password/domain/use_cases/reset_pass_use_case
     as _i262;
 import '../../features/auth/forget_password/presentation/view_model/cubit/forget_pass_view_model.dart'
     as _i128;
-import '../../features/auth/login_screen/api/auth_api_client/login_api_client.dart'
-    as _i226;
-import '../../features/auth/login_screen/api/data_sources/login_remote_data_source_impl.dart'
-    as _i33;
-import '../../features/auth/login_screen/data/data_sources/login_remote_data_source_contract.dart'
-    as _i462;
-import '../../features/auth/login_screen/data/repo/login_repo_impl.dart'
-    as _i375;
-import '../../features/auth/login_screen/domain/repo/login_repo_contract.dart'
-    as _i48;
-import '../../features/auth/login_screen/domain/use_cases/login_use_cases.dart'
-    as _i70;
-import '../../features/auth/login_screen/presentations/view_model/cubit/login_view_model.dart'
-    as _i952;
+import '../../features/auth/login/api/data_sources/login_remote_data_source_impl.dart'
+    as _i584;
+import '../../features/auth/login/api/login_api_client/login_api_client.dart'
+    as _i251;
+import '../../features/auth/login/data/data_sources/login_remote_data_source_contract.dart'
+    as _i183;
+import '../../features/auth/login/data/repo/login_repo_impl.dart' as _i1001;
+import '../../features/auth/login/domain/repo/login_repo_contract.dart'
+    as _i844;
+import '../../features/auth/login/domain/use_cases/login_use_cases.dart'
+    as _i685;
+import '../../features/auth/login/presentations/view_model/cubit/login_view_model.dart'
+    as _i370;
 import '../../features/auth/register/api/data_sources/register_remote_source_implementation.dart'
     as _i1056;
 import '../../features/auth/register/api/register_api_client/register_api_client.dart'
@@ -59,6 +58,20 @@ import '../../features/auth/register/domain/use_cases/register_use_case.dart'
     as _i118;
 import '../../features/auth/register/presentation/view_model/register_view_model.dart'
     as _i656;
+import '../../features/profile/api/data_sources/profile_remote_data_source_impl.dart'
+    as _i684;
+import '../../features/profile/api/profile_api_client/profile_api_client.dart'
+    as _i1000;
+import '../../features/profile/data/data_sources/profile_remote_data_source_contract.dart'
+    as _i427;
+import '../../features/profile/data/repo/profile_repo_impl.dart' as _i256;
+import '../../features/profile/domain/repo/profile_repo_contract.dart' as _i541;
+import '../../features/profile/domain/use_case/get_profile_info_use_case.dart'
+    as _i899;
+import '../../features/profile/domain/use_case/update_profile_info_use_case.dart'
+    as _i476;
+import '../../features/profile/presentation/view_model/profile_view_model.dart'
+    as _i15;
 import '../dio/dio_module.dart' as _i977;
 
 extension GetItInjectableX on _i174.GetIt {
@@ -70,15 +83,20 @@ extension GetItInjectableX on _i174.GetIt {
     final gh = _i526.GetItHelper(this, environment, environmentFilter);
     final dioModule = _$DioModule();
     gh.singleton<_i361.Dio>(() => dioModule.dio);
+    gh.lazySingleton<_i251.LoginApiClient>(
+      () => _i251.LoginApiClient(gh<_i361.Dio>()),
+    );
+    gh.lazySingleton<_i453.RegisterApiClient>(
+      () => _i453.RegisterApiClient(gh<_i361.Dio>()),
+    );
+    gh.lazySingleton<_i1000.ProfileApiClient>(
+      () => _i1000.ProfileApiClient(gh<_i361.Dio>()),
+    );
     gh.factory<_i358.ForgetPassApiClient>(
       () => _i358.ForgetPassApiClient(gh<_i361.Dio>()),
     );
-    gh.factory<_i226.AuthApiClient>(() => _i226.AuthApiClient(gh<_i361.Dio>()));
-    gh.factory<_i453.RegisterApiClient>(
-      () => _i453.RegisterApiClient(gh<_i361.Dio>()),
-    );
-    gh.factory<_i462.AuthRemoteDataSourceContract>(
-      () => _i33.AuthRemoteDataSourceImpl(gh<_i226.AuthApiClient>()),
+    gh.factory<_i183.AuthRemoteDataSourceContract>(
+      () => _i584.AuthRemoteDataSourceImpl(gh<_i251.LoginApiClient>()),
     );
     gh.factory<_i426.ForgetPassRemoteDataSourceContract>(
       () => _i970.ForgetPassRemoteDataSourceImpl(
@@ -90,20 +108,44 @@ extension GetItInjectableX on _i174.GetIt {
         registerApiClient: gh<_i453.RegisterApiClient>(),
       ),
     );
-    gh.factory<_i48.AuthRepoContract>(
-      () => _i375.AuthRepoImpl(
-        remoteDataSource: gh<_i462.AuthRemoteDataSourceContract>(),
+    gh.factory<_i427.ProfileRemoteDataSourceContract>(
+      () => _i684.ProfileRemoteDataSourceImpl(
+        profileApiClient: gh<_i1000.ProfileApiClient>(),
       ),
     );
-    gh.factory<_i70.LoginUseCase>(
-      () => _i70.LoginUseCase(repo: gh<_i48.AuthRepoContract>()),
+    gh.factory<_i844.AuthRepoContract>(
+      () => _i1001.AuthRepoImpl(
+        remoteDataSource: gh<_i183.AuthRemoteDataSourceContract>(),
+      ),
     );
-    gh.factory<_i952.LoginViewModel>(
-      () => _i952.LoginViewModel(loginUseCase: gh<_i70.LoginUseCase>()),
+    gh.factory<_i541.ProfileRepoContract>(
+      () => _i256.ProfileRepoImpl(
+        profileRemoteDataSourceContract:
+            gh<_i427.ProfileRemoteDataSourceContract>(),
+      ),
+    );
+    gh.factory<_i899.GetProfileInfoUseCase>(
+      () => _i899.GetProfileInfoUseCase(
+        profileRepoContract: gh<_i541.ProfileRepoContract>(),
+      ),
+    );
+    gh.factory<_i476.UpdateProfileInfoUseCase>(
+      () => _i476.UpdateProfileInfoUseCase(
+        profileRepoContract: gh<_i541.ProfileRepoContract>(),
+      ),
+    );
+    gh.factory<_i685.LoginUseCase>(
+      () => _i685.LoginUseCase(repo: gh<_i844.AuthRepoContract>()),
     );
     gh.factory<_i65.RegisterRepoContract>(
       () => _i695.RegisterRepoImplementation(
         registerRemoteSourceContract: gh<_i821.RegisterRemoteSourceContract>(),
+      ),
+    );
+    gh.factory<_i15.ProfileViewModel>(
+      () => _i15.ProfileViewModel(
+        getProfileInfoUseCase: gh<_i899.GetProfileInfoUseCase>(),
+        updateProfileInfoUseCase: gh<_i476.UpdateProfileInfoUseCase>(),
       ),
     );
     gh.factory<_i222.ForgetPassRepoContract>(
@@ -116,6 +158,9 @@ extension GetItInjectableX on _i174.GetIt {
       () => _i118.RegisterUseCase(
         registerRepoContract: gh<_i65.RegisterRepoContract>(),
       ),
+    );
+    gh.factory<_i370.LoginViewModel>(
+      () => _i370.LoginViewModel(loginUseCase: gh<_i685.LoginUseCase>()),
     );
     gh.factory<_i146.ConfirmValidationCodeUseCase>(
       () => _i146.ConfirmValidationCodeUseCase(
