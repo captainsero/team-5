@@ -88,6 +88,15 @@ import '../../features/questions/domain/use_cases/get_all_questions_on_exam_use_
     as _i266;
 import '../../features/questions/presentation/view_model/cubit/questions_view_model.dart'
     as _i659;
+import '../../features/result/api/result_api_client/result_api_client.dart'
+    as _i555;
+import '../../features/result/data/data_sources/result_remote_data_source_contract.dart'
+    as _i136;
+import '../../features/result/data/repo/result_repo_impl.dart' as _i544;
+import '../../features/result/domain/repo/result_repo_contract.dart' as _i166;
+import '../../features/result/domain/use_cases/result_use_case.dart' as _i155;
+import '../../features/result/presentation/view_model/result_view_model.dart'
+    as _i1038;
 import '../../features/subjects_portal/api/data_sources/subjects_portal_remote_data_source_impl.dart'
     as _i224;
 import '../../features/subjects_portal/api/subjects_portal_api_client/subjects_portal_api_client.dart'
@@ -137,6 +146,9 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i598.ExamsApiClient>(
       () => _i598.ExamsApiClient(gh<_i361.Dio>()),
     );
+    gh.factory<_i555.ResultsApiClient>(
+      () => _i555.ResultsApiClient(gh<_i361.Dio>()),
+    );
     gh.factory<_i625.SubjectsPortalApiClient>(
       () => _i625.SubjectsPortalApiClient(gh<_i361.Dio>()),
     );
@@ -162,6 +174,11 @@ extension GetItInjectableX on _i174.GetIt {
         registerApiClient: gh<_i453.RegisterApiClient>(),
       ),
     );
+    gh.factory<_i166.ResultsRepoContract>(
+      () => _i544.ResultsRepoImpl(
+        remoteDataSource: gh<_i136.ResultsRemoteDataSourceContract>(),
+      ),
+    );
     gh.factory<_i46.QuestionsRepoContract>(
       () => _i92.QuestionsRepoImpl(
         questionsRemoteDataSourceContract:
@@ -172,6 +189,12 @@ extension GetItInjectableX on _i174.GetIt {
       () => _i1001.AuthRepoImpl(
         remoteDataSource: gh<_i183.AuthRemoteDataSourceContract>(),
       ),
+    );
+    gh.factory<_i155.GetResultsUseCase>(
+      () => _i155.GetResultsUseCase(repo: gh<_i166.ResultsRepoContract>()),
+    );
+    gh.factory<_i1038.ResultsViewModel>(
+      () => _i1038.ResultsViewModel(useCase: gh<_i155.GetResultsUseCase>()),
     );
     gh.factory<_i420.SubjectsPortalRemoteDataSourceContract>(
       () => _i224.SubjectsPortalRemoteDataSourceImpl(

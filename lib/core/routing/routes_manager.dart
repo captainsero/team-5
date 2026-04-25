@@ -17,14 +17,22 @@ import 'package:team_5_examapp/features/questions/presentation/view_model/cubit/
 import 'package:team_5_examapp/features/subjects_portal/domain/models/subject_model.dart';
 import 'package:team_5_examapp/features/subjects_portal/presentation/screens/main_survey_screen.dart';
 import 'package:team_5_examapp/splash_screen.dart';
+import '../../features/result/presentation/screens/result_screen.dart';
 
 abstract class AppRouter {
   static final GoRouter router = GoRouter(
-    initialLocation: RoutesPath.loginRoute,
+    initialLocation: RoutesPath.resultsRoute,
     routes: [
       GoRoute(
         path: RoutesPath.splashRoute,
         builder: (context, state) => const SplashScreen(),
+      ),
+      GoRoute(
+        path: RoutesPath.resultsRoute,
+        builder: (context, state) => const ResultsScreen(
+          token:
+              'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5ZWI5NDgxMDRkYTBkNGNmNTU3MDM1MSIsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNzc3MTI3NTY5fQ.W_Q02tjHB2QiLphKSp3AYJMEjjdmJt1_QR78SHRRktg',
+        ),
       ),
       GoRoute(
         path: RoutesPath.loginRoute,
