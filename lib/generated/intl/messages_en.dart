@@ -22,11 +22,11 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+    "Update": MessageLookupByLibrary.simpleMessage("Update"),
     "answersNotReady": MessageLookupByLibrary.simpleMessage(
       "Answers not ready yet",
     ),
     "back": MessageLookupByLibrary.simpleMessage("Back"),
-    "Update": MessageLookupByLibrary.simpleMessage("Update"),
     "change": MessageLookupByLibrary.simpleMessage("Change"),
     "codeIsRequired": MessageLookupByLibrary.simpleMessage("Code is required"),
     "confirmPassword": MessageLookupByLibrary.simpleMessage("Confirm password"),
@@ -129,6 +129,8 @@ class MessageLookup extends MessageLookupByLibrary {
     "pleaseConfirmPassword": MessageLookupByLibrary.simpleMessage(
       "Please confirm your password",
     ),
+    "profile": MessageLookupByLibrary.simpleMessage("Profile"),
+    "questions": MessageLookupByLibrary.simpleMessage("Questions"),
     "rememberMe": MessageLookupByLibrary.simpleMessage("Remember me"),
     "requestTimeout": MessageLookupByLibrary.simpleMessage(
       "Request timed out. Please try again.",
@@ -144,11 +146,11 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "showResults": MessageLookupByLibrary.simpleMessage("Show results"),
     "signUp": MessageLookupByLibrary.simpleMessage("Sign up"),
+    "star": MessageLookupByLibrary.simpleMessage("*"),
     "start": MessageLookupByLibrary.simpleMessage("Start"),
     "startAgain": MessageLookupByLibrary.simpleMessage("Start again"),
     "timeOut": MessageLookupByLibrary.simpleMessage("Time out !!"),
     "to": MessageLookupByLibrary.simpleMessage("To: 6.00"),
-    "star": MessageLookupByLibrary.simpleMessage("*"),
     "updateSuccessful": MessageLookupByLibrary.simpleMessage(
       "Profile updated successfully!",
     ),
